@@ -1,13 +1,22 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
+import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Administrator {
+@Entity
+@Table(name="administrator")
+public class Administrator implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
@@ -21,6 +30,13 @@ public class Administrator {
 
 	public Administrator(){
 		
+	}
+
+	public Administrator(Long id, String username, String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
 	}
 
 	public Long getId() {

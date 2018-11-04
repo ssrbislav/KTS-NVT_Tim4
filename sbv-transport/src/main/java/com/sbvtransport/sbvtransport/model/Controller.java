@@ -1,12 +1,15 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="controller")
 public class Controller extends User implements Serializable {
 
 	/**
@@ -20,7 +23,12 @@ public class Controller extends User implements Serializable {
 	private Long id;
 	
 	public Controller(){
-		
+		super();
+	}
+
+	public Controller(Long id) {
+		super();
+		this.id = id;
 	}
 
 	public Long getId() {
