@@ -45,8 +45,7 @@ public class ControllerService implements IControllerService {
 			if(controller.getId() == id){
 				controllerRepository.delete(controller);
 				return true;
-			}
-			
+			}	
 		}
 		return false;
 	}

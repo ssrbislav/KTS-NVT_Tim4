@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sbvtransport.sbvtransport.dto.ValidateDocument;
 import com.sbvtransport.sbvtransport.model.Controller;
 import com.sbvtransport.sbvtransport.model.Passenger;
@@ -71,7 +70,6 @@ public class ControllerController {
 				passengerService.update(passenger);
 				return new ResponseEntity<>(true,HttpStatus.OK); 
 			}
-			
 		}
 		
 		return new ResponseEntity<>(false,HttpStatus.OK); 
