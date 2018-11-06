@@ -2,12 +2,16 @@ package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import java.io.Serializable;
 
+import java.util.Date;
+import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="station")
@@ -23,6 +27,15 @@ public class Station implements Serializable {
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private Long id;
+
+	// TODO #2: Solve MappingException.
+//	@Column(name = "location", unique = false, nullable = false)
+	@OneToOne(targetEntity = Location.class)
+	private Location location;
+
+	// TODO #3: Solve MappingException.
+//	@Column(name = "timetable", unique = false, nullable = false)
+	private Map<Transport, Date> timetable;
 	
 	public Station(){
 		
@@ -39,6 +52,23 @@ public class Station implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Map<Transport, Date> getTimetable() {
+		return timetable;
+	}
+
+	public void setTimetable(
+			Map<Transport, Date> timetable) {
+		this.timetable = timetable;
 	}
 
 	@Override
