@@ -5,10 +5,11 @@ import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,9 +34,8 @@ public class Line implements Serializable {
 	        cascade = CascadeType.ALL)
 	private List<Station> station_list = new ArrayList<Station>();
 
-
 	@Column(name = "line_type", unique = false, nullable = false)
-	private TypeTransport station_type;
+	private TypeTransport line_type;
 
 	
 	public Line(){
@@ -55,19 +55,19 @@ public class Line implements Serializable {
 		this.id = id;
 	}
 
-	/*public List<Station> getStation_list() {
+	public List<Station> getStation_list() {
 		return station_list;
 	}
 
 	public void setStation_list(List<Station> station_list) {
 		this.station_list = station_list;
-	}*/
-
-	public TypeTransport getStation_type() {
-		return station_type;
 	}
 
-	public void setStation_type(TypeTransport station_type) {
-		this.station_type = station_type;
+	public TypeTransport getStation_type() {
+		return line_type;
+	}
+
+	public void setStation_type(TypeTransport line_type) {
+		this.line_type = line_type;
 	}
 }
