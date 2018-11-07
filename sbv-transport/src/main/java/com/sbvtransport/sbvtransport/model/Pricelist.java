@@ -30,7 +30,6 @@ public class Pricelist {
   private TypeTransport type_transport;
   private Zone zone;
   private Double price;
-
   private Ticket ticket;
 
 }

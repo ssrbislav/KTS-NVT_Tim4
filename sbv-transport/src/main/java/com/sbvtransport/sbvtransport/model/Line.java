@@ -1,16 +1,18 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +28,10 @@ public class Line implements Serializable {
 	@Column(name="id", unique=true, nullable=false)
 	private Long id;
 
-	@Column(name = "station_list", unique = false, nullable = false)
-	private List<Station> station_list;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "line", 
+	        cascade = CascadeType.ALL)
+	private List<Station> station_list = new ArrayList<Station>();
 
 
 	@Column(name = "line_type", unique = false, nullable = false)
@@ -51,13 +55,13 @@ public class Line implements Serializable {
 		this.id = id;
 	}
 
-	public List<Station> getStation_list() {
+	/*public List<Station> getStation_list() {
 		return station_list;
 	}
 
 	public void setStation_list(List<Station> station_list) {
 		this.station_list = station_list;
-	}
+	}*/
 
 	public TypeTransport getStation_type() {
 		return station_type;
