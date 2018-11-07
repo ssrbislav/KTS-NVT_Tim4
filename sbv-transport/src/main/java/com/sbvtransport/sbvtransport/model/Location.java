@@ -5,8 +5,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,17 +34,21 @@ public class Location {
 
   @Column(name = "type", unique = false, nullable = false)
   private String type;
+  
+  @OneToOne(fetch = FetchType.LAZY)
+  private Station station;
 
   public Location() {
   }
 
   public Location(String location_name, String address, Float latitude, Float longitude,
-      String type) {
+      String type, Station station) {
     this.location_name = location_name;
     this.address = address;
     this.latitude = latitude;
     this.longitude = longitude;
     this.type = type;
+    this.station = station;
   }
 
   @Override
@@ -104,4 +110,14 @@ public class Location {
   public void setType(String type) {
     this.type = type;
   }
+
+public Station getStation() {
+	return station;
+}
+
+public void setStation(Station station) {
+	this.station = station;
+}
+  
+  
 }
