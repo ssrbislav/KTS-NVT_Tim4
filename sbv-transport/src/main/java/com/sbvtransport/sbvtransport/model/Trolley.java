@@ -57,6 +57,5 @@ public class Trolley extends Transport implements Serializable {
 				+ ", name=" + name + "]";
 	}
 	
-	
 
 }
