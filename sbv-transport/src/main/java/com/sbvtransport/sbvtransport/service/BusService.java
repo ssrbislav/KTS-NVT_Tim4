@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
 
@@ -55,9 +54,5 @@ public class BusService implements IBusService {
 		return false;
 	}
 
-	@Override
-	public TypeTransport setType(TypeTransport type) {
-		return TypeTransport.bus;
-	}
 
 }

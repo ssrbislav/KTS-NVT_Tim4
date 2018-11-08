@@ -5,15 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
-public class SubwayService implements ISubwayService{
+public class SubwayService implements ISubwayService {
 
 	@Autowired
 	SubwayRepository subwayRepository;
-	
+
 	@Override
 	public List<Subway> findAll() {
 		return subwayRepository.findAll();
@@ -40,24 +39,19 @@ public class SubwayService implements ISubwayService{
 		updateSubway.get().setName(subway.getName());
 		updateSubway.get().setLate(subway.isLate());
 		updateSubway.get().setLine(subway.getLine());
-		
+
 		return subwayRepository.save(subway);
-	
+
 	}
 
 	@Override
 	public boolean delete(Long id) {
 		for (Subway subway : findAll())
-			if(subway.getId() == id) {
+			if (subway.getId() == id) {
 				subwayRepository.delete(subway);
 				return true;
 			}
 		return false;
-	}
-
-	@Override
-	public TypeTransport setType(TypeTransport type) {
-		return TypeTransport.subway;
 	}
 
 }

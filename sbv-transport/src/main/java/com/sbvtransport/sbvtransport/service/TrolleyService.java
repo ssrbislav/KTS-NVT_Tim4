@@ -5,15 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 
-public class TrolleyService implements ITrolleyService{
+public class TrolleyService implements ITrolleyService {
 
 	@Autowired
 	TrolleyRepository trolleyRepository;
-	
+
 	@Override
 	public List<Trolley> findAll() {
 		return trolleyRepository.findAll();
@@ -37,25 +36,19 @@ public class TrolleyService implements ITrolleyService{
 		updateTrolley.get().setName(trolley.getName());
 		updateTrolley.get().setLate(trolley.isLate());
 		updateTrolley.get().setLine(trolley.getLine());
-		
+
 		return trolleyRepository.save(trolley);
 	}
 
 	@Override
 	public boolean delete(Long id) {
-		for(Trolley trolley : findAll()) 
-			if(trolley.getId() == id) {
+		for (Trolley trolley : findAll())
+			if (trolley.getId() == id) {
 				trolleyRepository.delete(trolley);
 				return true;
 			}
 		return false;
 	}
 
-	@Override
-	public TypeTransport setType(TypeTransport type) {	
-		return TypeTransport.trolley;
-	}
 
-	
-	
 }
