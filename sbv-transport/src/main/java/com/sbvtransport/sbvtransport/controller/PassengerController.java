@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.service.IPassengerService;
 
@@ -51,6 +53,15 @@ public class PassengerController {
 		boolean delete = passengerService.delete(id);
 		
 		return new ResponseEntity<>(delete,HttpStatus.OK); 
+
+	}
+	
+	@RequestMapping(value="/logIn", method = RequestMethod.POST)
+	public ResponseEntity<Passenger> logIn(@RequestBody UserDTO user){
+		
+		Passenger singInPassenger = passengerService.logIn(user);
+		
+		return new ResponseEntity<>(singInPassenger,HttpStatus.OK); 
 
 	}
 

@@ -2,9 +2,7 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
 
@@ -34,6 +32,11 @@ public class BusService implements IBusService {
 	@Override
 	public Bus update(Bus bus) {
 
+		for (Bus bu : findAll()) {
+			if(bu.getName().equals(bus.getName()) && bu.getCode().equals(bus.getCode())){
+				return null;
+			}
+		}
 		Optional<Bus> updateBus = busRepository.findById(bus.getId());
 		updateBus.get().setCode(bus.getCode());
 		updateBus.get().setSpeed(bus.getSpeed());

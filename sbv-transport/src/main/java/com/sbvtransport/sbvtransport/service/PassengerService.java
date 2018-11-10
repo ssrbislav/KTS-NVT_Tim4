@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 
@@ -21,6 +23,12 @@ public class PassengerService implements IPassengerService {
 
 	@Override
 	public Passenger create(Passenger passenger) {
+		
+		for (Passenger pass : findAll()) {
+			if(pass.getUsername().equals(passenger.getUsername()) || pass.getEmail().equals(passenger.getEmail())){
+				return null;
+			}
+		}
 		//need to create document and save it's path (correct this when you do front)
 		passenger.setDocument(" ");
 		
@@ -32,6 +40,12 @@ public class PassengerService implements IPassengerService {
 
 	@Override
 	public Passenger update(Passenger passenger) {
+		
+		for (Passenger pass : findAll()) {
+			if(passenger.getUsername().equals(pass.getUsername()) || passenger.getEmail().equals(pass.getEmail())){
+				return null;
+			}
+		}
 		
 		Optional<Passenger> updatePassenger = passengerRepository.findById(passenger.getId());
 		updatePassenger.get().setActive(passenger.isActive());
@@ -58,6 +72,17 @@ public class PassengerService implements IPassengerService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Passenger logIn(UserDTO user) {
+		
+		for (Passenger passenger : findAll()) {
+			if(passenger.getUsername().equals(user.getUsername()) && passenger.getPassword().equals(user.getPassword())){
+				return passenger;
+			}
+		}
+		return null;
 	}
 	
 	
