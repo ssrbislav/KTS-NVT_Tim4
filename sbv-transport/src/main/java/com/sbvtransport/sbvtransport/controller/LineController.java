@@ -1,5 +1,7 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.LineDTO;
+import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.service.ILineService;
 import java.util.List;
@@ -28,13 +30,16 @@ public class LineController {
   }
 
   @RequestMapping(value = "/addLine", method = RequestMethod.POST)
-  public ResponseEntity<Line> create(@RequestBody Line line){
+  public ResponseEntity<Line> create(@RequestBody LineDTO line){
 
-    Line newLine = lineService.create(line);
+	Line l = new Line();
+	l.setStation_type(TypeTransport.valueOf(line.getLine_type()));
+    Line newLine = lineService.create(l);
 
     return new ResponseEntity<>(newLine,HttpStatus.OK);
 
   }
+  
 
   @RequestMapping(value = "/updateLine", method = RequestMethod.POST)
   public ResponseEntity<Line> update(@RequestBody Line line){
