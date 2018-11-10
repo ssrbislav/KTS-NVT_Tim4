@@ -2,10 +2,14 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
 
+@Service
 public class BusService implements IBusService {
 
 	@Autowired
@@ -33,7 +37,7 @@ public class BusService implements IBusService {
 	public Bus update(Bus bus) {
 
 		for (Bus bu : findAll()) {
-			if(bu.getName().equals(bus.getName()) && bu.getCode().equals(bus.getCode())){
+			if (bu.getName().equals(bus.getName()) && bu.getCode().equals(bus.getCode())) {
 				return null;
 			}
 		}
@@ -56,6 +60,5 @@ public class BusService implements IBusService {
 			}
 		return false;
 	}
-
 
 }

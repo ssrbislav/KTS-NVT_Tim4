@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 
+@Service
 public class TrolleyService implements ITrolleyService {
 
 	@Autowired
@@ -49,6 +51,5 @@ public class TrolleyService implements ITrolleyService {
 			}
 		return false;
 	}
-
 
 }
