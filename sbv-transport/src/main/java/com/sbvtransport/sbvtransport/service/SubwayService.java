@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
@@ -34,6 +33,12 @@ public class SubwayService implements ISubwayService {
 
 	@Override
 	public Subway update(Subway subway) {
+		
+		for (Subway su : findAll()) {
+			if (su.getName().equals(subway.getName()) && su.getCode().equals(subway.getCode())) {
+				return null;
+			}
+		}
 
 		Optional<Subway> updateSubway = subwayRepository.findById(subway.getId());
 		updateSubway.get().setCode(subway.getCode());

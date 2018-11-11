@@ -10,5 +10,6 @@ public interface ITicketService {
   Ticket create(Ticket ticket);
   Ticket update(Ticket ticket);
   boolean delete(Long id);
+  boolean deleteBecauseTransport(String code);
 
 }

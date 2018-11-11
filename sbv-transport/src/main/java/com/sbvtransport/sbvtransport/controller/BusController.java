@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.service.IBusService;
+import com.sbvtransport.sbvtransport.service.ITicketService;
 
 @RestController
 @RequestMapping(value = "api/bus")
@@ -20,6 +19,9 @@ public class BusController {
 
 	@Autowired
 	IBusService busService;
+	
+	@Autowired
+	ITicketService ticketService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<List<Bus>> getAll() {
@@ -61,6 +63,8 @@ public class BusController {
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = busService.delete(id);
+		
+		boolean deleteTicket = ticketService.deleteBecauseTransport(busService.getOne(id).getCode());
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 

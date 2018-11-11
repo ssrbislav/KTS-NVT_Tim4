@@ -2,10 +2,8 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 
@@ -32,6 +30,12 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public Trolley update(Trolley trolley) {
+		
+		for (Trolley t : findAll()) {
+			if (t.getName().equals(trolley.getName()) && t.getCode().equals(trolley.getCode())) {
+				return null;
+			}
+		}
 		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
 		updateTrolley.get().setCode(trolley.getCode());
 		updateTrolley.get().setSpeed(trolley.getSpeed());

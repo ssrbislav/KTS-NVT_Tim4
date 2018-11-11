@@ -5,8 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbvtransport.sbvtransport.dto.BuyTicketDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
+import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 
 @Service
@@ -83,6 +85,22 @@ public class PassengerService implements IPassengerService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean buyTicket(BuyTicketDTO ticket) {
+		
+		Passenger passenger = getOne(ticket.getId());
+		passenger.getTickets().add(ticket.getTicket());
+		passengerRepository.save(passenger);
+		
+		return true;
+	}
+
+	@Override
+	public Passenger getOne(Long id) {
+		
+		return passengerRepository.getOne(id);
 	}
 	
 	

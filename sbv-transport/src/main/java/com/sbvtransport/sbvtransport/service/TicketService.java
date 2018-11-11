@@ -1,5 +1,4 @@
 package com.sbvtransport.sbvtransport.service;
-
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.TicketRepository;
 import java.util.List;
@@ -55,4 +54,17 @@ public class TicketService implements ITicketService {
     }
     return false;
   }
+
+@Override
+public boolean deleteBecauseTransport(String code) {
+	for (Ticket ticket : findAll()) {
+		if(ticket.getCode_transport().equals(code)){
+		      ticketRepository.delete(ticketRepository.getOne(ticket.getId()));
+		      return true;
+
+		}
+	}
+	return false;
+}
+
 }

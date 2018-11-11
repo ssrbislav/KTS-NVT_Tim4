@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sbvtransport.sbvtransport.model.Trolley;
+import com.sbvtransport.sbvtransport.service.ITicketService;
 import com.sbvtransport.sbvtransport.service.ITrolleyService;
 import com.sbvtransport.sbvtransport.service.TrolleyService;
 
@@ -21,6 +22,9 @@ public class TrolleyController {
 
 	@Autowired
 	ITrolleyService trolleyService;
+	
+	@Autowired
+	ITicketService ticketService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<List<Trolley>> getAll() {
@@ -62,6 +66,8 @@ public class TrolleyController {
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean deleteTrolley = trolleyService.delete(id);
+		
+		boolean deleteTicket = ticketService.deleteBecauseTransport(trolleyService.getOne(id).getCode());
 		
 		return new ResponseEntity<>(deleteTrolley, HttpStatus.OK);
 		

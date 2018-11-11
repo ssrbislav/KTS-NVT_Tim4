@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.service.ISubwayService;
+import com.sbvtransport.sbvtransport.service.ITicketService;
 
 @RestController
 public class SubwayController {
 
 	@Autowired
 	ISubwayService subwayService;
+	
+	@Autowired
+	ITicketService ticketService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<List<Subway>> getAll() {
@@ -60,6 +64,8 @@ public class SubwayController {
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = subwayService.delete(id);
+		
+		boolean deleteTicket = ticketService.deleteBecauseTransport(subwayService.getOne(id).getCode());
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
