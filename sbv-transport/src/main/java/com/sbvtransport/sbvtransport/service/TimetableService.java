@@ -15,6 +15,9 @@ public class TimetableService implements ITimetableService {
     TimetableRepository timetableRepository;
 
     @Override
+    public Timetable getOne(Long id) { return timetableRepository.getOne(id); }
+
+    @Override
     public List<Timetable> findAll() {
         return timetableRepository.findAll();
     }

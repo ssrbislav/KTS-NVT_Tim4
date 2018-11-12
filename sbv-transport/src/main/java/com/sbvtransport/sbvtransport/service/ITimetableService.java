@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ITimetableService {
 
+    Timetable getOne(Long id);
     List<Timetable> findAll();
     Timetable create(Timetable timetable);
     Timetable update(Timetable timetable);
