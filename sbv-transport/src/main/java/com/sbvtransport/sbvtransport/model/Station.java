@@ -4,14 +4,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 @Entity
 @Table(name="station")
 public class Station implements Serializable {
@@ -29,12 +23,17 @@ public class Station implements Serializable {
 
 	// TODO #2: Solve MappingException.
 //	@Column(name = "location", unique = false, nullable = false)
-	// @OneToOne(targetEntity = Location.class)
-	//private Location location;
+	@OneToOne(targetEntity = Location.class)
+	@JoinColumn(name = "location", referencedColumnName = "id")
+	private Location location;
 
 	// TODO #3: Solve MappingException.
 //	@Column(name = "timetable", unique = false, nullable = false)
-	//private Map<Transport, Date> timetable;
+//	@JoinColumn(name = "timetable", referencedColumnName = "code")
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "code", targetEntity = Date.class)
+	@OneToOne(targetEntity = Timetable.class)
+	@JoinColumn(name = "timetable", referencedColumnName = "id")
+	private Timetable timetable;
 	
 	@ManyToOne (optional = false)
 	@JoinColumn(name = "line", referencedColumnName="id")
@@ -57,7 +56,7 @@ public class Station implements Serializable {
 		this.id = id;
 	}
 
-	/*public Location getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
@@ -65,16 +64,13 @@ public class Station implements Serializable {
 		this.location = location;
 	}
 
-	public Map<Transport, Date> getTimetable() {
+	public Timetable getTimetable() {
 		return timetable;
 	}
 
-	public void setTimetable(
-			Map<Transport, Date> timetable) {
+	public void setTimetable(Timetable timetable) {
 		this.timetable = timetable;
-	}*/
-	
-	
+	}
 
 	@Override
 	public String toString() {
