@@ -33,7 +33,7 @@ public class LineService implements ILineService {
     Optional<Line> updateLine = lineRepository.findById(line.getId());
     updateLine.get().setStation_list(line.getStation_list());
     updateLine.get().setStation_type(line.getStation_type());
-    return lineRepository.save(line);
+    return lineRepository.save(updateLine.get());
   }
 
   @Override

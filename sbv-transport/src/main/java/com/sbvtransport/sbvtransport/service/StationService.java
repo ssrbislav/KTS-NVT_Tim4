@@ -32,9 +32,10 @@ public class StationService implements IStationService {
   @Override
   public Station update(Station station) {
     Optional<Station> updateStation = stationRepository.findById(station.getId());
-    //updateStation.get().setLocation(station.getLocation());
-    //updateStation.get().setTimetable(station.getTimetable());
-    return stationRepository.save(station);
+    updateStation.get().setLocation(station.getLocation());
+    updateStation.get().setTimetable(station.getTimetable());
+    updateStation.get().setLine(station.getLine());
+    return stationRepository.save(updateStation.get());
   }
 
   @Override
