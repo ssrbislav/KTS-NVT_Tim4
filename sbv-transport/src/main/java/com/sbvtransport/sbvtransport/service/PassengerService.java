@@ -32,10 +32,9 @@ public class PassengerService implements IPassengerService {
 			}
 		}
 		//need to create document and save it's path (correct this when you do front)
-		passenger.setDocument(" ");
 		
 		passenger.setActive(false);
-		passenger.setValidate_document(false);
+		passenger.setDocument_validated(false);
 		
 		return passengerRepository.save(passenger);
 	}
@@ -59,7 +58,7 @@ public class PassengerService implements IPassengerService {
 		updatePassenger.get().setLast_name(passenger.getLast_name());
 		updatePassenger.get().setUsername(passenger.getUsername());
 		updatePassenger.get().setPassword(passenger.getPassword());
-		updatePassenger.get().setValidate_document(passenger.isValidate_document());
+		updatePassenger.get().setDocument_validated(passenger.isDocument_validated());
 		updatePassenger.get().setTickets(passenger.getTickets());
 		
 		return passengerRepository.save(updatePassenger.get());
