@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 
@@ -26,22 +27,24 @@ public class TrolleyService implements ITrolleyService {
 	}
 
 	@Override
-	public Trolley create(Trolley trolley) {
+	public Trolley create(TrolleyDTO trolley) {
 		
-		return trolleyRepository.save(trolley);
+		Trolley newTrolley = new Trolley(trolley.getId(), trolley.getCode(), trolley.getSpeed(), trolley.getId_line(), trolley.isLate(), trolley.getName());
+		
+		return trolleyRepository.save(newTrolley);
 	}
 
 	@Override
-	public Trolley update(Trolley trolley) {
+	public Trolley update(TrolleyDTO trolley) {
 		
 		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
 		updateTrolley.get().setCode(trolley.getCode());
 		updateTrolley.get().setSpeed(trolley.getSpeed());
 		updateTrolley.get().setName(trolley.getName());
 		updateTrolley.get().setLate(trolley.isLate());
-		updateTrolley.get().setLine(trolley.getLine());
+		updateTrolley.get().setLine(trolley.getId_line());
 
-		return trolleyRepository.save(trolley);
+		return trolleyRepository.save(updateTrolley.get());
 	}
 
 	@Override
