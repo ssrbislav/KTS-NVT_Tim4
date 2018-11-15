@@ -1,21 +1,33 @@
 package com.sbvtransport.sbvtransport.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sbvtransport.sbvtransport.dto.BuyTicketDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
+import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
+import com.sbvtransport.sbvtransport.enumeration.TicketType;
+import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
+import com.sbvtransport.sbvtransport.repository.TicketRepository;
 
 @Service
 public class PassengerService implements IPassengerService {
 	
 	@Autowired
 	PassengerRepository passengerRepository;
+	
+	@Autowired
+	TicketService ticketService;
 
 	@Override
 	public List<Passenger> findAll() {
@@ -86,14 +98,21 @@ public class PassengerService implements IPassengerService {
 		return null;
 	}
 
+	
 	@Override
-	public boolean buyTicket(BuyTicketDTO ticket) {
+	public Passenger buyTicket(BuyTicketDTO ticket) throws ParseException {
 		
-		Passenger passenger = getOne(ticket.getId());
-		passenger.getTickets().add(ticket.getTicket());
-		passengerRepository.save(passenger);
+		Passenger passenger = getOne(ticket.getIdPassenger());
+		Date thedate = new SimpleDateFormat("dd-MM-yyyy").parse(ticket.getDate());
+		Ticket newTicket = new Ticket(2L, TypeTransport.valueOf(ticket.getType_transport()), ticket.getCost(),
+				Zone.valueOf(ticket.getZone()), thedate, TicketType.valueOf(ticket.getTicket_type()),ticket.isActive(), 
+				ticket.isApproved(),ticket.isExpired(), DemographicTicketType.valueOf(ticket.getDemographic_type()), 
+				ticket.isTime_expired(), ticket.isBlock(), ticket.getCode_transport(), passenger);
 		
-		return true;
+		ticketService.create(newTicket);		
+		
+		
+		return passengerRepository.save(passenger);
 	}
 
 	@Override
