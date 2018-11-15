@@ -53,7 +53,7 @@ public class Trolley extends Transport implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Trolley [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line + ", late=" + late
+		return "Trolley [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line_id + ", late=" + late
 				+ ", name=" + name + "]";
 	}
 	

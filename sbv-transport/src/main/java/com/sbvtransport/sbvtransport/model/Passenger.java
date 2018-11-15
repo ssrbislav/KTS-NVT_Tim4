@@ -46,7 +46,7 @@ public class Passenger extends User implements Serializable {
 	private List<Ticket> tickets = new ArrayList<Ticket>();
 	
 	public Passenger(){
-		super();
+		
 	}
 	
 	public Passenger(Long id, boolean active, Document document, boolean document_validated, List<Ticket> tickets) {

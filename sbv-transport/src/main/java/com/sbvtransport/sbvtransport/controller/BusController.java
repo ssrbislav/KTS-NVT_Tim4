@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.service.IBusService;
 import com.sbvtransport.sbvtransport.service.ITicketService;
@@ -42,7 +44,7 @@ public class BusController {
 	}
 
 	@RequestMapping(value = "/addBus", method = RequestMethod.POST)
-	public ResponseEntity<Bus> create(@RequestBody Bus bus) {
+	public ResponseEntity<Bus> create(@RequestBody BusDTO bus) {
 
 		Bus newBus = busService.create(bus);
 
@@ -51,7 +53,7 @@ public class BusController {
 	}
 
 	@RequestMapping(value = "/updateBus", method = RequestMethod.POST)
-	public ResponseEntity<Bus> update(@RequestBody Bus bus) {
+	public ResponseEntity<Bus> update(@RequestBody BusDTO bus) {
 
 		Bus updateBus = busService.update(bus);
 
@@ -62,9 +64,10 @@ public class BusController {
 	@RequestMapping(value = "/deleteBus/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
+		boolean deleteTicket = ticketService.deleteBecauseTransport(busService.getOne(id).getCode());
+
 		boolean delete = busService.delete(id);
 		
-		boolean deleteTicket = ticketService.deleteBecauseTransport(busService.getOne(id).getCode());
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 

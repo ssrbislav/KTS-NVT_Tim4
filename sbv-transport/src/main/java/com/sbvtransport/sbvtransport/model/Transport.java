@@ -10,7 +10,7 @@ public abstract class Transport {
 	protected double speed;
 	
 	@Column(name="line",unique=false, nullable=false)
-	protected Line line;
+	protected Long line_id;
 	
 	@Column(name="late",unique=false, nullable=false)
 	protected boolean late;
@@ -21,13 +21,25 @@ public abstract class Transport {
 	public Transport(){
 		
 	}
+	
+	
+
+	public Transport(double speed, Long line, boolean late, String name) {
+		super();
+		this.speed = speed;
+		this.line_id = line;
+		this.late = late;
+		this.name = name;
+	}
+
+
 
 	public double getSpeed() {
 		return speed;
 	}
 
-	public Line getLine() {
-		return line;
+	public Long getLine() {
+		return line_id;
 	}
 
 	public boolean isLate() {
@@ -42,8 +54,8 @@ public abstract class Transport {
 		this.speed = speed;
 	}
 
-	public void setLine(Line line) {
-		this.line = line;
+	public void setLine(Long line) {
+		this.line_id = line;
 	}
 
 	public void setLate(boolean late) {
@@ -56,7 +68,7 @@ public abstract class Transport {
 
 	@Override
 	public String toString() {
-		return "Transport [speed=" + speed + ", line=" + line + ", late=" + late + ", name=" + name + "]";
+		return "Transport [speed=" + speed + ", line=" + line_id + ", late=" + late + ", name=" + name + "]";
 	}
 	
 	

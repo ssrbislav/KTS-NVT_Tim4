@@ -1,18 +1,10 @@
 package com.sbvtransport.sbvtransport.dto;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-
-import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
-import com.sbvtransport.sbvtransport.enumeration.TicketType;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.enumeration.Zone;
-import com.sbvtransport.sbvtransport.model.Ticket;
-
 public class BuyTicketDTO {
 	
 	private Long idPassenger;
+	
+	private Long id;
 	
 	private String type_transport;
 	
@@ -44,11 +36,12 @@ public class BuyTicketDTO {
 	}
 
 
-	public BuyTicketDTO(Long idPassenger,String type_transport, double cost, String zone, String date, String ticket_type, boolean active,
+	public BuyTicketDTO(Long idPassenger,Long id,String type_transport, double cost, String zone, String date, String ticket_type, boolean active,
 			boolean approved, boolean expired, String demographic_type, boolean time_expired, boolean block,
 			String code_transport) {
 		super();
 		this.idPassenger = idPassenger;
+		this.id = id;
 		this.type_transport = type_transport;
 		this.cost = cost;
 		this.zone = zone;
@@ -72,6 +65,16 @@ public class BuyTicketDTO {
 
 	public void setIdPassenger(Long idPassenger) {
 		this.idPassenger = idPassenger;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 

@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
+import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
+import com.sbvtransport.sbvtransport.repository.LineRepository;
 
 @Service
 public class BusService implements IBusService {
@@ -28,22 +31,24 @@ public class BusService implements IBusService {
 	}
 
 	@Override
-	public Bus create(Bus bus) {
+	public Bus create(BusDTO bus) {
+		
+		Bus newBus = new Bus(bus.getId(), bus.getCode(), bus.getSpeed(), bus.getId_line(), bus.isLate(), bus.getName());
 
-		return busRepository.save(bus);
+		return busRepository.save(newBus);
 	}
 
 	@Override
-	public Bus update(Bus bus) {
+	public Bus update(BusDTO bus) {
 
 		Optional<Bus> updateBus = busRepository.findById(bus.getId());
 		updateBus.get().setCode(bus.getCode());
 		updateBus.get().setSpeed(bus.getSpeed());
 		updateBus.get().setName(bus.getName());
 		updateBus.get().setLate(bus.isLate());
-		updateBus.get().setLine(bus.getLine());
+		updateBus.get().setLine(bus.getId_line());
 
-		return busRepository.save(bus);
+		return busRepository.save(updateBus.get());
 	}
 
 	@Override
