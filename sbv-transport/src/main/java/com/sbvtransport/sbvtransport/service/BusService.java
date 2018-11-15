@@ -36,11 +36,6 @@ public class BusService implements IBusService {
 	@Override
 	public Bus update(Bus bus) {
 
-		for (Bus bu : findAll()) {
-			if (bu.getName().equals(bus.getName()) && bu.getCode().equals(bus.getCode())) {
-				return null;
-			}
-		}
 		Optional<Bus> updateBus = busRepository.findById(bus.getId());
 		updateBus.get().setCode(bus.getCode());
 		updateBus.get().setSpeed(bus.getSpeed());

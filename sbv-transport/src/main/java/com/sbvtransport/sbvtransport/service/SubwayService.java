@@ -33,12 +33,6 @@ public class SubwayService implements ISubwayService {
 
 	@Override
 	public Subway update(Subway subway) {
-		
-		for (Subway su : findAll()) {
-			if (su.getName().equals(subway.getName()) && su.getCode().equals(subway.getCode())) {
-				return null;
-			}
-		}
 
 		Optional<Subway> updateSubway = subwayRepository.findById(subway.getId());
 		updateSubway.get().setCode(subway.getCode());
@@ -53,6 +47,7 @@ public class SubwayService implements ISubwayService {
 
 	@Override
 	public boolean delete(Long id) {
+		
 		for (Subway subway : findAll())
 			if (subway.getId() == id) {
 				subwayRepository.delete(subway);

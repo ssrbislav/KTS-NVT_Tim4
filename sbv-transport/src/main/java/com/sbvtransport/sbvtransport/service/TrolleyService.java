@@ -15,27 +15,25 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public List<Trolley> findAll() {
+		
 		return trolleyRepository.findAll();
 	}
 
 	@Override
 	public Trolley getOne(Long id) {
+		
 		return trolleyRepository.getOne(id);
 	}
 
 	@Override
 	public Trolley create(Trolley trolley) {
+		
 		return trolleyRepository.save(trolley);
 	}
 
 	@Override
 	public Trolley update(Trolley trolley) {
 		
-		for (Trolley t : findAll()) {
-			if (t.getName().equals(trolley.getName()) && t.getCode().equals(trolley.getCode())) {
-				return null;
-			}
-		}
 		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
 		updateTrolley.get().setCode(trolley.getCode());
 		updateTrolley.get().setSpeed(trolley.getSpeed());
@@ -48,6 +46,7 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public boolean delete(Long id) {
+		
 		for (Trolley trolley : findAll())
 			if (trolley.getId() == id) {
 				trolleyRepository.delete(trolley);
