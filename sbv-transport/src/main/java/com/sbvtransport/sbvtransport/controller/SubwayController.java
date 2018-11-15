@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.service.ISubwayService;
 import com.sbvtransport.sbvtransport.service.ITicketService;
 
 @RestController
+@RequestMapping(value = "api/subway")
 public class SubwayController {
 
 	@Autowired
@@ -43,7 +45,7 @@ public class SubwayController {
 	}
 
 	@RequestMapping(value = "/addSubway", method = RequestMethod.POST)
-	public ResponseEntity<Subway> create(@RequestBody Subway subway) {
+	public ResponseEntity<Subway> create(@RequestBody SubwayDTO subway) {
 
 		Subway addSubway = subwayService.create(subway);
 
@@ -52,7 +54,7 @@ public class SubwayController {
 	}
 
 	@RequestMapping(value = "/updateSubway", method = RequestMethod.POST)
-	public ResponseEntity<Subway> update(@RequestBody Subway subway) {
+	public ResponseEntity<Subway> update(@RequestBody SubwayDTO subway) {
 
 		Subway updateSubway = subwayService.update(subway);
 
@@ -63,9 +65,10 @@ public class SubwayController {
 	@RequestMapping(value = "/deleteSubway/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
+		boolean deleteTicket = ticketService.deleteBecauseTransport(subwayService.getOne(id).getCode());
+
 		boolean delete = subwayService.delete(id);
 		
-		boolean deleteTicket = ticketService.deleteBecauseTransport(subwayService.getOne(id).getCode());
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
