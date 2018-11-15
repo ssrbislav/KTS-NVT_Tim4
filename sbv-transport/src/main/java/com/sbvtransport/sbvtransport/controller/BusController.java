@@ -35,9 +35,9 @@ public class BusController {
 	@RequestMapping(value = "/getBuss/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Bus> getOne(@PathVariable Long id) {
 
-		Bus getBus = busService.getOne(id);
+		Bus bus = busService.getOne(id);
 
-		return new ResponseEntity<>(getBus, HttpStatus.OK);
+		return new ResponseEntity<>(bus, HttpStatus.OK);
 
 	}
 
