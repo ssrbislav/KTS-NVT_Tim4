@@ -29,8 +29,8 @@ public class Trolley extends Transport implements Serializable {
 		
 	}
 
-	public Trolley(Long id, String code) {
-		super();
+	public Trolley(Long id, String code,double speed, Long line, boolean late, String name) {
+		super(speed, line, late, name);
 		this.id = id;
 		this.code = code;
 	}
@@ -53,7 +53,7 @@ public class Trolley extends Transport implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Trolley [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line + ", late=" + late
+		return "Trolley [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line_id + ", late=" + late
 				+ ", name=" + name + "]";
 	}
 	

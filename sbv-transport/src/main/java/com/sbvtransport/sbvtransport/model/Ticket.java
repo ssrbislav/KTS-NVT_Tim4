@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
 import com.sbvtransport.sbvtransport.enumeration.TicketType;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
@@ -145,6 +147,7 @@ public class Ticket implements Serializable {
 		return code_transport;
 	}
 
+	@JsonIgnore
 	public Passenger getPassenger() {
 		return passenger;
 	}

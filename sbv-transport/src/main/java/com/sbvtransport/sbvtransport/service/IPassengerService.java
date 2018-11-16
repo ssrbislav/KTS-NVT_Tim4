@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.sbvtransport.sbvtransport.dto.BuyTicketDTO;
@@ -13,7 +14,7 @@ public interface IPassengerService {
 	Passenger update(Passenger passenger);
 	boolean delete (Long id);
 	Passenger logIn(UserDTO user);
-	boolean buyTicket(BuyTicketDTO ticket);
+	Passenger buyTicket(BuyTicketDTO ticket) throws ParseException;
 	Passenger getOne(Long id);
 
 }

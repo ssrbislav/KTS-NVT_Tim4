@@ -28,8 +28,8 @@ public class Subway extends Transport implements Serializable {
 		
 	}
 
-	public Subway(Long id, String code) {
-		super();
+	public Subway(Long id, String code,double speed, Long line, boolean late, String name) {
+		super(speed, line, late, name);
 		this.id = id;
 		this.code = code;
 	}
@@ -52,7 +52,7 @@ public class Subway extends Transport implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Subway [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line + ", late=" + late
+		return "Subway [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line_id + ", late=" + late
 				+ ", name=" + name + "]";
 	}
 	

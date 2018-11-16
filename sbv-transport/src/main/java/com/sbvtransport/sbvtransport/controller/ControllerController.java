@@ -1,6 +1,8 @@
 package com.sbvtransport.sbvtransport.controller;
 
 import java.util.List;
+
+import org.hibernate.validator.internal.metadata.aggregated.ValidatableParametersMetaData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,11 +66,13 @@ public class ControllerController {
 	public ResponseEntity<Boolean> validateDocument(@RequestBody ValidateDocument validateDocument){
 		
 		for (Passenger passenger : passengerService.findAll()) {
-			
-			if(passenger.getId() == validateDocument.getIdPassenger()){
-				passenger.setValidate_document(validateDocument.isValidate());
-				passengerService.update(passenger);
-				return new ResponseEntity<>(true,HttpStatus.OK); 
+
+			if(passenger.getId() == validateDocument.getIdPassenger()) {
+				Long passengerId = validateDocument.getIdPassenger();
+				if(controllerService.validatePassengerDocument(passengerId) != null) {
+					passengerService.update(passenger);
+					return new ResponseEntity<>(true,HttpStatus.OK); 
+				}
 			}
 		}
 		

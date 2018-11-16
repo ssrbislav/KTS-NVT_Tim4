@@ -57,14 +57,21 @@ public class TicketService implements ITicketService {
 
 @Override
 public boolean deleteBecauseTransport(String code) {
+	int i = 0;
+	
 	for (Ticket ticket : findAll()) {
 		if(ticket.getCode_transport().equals(code)){
 		      ticketRepository.delete(ticketRepository.getOne(ticket.getId()));
-		      return true;
+		      i++;
 
 		}
 	}
-	return false;
+	
+	if (i>0){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 }

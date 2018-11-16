@@ -1,7 +1,9 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
+
 import com.sbvtransport.sbvtransport.model.Controller;
+import com.sbvtransport.sbvtransport.model.Passenger;
 
 public interface IControllerService {
 	
@@ -9,5 +11,6 @@ public interface IControllerService {
 	Controller create(Controller controller);
 	Controller update(Controller controller);
 	boolean delete (Long id);
+	Passenger validatePassengerDocument(Long passengerId);
 
 }

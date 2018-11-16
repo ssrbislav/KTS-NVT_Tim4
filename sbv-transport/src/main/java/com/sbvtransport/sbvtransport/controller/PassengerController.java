@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbvtransport.sbvtransport.dto.BuyTicketDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.service.IPassengerService;
@@ -64,6 +66,16 @@ public class PassengerController {
 		return new ResponseEntity<>(singInPassenger,HttpStatus.OK); 
 
 	}
+	
+	@RequestMapping(value="/buyTicket", method = RequestMethod.POST)
+	public ResponseEntity<Passenger> buyTicket(@RequestBody BuyTicketDTO ticket) throws ParseException{
+		
+		Passenger pass = passengerService.buyTicket(ticket);
+		
+		return new ResponseEntity<>(pass,HttpStatus.OK); 
+
+	}
+
 
 
 }

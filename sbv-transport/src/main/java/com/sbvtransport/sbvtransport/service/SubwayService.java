@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
@@ -26,33 +28,30 @@ public class SubwayService implements ISubwayService {
 	}
 
 	@Override
-	public Subway create(Subway subway) {
+	public Subway create(SubwayDTO subway) {
+		
+		Subway newSubway = new Subway(subway.getId(), subway.getCode(), subway.getSpeed(), subway.getId_line(), subway.isLate(), subway.getName());
 
-		return subwayRepository.save(subway);
+		return subwayRepository.save(newSubway);
 	}
 
 	@Override
-	public Subway update(Subway subway) {
-		
-		for (Subway su : findAll()) {
-			if (su.getName().equals(subway.getName()) && su.getCode().equals(subway.getCode())) {
-				return null;
-			}
-		}
+	public Subway update(SubwayDTO subway) {
 
 		Optional<Subway> updateSubway = subwayRepository.findById(subway.getId());
 		updateSubway.get().setCode(subway.getCode());
 		updateSubway.get().setSpeed(subway.getSpeed());
 		updateSubway.get().setName(subway.getName());
 		updateSubway.get().setLate(subway.isLate());
-		updateSubway.get().setLine(subway.getLine());
+		updateSubway.get().setLine(subway.getId_line());
 
-		return subwayRepository.save(subway);
+		return subwayRepository.save(updateSubway.get());
 
 	}
 
 	@Override
 	public boolean delete(Long id) {
+		
 		for (Subway subway : findAll())
 			if (subway.getId() == id) {
 				subwayRepository.delete(subway);

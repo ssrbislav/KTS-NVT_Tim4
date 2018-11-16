@@ -2,6 +2,7 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
 
+import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.model.Trolley;
 
 public interface ITrolleyService {
@@ -10,9 +11,9 @@ public interface ITrolleyService {
 
 	Trolley getOne(Long id);
 
-	Trolley create(Trolley trolley);
+	Trolley create(TrolleyDTO trolley);
 
-	Trolley update(Trolley trolley);
+	Trolley update(TrolleyDTO trolley);
 
 	boolean delete(Long id);
 

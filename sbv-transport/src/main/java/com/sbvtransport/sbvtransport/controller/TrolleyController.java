@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.service.ITicketService;
 import com.sbvtransport.sbvtransport.service.ITrolleyService;
@@ -45,16 +46,16 @@ public class TrolleyController {
 	}
 
 	@RequestMapping(value = "/createTrolley", method = RequestMethod.POST)
-	public ResponseEntity<Trolley> create(@RequestBody Trolley trolley) {
+	public ResponseEntity<Trolley> create(@RequestBody TrolleyDTO trolley) {
 
-		Trolley newTrolley = new TrolleyService().create(trolley);
+		Trolley newTrolley = trolleyService.create(trolley);
 
 		return new ResponseEntity<>(newTrolley, HttpStatus.OK);
 
 	}
 	
 	@RequestMapping(value = "/updateTrolley", method = RequestMethod.POST)
-	public ResponseEntity<Trolley> update(@RequestBody Trolley trolley) {
+	public ResponseEntity<Trolley> update(@RequestBody TrolleyDTO trolley) {
 
 		Trolley updateTrolley = trolleyService.update(trolley);
 
@@ -62,13 +63,13 @@ public class TrolleyController {
 
 	}
 
-	@RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-		boolean deleteTrolley = trolleyService.delete(id);
-		
 		boolean deleteTicket = ticketService.deleteBecauseTransport(trolleyService.getOne(id).getCode());
-		
+
+		boolean deleteTrolley = trolleyService.delete(id);
+				
 		return new ResponseEntity<>(deleteTrolley, HttpStatus.OK);
 		
 	}
