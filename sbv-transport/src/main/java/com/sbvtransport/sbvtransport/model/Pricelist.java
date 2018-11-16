@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
 import com.sbvtransport.sbvtransport.enumeration.TicketType;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
@@ -26,8 +27,10 @@ public class Pricelist {
   private Long id;
 
   @Column(name="valid_since", unique=false, nullable=false)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
   private Date valid_since;
   @Column(name="valid_until", unique=false, nullable=false)
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
   private Date valid_until;
 
   @Column(name = "active", unique = false, nullable = false)
