@@ -61,7 +61,10 @@ public boolean deleteBecauseTransport(String code) {
 	
 	for (Ticket ticket : findAll()) {
 		if(ticket.getCode_transport().equals(code)){
-		      ticketRepository.delete(ticketRepository.getOne(ticket.getId()));
+			  Ticket t = ticketRepository.getOne(ticket.getId());
+			  t.setActive(false);
+		      update(t);
+		      ticketRepository.save(t);
 		      i++;
 
 		}

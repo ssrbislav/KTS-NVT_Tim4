@@ -49,6 +49,7 @@ public class Ticket implements Serializable {
 	@Column(name="active", unique=false, nullable=false)
 	private boolean active;
 	
+	//izbrisi approved
 	@Column(name="approved", unique=false, nullable=false)
 	private boolean approved;
 	
@@ -57,7 +58,7 @@ public class Ticket implements Serializable {
 	
 	@Column(name="demographic_type", unique=false, nullable=false)
 	private DemographicTicketType demographic_type;
-	
+	//stavi Date vreme isteka karte(proveri da li je oneUse,monty,year)
 	@Column(name="time_expired", unique=false, nullable=false)
 	private boolean time_expired;
 	

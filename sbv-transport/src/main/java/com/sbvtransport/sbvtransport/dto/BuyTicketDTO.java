@@ -16,17 +16,17 @@ public class BuyTicketDTO {
  
 	private String ticket_type;
 	
-	private boolean active;
+	//private boolean active;
 	
-	private boolean approved;
+	//private boolean approved;
 	
-	private boolean expired;
+	//private boolean expired;
 	
 	private String demographic_type;
 	
-	private boolean time_expired;
+	//private boolean time_expired;
 	
-	private boolean block;
+	//private boolean block;
 	
 	private String code_transport;
 	
@@ -47,12 +47,12 @@ public class BuyTicketDTO {
 		this.zone = zone;
 		this.date = date;
 		this.ticket_type = ticket_type;
-		this.active = active;
-		this.approved = approved;
-		this.expired = expired;
+		//this.active = active;
+		//this.approved = approved;
+		//this.expired = expired;
 		this.demographic_type = demographic_type;
-		this.time_expired = time_expired;
-		this.block = block;
+		//this.time_expired = time_expired;
+		//this.block = block;
 		this.code_transport = code_transport;
 	}
 
@@ -128,36 +128,7 @@ public class BuyTicketDTO {
 	}
 
 
-	public boolean isActive() {
-		return active;
-	}
-
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-
-	public boolean isApproved() {
-		return approved;
-	}
-
-
-	public void setApproved(boolean approved) {
-		this.approved = approved;
-	}
-
-
-	public boolean isExpired() {
-		return expired;
-	}
-
-
-	public void setExpired(boolean expired) {
-		this.expired = expired;
-	}
-
-
+	
 	public String getDemographic_type() {
 		return demographic_type;
 	}
@@ -165,26 +136,6 @@ public class BuyTicketDTO {
 
 	public void setDemographic_type(String demographic_type) {
 		this.demographic_type = demographic_type;
-	}
-
-
-	public boolean isTime_expired() {
-		return time_expired;
-	}
-
-
-	public void setTime_expired(boolean time_expired) {
-		this.time_expired = time_expired;
-	}
-
-
-	public boolean isBlock() {
-		return block;
-	}
-
-
-	public void setBlock(boolean block) {
-		this.block = block;
 	}
 
 
@@ -200,12 +151,12 @@ public class BuyTicketDTO {
 
 	@Override
 	public String toString() {
-		return "TicketDTO [type_transport=" + type_transport + ", cost=" + cost + ", zone=" + zone + ", date=" + date
-				+ ", ticket_type=" + ticket_type + ", active=" + active + ", approved=" + approved + ", expired="
-				+ expired + ", demographic_type=" + demographic_type + ", time_expired=" + time_expired + ", block="
-				+ block + ", code_transport=" + code_transport + "]";
+		return "BuyTicketDTO [idPassenger=" + idPassenger + ", id=" + id + ", type_transport=" + type_transport
+				+ ", cost=" + cost + ", zone=" + zone + ", date=" + date + ", ticket_type=" + ticket_type
+				+ ", demographic_type=" + demographic_type + ", code_transport=" + code_transport + "]";
 	}
-	
+
+
 	
 
 	

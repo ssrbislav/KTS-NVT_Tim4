@@ -30,6 +30,8 @@ public class Passenger extends User implements Serializable {
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private Long id;
+	
+	// DOB
 
 	@Column(name="active", unique=false, nullable=false)
 	private boolean active;

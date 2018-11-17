@@ -17,6 +17,8 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 
+
+
 @Service
 public class PassengerService implements IPassengerService {
 	
@@ -25,6 +27,7 @@ public class PassengerService implements IPassengerService {
 	
 	@Autowired
 	TicketService ticketService;
+	
 
 	@Override
 	public List<Passenger> findAll() {
@@ -102,9 +105,9 @@ public class PassengerService implements IPassengerService {
 		Passenger passenger = getOne(ticket.getIdPassenger());
 		Date thedate = new SimpleDateFormat("dd-MM-yyyy").parse(ticket.getDate());
 		Ticket newTicket = new Ticket(ticket.getId(), TypeTransport.valueOf(ticket.getType_transport()), ticket.getCost(),
-				Zone.valueOf(ticket.getZone()), thedate, TicketType.valueOf(ticket.getTicket_type()),ticket.isActive(), 
-				ticket.isApproved(),ticket.isExpired(), DemographicTicketType.valueOf(ticket.getDemographic_type()), 
-				ticket.isTime_expired(), ticket.isBlock(), ticket.getCode_transport(), passenger);
+				Zone.valueOf(ticket.getZone()), thedate, TicketType.valueOf(ticket.getTicket_type()),false, 
+				false,false, DemographicTicketType.valueOf(ticket.getDemographic_type()), 
+				false, false, ticket.getCode_transport(), passenger);
 		
 		ticketService.create(newTicket);		
 		

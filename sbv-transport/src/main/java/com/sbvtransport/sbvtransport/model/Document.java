@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Document {
 
@@ -19,6 +22,7 @@ public class Document {
 	private Long id;
 	
 	@Column(name = "dateOfUploud", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date dateOfUpload;
 	
 	@Column(name = "imageLocation", nullable = false)
@@ -31,7 +35,17 @@ public class Document {
 	public Document() {
 		super();
 	}
+	
+	
+	public Document(Date dateOfUpload, String imageLocation, Passenger passenger) {
+		super();
+		this.dateOfUpload = dateOfUpload;
+		this.imageLocation = imageLocation;
+		this.passenger = passenger;
+	}
 
+
+	@JsonIgnore
 	public Passenger getPassenger() {
 		return passenger;
 	}

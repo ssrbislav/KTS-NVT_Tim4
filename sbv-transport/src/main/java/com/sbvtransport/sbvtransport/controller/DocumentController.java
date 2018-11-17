@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbvtransport.sbvtransport.dto.DocumentDTO;
 import com.sbvtransport.sbvtransport.model.Document;
 import com.sbvtransport.sbvtransport.service.DocumentService;
 
@@ -38,7 +39,7 @@ public class DocumentController {
 	}
 	
 	@RequestMapping(value = "/addDoc", method = RequestMethod.POST)
-	public ResponseEntity<Document> create(@RequestBody Document doc) {
+	public ResponseEntity<Document> create(@RequestBody DocumentDTO doc) {
 		
 		Document newDoc = documentService.create(doc);
 		
@@ -46,7 +47,7 @@ public class DocumentController {
 	}
 	
 	@RequestMapping(value = "/updateDoc", method = RequestMethod.POST)
-	public ResponseEntity<Document> update(@RequestBody Document doc) {
+	public ResponseEntity<Document> update(@RequestBody DocumentDTO doc) {
 		
 		Document updateDoc = documentService.update(doc);
 		
