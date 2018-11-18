@@ -2,12 +2,13 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sbvtransport.sbvtransport.dto.BuyTicketDTO;
+import com.sbvtransport.sbvtransport.dto.TicketDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
 import com.sbvtransport.sbvtransport.enumeration.TicketType;
@@ -25,10 +26,6 @@ public class PassengerService implements IPassengerService {
 	@Autowired
 	PassengerRepository passengerRepository;
 	
-	@Autowired
-	TicketService ticketService;
-	
-
 	@Override
 	public List<Passenger> findAll() {
 		
@@ -99,21 +96,6 @@ public class PassengerService implements IPassengerService {
 	}
 
 	
-	@Override
-	public Passenger buyTicket(BuyTicketDTO ticket) throws ParseException {
-		
-		Passenger passenger = getOne(ticket.getIdPassenger());
-		Date thedate = new SimpleDateFormat("dd-MM-yyyy").parse(ticket.getDate());
-		Ticket newTicket = new Ticket(ticket.getId(), TypeTransport.valueOf(ticket.getType_transport()), ticket.getCost(),
-				Zone.valueOf(ticket.getZone()), thedate, TicketType.valueOf(ticket.getTicket_type()),false, 
-				false,false, DemographicTicketType.valueOf(ticket.getDemographic_type()), 
-				false, false, ticket.getCode_transport(), passenger);
-		
-		ticketService.create(newTicket);		
-		
-		return passengerRepository.save(passenger);
-	}
-
 	@Override
 	public Passenger getOne(Long id) {
 		

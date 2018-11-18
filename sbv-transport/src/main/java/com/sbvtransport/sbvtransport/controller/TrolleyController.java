@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.service.ITicketService;
 import com.sbvtransport.sbvtransport.service.ITrolleyService;
-import com.sbvtransport.sbvtransport.service.TrolleyService;
 
 @RestController
 @RequestMapping(value = "api/trolley")
@@ -66,7 +63,7 @@ public class TrolleyController {
 	@RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-		boolean deleteTicket = ticketService.deleteBecauseTransport(trolleyService.getOne(id).getCode());
+		ticketService.changeBecauseTransport(trolleyService.getOne(id).getCode());
 
 		boolean deleteTrolley = trolleyService.delete(id);
 				

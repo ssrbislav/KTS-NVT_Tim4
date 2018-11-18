@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sbvtransport.sbvtransport.dto.BuyTicketDTO;
+import com.sbvtransport.sbvtransport.dto.TicketDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.service.IPassengerService;
@@ -67,14 +67,6 @@ public class PassengerController {
 
 	}
 	
-	@RequestMapping(value="/buyTicket", method = RequestMethod.POST)
-	public ResponseEntity<Passenger> buyTicket(@RequestBody BuyTicketDTO ticket) throws ParseException{
-		
-		Passenger pass = passengerService.buyTicket(ticket);
-		
-		return new ResponseEntity<>(pass,HttpStatus.OK); 
-
-	}
 
 
 
