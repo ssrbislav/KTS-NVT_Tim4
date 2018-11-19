@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.model.Timetable;
-
 import java.util.List;
 
 public interface ITimetableService {

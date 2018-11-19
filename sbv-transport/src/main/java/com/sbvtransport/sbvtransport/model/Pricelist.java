@@ -1,12 +1,7 @@
 package com.sbvtransport.sbvtransport.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
-import com.sbvtransport.sbvtransport.enumeration.TicketType;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.enumeration.Zone;
 import org.hibernate.validator.constraints.Range;
-
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;

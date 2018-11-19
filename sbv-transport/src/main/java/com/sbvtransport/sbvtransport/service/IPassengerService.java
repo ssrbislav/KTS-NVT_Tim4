@@ -1,8 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
-
 import java.util.List;
-
 import com.sbvtransport.sbvtransport.dto.PassengerChangeBooleanDTO;
 import com.sbvtransport.sbvtransport.dto.PassengerDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;

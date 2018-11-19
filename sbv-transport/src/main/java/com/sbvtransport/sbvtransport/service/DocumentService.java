@@ -2,14 +2,11 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.dto.DocumentDTO;
 import com.sbvtransport.sbvtransport.model.Document;
 import com.sbvtransport.sbvtransport.model.Passenger;
-import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.DocumentRepository;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 

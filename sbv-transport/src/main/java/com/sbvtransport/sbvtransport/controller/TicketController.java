@@ -3,8 +3,6 @@ package com.sbvtransport.sbvtransport.controller;
 import com.sbvtransport.sbvtransport.dto.TicketDTO;
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.service.ITicketService;
-
-import java.text.ParseException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,8 @@
 package com.sbvtransport.sbvtransport.model;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @MappedSuperclass

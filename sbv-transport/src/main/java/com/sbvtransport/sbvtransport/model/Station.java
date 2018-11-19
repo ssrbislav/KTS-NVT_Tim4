@@ -2,8 +2,6 @@ package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Map;
 import javax.persistence.*;
 
 @Entity

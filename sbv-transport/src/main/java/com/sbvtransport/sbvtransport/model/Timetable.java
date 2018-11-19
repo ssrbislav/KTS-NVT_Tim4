@@ -1,10 +1,8 @@
 package com.sbvtransport.sbvtransport.model;
 
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity

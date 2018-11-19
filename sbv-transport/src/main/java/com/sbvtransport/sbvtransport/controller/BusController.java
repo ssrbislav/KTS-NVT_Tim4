@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.service.IBusService;
@@ -65,10 +64,8 @@ public class BusController {
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		ticketService.changeBecauseTransport(busService.getOne(id).getCode());
-
 		boolean delete = busService.delete(id);
 		
-
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
 	}
