@@ -33,20 +33,20 @@ public class BusService implements IBusService {
 	@Override
 	public Bus create(BusDTO bus) {
 		
-		Bus newBus = new Bus(bus.getId(), bus.getCode(), bus.getSpeed(), bus.getId_line(), bus.isLate(), bus.getName());
+		Bus newBus = new Bus( bus.getCode(), bus.getSpeed(), bus.getId_line(), bus.isLate(), bus.getName());
 
 		return busRepository.save(newBus);
 	}
 
 	@Override
-	public Bus update(BusDTO bus) {
+	public Bus update(Bus bus) {
 
 		Optional<Bus> updateBus = busRepository.findById(bus.getId());
 		updateBus.get().setCode(bus.getCode());
 		updateBus.get().setSpeed(bus.getSpeed());
 		updateBus.get().setName(bus.getName());
 		updateBus.get().setLate(bus.isLate());
-		updateBus.get().setLine(bus.getId_line());
+		updateBus.get().setLine(bus.getLine());
 
 		return busRepository.save(updateBus.get());
 	}
@@ -58,6 +58,16 @@ public class BusService implements IBusService {
 				busRepository.delete(bus);
 				return true;
 			}
+		return false;
+	}
+
+	@Override
+	public boolean codeExist(String code) {
+		for (Bus bus : findAll()) {
+			if(bus.getCode().equals(code)){
+				return true;
+			}
+		}
 		return false;
 	}
 

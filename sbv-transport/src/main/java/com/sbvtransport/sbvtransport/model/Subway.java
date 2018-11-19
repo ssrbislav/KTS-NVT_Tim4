@@ -28,9 +28,8 @@ public class Subway extends Transport implements Serializable {
 		
 	}
 
-	public Subway(Long id, String code,double speed, Long line, boolean late, String name) {
+	public Subway(String code,double speed, Long line, boolean late, String name) {
 		super(speed, line, late, name);
-		this.id = id;
 		this.code = code;
 	}
 

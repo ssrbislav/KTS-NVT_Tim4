@@ -28,20 +28,20 @@ public class SubwayService implements ISubwayService {
 	@Override
 	public Subway create(SubwayDTO subway) {
 		
-		Subway newSubway = new Subway(subway.getId(), subway.getCode(), subway.getSpeed(), subway.getId_line(), subway.isLate(), subway.getName());
+		Subway newSubway = new Subway(subway.getCode(), subway.getSpeed(), subway.getId_line(), subway.isLate(), subway.getName());
 
 		return subwayRepository.save(newSubway);
 	}
 
 	@Override
-	public Subway update(SubwayDTO subway) {
+	public Subway update(Subway subway) {
 
 		Optional<Subway> updateSubway = subwayRepository.findById(subway.getId());
 		updateSubway.get().setCode(subway.getCode());
 		updateSubway.get().setSpeed(subway.getSpeed());
 		updateSubway.get().setName(subway.getName());
 		updateSubway.get().setLate(subway.isLate());
-		updateSubway.get().setLine(subway.getId_line());
+		updateSubway.get().setLine(subway.getLine());
 
 		return subwayRepository.save(updateSubway.get());
 
@@ -55,6 +55,16 @@ public class SubwayService implements ISubwayService {
 				subwayRepository.delete(subway);
 				return true;
 			}
+		return false;
+	}
+
+	@Override
+	public boolean codeExist(String code) {
+		for (Subway subway : findAll()) {
+			if(subway.getCode().equals(code)){
+				return true;
+			}
+		}
 		return false;
 	}
 

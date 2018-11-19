@@ -1,7 +1,11 @@
 package com.sbvtransport.sbvtransport.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @MappedSuperclass
 public abstract class User {
@@ -27,9 +31,27 @@ public abstract class User {
 	@Column(name="phone_number",unique=false, nullable=false)
 	protected String phone_number;
 	
+	@Column(name="date_birth",unique=false, nullable=false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	protected Date date_birth;
+	
 	public User(){
 		
 	}
+
+	public User(String email, String username, String password, String first_name, String last_name, String address,
+			String phone_number, Date date_birth) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.date_birth = date_birth;
+	}
+
 
 	public String getEmail() {
 		return email;
@@ -85,6 +107,14 @@ public abstract class User {
 
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
+	}
+
+	public Date getDate_birth() {
+		return date_birth;
+	}
+
+	public void setDate_birth(Date date_birth) {
+		this.date_birth = date_birth;
 	}
 	
 	

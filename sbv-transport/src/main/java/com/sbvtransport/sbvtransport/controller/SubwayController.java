@@ -54,7 +54,7 @@ public class SubwayController {
 	}
 
 	@RequestMapping(value = "/updateSubway", method = RequestMethod.POST)
-	public ResponseEntity<Subway> update(@RequestBody SubwayDTO subway) {
+	public ResponseEntity<Subway> update(@RequestBody Subway subway) {
 
 		Subway updateSubway = subwayService.update(subway);
 

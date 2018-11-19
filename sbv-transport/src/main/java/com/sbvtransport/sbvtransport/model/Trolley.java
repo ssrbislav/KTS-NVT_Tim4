@@ -29,9 +29,8 @@ public class Trolley extends Transport implements Serializable {
 		
 	}
 
-	public Trolley(Long id, String code,double speed, Long line, boolean late, String name) {
+	public Trolley(String code,double speed, Long line, boolean late, String name) {
 		super(speed, line, late, name);
-		this.id = id;
 		this.code = code;
 	}
 

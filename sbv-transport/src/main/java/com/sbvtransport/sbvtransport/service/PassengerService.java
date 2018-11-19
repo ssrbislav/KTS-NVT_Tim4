@@ -1,24 +1,15 @@
 package com.sbvtransport.sbvtransport.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sbvtransport.sbvtransport.dto.TicketDTO;
+
+import com.sbvtransport.sbvtransport.dto.PassengerChangeBooleanDTO;
+import com.sbvtransport.sbvtransport.dto.PassengerDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
-import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
-import com.sbvtransport.sbvtransport.enumeration.TicketType;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Passenger;
-import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
-
-
 
 @Service
 public class PassengerService implements IPassengerService {
@@ -33,7 +24,7 @@ public class PassengerService implements IPassengerService {
 	}
 
 	@Override
-	public Passenger create(Passenger passenger) {
+	public Passenger create(PassengerDTO passenger) {
 		
 		for (Passenger pass : findAll()) {
 			if(pass.getUsername().equals(passenger.getUsername()) || pass.getEmail().equals(passenger.getEmail())){
@@ -42,10 +33,11 @@ public class PassengerService implements IPassengerService {
 		}
 		//need to create document and save it's path (correct this when you do front)
 		
-		passenger.setActive(false);
-		passenger.setDocument_validated(false);
+		Passenger p = new Passenger(true, false, passenger.getEmail(), passenger.getUsername(), passenger.getPassword(),
+				passenger.getFirst_name(), passenger.getLast_name(), passenger.getAddress(), passenger.getPhone_number(),
+				passenger.getDate_birth());
 		
-		return passengerRepository.save(passenger);
+		return passengerRepository.save(p);
 	}
 
 	@Override
@@ -100,6 +92,17 @@ public class PassengerService implements IPassengerService {
 	public Passenger getOne(Long id) {
 		
 		return passengerRepository.getOne(id);
+	}
+
+	@Override
+	public String changeActive(PassengerChangeBooleanDTO pass) {
+		Passenger p = getOne(pass.getIdPassenger());
+		if(p == null){
+			return "Passenger with" + pass.getIdPassenger() +"doesn't exist!";
+		}
+		p.setActive(pass.isChange());
+		passengerRepository.save(p);
+		return "Successfully!";
 	}
 	
 	

@@ -2,7 +2,6 @@ package com.sbvtransport.sbvtransport.dto;
 
 public class BusDTO {
 	
-	private Long id;
 	private String code;
 	private double speed;
 	private boolean late;
@@ -13,23 +12,13 @@ public class BusDTO {
 		
 	}
 
-	public BusDTO(Long id,String code, double speed, boolean late, String name, Long id_line) {
+	public BusDTO(String code, double speed, boolean late, String name, Long id_line) {
 		super();
-		this.id = id;
 		this.code = code;
 		this.speed = speed;
 		this.late = late;
 		this.name = name;
 		this.id_line = id_line;
-	}
-	
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getCode() {

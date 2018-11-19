@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbvtransport.sbvtransport.dto.PassengerChangeBooleanDTO;
+import com.sbvtransport.sbvtransport.dto.PassengerDTO;
 import com.sbvtransport.sbvtransport.dto.TicketDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
@@ -32,7 +34,7 @@ public class PassengerController {
 	}
 	
 	@RequestMapping(value="/addPassenger", method = RequestMethod.POST)
-	public ResponseEntity<Passenger> create(@RequestBody Passenger passenger){
+	public ResponseEntity<Passenger> create(@RequestBody PassengerDTO passenger){
 		
 		Passenger newPassenger = passengerService.create(passenger);
 		
@@ -64,6 +66,15 @@ public class PassengerController {
 		Passenger singInPassenger = passengerService.logIn(user);
 		
 		return new ResponseEntity<>(singInPassenger,HttpStatus.OK); 
+
+	}
+	
+	@RequestMapping(value="/changeActive", method = RequestMethod.POST)
+	public ResponseEntity<String> changeActive(@RequestBody PassengerChangeBooleanDTO user){
+		
+		String changeActive = passengerService.changeActive(user);
+		
+		return new ResponseEntity<>(changeActive,HttpStatus.OK); 
 
 	}
 	

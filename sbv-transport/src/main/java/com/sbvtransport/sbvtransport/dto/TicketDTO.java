@@ -7,7 +7,6 @@ public class TicketDTO {
 	
 	private Long idPassenger;
 	private String type_transport;
-	private double cost;
 	private String zone;
 	private String ticket_type;
 	private String demographic_type;
@@ -21,12 +20,11 @@ public class TicketDTO {
 	}
 
 
-	public TicketDTO(Long idPassenger, String type_transport, double cost, String zone, String ticket_type,
+	public TicketDTO(Long idPassenger, String type_transport, String zone, String ticket_type,
 			String demographic_type, String code_transport, Date date) {
 		super();
 		this.idPassenger = idPassenger;
 		this.type_transport = type_transport;
-		this.cost = cost;
 		this.zone = zone;
 		this.ticket_type = ticket_type;
 		this.demographic_type = demographic_type;
@@ -53,17 +51,6 @@ public class TicketDTO {
 	public void setType_transport(String type_transport) {
 		this.type_transport = type_transport;
 	}
-
-
-	public double getCost() {
-		return cost;
-	}
-
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
 
 	public String getZone() {
 		return zone;
@@ -117,8 +104,7 @@ public class TicketDTO {
 
 	@Override
 	public String toString() {
-		return "TicketDTO [idPassenger=" + idPassenger + ", type_transport=" + type_transport + ", cost=" + cost
-				+ ", zone=" + zone + ", ticket_type=" + ticket_type + ", demographic_type=" + demographic_type
+		return "TicketDTO [idPassenger=" + idPassenger + ", type_transport=" + type_transport +  ", zone=" + zone + ", ticket_type=" + ticket_type + ", demographic_type=" + demographic_type
 				+ ", code_transport=" + code_transport + ", date=" + date + "]";
 	}
 	

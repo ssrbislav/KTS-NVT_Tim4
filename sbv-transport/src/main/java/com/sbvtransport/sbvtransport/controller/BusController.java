@@ -53,7 +53,7 @@ public class BusController {
 	}
 
 	@RequestMapping(value = "/updateBus", method = RequestMethod.POST)
-	public ResponseEntity<Bus> update(@RequestBody BusDTO bus) {
+	public ResponseEntity<Bus> update(@RequestBody Bus bus) {
 
 		Bus updateBus = busService.update(bus);
 

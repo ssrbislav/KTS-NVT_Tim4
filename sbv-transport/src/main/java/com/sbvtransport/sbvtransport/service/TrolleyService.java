@@ -29,20 +29,20 @@ public class TrolleyService implements ITrolleyService {
 	@Override
 	public Trolley create(TrolleyDTO trolley) {
 		
-		Trolley newTrolley = new Trolley(trolley.getId(), trolley.getCode(), trolley.getSpeed(), trolley.getId_line(), trolley.isLate(), trolley.getName());
+		Trolley newTrolley = new Trolley(trolley.getCode(), trolley.getSpeed(), trolley.getId_line(), trolley.isLate(), trolley.getName());
 		
 		return trolleyRepository.save(newTrolley);
 	}
 
 	@Override
-	public Trolley update(TrolleyDTO trolley) {
+	public Trolley update(Trolley trolley) {
 		
 		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
 		updateTrolley.get().setCode(trolley.getCode());
 		updateTrolley.get().setSpeed(trolley.getSpeed());
 		updateTrolley.get().setName(trolley.getName());
 		updateTrolley.get().setLate(trolley.isLate());
-		updateTrolley.get().setLine(trolley.getId_line());
+		updateTrolley.get().setLine(trolley.getLine());
 
 		return trolleyRepository.save(updateTrolley.get());
 	}
@@ -55,6 +55,16 @@ public class TrolleyService implements ITrolleyService {
 				trolleyRepository.delete(trolley);
 				return true;
 			}
+		return false;
+	}
+
+	@Override
+	public boolean codeExist(String code) {
+		for (Trolley trolley : findAll()) {
+			if(trolley.getCode().equals(code)){
+				return true;
+			}
+		}
 		return false;
 	}
 

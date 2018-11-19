@@ -52,7 +52,7 @@ public class TrolleyController {
 	}
 	
 	@RequestMapping(value = "/updateTrolley", method = RequestMethod.POST)
-	public ResponseEntity<Trolley> update(@RequestBody TrolleyDTO trolley) {
+	public ResponseEntity<Trolley> update(@RequestBody Trolley trolley) {
 
 		Trolley updateTrolley = trolleyService.update(trolley);
 

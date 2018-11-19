@@ -42,6 +42,7 @@ public class Ticket implements Serializable {
 	private Zone zone;
 	
 	@Column(name="date", unique=false, nullable=false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date date;
 
 	@Column(name="ticket_type", unique=false, nullable=false)

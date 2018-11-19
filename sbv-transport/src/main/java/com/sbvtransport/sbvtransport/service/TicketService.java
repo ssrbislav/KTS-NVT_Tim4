@@ -9,15 +9,12 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 import com.sbvtransport.sbvtransport.repository.TicketRepository;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import org.assertj.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +26,15 @@ public class TicketService implements ITicketService {
   
 	@Autowired
 	PassengerRepository passengerRepository;
+	
+	@Autowired
+	BusService busService;
+	
+	@Autowired
+	TrolleyService trolleyService;
+	
+	@Autowired
+	SubwayService subwayService;
 
 	@Override
 	public Ticket getOne(Long id) {
@@ -44,6 +50,23 @@ public class TicketService implements ITicketService {
 	public String create(TicketDTO ticket) {
 		
 		Passenger passenger = passengerRepository.getOne(ticket.getIdPassenger());
+		if(passenger == null){
+			return "Passenger with that id doesn't exist!";
+		}else{
+			if(!(passenger.isActive())){
+				return "Passenger with that id is not active!";
+			}
+			Calendar c1 = Calendar.getInstance();
+			c1.setTime(passenger.getDate_birth());
+			Calendar c2 = Calendar.getInstance();
+			c2.setTime(new Date());
+			int years = c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR);
+			if(ticket.getDemographic_type().equals("senior") && years < 64){
+				return "This passenger can't buy tickets for seniors!";
+			}else if(ticket.getDemographic_type().equals("student") && years > 26){
+				return "This passenger can't buy ticket for students!";
+			}	
+		}
 		Ticket t = new Ticket();
 		Date d = new Date();
 		System.out.println(d);
@@ -100,8 +123,27 @@ public class TicketService implements ITicketService {
 		
 		t.setBlock(false);
 		t.setExpired(false);
-		t.setCost(ticket.getCost());
+		
+		if(ticket.getType_transport().equals("bus")){
+			boolean exist = busService.codeExist(ticket.getCode_transport());
+			if(!(exist)){
+				return "That bus doesn't exist!";
+			}
+		}else if(ticket.getTicket_type().equals("subway")){
+			boolean exist = subwayService.codeExist(ticket.getCode_transport());
+			if(!(exist)){
+				return "That subway doesn't exist!";
+			}
+		}else{
+			boolean exist = trolleyService.codeExist(ticket.getCode_transport());
+			if(!(exist)){
+				return "That trolley doesn't exist!";
+			}
+		}
 		t.setCode_transport(ticket.getCode_transport());
+		
+		// calculate the cost from price list
+		t.setCost(900);
 		
 		if(ticket.getTicket_type().equals("daily")){ 
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 1));
@@ -110,9 +152,7 @@ public class TicketService implements ITicketService {
 		}else if(ticket.getTicket_type().equals("year")){
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 3));
 		}
-		
-		//there is a error in time_expired, date from calendar is to big for database?
-		
+				
 		ticketRepository.save(t);
 	  
 		return "Your ticket has been successfully created";

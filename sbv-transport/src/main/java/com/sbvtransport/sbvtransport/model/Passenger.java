@@ -4,6 +4,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,13 +52,12 @@ public class Passenger extends User implements Serializable {
 		
 	}
 	
-	public Passenger(Long id, boolean active, Document document, boolean document_validated, List<Ticket> tickets) {
-		super();
-		this.id = id;
+	public Passenger(boolean active, boolean document_validated,String email, String username, 
+			String password, String first_name, String last_name, String address,
+			String phone_number, Date date_birth) {
+		super(email, username, password, first_name, last_name, address,phone_number, date_birth);
 		this.active = active;
-		this.document = document;
 		this.document_validated = document_validated;
-		this.tickets = tickets;
 	}
 
 	public boolean isActive() {
