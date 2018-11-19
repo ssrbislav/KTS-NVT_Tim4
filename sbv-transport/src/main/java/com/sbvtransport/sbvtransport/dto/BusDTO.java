@@ -2,6 +2,10 @@ package com.sbvtransport.sbvtransport.dto;
 
 public class BusDTO {
 	
+	// TODO #5: String code ne treba (auto-generated - create).
+	// TODO #6: Izbrisati speed iz modela.
+	// TODO #7: Sve uraditi za Trolley, Subway.
+	
 	private String code;
 	private double speed;
 	private boolean late;

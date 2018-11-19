@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
+import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
 
 @Service
@@ -29,7 +30,7 @@ public class BusService implements IBusService {
 	@Override
 	public Bus create(BusDTO bus) {
 		
-		Bus newBus = new Bus( bus.getCode(), bus.getSpeed(), bus.getId_line(), bus.isLate(), bus.getName());
+		Transport newBus = new Bus( bus.getCode(), bus.getSpeed(), bus.getId_line(), bus.isLate(), bus.getName());
 
 		return busRepository.save(newBus);
 	}

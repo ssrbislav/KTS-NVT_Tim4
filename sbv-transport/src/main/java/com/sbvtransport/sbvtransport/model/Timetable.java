@@ -8,6 +8,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "timetable")
 public class Timetable {
+	
+	// TODO #8: Ne treba code, vec Transport.
 
     @Id
     @GeneratedValue(strategy=IDENTITY)

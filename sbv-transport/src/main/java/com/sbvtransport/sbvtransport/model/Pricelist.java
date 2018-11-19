@@ -15,6 +15,7 @@ import javax.persistence.Table;
 public class Pricelist {
 
   // TODO #1: Finish this class.
+  // TODO #9: Auto-generated ticket prices.
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

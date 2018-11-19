@@ -26,7 +26,6 @@ public class Line implements Serializable {
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private Long id;
-
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "line", 
 	        cascade = CascadeType.ALL)

@@ -48,11 +48,10 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public String create(TicketDTO ticket) {
-		
-		Passenger passenger = passengerRepository.getOne(ticket.getIdPassenger());
-		if(passenger == null){
-			return "Passenger with that id doesn't exist!";
-		}else{
+		Passenger passenger = null;
+		if (passengerRepository.findAll().contains(passengerRepository.getOne(ticket.getIdPassenger()))) {
+
+			passenger = passengerRepository.getOne(ticket.getIdPassenger());
 			if(!(passenger.isActive())){
 				return "Passenger with that id is not active!";
 			}
@@ -66,6 +65,9 @@ public class TicketService implements ITicketService {
 			}else if(ticket.getDemographic_type().equals("student") && years > 26){
 				return "This passenger can't buy ticket for students!";
 			}	
+		}else{
+			return "Passenger with that id doesn't exist!";
+
 		}
 		Ticket t = new Ticket();
 		Date d = new Date();
@@ -81,7 +83,7 @@ public class TicketService implements ITicketService {
 			}
 			
 		}
-		
+	    //koristi enum
 		ArrayList<String> ticketType= new ArrayList<String>();
 		ticketType.addAll( Arrays.asList("oneUse","daily","year","monthly"));
 		if(!(ticketType.contains(ticket.getTicket_type()))){
@@ -150,6 +152,8 @@ public class TicketService implements ITicketService {
 		}else if(ticket.getTicket_type().equals("monthly")){
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 2));
 		}else if(ticket.getTicket_type().equals("year")){
+			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 3));
+		}else{
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 3));
 		}
 				
