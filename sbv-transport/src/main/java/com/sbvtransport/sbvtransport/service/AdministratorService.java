@@ -19,7 +19,7 @@ public class AdministratorService implements IAdministratorService {
 
 	@Autowired
 	AdministratorRepository administratorRepository;
-	
+
 	@Autowired
 	PassengerRepository pasengerRepository;
 
@@ -73,9 +73,8 @@ public class AdministratorService implements IAdministratorService {
 				if (dateOfUpload.after(thisYear))
 					if (passenger.isDocument_validated() == false) {
 						passenger.setDocument_validated(true);
-						passenger.getTickets();
 						return true;
-					}
+					}				
 			}
 			if (month <= 9) {
 				if (dateOfUpload.after(previousYear))
