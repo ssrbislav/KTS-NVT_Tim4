@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sbvtransport.sbvtransport.model.Administrator;
+import com.sbvtransport.sbvtransport.model.Document;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.repository.AdministratorRepository;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
@@ -21,7 +22,7 @@ public class AdministratorService implements IAdministratorService {
 	AdministratorRepository administratorRepository;
 
 	@Autowired
-	PassengerRepository pasengerRepository;
+	PassengerRepository passengerRepository;
 
 	@Override
 	public List<Administrator> findAll() {
@@ -57,7 +58,7 @@ public class AdministratorService implements IAdministratorService {
 
 	@Override
 	public boolean validatePassengerDocument(Long passengerId) {
-		Passenger passenger = pasengerRepository.getOne(passengerId);
+		Passenger passenger = passengerRepository.getOne(passengerId);
 
 		Date dateOfUpload = passenger.getDocument().getDateOfUpload();
 
@@ -98,6 +99,21 @@ public class AdministratorService implements IAdministratorService {
 
 		Date date = time.getTime();
 		return date;
+	}
+	
+	@Override
+	@SuppressWarnings("null")
+	public List<Document> retriveUnvalidateDocuments() {
+		
+		List<Document> list = null;
+		
+		for(Passenger passenger : passengerRepository.findAll())
+			if(!passenger.isDocument_validated()) {
+				list.add(passenger.getDocument());
+			}
+		
+		return list;
+		
 	}
 
 }

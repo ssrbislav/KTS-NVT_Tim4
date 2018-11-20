@@ -36,10 +36,9 @@ public class TicketService implements ITicketService {
 
 	@Autowired
 	SubwayService subwayService;
-	
+
 	@Autowired
 	AdministratorService adminService;
-
 
 	@Autowired
 	PricelistService pricelistService;
@@ -57,7 +56,7 @@ public class TicketService implements ITicketService {
 	@Override
 	public String create(TicketDTO ticket) {
 
-		Passenger passenger = null;	
+		Passenger passenger = null;
 
 		if (passengerRepository.findAll().contains(passengerRepository.getOne(ticket.getIdPassenger()))) {
 
@@ -67,30 +66,20 @@ public class TicketService implements ITicketService {
 
 		} else
 			return "Passenger with that id doesn't exist!";
-/*
-		Calendar c1 = Calendar.getInstance();
-		c1.setTime(passenger.getDate_birth());
-		Calendar c2 = Calendar.getInstance();
-		c2.setTime(new Date());
-		int years = c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR);
-*/		
-		
+
 		if (ticket.getDemographic_type().equals(DemographicTicketType.senior))
-			if(passenger.getUserType() != UserType.senior)
+			if (passenger.getUserType() != UserType.senior)
 				return "This passenger can't buy tickets for seniors!";
-			else
-				if (!passenger.isDocument_validated()) {
-					return "You do not have valid document!";
-				}
+			else if (!passenger.isDocument_validated()) {
+				return "You do not have valid document!";
+			}
 
 		if (ticket.getDemographic_type().equals(DemographicTicketType.student))
 			if (passenger.getUserType() != UserType.student)
 				return "This passenger can't buy ticket for students!";
-			else
-				if (!passenger.isDocument_validated()) {
-					return "You do not have valid document!";
-				}
-					
+			else if (!passenger.isDocument_validated()) {
+				return "You do not have valid document!";
+			}
 
 		Ticket t = new Ticket();
 		Date d = new Date();
@@ -142,7 +131,6 @@ public class TicketService implements ITicketService {
 		} else
 			t.setActive(true);
 
-
 		t.setBlock(false);
 		t.setExpired(false);
 
@@ -165,7 +153,8 @@ public class TicketService implements ITicketService {
 		t.setCode_transport(ticket.getCode_transport());
 
 		// calculate the cost from price list
-		t.setCost(pricelistService.calculatePrice(ticket.getType_transport(), ticket.getDemographic_type(), ticket.getTicket_type(), ticket.getZone()));
+		t.setCost(pricelistService.calculatePrice(ticket.getType_transport(), ticket.getDemographic_type(),
+				ticket.getTicket_type(), ticket.getZone()));
 
 		if (ticket.getTicket_type().equals(TicketType.daily)) {
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 1));
