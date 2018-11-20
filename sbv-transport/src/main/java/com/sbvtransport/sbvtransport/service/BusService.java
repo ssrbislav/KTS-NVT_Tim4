@@ -1,5 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Timetable;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class BusService implements IBusService {
 	@Autowired
 	BusRepository busRepository;
 
+	@Autowired
+	LineService lineService;
+
 	@Override
 	public List<Bus> findAll() {
 
@@ -29,9 +34,11 @@ public class BusService implements IBusService {
 
 	@Override
 	public Bus create(BusDTO bus) {
-		
-		Transport newBus = new Bus( bus.getCode(), bus.getSpeed(), bus.getId_line(), bus.isLate(), bus.getName());
-
+		Line line = lineService.getOne(bus.getId_line());
+		String code = "";
+		Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
+		code = line.getName() + ":" + newBus.getId() + ":" + "bus";
+		((Bus) newBus).setCode(code);
 		return busRepository.save(newBus);
 	}
 
@@ -40,10 +47,10 @@ public class BusService implements IBusService {
 
 		Optional<Bus> updateBus = busRepository.findById(bus.getId());
 		updateBus.get().setCode(bus.getCode());
-		updateBus.get().setSpeed(bus.getSpeed());
 		updateBus.get().setName(bus.getName());
 		updateBus.get().setLate(bus.isLate());
 		updateBus.get().setLine(bus.getLine());
+//		updateBus.get().setTimetable(bus.getTimetable());
 
 		return busRepository.save(updateBus.get());
 	}

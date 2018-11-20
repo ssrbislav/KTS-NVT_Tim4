@@ -32,6 +32,8 @@ public class LineService implements ILineService {
   @Override
   public Line update(Line line) {
     Optional<Line> updateLine = lineRepository.findById(line.getId());
+    updateLine.get().setName(line.getName());
+    updateLine.get().setLine_type(line.getLine_type());
     updateLine.get().setStation_list(line.getStation_list());
     updateLine.get().setStation_type(line.getStation_type());
     return lineRepository.save(updateLine.get());
