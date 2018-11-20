@@ -1,41 +1,40 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="line")
+@Table(name = "line")
 public class Line implements Serializable {
-	
+
 	/**
 	 * need to add timetable and stations
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "station_list", unique = false, nullable = false)
-	private List<Station> station_list;
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
+	private List<Station> station_list = new ArrayList<Station>();
 
 	@Column(name = "line_type", unique = false, nullable = false)
-	private TypeTransport station_type;
+	private TypeTransport line_type;
 
-	
-	public Line(){
-		
+	public Line() {
+
 	}
 
 	public Line(Long id) {
@@ -47,10 +46,6 @@ public class Line implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public List<Station> getStation_list() {
 		return station_list;
 	}
@@ -60,10 +55,10 @@ public class Line implements Serializable {
 	}
 
 	public TypeTransport getStation_type() {
-		return station_type;
+		return line_type;
 	}
 
-	public void setStation_type(TypeTransport station_type) {
-		this.station_type = station_type;
+	public void setStation_type(TypeTransport line_type) {
+		this.line_type = line_type;
 	}
 }

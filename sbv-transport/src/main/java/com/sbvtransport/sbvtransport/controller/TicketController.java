@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.TicketDTO;
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.service.ITicketService;
 import java.util.List;
@@ -28,9 +29,9 @@ public class TicketController {
   }
 
   @RequestMapping(value = "/addTicket", method = RequestMethod.POST)
-  public ResponseEntity<Ticket> create(@RequestBody Ticket ticket){
+  public ResponseEntity<String> create(@RequestBody TicketDTO ticket){
 
-    Ticket newTicket = ticketService.create(ticket);
+    String newTicket = ticketService.create(ticket);
 
     return new ResponseEntity<>(newTicket,HttpStatus.OK);
 
@@ -53,5 +54,6 @@ public class TicketController {
     return new ResponseEntity<>(delete,HttpStatus.OK);
 
   }
+  
 
 }

@@ -34,7 +34,8 @@ public class StationService implements IStationService {
     Optional<Station> updateStation = stationRepository.findById(station.getId());
     updateStation.get().setLocation(station.getLocation());
     updateStation.get().setTimetable(station.getTimetable());
-    return stationRepository.save(station);
+    updateStation.get().setLine(station.getLine());
+    return stationRepository.save(updateStation.get());
   }
 
   @Override

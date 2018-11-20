@@ -1,33 +1,63 @@
 package com.sbvtransport.sbvtransport.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Transport {
-	
-	@Column(name="speed",unique=false, nullable=false)
+public class Transport {
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
+
+	@Column(name = "speed", unique = false, nullable = false)
 	protected double speed;
-	
-	@Column(name="line",unique=false, nullable=false)
-	protected Line line;
-	
-	@Column(name="late",unique=false, nullable=false)
+
+	// TODO #4: Line - Transport
+	@Column(name = "line", unique = false, nullable = false)
+	protected Long line_id;
+
+	@Column(name = "late", unique = false, nullable = false)
 	protected boolean late;
-	
-	@Column(name="name",unique=false, nullable=false)
+
+	@Column(name = "name", unique = false, nullable = false)
 	protected String name;
-	
-	public Transport(){
-		
+
+	public Transport() {
+
+	}
+
+	public Transport(double speed, Long line, boolean late, String name) {
+		super();
+		this.speed = speed;
+		this.line_id = line;
+		this.late = late;
+		this.name = name;
+	}
+
+	public Long getLine_id() {
+		return line_id;
+	}
+
+	public void setLine_id(Long line_id) {
+		this.line_id = line_id;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public double getSpeed() {
 		return speed;
 	}
 
-	public Line getLine() {
-		return line;
+	public Long getLine() {
+		return line_id;
 	}
 
 	public boolean isLate() {
@@ -42,8 +72,8 @@ public abstract class Transport {
 		this.speed = speed;
 	}
 
-	public void setLine(Line line) {
-		this.line = line;
+	public void setLine(Long line) {
+		this.line_id = line;
 	}
 
 	public void setLate(boolean late) {
@@ -56,9 +86,7 @@ public abstract class Transport {
 
 	@Override
 	public String toString() {
-		return "Transport [speed=" + speed + ", line=" + line + ", late=" + late + ", name=" + name + "]";
+		return "Transport [speed=" + speed + ", line=" + line_id + ", late=" + late + ", name=" + name + "]";
 	}
-	
-	
 
 }
