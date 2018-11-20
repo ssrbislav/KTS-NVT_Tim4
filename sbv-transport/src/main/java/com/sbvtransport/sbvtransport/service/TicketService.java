@@ -36,6 +36,9 @@ public class TicketService implements ITicketService {
 	@Autowired
 	SubwayService subwayService;
 
+	@Autowired
+	PricelistService pricelistService;
+
 	@Override
 	public Ticket getOne(Long id) {
 		return ticketRepository.getOne(id);
@@ -142,7 +145,7 @@ public class TicketService implements ITicketService {
 		t.setCode_transport(ticket.getCode_transport());
 
 		// calculate the cost from price list
-		t.setCost(900);
+		t.setCost(pricelistService.calculatePrice(ticket.getType_transport(), ticket.getDemographic_type(), ticket.getTicket_type(), ticket.getZone()));
 
 		if (ticket.getTicket_type().equals(TicketType.daily)) {
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 1));

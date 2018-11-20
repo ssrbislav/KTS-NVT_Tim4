@@ -27,6 +27,9 @@ public class Line implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
+	@Column(name = "name", unique = true, nullable = false)
+	private String name;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
 	private List<Station> station_list = new ArrayList<Station>();
 
@@ -40,6 +43,22 @@ public class Line implements Serializable {
 	public Line(Long id) {
 		super();
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public TypeTransport getLine_type() {
+		return line_type;
+	}
+
+	public void setLine_type(TypeTransport line_type) {
+		this.line_type = line_type;
 	}
 
 	public Long getId() {
