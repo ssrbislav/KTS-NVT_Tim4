@@ -111,7 +111,6 @@ public class AdministratorService implements IAdministratorService {
 			if(!passenger.isDocument_validated()) {
 				list.add(passenger.getDocument());
 			}
-		
 		return list;
 		
 	}
