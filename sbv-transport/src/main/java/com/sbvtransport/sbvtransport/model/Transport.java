@@ -2,10 +2,14 @@ package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 @MappedSuperclass
 public class Transport {
@@ -15,12 +19,21 @@ public class Transport {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "speed", unique = false, nullable = false)
-	protected double speed;
+//	@Column(name = "speed", unique = false, nullable = false)
+//	protected double speed;
 
 	// TODO #4: Line - Transport
-	@Column(name = "line", unique = false, nullable = false)
-	protected Long line_id;
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "transport", cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Line.class)
+	@JoinColumn(name = "line", referencedColumnName = "id")
+	protected Line line;
+//	protected Long line_id;
+
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "transport", cascade = CascadeType.ALL)
+//	@JoinColumn(name = "transport", referencedColumnName = "id")
+//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "transport")
+//	@OneToOne(t)
+//	protected Timetable timetable;
 
 	@Column(name = "late", unique = false, nullable = false)
 	protected boolean late;
@@ -32,33 +45,59 @@ public class Transport {
 
 	}
 
-	public Transport(double speed, Long line, boolean late, String name) {
-		super();
-		this.speed = speed;
-		this.line_id = line;
+//	public Transport(double speed, Long line, boolean late, String name) {
+//		super();
+//		this.speed = speed;
+//		this.line_id = line;
+//		this.late = late;
+//		this.name = name;
+//	}
+
+//	public Long getLine_id() {
+//		return line_id;
+//	}
+
+//	public void setLine_id(Long line_id) {
+//		this.line_id = line_id;
+//	}
+
+	public Transport(Line line, boolean late, String name) {
+		this.line = line;
 		this.late = late;
 		this.name = name;
 	}
 
-	public Long getLine_id() {
-		return line_id;
+//	public Transport(Line line, Timetable timetable, boolean late, String name) {
+//		this.line = line;
+//		this.timetable = timetable;
+//		this.late = late;
+//		this.name = name;
+//	}
+//
+//	public Timetable getTimetable() {
+//		return timetable;
+//	}
+//
+//	public void setTimetable(Timetable timetable) {
+//		this.timetable = timetable;
+//	}
+
+	public Line getLine() {
+		return line;
 	}
 
-	public void setLine_id(Long line_id) {
-		this.line_id = line_id;
+	public void setLine(Line line) {
+		this.line = line;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public double getSpeed() {
-		return speed;
-	}
 
-	public Long getLine() {
-		return line_id;
-	}
+//	public Long getLine() {
+//		return line_id;
+//	}
 
 	public boolean isLate() {
 		return late;
@@ -68,13 +107,9 @@ public class Transport {
 		return name;
 	}
 
-	public void setSpeed(double speed) {
-		this.speed = speed;
-	}
-
-	public void setLine(Long line) {
-		this.line_id = line;
-	}
+//	public void setLine(Long line) {
+//		this.line_id = line;
+//	}
 
 	public void setLate(boolean late) {
 		this.late = late;
@@ -84,9 +119,9 @@ public class Transport {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "Transport [speed=" + speed + ", line=" + line_id + ", late=" + late + ", name=" + name + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Transport [speed=" + speed + ", line=" + line_id + ", late=" + late + ", name=" + name + "]";
+//	}
 
 }
