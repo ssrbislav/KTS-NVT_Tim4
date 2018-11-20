@@ -9,20 +9,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="controller")
+@Table(name = "controller")
 public class Controller extends User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	public Controller(){
+
+	public Controller() {
 		super();
 	}
 
@@ -41,8 +41,5 @@ public class Controller extends User implements Serializable {
 				+ ", first_name=" + first_name + ", last_name=" + last_name + ", address=" + address + ", phone_number="
 				+ phone_number + "]";
 	}
-
-	
-	
 
 }
