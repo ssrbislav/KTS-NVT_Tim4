@@ -9,27 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="administrator")
+@Table(name = "administrator")
 public class Administrator implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	@Column(name="username",unique=true, nullable=false)
+
+	@Column(name = "username", unique = true, nullable = false)
 	private String username;
-	
-	@Column(name="password",unique=false, nullable=false)
+
+	@Column(name = "password", unique = false, nullable = false)
 	private String password;
 
-	public Administrator(){
-		
+	public Administrator() {
+
 	}
 
 	public Administrator(Long id, String username, String password) {
@@ -51,10 +51,6 @@ public class Administrator implements Serializable {
 		return password;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -67,6 +63,5 @@ public class Administrator implements Serializable {
 	public String toString() {
 		return "Administrator [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
-	
-	
+
 }

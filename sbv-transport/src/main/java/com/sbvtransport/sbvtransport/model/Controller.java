@@ -35,10 +35,6 @@ public class Controller extends User implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Override
 	public String toString() {
 		return "Controller [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password

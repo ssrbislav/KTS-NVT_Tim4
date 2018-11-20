@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="bus")
+@Table(name = "bus")
 public class Bus extends Transport implements Serializable {
 
 	/**
@@ -17,18 +18,18 @@ public class Bus extends Transport implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	@Column(name="code", unique=false, nullable=false)
+
+	@Column(name = "code", unique = false, nullable = false)
 	private String code;
-	
-	public Bus(){
-		
+
+	public Bus() {
+
 	}
 
-	public Bus(String code,double speed, Long line, boolean late, String name) {
+	public Bus(String code, double speed, Long line, boolean late, String name) {
 		super(speed, line, late, name);
 		this.code = code;
 	}
@@ -41,22 +42,14 @@ public class Bus extends Transport implements Serializable {
 		return code;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
 
 	@Override
 	public String toString() {
-		return "Bus [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line_id + ", late=" + late + ", name="
-				+ name + "]";
+		return "Bus [id=" + id + ", code=" + code + ", speed=" + speed + ", line=" + line_id + ", late=" + late
+				+ ", name=" + name + "]";
 	}
-	
-	
 
-	
-	
 }

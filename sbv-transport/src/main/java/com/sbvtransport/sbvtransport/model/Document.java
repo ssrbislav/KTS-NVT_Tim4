@@ -18,30 +18,27 @@ public class Document {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
-	
+
 	@Column(name = "dateOfUploud", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date dateOfUpload;
-	
+
 	@Column(name = "imageLocation", nullable = false)
 	private String imageLocation;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passenger passenger;
-	
-	
+
 	public Document() {
 		super();
 	}
-	
-	
+
 	public Document(Date dateOfUpload, String imageLocation, Passenger passenger) {
 		super();
 		this.dateOfUpload = dateOfUpload;
 		this.imageLocation = imageLocation;
 		this.passenger = passenger;
 	}
-
 
 	@JsonIgnore
 	public Passenger getPassenger() {
@@ -71,7 +68,5 @@ public class Document {
 	public Long getId() {
 		return id;
 	}
-	
-	
-	
+
 }

@@ -18,70 +18,70 @@ import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
 
 @Entity
-@Table(name="ticket")
+@Table(name = "ticket")
 public class Ticket implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	@Column(name="type_transport", unique=false, nullable=false)
+
+	@Column(name = "type_transport", unique = false, nullable = false)
 	private TypeTransport type_transport;
-	
-	@Column(name="cost", unique=false, nullable=false)
+
+	@Column(name = "cost", unique = false, nullable = false)
 	private double cost;
-	
-	@Column(name="zone", unique=false, nullable=false)
+
+	@Column(name = "zone", unique = false, nullable = false)
 	private Zone zone;
-	
-	@Column(name="date", unique=false, nullable=false)
+
+	@Column(name = "date", unique = false, nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date date;
 
-	@Column(name="ticket_type", unique=false, nullable=false)
+	@Column(name = "ticket_type", unique = false, nullable = false)
 	private TicketType ticket_type;
-	
-	@Column(name="active", unique=false, nullable=false)
+
+	@Column(name = "active", unique = false, nullable = false)
 	private boolean active;
-	
-	@Column(name="expired", unique=false, nullable=false)
+
+	@Column(name = "expired", unique = false, nullable = false)
 	private boolean expired;
-	
-	@Column(name="demographic_type", unique=false, nullable=false)
+
+	@Column(name = "demographic_type", unique = false, nullable = false)
 	private DemographicTicketType demographic_type;
-	
-	//stavi Date vreme isteka karte(proveri da li je oneUse,monty,year)
-	@Column(name="time_expired", unique=false, nullable=false)
+
+	// stavi Date vreme isteka karte(proveri da li je oneUse,monty,year)
+	@Column(name = "time_expired", unique = false, nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date time_expired;
-	
-	@Column(name="block", unique=false, nullable=false)
+
+	@Column(name = "block", unique = false, nullable = false)
 	private boolean block;
-	
-	@Column(name="code_transport", unique=false, nullable=false)
+
+	@Column(name = "code_transport", unique = false, nullable = false)
 	private String code_transport;
-	
-	@Column(name="date_purchase", unique=false, nullable=false)
+
+	@Column(name = "date_purchase", unique = false, nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date date_purchase;
-	
-	@ManyToOne (optional = false)
-	@JoinColumn(name = "passenger", referencedColumnName="id")
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "passenger", referencedColumnName = "id")
 	private Passenger passenger;
-	
-	public Ticket(){
-		
+
+	public Ticket() {
+
 	}
 
 	public Ticket(TypeTransport type_transport, double cost, Zone zone, Date date, TicketType ticket_type,
 			boolean active, boolean expired, DemographicTicketType demographic_type, Date time_expired, boolean block,
-			String code_transport,Date date_purchase, Passenger passenger) {
+			String code_transport, Date date_purchase, Passenger passenger) {
 		super();
 		this.type_transport = type_transport;
 		this.cost = cost;
@@ -100,10 +100,6 @@ public class Ticket implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public TypeTransport getType_transport() {
@@ -218,7 +214,5 @@ public class Ticket implements Serializable {
 				+ ", demographic_type=" + demographic_type + ", time_expired=" + time_expired + ", block=" + block
 				+ ", code_transport=" + code_transport + ", passenger=" + passenger + "]";
 	}
-
-	
 
 }

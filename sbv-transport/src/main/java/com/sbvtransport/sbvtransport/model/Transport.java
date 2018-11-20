@@ -9,12 +9,11 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Transport {
-	
-	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
-	private Long id;
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
 	@Column(name = "speed", unique = false, nullable = false)
 	protected double speed;
@@ -39,6 +38,18 @@ public class Transport {
 		this.line_id = line;
 		this.late = late;
 		this.name = name;
+	}
+
+	public Long getLine_id() {
+		return line_id;
+	}
+
+	public void setLine_id(Long line_id) {
+		this.line_id = line_id;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public double getSpeed() {

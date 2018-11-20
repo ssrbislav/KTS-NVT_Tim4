@@ -17,43 +17,41 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="passenger")
+@Table(name = "passenger")
 public class Passenger extends User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	// DOB
 
-	@Column(name="active", unique=false, nullable=false)
+	@Column(name = "active", unique = false, nullable = false)
 	private boolean active;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passenger", cascade = CascadeType.ALL)
 	@JoinColumn(name = "passenger", referencedColumnName = "id")
 	private Document document;
-	
-	@Column(name="validate_document", unique=false, nullable=false)
+
+	@Column(name = "validate_document", unique = false, nullable = false)
 	private boolean document_validated;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "passenger", 
-	        cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "passenger", cascade = CascadeType.ALL)
 	private List<Ticket> tickets = new ArrayList<Ticket>();
-	
-	public Passenger(){
-		
+
+	public Passenger() {
+
 	}
-	
-	public Passenger(boolean active, boolean document_validated,String email, String username, 
-			String password, String first_name, String last_name, String address,
-			String phone_number, Date date_birth) {
-		super(email, username, password, first_name, last_name, address,phone_number, date_birth);
+
+	public Passenger(boolean active, boolean document_validated, String email, String username, String password,
+			String first_name, String last_name, String address, String phone_number, Date date_birth) {
+		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
 		this.active = active;
 		this.document_validated = document_validated;
 	}
@@ -81,13 +79,11 @@ public class Passenger extends User implements Serializable {
 	public void setDocument_validated(boolean document_validated) {
 		this.document_validated = document_validated;
 	}
-	
 
 	public Long getId() {
 		return id;
 	}
 
-	
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -95,8 +91,6 @@ public class Passenger extends User implements Serializable {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -105,6 +99,5 @@ public class Passenger extends User implements Serializable {
 				+ ", password=" + password + ", first_name=" + first_name + ", last_name=" + last_name + ", address="
 				+ address + ", phone_number=" + phone_number + "]";
 	}
-
 
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="station")
+@Table(name = "station")
 public class Station implements Serializable {
 
 	/**
@@ -13,32 +13,33 @@ public class Station implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
 	// TODO #2: Solve MappingException.
-//	@Column(name = "location", unique = false, nullable = false)
+	// @Column(name = "location", unique = false, nullable = false)
 	@OneToOne(targetEntity = Location.class)
 	@JoinColumn(name = "location", referencedColumnName = "id")
 	private Location location;
 
 	// TODO #3: Solve MappingException.
-//	@Column(name = "timetable", unique = false, nullable = false)
-//	@JoinColumn(name = "timetable", referencedColumnName = "code")
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "code", targetEntity = Date.class)
+	// @Column(name = "timetable", unique = false, nullable = false)
+	// @JoinColumn(name = "timetable", referencedColumnName = "code")
+	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "code", targetEntity =
+	// Date.class)
 	@OneToOne(targetEntity = Timetable.class)
 	@JoinColumn(name = "timetable", referencedColumnName = "id")
 	private Timetable timetable;
-	
-	@ManyToOne (optional = false)
-	@JoinColumn(name = "line", referencedColumnName="id")
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "line", referencedColumnName = "id")
 	private Line line;
-	
-	public Station(){
-		
+
+	public Station() {
+
 	}
 
 	public Station(Long id) {
@@ -48,10 +49,6 @@ public class Station implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Location getLocation() {
@@ -82,6 +79,5 @@ public class Station implements Serializable {
 	public void setLine(Line line) {
 		this.line = line;
 	}
-	
 
 }

@@ -15,28 +15,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="line")
+@Table(name = "line")
 public class Line implements Serializable {
-	
+
 	/**
 	 * need to add timetable and stations
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "line", 
-	        cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
 	private List<Station> station_list = new ArrayList<Station>();
 
 	@Column(name = "line_type", unique = false, nullable = false)
 	private TypeTransport line_type;
 
-	
-	public Line(){
-		
+	public Line() {
+
 	}
 
 	public Line(Long id) {
@@ -46,10 +44,6 @@ public class Line implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public List<Station> getStation_list() {
