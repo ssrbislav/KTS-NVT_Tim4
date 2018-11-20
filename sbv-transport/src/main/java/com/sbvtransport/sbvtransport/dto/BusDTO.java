@@ -6,8 +6,8 @@ public class BusDTO {
 	// TODO #6: Izbrisati speed iz modela.
 	// TODO #7: Sve uraditi za Trolley, Subway.
 	
-	private String code;
-	private double speed;
+//	private String code;
+//	private double speed;
 	private boolean late;
 	private String name;
 	private Long id_line;
@@ -16,29 +16,10 @@ public class BusDTO {
 		
 	}
 
-	public BusDTO(String code, double speed, boolean late, String name, Long id_line) {
-		super();
-		this.code = code;
-		this.speed = speed;
+	public BusDTO(boolean late, String name, Long id_line) {
 		this.late = late;
 		this.name = name;
 		this.id_line = id_line;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public double getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(double speed) {
-		this.speed = speed;
 	}
 
 	public boolean isLate() {
