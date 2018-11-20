@@ -9,31 +9,25 @@ import com.sbvtransport.sbvtransport.repository.AdministratorRepository;
 
 @Service
 public class AdministratorService implements IAdministratorService {
-	
+
 	@Autowired
 	AdministratorRepository administratorRepository;
 
 	@Override
 	public List<Administrator> findAll() {
-		
+
 		return administratorRepository.findAll();
 	}
 
 	@Override
 	public Administrator create(Administrator administrator) {
-		
-		if(administratorRepository.findAll() != null) {
-			
-			System.out.println("Administrator already exists!");
-			return null;
-		}
-		
+
 		return administratorRepository.save(administrator);
 	}
 
 	@Override
 	public Administrator update(Administrator administrator) {
-		
+
 		Optional<Administrator> updateAdmin = administratorRepository.findById(administrator.getId());
 		updateAdmin.get().setPassword(administrator.getPassword());
 		updateAdmin.get().setUsername(administrator.getUsername());
@@ -43,7 +37,7 @@ public class AdministratorService implements IAdministratorService {
 	@Override
 	public boolean delete(Long id) {
 		for (Administrator admin : findAll()) {
-			if(admin.getId() == id){
+			if (admin.getId() == id) {
 				administratorRepository.delete(admin);
 				return true;
 			}

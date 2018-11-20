@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "administrator")
-public class Administrator implements Serializable {
+public class Administrator extends User implements Serializable {
 
 	/**
 	 * 
