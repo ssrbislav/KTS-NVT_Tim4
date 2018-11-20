@@ -35,7 +35,6 @@ public class TransportService implements ITransportService {
 		Optional<Transport> updatetransport = transportRepository.findById(transport.getId());
 		updatetransport.get().setName(transport.getName());
 		updatetransport.get().setLine(transport.getLine());
-		updatetransport.get().setSpeed(transport.getSpeed());
 		updatetransport.get().setLate(transport.isLate());
 		
 		return transportRepository.save(updatetransport.get());
