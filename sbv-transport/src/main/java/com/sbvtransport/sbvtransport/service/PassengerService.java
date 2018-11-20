@@ -10,6 +10,7 @@ import com.sbvtransport.sbvtransport.dto.PassengerChangeBooleanDTO;
 import com.sbvtransport.sbvtransport.dto.PassengerDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
+import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 
 @Service
@@ -17,6 +18,9 @@ public class PassengerService implements IPassengerService {
 
 	@Autowired
 	PassengerRepository passengerRepository;
+	
+	@Autowired
+	TicketService ticketService;
 
 	@Override
 	public List<Passenger> findAll() {
@@ -106,6 +110,23 @@ public class PassengerService implements IPassengerService {
 		return "Successfully!";
 	}
 	
-	
+	public String activateOneTimeTicket(Long ticketId) {
+		
+		Ticket ticket;
+		
+		TimeScheduler timeScheduler = new TimeScheduler();
+		
+		for(Passenger passenger :  findAll())
+		{
+			if(passenger.getTickets().contains(ticketService.getOne(ticketId))) {
+				ticket = ticketService.getOne(ticketId);
+				ticket.setActive(true);
+				ticketService.update(ticket);
+				timeScheduler.changeActiveForOneUse(ticketId);
+				return "Your ticket has been activated";
+			}
+		}
+		return "You are not able to activate this ticket";	
+	}
 
 }
