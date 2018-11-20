@@ -1,2 +1,4 @@
 
 sbv-transport/\.vscode/
+
+sbv-transport/src/main/resources/application\.properties
