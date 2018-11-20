@@ -1,5 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Timetable;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class SubwayService implements ISubwayService {
 
 	@Autowired
 	SubwayRepository subwayRepository;
+	@Autowired
+	LineService lineService;
 
 	@Override
 	public List<Subway> findAll() {
@@ -27,9 +31,11 @@ public class SubwayService implements ISubwayService {
 
 	@Override
 	public Subway create(SubwayDTO subway) {
-		
-		Subway newSubway = new Subway(subway.getCode(), subway.getSpeed(), subway.getId_line(), subway.isLate(), subway.getName());
-
+		Line line = lineService.getOne(subway.getId_line());
+		String code = "";
+		Subway newSubway = new Subway(code, line, subway.isLate(), subway.getName());
+		code = line.getName() + ":" + newSubway.getId() + ":" + "bus";
+		newSubway.setCode(code);
 		return subwayRepository.save(newSubway);
 	}
 
@@ -38,11 +44,10 @@ public class SubwayService implements ISubwayService {
 
 		Optional<Subway> updateSubway = subwayRepository.findById(subway.getId());
 		updateSubway.get().setCode(subway.getCode());
-		updateSubway.get().setSpeed(subway.getSpeed());
 		updateSubway.get().setName(subway.getName());
 		updateSubway.get().setLate(subway.isLate());
 		updateSubway.get().setLine(subway.getLine());
-
+//		updateSubway.get().setTimetable(subway.getTimetable());
 		return subwayRepository.save(updateSubway.get());
 
 	}

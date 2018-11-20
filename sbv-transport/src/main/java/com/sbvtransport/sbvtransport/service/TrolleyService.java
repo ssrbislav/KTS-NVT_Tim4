@@ -1,5 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Timetable;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class TrolleyService implements ITrolleyService {
 
 	@Autowired
 	TrolleyRepository trolleyRepository;
+	@Autowired
+	LineService lineService;
 
 	@Override
 	public List<Trolley> findAll() {
@@ -28,9 +32,12 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public Trolley create(TrolleyDTO trolley) {
-		
-		Trolley newTrolley = new Trolley(trolley.getCode(), trolley.getSpeed(), trolley.getId_line(), trolley.isLate(), trolley.getName());
-		
+
+		Line line = lineService.getOne(trolley.getId_line());
+		String code = "";
+		Trolley newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
+		code = line.getName() + ":" + newTrolley.getId() + ":" + "bus";
+		newTrolley.setCode(code);
 		return trolleyRepository.save(newTrolley);
 	}
 
@@ -39,11 +46,10 @@ public class TrolleyService implements ITrolleyService {
 		
 		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
 		updateTrolley.get().setCode(trolley.getCode());
-		updateTrolley.get().setSpeed(trolley.getSpeed());
 		updateTrolley.get().setName(trolley.getName());
 		updateTrolley.get().setLate(trolley.isLate());
 		updateTrolley.get().setLine(trolley.getLine());
-
+//		updateTrolley.get().setTimetable(trolley.getTimetable());
 		return trolleyRepository.save(updateTrolley.get());
 	}
 
