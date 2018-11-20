@@ -22,6 +22,12 @@ public class AdministratorService implements IAdministratorService {
 	@Override
 	public Administrator create(Administrator administrator) {
 		
+		if(administratorRepository.findAll() != null) {
+			
+			System.out.println("Administrator already exists!");
+			return null;
+		}
+		
 		return administratorRepository.save(administrator);
 	}
 
