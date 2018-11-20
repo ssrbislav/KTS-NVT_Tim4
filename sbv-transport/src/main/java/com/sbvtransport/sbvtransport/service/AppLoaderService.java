@@ -4,10 +4,12 @@ import java.util.Date;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
 
 import com.sbvtransport.sbvtransport.model.Administrator;
 import com.sbvtransport.sbvtransport.repository.AdministratorRepository;
 
+@Component
 public class AppLoaderService implements ApplicationRunner {
 
 	private AdministratorRepository adminRepository;
