@@ -77,7 +77,6 @@ public class AdministratorController {
 		}
 
 		return new ResponseEntity<>(false, HttpStatus.OK);
-
 	}
 
 }

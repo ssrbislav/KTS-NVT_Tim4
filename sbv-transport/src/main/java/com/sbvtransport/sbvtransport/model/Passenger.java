@@ -1,13 +1,17 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.sbvtransport.sbvtransport.enumeration.UserType;
 
 @Entity
 @Table(name = "passenger")
@@ -35,6 +41,10 @@ public class Passenger extends User implements Serializable {
 	@Column(name = "active", unique = false, nullable = false)
 	private boolean active;
 
+	@Column(name = "userType", nullable = false)
+	@Enumerated(value = EnumType.STRING)
+	private UserType userType;
+
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passenger", cascade = CascadeType.ALL)
 	@JoinColumn(name = "passenger", referencedColumnName = "id")
 	private Document document;
@@ -54,6 +64,7 @@ public class Passenger extends User implements Serializable {
 		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
 		this.active = active;
 		this.document_validated = document_validated;
+		this.userType = UserType.standard;
 	}
 
 	public boolean isActive() {
@@ -90,6 +101,14 @@ public class Passenger extends User implements Serializable {
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	@Override
