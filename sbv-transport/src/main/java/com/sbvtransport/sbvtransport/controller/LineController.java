@@ -30,12 +30,9 @@ public class LineController {
   }
 
   @RequestMapping(value = "/addLine", method = RequestMethod.POST)
-  public ResponseEntity<Line> create(@RequestBody LineDTO line){
+  public ResponseEntity<String> create(@RequestBody LineDTO line){
 
-	Line l = new Line();
-	l.setStation_type(TypeTransport.valueOf(line.getLine_type()));
-	l.setName(line.getName());
-    Line newLine = lineService.create(l);
+    String newLine = lineService.create(line);
 
     return new ResponseEntity<>(newLine,HttpStatus.OK);
 
