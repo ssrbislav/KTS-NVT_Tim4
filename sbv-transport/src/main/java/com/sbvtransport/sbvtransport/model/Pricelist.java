@@ -33,13 +33,13 @@ public class Pricelist {
 	private Boolean active;
 
 	@Column(name = "senior_discount_percentage", unique = false, nullable = false)
-	@Range(min = 0, max = 100)
+	@Range(min = 1, max = 100)
 	private Integer senior_discount_percentage;
 	@Column(name = "student_discount_percentage", unique = false, nullable = false)
-	@Range(min = 0, max = 100)
+	@Range(min = 1, max = 100)
 	private Integer student_discount_percentage;
 	@Column(name = "standard_discount_percentage", unique = false, nullable = false)
-	@Range(min = 0, max = 100)
+	@Range(min = 1, max = 100)
 	private Integer standard_discount_percentage;
 
 	@Column(name = "double_zone_premium_percentage", unique = false, nullable = false)
@@ -74,9 +74,9 @@ public class Pricelist {
 	private Double trolley_yearly_use_price;
 
 	public Pricelist(Date valid_since, Date valid_until, Boolean active,
-			@Range(min = 0, max = 100) Integer senior_discount_percentage,
-			@Range(min = 0, max = 100) Integer student_discount_percentage,
-			@Range(min = 0, max = 100) Integer standard_discount_percentage,
+			@Range(min = 0, max = 99) Integer senior_discount_percentage,
+			@Range(min = 0, max = 99) Integer student_discount_percentage,
+			@Range(min = 0, max = 99) Integer standard_discount_percentage,
 			@Range(min = 100) Integer double_zone_premium_percentage, Double bus_one_use_price,
 			Double bus_daily_use_price, Double bus_monthly_use_price, Double bus_yearly_use_price,
 			Double subway_one_use_price, Double subway_daily_use_price, Double subway_monthly_use_price,

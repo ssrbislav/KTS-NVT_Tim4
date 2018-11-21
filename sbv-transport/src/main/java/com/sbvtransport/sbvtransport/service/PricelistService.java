@@ -73,11 +73,11 @@ public class PricelistService implements IPricelistService {
     }
 
     if (demographicTicketType.equals(DemographicTicketType.standard)) {
-      cost = cost * pricelist.getStandard_discount_percentage() / 100;
+      cost = cost * (100-pricelist.getStandard_discount_percentage()) / 100;
     } else if (demographicTicketType.equals(DemographicTicketType.senior)) {
-      cost = cost * pricelist.getSenior_discount_percentage() / 100;
+      cost = cost * (100-pricelist.getSenior_discount_percentage()) / 100;
     } else {
-      cost = cost * pricelist.getStudent_discount_percentage() / 100;
+      cost = cost * (100-pricelist.getStudent_discount_percentage()) / 100;
     }
 
     if (zone.equals(Zone.first)) {
