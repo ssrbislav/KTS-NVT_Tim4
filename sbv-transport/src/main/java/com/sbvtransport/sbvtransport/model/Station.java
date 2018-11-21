@@ -1,6 +1,8 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -59,6 +61,7 @@ public class Station implements Serializable {
 		this.location = location;
 	}
 
+	@JsonIgnore
 	public Timetable getTimetable() {
 		return timetable;
 	}

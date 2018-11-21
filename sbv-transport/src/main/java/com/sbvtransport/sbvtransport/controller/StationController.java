@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.service.IStationService;
 import java.util.List;
@@ -28,9 +29,9 @@ public class StationController {
   }
 
   @RequestMapping(value = "/addStation", method = RequestMethod.POST)
-  public ResponseEntity<Station> create(@RequestBody Station station){
+  public ResponseEntity<String> create(@RequestBody StationDTO station){
 
-    Station newStation = stationService.create(station);
+    String newStation = stationService.create(station);
 
     return new ResponseEntity<>(newStation,HttpStatus.OK);
 
