@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.dto.LocationDTO;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.repository.LocationRepository;
 import java.util.List;
@@ -13,6 +14,9 @@ public class LocationService implements ILocationService {
   @Autowired
   LocationRepository locationRepository;
 
+  @Autowired
+  StationService stationService;
+
 
   @Override
   public Location getOne(Long id) {
@@ -25,8 +29,20 @@ public class LocationService implements ILocationService {
   }
 
   @Override
-  public Location create(Location location) {
-    return locationRepository.save(location);
+  public String create(LocationDTO locationDTO) {
+    Location location = new Location();
+    location.setType(locationDTO.getType());
+    location.setLongitude(locationDTO.getLongitude());
+    location.setLocation_name(locationDTO.getLocation_name());
+    location.setLatitude(locationDTO.getLatitude());
+    location.setAddress(locationDTO.getAddress());
+    if (!stationService.findAll().contains(stationService.getOne(locationDTO.getStation_id()))) {
+      return "No station with ID " + locationDTO.getStation_id() + " exists!";
+    } else {
+      location.setStation(stationService.getOne(locationDTO.getStation_id()));
+    }
+    locationRepository.save(location);
+    return "Location has been successfully created!";
   }
 
   @Override

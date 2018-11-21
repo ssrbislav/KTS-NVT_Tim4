@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.LocationDTO;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.service.ILocationService;
 import java.util.List;
@@ -28,9 +29,9 @@ public class LocationController {
   }
 
   @RequestMapping(value = "/addLocation", method = RequestMethod.POST)
-  public ResponseEntity<Location> create(@RequestBody Location location){
+  public ResponseEntity<String> create(@RequestBody LocationDTO location){
 
-    Location newLocation = locationService.create(location);
+    String newLocation = locationService.create(location);
 
     return new ResponseEntity<>(newLocation,HttpStatus.OK);
 

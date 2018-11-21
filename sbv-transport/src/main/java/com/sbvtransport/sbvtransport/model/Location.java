@@ -1,6 +1,8 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -93,6 +95,7 @@ public class Location {
 		this.type = type;
 	}
 
+	@JsonIgnore
 	public Station getStation() {
 		return station;
 	}

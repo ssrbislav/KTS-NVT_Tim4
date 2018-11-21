@@ -1,6 +1,8 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,19 +67,12 @@ public class Line implements Serializable {
 		return id;
 	}
 
+	@JsonIgnore
 	public List<Station> getStation_list() {
 		return station_list;
 	}
 
 	public void setStation_list(List<Station> station_list) {
 		this.station_list = station_list;
-	}
-
-	public TypeTransport getStation_type() {
-		return line_type;
-	}
-
-	public void setStation_type(TypeTransport line_type) {
-		this.line_type = line_type;
 	}
 }
