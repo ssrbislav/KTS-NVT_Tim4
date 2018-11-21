@@ -34,6 +34,7 @@ public class LineController {
 
 	Line l = new Line();
 	l.setStation_type(TypeTransport.valueOf(line.getLine_type()));
+	l.setName(line.getName());
     Line newLine = lineService.create(l);
 
     return new ResponseEntity<>(newLine,HttpStatus.OK);

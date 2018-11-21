@@ -1,13 +1,14 @@
 package com.sbvtransport.sbvtransport.service;
 
-import com.sbvtransport.sbvtransport.model.Line;
-import com.sbvtransport.sbvtransport.model.Timetable;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
+import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
 

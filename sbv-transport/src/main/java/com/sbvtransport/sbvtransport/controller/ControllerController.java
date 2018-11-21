@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbvtransport.sbvtransport.model.Controller;
 import com.sbvtransport.sbvtransport.service.IControllerService;
-import com.sbvtransport.sbvtransport.service.IPassengerService;
 
 @RestController
 @RequestMapping(value = "api/controller")
