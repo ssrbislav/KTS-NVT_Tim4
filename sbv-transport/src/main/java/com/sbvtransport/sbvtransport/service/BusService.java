@@ -35,6 +35,7 @@ public class BusService implements IBusService {
 
 	@Override
 	public Bus create(BusDTO bus) {
+		//Jugoslav-proveri da nije null line --------------------------------------------------------------------------------------
 		Line line = lineService.getOne(bus.getId_line());
 		String code = "";
 		Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
