@@ -36,10 +36,11 @@ public class BusService implements IBusService {
 	@Override
 	public Bus create(BusDTO bus) {
 		//Jugoslav-proveri da nije null line --------------------------------------------------------------------------------------
+		//Need to change code
 		Line line = lineService.getOne(bus.getId_line());
 		String code = "";
 		Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
-		code = line.getName() + ":" + newBus.getId() + ":" + "bus";
+		code = line.getName() + ":" + (busRepository.findAll().get(busRepository.findAll().size()-1).getId() + 1) + ":" + "bus";
 		((Bus) newBus).setCode(code);
 		return busRepository.save(newBus);
 	}

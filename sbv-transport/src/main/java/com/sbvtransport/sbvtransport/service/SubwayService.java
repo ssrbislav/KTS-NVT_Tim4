@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.model.Line;
-import com.sbvtransport.sbvtransport.model.Timetable;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class SubwayService implements ISubwayService {
 		Line line = lineService.getOne(subway.getId_line());
 		String code = "";
 		Subway newSubway = new Subway(code, line, subway.isLate(), subway.getName());
-		code = line.getName() + ":" + newSubway.getId() + ":" + "bus";
+		code = line.getName() + ":" + (subwayRepository.findAll().size() + 1)  + ":" + "bus";
 		newSubway.setCode(code);
 		return subwayRepository.save(newSubway);
 	}

@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +38,7 @@ public class Line implements Serializable {
 
 	@Column(name = "line_type", unique = false, nullable = false)
 	private TypeTransport line_type;
+	
 
 	public Line() {
 
@@ -75,4 +77,8 @@ public class Line implements Serializable {
 	public void setStation_list(List<Station> station_list) {
 		this.station_list = station_list;
 	}
+	
+
+	
+	
 }
