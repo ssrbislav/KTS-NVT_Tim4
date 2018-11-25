@@ -6,11 +6,11 @@ import com.sbvtransport.sbvtransport.model.Subway;
 
 public interface ISubwayService {
 
-	List<Subway> findAll();
-	Subway getOne(Long id);
-	Subway create(SubwayDTO subway);
-	Subway update(Subway subway);
-	boolean delete(Long id);
-	boolean codeExist(String code);
+  List<Subway> findAll();
+  Subway getOne(Long id);
+  Subway create(SubwayDTO subway);
+  Subway update(Subway subway);
+  boolean delete(Long id);
+  boolean codeExist(String code);
 
 }

@@ -10,12 +10,12 @@ import java.util.List;
 public interface IPricelistService {
 
 
-    public Pricelist getOne(Long id);
-    Pricelist getActive();
-    double calculatePrice(TypeTransport typeTransport, DemographicTicketType demographicTicketType, TicketType ticketType, Zone zone);
-    List<Pricelist> findAll();
-    Pricelist create(Pricelist pricelist);
-    Pricelist update(Pricelist pricelist);
-    boolean delete (Long id);
+  public Pricelist getOne(Long id);
+  Pricelist getActive();
+  double calculatePrice(TypeTransport typeTransport, DemographicTicketType demographicTicketType, TicketType ticketType, Zone zone);
+  List<Pricelist> findAll();
+  Pricelist create(Pricelist pricelist);
+  Pricelist update(Pricelist pricelist);
+  boolean delete (Long id);
 
 }

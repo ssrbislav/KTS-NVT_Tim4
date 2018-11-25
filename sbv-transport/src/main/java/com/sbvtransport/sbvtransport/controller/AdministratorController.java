@@ -21,62 +21,62 @@ import com.sbvtransport.sbvtransport.service.IPassengerService;
 @RequestMapping(value = "api/administrator")
 public class AdministratorController {
 
-	@Autowired
-	IAdministratorService administratorService;
+  @Autowired
+  IAdministratorService administratorService;
 
-	@Autowired
-	IPassengerService passengerService;
+  @Autowired
+  IPassengerService passengerService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity<List<Administrator>> getAll() {
+  @RequestMapping(value = "", method = RequestMethod.GET)
+  public ResponseEntity<List<Administrator>> getAll() {
 
-		List<Administrator> administrators = administratorService.findAll();
+    List<Administrator> administrators = administratorService.findAll();
 
-		return new ResponseEntity<>(administrators, HttpStatus.OK);
-	}
+    return new ResponseEntity<>(administrators, HttpStatus.OK);
+  }
 
-	@RequestMapping(value = "/addAdministrator", method = RequestMethod.POST)
-	public ResponseEntity<Administrator> create(@RequestBody Administrator administrator) {
+  @RequestMapping(value = "/addAdministrator", method = RequestMethod.POST)
+  public ResponseEntity<Administrator> create(@RequestBody Administrator administrator) {
 
-		Administrator newAdministrator = administratorService.create(administrator);
+    Administrator newAdministrator = administratorService.create(administrator);
 
-		return new ResponseEntity<>(newAdministrator, HttpStatus.OK);
+    return new ResponseEntity<>(newAdministrator, HttpStatus.OK);
 
-	}
+  }
 
-	@RequestMapping(value = "/updateAdministrator", method = RequestMethod.POST)
-	public ResponseEntity<Administrator> update(@RequestBody Administrator administrator) {
+  @RequestMapping(value = "/updateAdministrator", method = RequestMethod.POST)
+  public ResponseEntity<Administrator> update(@RequestBody Administrator administrator) {
 
-		Administrator updateAdministrator = administratorService.update(administrator);
+    Administrator updateAdministrator = administratorService.update(administrator);
 
-		return new ResponseEntity<>(updateAdministrator, HttpStatus.OK);
+    return new ResponseEntity<>(updateAdministrator, HttpStatus.OK);
 
-	}
+  }
 
-	@RequestMapping(value = "/deleteAdministrator/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+  @RequestMapping(value = "/deleteAdministrator/{id}", method = RequestMethod.GET)
+  public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-		boolean delete = administratorService.delete(id);
+    boolean delete = administratorService.delete(id);
 
-		return new ResponseEntity<>(delete, HttpStatus.OK);
+    return new ResponseEntity<>(delete, HttpStatus.OK);
 
-	}
+  }
 
-	@RequestMapping(value = "/validateDocument", method = RequestMethod.POST)
-	public ResponseEntity<Boolean> validateDocument(@RequestBody ValidateDocument validateDocument) {
+  @RequestMapping(value = "/validateDocument", method = RequestMethod.POST)
+  public ResponseEntity<Boolean> validateDocument(@RequestBody ValidateDocument validateDocument) {
 
-		for (Passenger passenger : passengerService.findAll()) {
+    for (Passenger passenger : passengerService.findAll()) {
 
-			if (passenger.getId() == validateDocument.getIdPassenger()) {
-				Long passengerId = validateDocument.getIdPassenger();
-				if (administratorService.validatePassengerDocument(passengerId)) {
-					passengerService.update(passenger);
-					return new ResponseEntity<>(true, HttpStatus.OK);
-				}
-			}
-		}
+      if (passenger.getId() == validateDocument.getIdPassenger()) {
+        Long passengerId = validateDocument.getIdPassenger();
+        if (administratorService.validatePassengerDocument(passengerId)) {
+          passengerService.update(passenger);
+          return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+      }
+    }
 
-		return new ResponseEntity<>(false, HttpStatus.OK);
-	}
+    return new ResponseEntity<>(false, HttpStatus.OK);
+  }
 
 }

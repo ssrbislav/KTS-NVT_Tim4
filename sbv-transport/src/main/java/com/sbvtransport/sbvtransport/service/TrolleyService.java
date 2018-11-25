@@ -12,65 +12,64 @@ import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 @Service
 public class TrolleyService implements ITrolleyService {
 
-	@Autowired
-	TrolleyRepository trolleyRepository;
-	@Autowired
-	LineService lineService;
+  @Autowired
+  TrolleyRepository trolleyRepository;
+  @Autowired
+  LineService lineService;
 
-	@Override
-	public List<Trolley> findAll() {
-		
-		return trolleyRepository.findAll();
-	}
+  @Override
+  public List<Trolley> findAll() {
 
-	@Override
-	public Trolley getOne(Long id) {
-		
-		return trolleyRepository.getOne(id);
-	}
+    return trolleyRepository.findAll();
+  }
 
-	@Override
-	public Trolley create(TrolleyDTO trolley) {
+  @Override
+  public Trolley getOne(Long id) {
 
-		Line line = lineService.getOne(trolley.getId_line());
-		String code = "";
-		Trolley newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
-		code = line.getName() + ":" + (trolleyRepository.findAll().size()+1) + ":" + "bus";
-		newTrolley.setCode(code);
-		return trolleyRepository.save(newTrolley);
-	}
+    return trolleyRepository.getOne(id);
+  }
 
-	@Override
-	public Trolley update(Trolley trolley) {
-		
-		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
-		updateTrolley.get().setCode(trolley.getCode());
-		updateTrolley.get().setName(trolley.getName());
-		updateTrolley.get().setLate(trolley.isLate());
-		updateTrolley.get().setLine(trolley.getLine());
-//		updateTrolley.get().setTimetable(trolley.getTimetable());
-		return trolleyRepository.save(updateTrolley.get());
-	}
+  @Override
+  public Trolley create(TrolleyDTO trolley) {
 
-	@Override
-	public boolean delete(Long id) {
-		
-		for (Trolley trolley : findAll())
-			if (trolley.getId() == id) {
-				trolleyRepository.delete(trolley);
-				return true;
-			}
-		return false;
-	}
+    Line line = lineService.getOne(trolley.getId_line());
+    String code = "";
+    Trolley newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
+    code = line.getName() + ":" + (trolleyRepository.findAll().size()+1) + ":" + "bus";
+    newTrolley.setCode(code);
+    return trolleyRepository.save(newTrolley);
+  }
 
-	@Override
-	public boolean codeExist(String code) {
-		for (Trolley trolley : findAll()) {
-			if(trolley.getCode().equals(code)){
-				return true;
-			}
-		}
-		return false;
-	}
+  @Override
+  public Trolley update(Trolley trolley) {
+
+    Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId());
+    updateTrolley.get().setCode(trolley.getCode());
+    updateTrolley.get().setName(trolley.getName());
+    updateTrolley.get().setLate(trolley.isLate());
+    updateTrolley.get().setLine(trolley.getLine());
+    return trolleyRepository.save(updateTrolley.get());
+  }
+
+  @Override
+  public boolean delete(Long id) {
+
+    for (Trolley trolley : findAll())
+      if (trolley.getId() == id) {
+        trolleyRepository.delete(trolley);
+        return true;
+      }
+    return false;
+  }
+
+  @Override
+  public boolean codeExist(String code) {
+    for (Trolley trolley : findAll()) {
+      if(trolley.getCode().equals(code)){
+        return true;
+      }
+    }
+    return false;
+  }
 
 }

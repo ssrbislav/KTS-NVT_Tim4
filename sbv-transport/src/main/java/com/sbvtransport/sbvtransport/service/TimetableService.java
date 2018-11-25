@@ -10,36 +10,36 @@ import java.util.Optional;
 @Service
 public class TimetableService implements ITimetableService {
 
-    @Autowired
-    TimetableRepository timetableRepository;
+  @Autowired
+  TimetableRepository timetableRepository;
 
-    @Override
-    public Timetable getOne(Long id) { return timetableRepository.getOne(id); }
+  @Override
+  public Timetable getOne(Long id) { return timetableRepository.getOne(id); }
 
-    @Override
-    public List<Timetable> findAll() {
-        return timetableRepository.findAll();
+  @Override
+  public List<Timetable> findAll() {
+    return timetableRepository.findAll();
+  }
+
+  @Override
+  public Timetable create(Timetable timetable) {
+    return timetableRepository.save(timetable);
+  }
+
+  @Override
+  public Timetable update(Timetable timetable) {
+    Optional<Timetable> updateTimetable = timetableRepository.findById(timetable.getId());
+    updateTimetable.get().setCode(timetable.getCode());
+    updateTimetable.get().setSchedule(timetable.getSchedule());
+    return timetableRepository.save(updateTimetable.get());
+  }
+
+  @Override
+  public boolean delete(Long id) {
+    if (timetableRepository.findAll().contains(timetableRepository.getOne(id))) {
+      timetableRepository.delete(timetableRepository.getOne(id));
+      return true;
     }
-
-    @Override
-    public Timetable create(Timetable timetable) {
-        return timetableRepository.save(timetable);
-    }
-
-    @Override
-    public Timetable update(Timetable timetable) {
-        Optional<Timetable> updateTimetable = timetableRepository.findById(timetable.getId());
-        updateTimetable.get().setCode(timetable.getCode());
-        updateTimetable.get().setSchedule(timetable.getSchedule());
-        return timetableRepository.save(updateTimetable.get());
-    }
-
-    @Override
-    public boolean delete(Long id) {
-        if (timetableRepository.findAll().contains(timetableRepository.getOne(id))) {
-            timetableRepository.delete(timetableRepository.getOne(id));
-            return true;
-        }
-        return false;
-    }
+    return false;
+  }
 }

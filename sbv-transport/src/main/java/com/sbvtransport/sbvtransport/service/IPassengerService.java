@@ -7,13 +7,13 @@ import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.model.Passenger;
 
 public interface IPassengerService {
-	
-	List<Passenger> findAll();
-	Passenger create(PassengerDTO passenger);
-	Passenger update(Passenger passenger);
-	boolean delete (Long id);
-	Passenger logIn(UserDTO user);
-	Passenger getOne(Long id);
-	String changeActive(PassengerChangeBooleanDTO change);
+
+  List<Passenger> findAll();
+  Passenger create(PassengerDTO passenger);
+  Passenger update(Passenger passenger);
+  boolean delete (Long id);
+  Passenger logIn(UserDTO user);
+  Passenger getOne(Long id);
+  String changeActive(PassengerChangeBooleanDTO change);
 
 }

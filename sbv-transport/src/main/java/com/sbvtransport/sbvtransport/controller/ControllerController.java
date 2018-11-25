@@ -18,42 +18,42 @@ import com.sbvtransport.sbvtransport.service.IControllerService;
 @RequestMapping(value = "api/controller")
 public class ControllerController {
 
-	@Autowired
-	IControllerService controllerService;
+  @Autowired
+  IControllerService controllerService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity<List<Controller>> getAll() {
+  @RequestMapping(value = "", method = RequestMethod.GET)
+  public ResponseEntity<List<Controller>> getAll() {
 
-		List<Controller> controllers = controllerService.findAll();
+    List<Controller> controllers = controllerService.findAll();
 
-		return new ResponseEntity<>(controllers, HttpStatus.OK);
-	}
+    return new ResponseEntity<>(controllers, HttpStatus.OK);
+  }
 
-	@RequestMapping(value = "/addController", method = RequestMethod.POST)
-	public ResponseEntity<Controller> create(@RequestBody Controller controller) {
+  @RequestMapping(value = "/addController", method = RequestMethod.POST)
+  public ResponseEntity<Controller> create(@RequestBody Controller controller) {
 
-		Controller newController = controllerService.create(controller);
+    Controller newController = controllerService.create(controller);
 
-		return new ResponseEntity<>(newController, HttpStatus.OK);
+    return new ResponseEntity<>(newController, HttpStatus.OK);
 
-	}
+  }
 
-	@RequestMapping(value = "/updateController", method = RequestMethod.POST)
-	public ResponseEntity<Controller> update(@RequestBody Controller controller) {
+  @RequestMapping(value = "/updateController", method = RequestMethod.POST)
+  public ResponseEntity<Controller> update(@RequestBody Controller controller) {
 
-		Controller updateController = controllerService.update(controller);
+    Controller updateController = controllerService.update(controller);
 
-		return new ResponseEntity<>(updateController, HttpStatus.OK);
+    return new ResponseEntity<>(updateController, HttpStatus.OK);
 
-	}
+  }
 
-	@RequestMapping(value = "/deleteController/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+  @RequestMapping(value = "/deleteController/{id}", method = RequestMethod.GET)
+  public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-		boolean delete = controllerService.delete(id);
+    boolean delete = controllerService.delete(id);
 
-		return new ResponseEntity<>(delete, HttpStatus.OK);
+    return new ResponseEntity<>(delete, HttpStatus.OK);
 
-	}
+  }
 
 }

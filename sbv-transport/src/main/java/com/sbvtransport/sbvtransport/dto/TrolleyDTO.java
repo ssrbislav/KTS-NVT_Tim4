@@ -2,51 +2,51 @@ package com.sbvtransport.sbvtransport.dto;
 
 public class TrolleyDTO {
 
-	private boolean late;
-	private String name;
-	private Long id_line;
-	
-	public TrolleyDTO(){
-		
-	}
+  private boolean late;
+  private String name;
+  private Long id_line;
 
-	public TrolleyDTO(boolean late, String name, Long id_line) {
-		super();
-		this.late = late;
-		this.name = name;
-		this.id_line = id_line;
-	}
+  public TrolleyDTO(){
 
-	public boolean isLate() {
-		return late;
-	}
+  }
 
-	public void setLate(boolean late) {
-		this.late = late;
-	}
+  public TrolleyDTO(boolean late, String name, Long id_line) {
+    super();
+    this.late = late;
+    this.name = name;
+    this.id_line = id_line;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public boolean isLate() {
+    return late;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setLate(boolean late) {
+    this.late = late;
+  }
 
-	public Long getId_line() {
-		return id_line;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setId_line(Long id_line) {
-		this.id_line = id_line;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	@Override
-	public String toString() {
-		return "TrolleyDTO [late=" + late + ", name=" + name
-				+ ", id_line=" + id_line + "]";
-	}
-	
-	
+  public Long getId_line() {
+    return id_line;
+  }
+
+  public void setId_line(Long id_line) {
+    this.id_line = id_line;
+  }
+
+  @Override
+  public String toString() {
+    return "TrolleyDTO [late=" + late + ", name=" + name
+        + ", id_line=" + id_line + "]";
+  }
+
+
 
 }

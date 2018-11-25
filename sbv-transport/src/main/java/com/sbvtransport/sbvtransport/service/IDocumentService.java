@@ -6,14 +6,14 @@ import com.sbvtransport.sbvtransport.model.Document;
 
 public interface IDocumentService {
 
-	Document getOne(Long id);
+  Document getOne(Long id);
 
-	List<Document> findAll();
+  List<Document> findAll();
 
-	Document create(DocumentDTO document);
+  Document create(DocumentDTO document);
 
-	Document update(DocumentDTO document);
+  Document update(DocumentDTO document);
 
-	boolean delete(Long id);
+  boolean delete(Long id);
 
 }

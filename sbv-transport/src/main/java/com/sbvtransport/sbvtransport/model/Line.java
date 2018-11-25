@@ -21,64 +21,60 @@ import javax.persistence.Table;
 @Table(name = "line")
 public class Line implements Serializable {
 
-	/**
-	 * need to add timetable and stations
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+  private static final long serialVersionUID = 1L;
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "id", unique = true, nullable = false)
+  private Long id;
 
-	@Column(name = "name", unique = true, nullable = false)
-	private String name;
+  @Column(name = "name", unique = true, nullable = false)
+  private String name;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
-	private List<Station> station_list = new ArrayList<Station>();
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
+  private List<Station> station_list = new ArrayList<Station>();
 
-	@Column(name = "line_type", unique = false, nullable = false)
-	private TypeTransport line_type;
-	
+  @Column(name = "line_type", unique = false, nullable = false)
+  private TypeTransport line_type;
 
-	public Line() {
+  public Line() {
 
-	}
+  }
 
-	public Line(Long id) {
-		super();
-		this.id = id;
-	}
+  public Line(Long id) {
+    super();
+    this.id = id;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public TypeTransport getLine_type() {
-		return line_type;
-	}
+  public TypeTransport getLine_type() {
+    return line_type;
+  }
 
-	public void setLine_type(TypeTransport line_type) {
-		this.line_type = line_type;
-	}
+  public void setLine_type(TypeTransport line_type) {
+    this.line_type = line_type;
+  }
 
-	public Long getId() {
-		return id;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	@JsonIgnore
-	public List<Station> getStation_list() {
-		return station_list;
-	}
+  @JsonIgnore
+  public List<Station> getStation_list() {
+    return station_list;
+  }
 
-	public void setStation_list(List<Station> station_list) {
-		this.station_list = station_list;
-	}
-	
+  public void setStation_list(List<Station> station_list) {
+    this.station_list = station_list;
+  }
 
-	
-	
+
+
+
 }

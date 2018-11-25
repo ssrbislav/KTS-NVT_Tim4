@@ -12,42 +12,42 @@ import java.util.List;
 @RequestMapping(value="api/pricelist")
 public class PricelistController {
 
-    @Autowired
-    IPricelistService pricelistService;
+  @Autowired
+  IPricelistService pricelistService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<Pricelist>> getAll(){
+  @RequestMapping(value = "", method = RequestMethod.GET)
+  public ResponseEntity<List<Pricelist>> getAll(){
 
-        List<Pricelist> pricelists = pricelistService.findAll();
+    List<Pricelist> pricelists = pricelistService.findAll();
 
-        return new ResponseEntity<>(pricelists, HttpStatus.OK);
-    }
+    return new ResponseEntity<>(pricelists, HttpStatus.OK);
+  }
 
-    @RequestMapping(value = "/addPricelist", method = RequestMethod.POST)
-    public ResponseEntity<Pricelist> create(@RequestBody Pricelist pricelist){
+  @RequestMapping(value = "/addPricelist", method = RequestMethod.POST)
+  public ResponseEntity<Pricelist> create(@RequestBody Pricelist pricelist){
 
-        Pricelist newPricelist = pricelistService.create(pricelist);
+    Pricelist newPricelist = pricelistService.create(pricelist);
 
-        return new ResponseEntity<>(newPricelist,HttpStatus.OK);
+    return new ResponseEntity<>(newPricelist,HttpStatus.OK);
 
-    }
+  }
 
-    @RequestMapping(value = "/updatePricelist", method = RequestMethod.POST)
-    public ResponseEntity<Pricelist> update(@RequestBody Pricelist pricelist){
+  @RequestMapping(value = "/updatePricelist", method = RequestMethod.POST)
+  public ResponseEntity<Pricelist> update(@RequestBody Pricelist pricelist){
 
-        Pricelist updatePricelist = pricelistService.update(pricelist);
+    Pricelist updatePricelist = pricelistService.update(pricelist);
 
-        return new ResponseEntity<>(updatePricelist,HttpStatus.OK);
+    return new ResponseEntity<>(updatePricelist,HttpStatus.OK);
 
-    }
+  }
 
-    @RequestMapping(value = "/deletePricelist/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> delete(@PathVariable Long id){
+  @RequestMapping(value = "/deletePricelist/{id}", method = RequestMethod.GET)
+  public ResponseEntity<Boolean> delete(@PathVariable Long id){
 
-        boolean delete = pricelistService.delete(id);
+    boolean delete = pricelistService.delete(id);
 
-        return new ResponseEntity<>(delete,HttpStatus.OK);
+    return new ResponseEntity<>(delete,HttpStatus.OK);
 
-    }
+  }
 
 }

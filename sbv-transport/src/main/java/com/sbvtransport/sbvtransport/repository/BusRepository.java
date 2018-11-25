@@ -8,6 +8,6 @@ import com.sbvtransport.sbvtransport.model.Transport;
 
 public interface BusRepository extends JpaRepository<Bus, Long>{
 
-	Bus save(Transport newBus);
-	
+  Bus save(Transport newBus);
+
 }

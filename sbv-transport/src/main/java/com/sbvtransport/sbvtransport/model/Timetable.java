@@ -9,46 +9,45 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "timetable")
 public class Timetable {
 
-	// TODO #8: Ne treba code, vec Transport.
+  // TODO #8: Transport (Bus, Subway, Trolley) - Timetable mapping.
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "id", unique = true, nullable = false)
+  private Long id;
 
-	@Column(name = "code", unique = false, nullable = false)
-	private String code;
+  @Column(name = "code", unique = false, nullable = false)
+  private String code;
 
-	@Column(name = "date", unique = false, nullable = false)
-	@ElementCollection(targetClass = Date.class)
-	// @OneToMany(targetEntity = Date.class)
-	private List<Date> schedule;
+  @Column(name = "date", unique = false, nullable = false)
+  @ElementCollection(targetClass = Date.class)
+  private List<Date> schedule;
 
-	public Timetable() {
-	}
+  public Timetable() {
+  }
 
-	public Timetable(String code, List<Date> schedule) {
-		this.code = code;
-		this.schedule = schedule;
-	}
+  public Timetable(String code, List<Date> schedule) {
+    this.code = code;
+    this.schedule = schedule;
+  }
 
-	public Long getId() {
-		return id;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public String getCode() {
-		return code;
-	}
+  public String getCode() {
+    return code;
+  }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-	public List<Date> getSchedule() {
-		return schedule;
-	}
+  public List<Date> getSchedule() {
+    return schedule;
+  }
 
-	public void setSchedule(List<Date> schedule) {
-		this.schedule = schedule;
-	}
+  public void setSchedule(List<Date> schedule) {
+    this.schedule = schedule;
+  }
 }

@@ -12,9 +12,6 @@ import javax.persistence.Table;
 @Table(name = "trolley")
 public class Trolley extends Transport implements Serializable {
 
-	/**
-	 * need to add current location
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

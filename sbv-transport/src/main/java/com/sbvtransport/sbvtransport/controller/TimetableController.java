@@ -12,42 +12,42 @@ import java.util.List;
 @RequestMapping(value="api/timetable")
 public class TimetableController {
 
-    @Autowired
-    ITimetableService timetableService;
+  @Autowired
+  ITimetableService timetableService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<Timetable>> getAll(){
+  @RequestMapping(value = "", method = RequestMethod.GET)
+  public ResponseEntity<List<Timetable>> getAll(){
 
-        List<Timetable> timetables = timetableService.findAll();
+    List<Timetable> timetables = timetableService.findAll();
 
-        return new ResponseEntity<>(timetables, HttpStatus.OK);
-    }
+    return new ResponseEntity<>(timetables, HttpStatus.OK);
+  }
 
-    @RequestMapping(value = "/addTimetable", method = RequestMethod.POST)
-    public ResponseEntity<Timetable> create(@RequestBody Timetable timetable){
+  @RequestMapping(value = "/addTimetable", method = RequestMethod.POST)
+  public ResponseEntity<Timetable> create(@RequestBody Timetable timetable){
 
-        Timetable newTimetable = timetableService.create(timetable);
+    Timetable newTimetable = timetableService.create(timetable);
 
-        return new ResponseEntity<>(newTimetable,HttpStatus.OK);
+    return new ResponseEntity<>(newTimetable,HttpStatus.OK);
 
-    }
+  }
 
-    @RequestMapping(value = "/updateTimetable", method = RequestMethod.POST)
-    public ResponseEntity<Timetable> update(@RequestBody Timetable timetable){
+  @RequestMapping(value = "/updateTimetable", method = RequestMethod.POST)
+  public ResponseEntity<Timetable> update(@RequestBody Timetable timetable){
 
-        Timetable updateTimetable = timetableService.update(timetable);
+    Timetable updateTimetable = timetableService.update(timetable);
 
-        return new ResponseEntity<>(updateTimetable,HttpStatus.OK);
+    return new ResponseEntity<>(updateTimetable,HttpStatus.OK);
 
-    }
+  }
 
-    @RequestMapping(value = "/deleteTimetable/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> delete(@PathVariable Long id){
+  @RequestMapping(value = "/deleteTimetable/{id}", method = RequestMethod.GET)
+  public ResponseEntity<Boolean> delete(@PathVariable Long id){
 
-        boolean delete = timetableService.delete(id);
+    boolean delete = timetableService.delete(id);
 
-        return new ResponseEntity<>(delete,HttpStatus.OK);
+    return new ResponseEntity<>(delete,HttpStatus.OK);
 
-    }
-    
+  }
+
 }

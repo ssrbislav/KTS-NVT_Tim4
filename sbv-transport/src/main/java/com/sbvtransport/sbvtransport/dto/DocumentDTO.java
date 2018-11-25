@@ -6,62 +6,62 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sbvtransport.sbvtransport.model.Passenger;
 
 public class DocumentDTO {
-	
-	private Long id;	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
-	private Date dateOfUpload;
-	private String imageLocation;
-	private Passenger passenger;
-	private Long idPassenger;
 
-	public Date getDateOfUpload() {
-		return dateOfUpload;
-	}
+  private Long id;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+  private Date dateOfUpload;
+  private String imageLocation;
+  private Passenger passenger;
+  private Long idPassenger;
 
-	public void setDateOfUpload(Date dateOfUpload) {
-		this.dateOfUpload = dateOfUpload;
-	}
+  public Date getDateOfUpload() {
+    return dateOfUpload;
+  }
 
-	public String getImageLocation() {
-		return imageLocation;
-	}
+  public void setDateOfUpload(Date dateOfUpload) {
+    this.dateOfUpload = dateOfUpload;
+  }
 
-	public void setImageLocation(String imageLocation) {
-		this.imageLocation = imageLocation;
-	}
+  public String getImageLocation() {
+    return imageLocation;
+  }
 
-	public Passenger getPassenger() {
-		return passenger;
-	}
+  public void setImageLocation(String imageLocation) {
+    this.imageLocation = imageLocation;
+  }
 
-	public void setPassenger(Passenger passenger) {
-		this.passenger = passenger;
-	}
+  public Passenger getPassenger() {
+    return passenger;
+  }
 
-	public Long getIdPassenger() {
-		return idPassenger;
-	}
+  public void setPassenger(Passenger passenger) {
+    this.passenger = passenger;
+  }
 
-	public void setIdPassenger(Long idPassenger) {
-		this.idPassenger = idPassenger;
-	}
+  public Long getIdPassenger() {
+    return idPassenger;
+  }
 
-	public Long getId() {
-		return id;
-	}
-	
-	public DocumentDTO() {
-		super();
-	}
+  public void setIdPassenger(Long idPassenger) {
+    this.idPassenger = idPassenger;
+  }
 
-	public DocumentDTO(Date dateOfUpload, String imageLocation, Passenger passenger, Long idPassenger) {
-		super();
-		this.dateOfUpload = dateOfUpload;
-		this.imageLocation = imageLocation;
-		this.passenger = passenger;
-		this.idPassenger = idPassenger;
-	}
-	
-	
+  public Long getId() {
+    return id;
+  }
+
+  public DocumentDTO() {
+    super();
+  }
+
+  public DocumentDTO(Date dateOfUpload, String imageLocation, Passenger passenger, Long idPassenger) {
+    super();
+    this.dateOfUpload = dateOfUpload;
+    this.imageLocation = imageLocation;
+    this.passenger = passenger;
+    this.idPassenger = idPassenger;
+  }
+
+
 
 }

@@ -10,77 +10,68 @@ import javax.persistence.*;
 @Table(name = "station")
 public class Station implements Serializable {
 
-	/**
-	 * need to add location and line
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  @Column(name = "id", unique = true, nullable = false)
+  private Long id;
 
-	// TODO #2: Solve MappingException.
-	// @Column(name = "location", unique = false, nullable = false)
-	@OneToOne(targetEntity = Location.class)
-	@JoinColumn(name = "location", referencedColumnName = "id")
-	private Location location;
+  @OneToOne(targetEntity = Location.class)
+  @JoinColumn(name = "location", referencedColumnName = "id")
+  private Location location;
 
-	// TODO #3: Solve MappingException.
-	// @Column(name = "timetable", unique = false, nullable = false)
-	// @JoinColumn(name = "timetable", referencedColumnName = "code")
-	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "code", targetEntity =
-	// Date.class)
-	@OneToOne(targetEntity = Timetable.class)
-	@JoinColumn(name = "timetable", referencedColumnName = "id")
-	private Timetable timetable;
+  // TODO: Change mapping.
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "line", referencedColumnName = "id")
-	private Line line;
+  @OneToOne(targetEntity = Timetable.class)
+  @JoinColumn(name = "timetable", referencedColumnName = "id")
+  private Timetable timetable;
 
-	public Station() {
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "line", referencedColumnName = "id")
+  private Line line;
 
-	}
+  public Station() {
 
-	public Station(Long id) {
-		super();
-		this.id = id;
-	}
+  }
 
-	public Long getId() {
-		return id;
-	}
+  public Station(Long id) {
+    super();
+    this.id = id;
+  }
 
-	public Location getLocation() {
-		return location;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+  public Location getLocation() {
+    return location;
+  }
 
-	@JsonIgnore
-	public Timetable getTimetable() {
-		return timetable;
-	}
+  public void setLocation(Location location) {
+    this.location = location;
+  }
 
-	public void setTimetable(Timetable timetable) {
-		this.timetable = timetable;
-	}
+  @JsonIgnore
+  public Timetable getTimetable() {
+    return timetable;
+  }
 
-	@Override
-	public String toString() {
-		return "Station [id=" + id + "]";
-	}
+  public void setTimetable(Timetable timetable) {
+    this.timetable = timetable;
+  }
 
-	public Line getLine() {
-		return line;
-	}
+  @Override
+  public String toString() {
+    return "Station [id=" + id + "]";
+  }
 
-	public void setLine(Line line) {
-		this.line = line;
-	}
+  public Line getLine() {
+    return line;
+  }
+
+  public void setLine(Line line) {
+    this.line = line;
+  }
 
 }

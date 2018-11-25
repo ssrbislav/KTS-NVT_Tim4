@@ -16,117 +16,117 @@ import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 @Service
 public class PassengerService implements IPassengerService {
 
-	@Autowired
-	PassengerRepository passengerRepository;
-	
-	@Autowired
-	TicketService ticketService;
+  @Autowired
+  PassengerRepository passengerRepository;
 
-	@Override
-	public List<Passenger> findAll() {
+  @Autowired
+  TicketService ticketService;
 
-		return passengerRepository.findAll();
-	}
+  @Override
+  public List<Passenger> findAll() {
 
-	@Override
-	public Passenger create(PassengerDTO passenger) {
+    return passengerRepository.findAll();
+  }
 
-		for (Passenger pass : findAll()) {
-			if (pass.getUsername().equals(passenger.getUsername()) || pass.getEmail().equals(passenger.getEmail())) {
-				return null;
-			}
-		}
-		// need to create document and save it's path (correct this when you do front)
+  @Override
+  public Passenger create(PassengerDTO passenger) {
 
-		Passenger p = new Passenger(true, false, passenger.getEmail(), passenger.getUsername(), passenger.getPassword(),
-				passenger.getFirst_name(), passenger.getLast_name(), passenger.getAddress(),
-				passenger.getPhone_number(), passenger.getDate_birth());
+    for (Passenger pass : findAll()) {
+      if (pass.getUsername().equals(passenger.getUsername()) || pass.getEmail().equals(passenger.getEmail())) {
+        return null;
+      }
+    }
+    // need to create document and save it's path (correct this when you do front)
 
-		return passengerRepository.save(p);
-	}
+    Passenger p = new Passenger(true, false, passenger.getEmail(), passenger.getUsername(), passenger.getPassword(),
+        passenger.getFirst_name(), passenger.getLast_name(), passenger.getAddress(),
+        passenger.getPhone_number(), passenger.getDate_birth());
 
-	@Override
-	public Passenger update(Passenger passenger) {
+    return passengerRepository.save(p);
+  }
 
-		for (Passenger pass : findAll()) {
-			if (passenger.getUsername().equals(pass.getUsername()) || passenger.getEmail().equals(pass.getEmail())) {
-				return null;
-			}
-		}
+  @Override
+  public Passenger update(Passenger passenger) {
 
-		Optional<Passenger> updatePassenger = passengerRepository.findById(passenger.getId());
-		updatePassenger.get().setActive(passenger.isActive());
-		updatePassenger.get().setAddress(passenger.getAddress());
-		updatePassenger.get().setDocument(passenger.getDocument());
-		updatePassenger.get().setEmail(passenger.getEmail());
-		updatePassenger.get().setPhone_number(passenger.getPhone_number());
-		updatePassenger.get().setFirst_name(passenger.getFirst_name());
-		updatePassenger.get().setLast_name(passenger.getLast_name());
-		updatePassenger.get().setUsername(passenger.getUsername());
-		updatePassenger.get().setPassword(passenger.getPassword());
-		updatePassenger.get().setDocument_validated(passenger.isDocument_validated());
-		updatePassenger.get().setTickets(passenger.getTickets());
+    for (Passenger pass : findAll()) {
+      if (passenger.getUsername().equals(pass.getUsername()) || passenger.getEmail().equals(pass.getEmail())) {
+        return null;
+      }
+    }
 
-		return passengerRepository.save(updatePassenger.get());
-	}
+    Optional<Passenger> updatePassenger = passengerRepository.findById(passenger.getId());
+    updatePassenger.get().setActive(passenger.isActive());
+    updatePassenger.get().setAddress(passenger.getAddress());
+    updatePassenger.get().setDocument(passenger.getDocument());
+    updatePassenger.get().setEmail(passenger.getEmail());
+    updatePassenger.get().setPhone_number(passenger.getPhone_number());
+    updatePassenger.get().setFirst_name(passenger.getFirst_name());
+    updatePassenger.get().setLast_name(passenger.getLast_name());
+    updatePassenger.get().setUsername(passenger.getUsername());
+    updatePassenger.get().setPassword(passenger.getPassword());
+    updatePassenger.get().setDocument_validated(passenger.isDocument_validated());
+    updatePassenger.get().setTickets(passenger.getTickets());
 
-	@Override
-	public boolean delete(Long id) {
-		for (Passenger passenger : findAll()) {
-			if (passenger.getId() == id) {
-				passengerRepository.delete(passenger);
-				return true;
-			}
-		}
-		return false;
-	}
+    return passengerRepository.save(updatePassenger.get());
+  }
 
-	@Override
-	public Passenger logIn(UserDTO user) {
+  @Override
+  public boolean delete(Long id) {
+    for (Passenger passenger : findAll()) {
+      if (passenger.getId() == id) {
+        passengerRepository.delete(passenger);
+        return true;
+      }
+    }
+    return false;
+  }
 
-		for (Passenger passenger : findAll()) {
-			if (passenger.getUsername().equals(user.getUsername())
-					&& passenger.getPassword().equals(user.getPassword())) {
-				return passenger;
-			}
-		}
-		return null;
-	}
+  @Override
+  public Passenger logIn(UserDTO user) {
 
-	@Override
-	public Passenger getOne(Long id) {
+    for (Passenger passenger : findAll()) {
+      if (passenger.getUsername().equals(user.getUsername())
+          && passenger.getPassword().equals(user.getPassword())) {
+        return passenger;
+      }
+    }
+    return null;
+  }
 
-		return passengerRepository.getOne(id);
-	}
+  @Override
+  public Passenger getOne(Long id) {
 
-	@Override
-	public String changeActive(PassengerChangeBooleanDTO pass) {
-		Passenger p = getOne(pass.getIdPassenger());
-		if (p == null) {
-			return "Passenger with" + pass.getIdPassenger() + "doesn't exist!";
-		}
-		p.setActive(pass.isChange());
-		passengerRepository.save(p);
-		return "Successfully!";
-	}
-	
-	public String activateOneTimeTicket(Long ticketId) {
-		
-		Ticket ticket;
-		
-		TimeScheduler timeScheduler = new TimeScheduler();
-		
-		for(Passenger passenger :  findAll())
-		{
-			if(passenger.getTickets().contains(ticketService.getOne(ticketId))) {
-				ticket = ticketService.getOne(ticketId);
-				ticket.setActive(true);
-				ticketService.update(ticket);
-				timeScheduler.changeActiveForOneUse(ticketId);
-				return "Your ticket has been activated";
-			}
-		}
-		return "You are not able to activate this ticket";	
-	}
+    return passengerRepository.getOne(id);
+  }
+
+  @Override
+  public String changeActive(PassengerChangeBooleanDTO pass) {
+    Passenger p = getOne(pass.getIdPassenger());
+    if (p == null) {
+      return "Passenger with" + pass.getIdPassenger() + "doesn't exist!";
+    }
+    p.setActive(pass.isChange());
+    passengerRepository.save(p);
+    return "Successfully!";
+  }
+
+  public String activateOneTimeTicket(Long ticketId) {
+
+    Ticket ticket;
+
+    TimeScheduler timeScheduler = new TimeScheduler();
+
+    for(Passenger passenger :  findAll())
+    {
+      if(passenger.getTickets().contains(ticketService.getOne(ticketId))) {
+        ticket = ticketService.getOne(ticketId);
+        ticket.setActive(true);
+        ticketService.update(ticket);
+        timeScheduler.changeActiveForOneUse(ticketId);
+        return "Your ticket has been activated";
+      }
+    }
+    return "You are not able to activate this ticket";
+  }
 
 }
