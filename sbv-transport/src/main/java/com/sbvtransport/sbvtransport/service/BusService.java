@@ -39,9 +39,17 @@ public class BusService implements IBusService {
     //Need to change code
     Line line = lineService.getOne(bus.getId_line());
     String code = "";
-    Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
-    code = line.getName() + ":" + (busRepository.findAll().get(busRepository.findAll().size()-1).getId() + 1) + ":" + "bus";
-    ((Bus) newBus).setCode(code);
+    Bus newBus = new Bus();
+    if (busRepository.findAll().isEmpty()) {
+      code = line.getName() + ":" +  "1" + ":" + "bus";
+    } else {
+      code = line.getName() + ":" + (
+          busRepository.findAll().get(busRepository.findAll().size()-1).getId() + 1) + ":" + "bus";
+    }
+    newBus.setCode(code);
+    newBus.setLine(line);
+    newBus.setLate(bus.isLate());
+    newBus.setName(bus.getName());
     return busRepository.save(newBus);
   }
 

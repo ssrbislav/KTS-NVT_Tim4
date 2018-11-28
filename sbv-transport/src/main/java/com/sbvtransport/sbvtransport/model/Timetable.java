@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.model;
 
+import java.util.Map;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +22,12 @@ public class Timetable {
 
   @Column(name = "date", unique = false, nullable = false)
   @ElementCollection(targetClass = Date.class)
-  private List<Date> schedule;
+  private Map<Station, Date> schedule;
 
   public Timetable() {
   }
 
-  public Timetable(String code, List<Date> schedule) {
+  public Timetable(String code, Map<Station, Date> schedule) {
     this.code = code;
     this.schedule = schedule;
   }
@@ -43,11 +44,12 @@ public class Timetable {
     this.code = code;
   }
 
-  public List<Date> getSchedule() {
+  public Map<Station, Date> getSchedule() {
     return schedule;
   }
 
-  public void setSchedule(List<Date> schedule) {
+  public void setSchedule(
+      Map<Station, Date> schedule) {
     this.schedule = schedule;
   }
 }

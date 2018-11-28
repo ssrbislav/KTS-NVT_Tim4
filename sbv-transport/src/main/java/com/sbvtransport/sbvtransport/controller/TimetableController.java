@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.TimetableDTO;
 import com.sbvtransport.sbvtransport.model.Timetable;
 import com.sbvtransport.sbvtransport.service.ITimetableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class TimetableController {
   }
 
   @RequestMapping(value = "/addTimetable", method = RequestMethod.POST)
-  public ResponseEntity<Timetable> create(@RequestBody Timetable timetable){
+  public ResponseEntity<String> create(@RequestBody TimetableDTO timetableDTO){
 
-    Timetable newTimetable = timetableService.create(timetable);
+    String newTimetable = timetableService.create(timetableDTO);
 
     return new ResponseEntity<>(newTimetable,HttpStatus.OK);
 
