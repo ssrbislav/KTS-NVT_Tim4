@@ -43,9 +43,9 @@ public class SubwayController {
   }
 
   @RequestMapping(value = "/addSubway", method = RequestMethod.POST)
-  public ResponseEntity<Subway> create(@RequestBody SubwayDTO subway) {
+  public ResponseEntity<String> create(@RequestBody SubwayDTO subway) {
 
-    Subway addSubway = subwayService.create(subway);
+	  String addSubway = subwayService.create(subway);
 
     return new ResponseEntity<>(addSubway, HttpStatus.OK);
 

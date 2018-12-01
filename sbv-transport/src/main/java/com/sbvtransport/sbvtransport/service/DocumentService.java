@@ -13,54 +13,52 @@ import com.sbvtransport.sbvtransport.repository.PassengerRepository;
 @Service
 public class DocumentService implements IDocumentService {
 
-  @Autowired
-  DocumentRepository documentRepository;
+	@Autowired
+	DocumentRepository documentRepository;
 
-  @Autowired
-  PassengerRepository passengerRepository;
+	@Autowired
+	PassengerRepository passengerRepository;
 
-  @Override
-  public List<Document> findAll() {
+	@Override
+	public List<Document> findAll() {
 
-    return documentRepository.findAll();
-  }
+		return documentRepository.findAll();
+	}
 
-  @Override
-  public Document getOne(Long id) {
+	@Override
+	public Document getOne(Long id) {
 
-    return documentRepository.getOne(id);
-  }
+		return documentRepository.getOne(id);
+	}
 
-  @Override
-  public Document create(DocumentDTO document) {
+	@Override
+	public Document create(DocumentDTO document) {
 
-    Passenger p = passengerRepository.getOne(document.getIdPassenger());
+		Passenger p = passengerRepository.getOne(document.getIdPassenger());
+		Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p);
+		return documentRepository.save(d);
+	}
 
-    Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p);
+	@Override
+	public Document update(DocumentDTO document) {
 
-    return documentRepository.save(d);
-  }
+		Optional<Document> updateDoc = documentRepository.findById(document.getId());
+		updateDoc.get().setImageLocation(document.getImageLocation());
+		updateDoc.get().setDateOfUpload(document.getDateOfUpload());
 
-  @Override
-  public Document update(DocumentDTO document) {
+		return documentRepository.save(updateDoc.get());
+	}
 
-    Optional<Document> updateDoc = documentRepository.findById(document.getId());
-    updateDoc.get().setImageLocation(document.getImageLocation());
-    updateDoc.get().setDateOfUpload(document.getDateOfUpload());
+	@Override
+	public boolean delete(Long id) {
 
-    return documentRepository.save(updateDoc.get());
-  }
-
-  @Override
-  public boolean delete(Long id) {
-
-    for (Document doc : findAll()) {
-      if (doc.getId() == id) {
-        documentRepository.delete(doc);
-        return true;
-      }
-    }
-    return false;
-  }
+		for (Document doc : findAll()) {
+			if (doc.getId() == id) {
+				documentRepository.delete(doc);
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
