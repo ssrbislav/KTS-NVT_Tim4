@@ -38,7 +38,7 @@ public class Transport implements Serializable {
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   protected Location location;
 
-  @OneToOne(targetEntity = Timetable.class)
+  @OneToOne(targetEntity = Timetable.class, cascade = CascadeType.ALL)
   protected Timetable timetable;
 
   public Transport() {

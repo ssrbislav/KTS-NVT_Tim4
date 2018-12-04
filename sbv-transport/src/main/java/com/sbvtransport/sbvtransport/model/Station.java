@@ -23,7 +23,7 @@ public class Station implements Serializable {
 
   // TODO: Change mapping.
 
-  @OneToOne(targetEntity = Timetable.class)
+  @OneToOne(targetEntity = Timetable.class, cascade = CascadeType.ALL)
   @JoinColumn(name = "timetable", referencedColumnName = "id")
   private Timetable timetable;
 
