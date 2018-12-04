@@ -53,6 +53,7 @@ public class TrolleyService implements ITrolleyService {
 		updateTrolley.get().setName(trolley.getName());
 		updateTrolley.get().setLate(trolley.isLate());
 		updateTrolley.get().setLine(trolley.getLine());
+		updateTrolley.get().setTimetable(trolley.getTimetable());
 		return trolleyRepository.save(updateTrolley.get());
 	}
 

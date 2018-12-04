@@ -51,6 +51,8 @@ public class StationService implements IStationService {
     station.setLocation(location);
     station.setLine(line);
     stationRepository.save(station);
+    location.setStation(station);
+    locationService.update(location);
     return "The station has been successfully created.";
   }
 

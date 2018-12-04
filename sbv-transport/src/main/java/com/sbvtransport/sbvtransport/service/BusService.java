@@ -58,7 +58,7 @@ public class BusService implements IBusService {
 		updateBus.get().setName(bus.getName());
 		updateBus.get().setLate(bus.isLate());
 		updateBus.get().setLine(bus.getLine());
-		// updateBus.get().setTimetable(bus.getTimetable());
+		updateBus.get().setTimetable(bus.getTimetable());
 
 		return busRepository.save(updateBus.get());
 	}

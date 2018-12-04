@@ -61,6 +61,7 @@ public class TimetableService implements ITimetableService {
         if (b.getCode().equals(timetableDTO.getTransportCode())) {
           bus = b;
           bus.setTimetable(timetable);
+          busService.update(bus);
         }
       }
     } else if (subwayService.codeExist(timetableDTO.getTransportCode())) {
@@ -68,6 +69,7 @@ public class TimetableService implements ITimetableService {
         if (s.getCode().equals(timetableDTO.getTransportCode())) {
           subway = s;
           subway.setTimetable(timetable);
+          subwayService.update(subway);
         }
       }
     } else if (trolleyService.codeExist(timetableDTO.getTransportCode())) {
@@ -75,6 +77,7 @@ public class TimetableService implements ITimetableService {
         if (t.getCode().equals(timetableDTO.getTransportCode())) {
           trolley = t;
           trolley.setTimetable(timetable);
+          trolleyService.update(trolley);
         }
       }
     } else {

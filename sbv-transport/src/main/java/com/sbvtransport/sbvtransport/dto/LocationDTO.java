@@ -11,19 +11,15 @@ public class LocationDTO {
   private Float latitude;
   private Float longitude;
   private String type;
-  private Station station;
-  private Long station_id;
 
   public LocationDTO(Long id, String location_name, String address, Float latitude,
-      Float longitude, String type, Station station, Long station_id) {
+      Float longitude, String type) {
     this.id = id;
     this.location_name = location_name;
     this.address = address;
     this.latitude = latitude;
     this.longitude = longitude;
     this.type = type;
-    this.station = station;
-    this.station_id = station_id;
   }
 
   public Long getId() {
@@ -74,19 +70,4 @@ public class LocationDTO {
     this.type = type;
   }
 
-  public Station getStation() {
-    return station;
-  }
-
-  public void setStation(Station station) {
-    this.station = station;
-  }
-
-  public Long getStation_id() {
-    return station_id;
-  }
-
-  public void setStation_id(Long station_id) {
-    this.station_id = station_id;
-  }
 }

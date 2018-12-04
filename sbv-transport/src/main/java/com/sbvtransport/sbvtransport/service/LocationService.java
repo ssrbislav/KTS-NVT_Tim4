@@ -36,11 +36,6 @@ public class LocationService implements ILocationService {
     location.setLocation_name(locationDTO.getLocation_name());
     location.setLatitude(locationDTO.getLatitude());
     location.setAddress(locationDTO.getAddress());
-//    if (!stationService.findAll().contains(stationService.getOne(locationDTO.getStation_id()))) {
-//      return "No station with ID " + locationDTO.getStation_id() + " exists!";
-//    } else {
-//      location.setStation(stationService.getOne(locationDTO.getStation_id()));
-//    }
     locationRepository.save(location);
     return "Location has been successfully created!";
   }
@@ -53,6 +48,7 @@ public class LocationService implements ILocationService {
     updateLocation.get().setLocation_name(location.getLocation_name());
     updateLocation.get().setLongitude(location.getLongitude());
     updateLocation.get().setType(location.getType());
+    updateLocation.get().setStation(location.getStation());
     return locationRepository.save(location);
   }
 

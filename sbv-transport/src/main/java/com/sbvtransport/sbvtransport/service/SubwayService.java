@@ -55,6 +55,7 @@ public class SubwayService implements ISubwayService {
 		updateSubway.get().setName(subway.getName());
 		updateSubway.get().setLate(subway.isLate());
 		updateSubway.get().setLine(subway.getLine());
+		updateSubway.get().setTimetable(subway.getTimetable());
 		return subwayRepository.save(updateSubway.get());
 
 	}
