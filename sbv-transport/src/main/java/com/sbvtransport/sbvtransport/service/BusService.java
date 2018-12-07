@@ -41,8 +41,7 @@ public class BusService implements IBusService {
 		if (line != null) {
 			String code = "";
 			Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
-			code = line.getName() + ":" + (busRepository.findAll().get(busRepository.findAll().size() - 1).getId() + 1)
-					+ ":" + "bus";
+			code = line.getName() + "_"+ "bus" ;
 			((Bus) newBus).setCode(code);
 			busRepository.save(newBus);
 			return "Bus successfully created!";
@@ -82,7 +81,7 @@ public class BusService implements IBusService {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public Line checkLine(Long lineId) {
 		for (Line line : lineService.findAll())
