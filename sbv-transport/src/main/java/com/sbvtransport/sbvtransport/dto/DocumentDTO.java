@@ -11,7 +11,7 @@ public class DocumentDTO {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
   private Date dateOfUpload;
   private String imageLocation;
-  private Passenger passenger;
+  //private Passenger passenger;
   private Long idPassenger;
 
   public Date getDateOfUpload() {
@@ -30,13 +30,13 @@ public class DocumentDTO {
     this.imageLocation = imageLocation;
   }
 
-  public Passenger getPassenger() {
+ /* public Passenger getPassenger() {
     return passenger;
   }
 
   public void setPassenger(Passenger passenger) {
     this.passenger = passenger;
-  }
+  }*/
 
   public Long getIdPassenger() {
     return idPassenger;
@@ -54,11 +54,10 @@ public class DocumentDTO {
     super();
   }
 
-  public DocumentDTO(Date dateOfUpload, String imageLocation, Passenger passenger, Long idPassenger) {
+  public DocumentDTO(Date dateOfUpload, String imageLocation, Long idPassenger) {
     super();
     this.dateOfUpload = dateOfUpload;
     this.imageLocation = imageLocation;
-    this.passenger = passenger;
     this.idPassenger = idPassenger;
   }
 
