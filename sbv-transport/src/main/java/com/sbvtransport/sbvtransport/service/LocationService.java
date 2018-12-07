@@ -11,53 +11,52 @@ import org.springframework.stereotype.Service;
 @Service
 public class LocationService implements ILocationService {
 
-  @Autowired
-  LocationRepository locationRepository;
+	@Autowired
+	LocationRepository locationRepository;
 
-  @Autowired
-  StationService stationService;
+	@Autowired
+	StationService stationService;
 
+	@Override
+	public Location getOne(Long id) {
+		return locationRepository.getOne(id);
+	}
 
-  @Override
-  public Location getOne(Long id) {
-    return locationRepository.getOne(id);
-  }
+	@Override
+	public List<Location> findAll() {
+		return locationRepository.findAll();
+	}
 
-  @Override
-  public List<Location> findAll() {
-    return locationRepository.findAll();
-  }
+	@Override
+	public String create(LocationDTO locationDTO) {
+		Location location = new Location();
+		location.setType(locationDTO.getType());
+		location.setLongitude(locationDTO.getLongitude());
+		location.setLocation_name(locationDTO.getLocation_name());
+		location.setLatitude(locationDTO.getLatitude());
+		location.setAddress(locationDTO.getAddress());
+		locationRepository.save(location);
+		return "Location has been successfully created!";
+	}
 
-  @Override
-  public String create(LocationDTO locationDTO) {
-    Location location = new Location();
-    location.setType(locationDTO.getType());
-    location.setLongitude(locationDTO.getLongitude());
-    location.setLocation_name(locationDTO.getLocation_name());
-    location.setLatitude(locationDTO.getLatitude());
-    location.setAddress(locationDTO.getAddress());
-    locationRepository.save(location);
-    return "Location has been successfully created!";
-  }
+	@Override
+	public Location update(Location location) {
+		Optional<Location> updateLocation = locationRepository.findById(location.getId());
+		updateLocation.get().setAddress(location.getAddress());
+		updateLocation.get().setLatitude(location.getLatitude());
+		updateLocation.get().setLocation_name(location.getLocation_name());
+		updateLocation.get().setLongitude(location.getLongitude());
+		updateLocation.get().setType(location.getType());
+		updateLocation.get().setStation(location.getStation());
+		return locationRepository.save(location);
+	}
 
-  @Override
-  public Location update(Location location) {
-    Optional<Location> updateLocation = locationRepository.findById(location.getId());
-    updateLocation.get().setAddress(location.getAddress());
-    updateLocation.get().setLatitude(location.getLatitude());
-    updateLocation.get().setLocation_name(location.getLocation_name());
-    updateLocation.get().setLongitude(location.getLongitude());
-    updateLocation.get().setType(location.getType());
-    updateLocation.get().setStation(location.getStation());
-    return locationRepository.save(location);
-  }
-
-  @Override
-  public boolean delete(Long id) {
-    if (locationRepository.findAll().contains(locationRepository.getOne(id))) {
-      locationRepository.delete(locationRepository.getOne(id));
-      return true;
-    }
-    return false;
-  }
+	@Override
+	public boolean delete(Long id) {
+		if (locationRepository.findAll().contains(locationRepository.getOne(id))) {
+			locationRepository.delete(locationRepository.getOne(id));
+			return true;
+		}
+		return false;
+	}
 }

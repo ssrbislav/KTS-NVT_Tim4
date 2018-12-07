@@ -18,58 +18,57 @@ import com.sbvtransport.sbvtransport.service.ITicketService;
 @RequestMapping(value = "api/subway")
 public class SubwayController {
 
-  @Autowired
-  ISubwayService subwayService;
+	@Autowired
+	ISubwayService subwayService;
 
-  @Autowired
-  ITicketService ticketService;
+	@Autowired
+	ITicketService ticketService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<List<Subway>> getAll() {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Subway>> getAll() {
 
-    List<Subway> subways = subwayService.findAll();
+		List<Subway> subways = subwayService.findAll();
 
-    return new ResponseEntity<>(subways, HttpStatus.OK);
+		return new ResponseEntity<>(subways, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/getSubway/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Subway> getOne(@PathVariable Long id) {
+	@RequestMapping(value = "/getSubway/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Subway> getOne(@PathVariable Long id) {
 
-    Subway getSubway = subwayService.getOne(id);
+		Subway getSubway = subwayService.getOne(id);
 
-    return new ResponseEntity<>(getSubway, HttpStatus.OK);
+		return new ResponseEntity<>(getSubway, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/addSubway", method = RequestMethod.POST)
-  public ResponseEntity<String> create(@RequestBody SubwayDTO subway) {
+	@RequestMapping(value = "/addSubway", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody SubwayDTO subway) {
 
-	  String addSubway = subwayService.create(subway);
+		String addSubway = subwayService.create(subway);
 
-    return new ResponseEntity<>(addSubway, HttpStatus.OK);
+		return new ResponseEntity<>(addSubway, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/updateSubway", method = RequestMethod.POST)
-  public ResponseEntity<Subway> update(@RequestBody Subway subway) {
+	@RequestMapping(value = "/updateSubway", method = RequestMethod.POST)
+	public ResponseEntity<Subway> update(@RequestBody Subway subway) {
 
-    Subway updateSubway = subwayService.update(subway);
+		Subway updateSubway = subwayService.update(subway);
 
-    return new ResponseEntity<>(updateSubway, HttpStatus.OK);
+		return new ResponseEntity<>(updateSubway, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/deleteSubway/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+	@RequestMapping(value = "/deleteSubway/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    ticketService.changeBecauseTransport(subwayService.getOne(id).getCode());
+		ticketService.changeBecauseTransport(subwayService.getOne(id).getCode());
 
-    boolean delete = subwayService.delete(id);
+		boolean delete = subwayService.delete(id);
 
+		return new ResponseEntity<>(delete, HttpStatus.OK);
 
-    return new ResponseEntity<>(delete, HttpStatus.OK);
-
-  }
+	}
 
 }

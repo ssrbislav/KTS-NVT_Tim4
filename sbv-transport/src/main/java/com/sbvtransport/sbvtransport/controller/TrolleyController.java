@@ -18,57 +18,57 @@ import com.sbvtransport.sbvtransport.service.ITrolleyService;
 @RequestMapping(value = "api/trolley")
 public class TrolleyController {
 
-  @Autowired
-  ITrolleyService trolleyService;
+	@Autowired
+	ITrolleyService trolleyService;
 
-  @Autowired
-  ITicketService ticketService;
+	@Autowired
+	ITicketService ticketService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<List<Trolley>> getAll() {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Trolley>> getAll() {
 
-    List<Trolley> trolleys = trolleyService.findAll();
+		List<Trolley> trolleys = trolleyService.findAll();
 
-    return new ResponseEntity<>(trolleys, HttpStatus.OK);
+		return new ResponseEntity<>(trolleys, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/getTrolley/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Trolley> getOne(@PathVariable Long id) {
+	@RequestMapping(value = "/getTrolley/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Trolley> getOne(@PathVariable Long id) {
 
-    Trolley getTrolley= trolleyService.getOne(id);
+		Trolley getTrolley = trolleyService.getOne(id);
 
-    return new ResponseEntity<>(getTrolley, HttpStatus.OK);
+		return new ResponseEntity<>(getTrolley, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/createTrolley", method = RequestMethod.POST)
-  public ResponseEntity<String> create(@RequestBody TrolleyDTO trolley) {
+	@RequestMapping(value = "/createTrolley", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody TrolleyDTO trolley) {
 
-    String newTrolley = trolleyService.create(trolley);
+		String newTrolley = trolleyService.create(trolley);
 
-    return new ResponseEntity<>(newTrolley, HttpStatus.OK);
+		return new ResponseEntity<>(newTrolley, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/updateTrolley", method = RequestMethod.POST)
-  public ResponseEntity<Trolley> update(@RequestBody Trolley trolley) {
+	@RequestMapping(value = "/updateTrolley", method = RequestMethod.POST)
+	public ResponseEntity<Trolley> update(@RequestBody Trolley trolley) {
 
-    Trolley updateTrolley = trolleyService.update(trolley);
+		Trolley updateTrolley = trolleyService.update(trolley);
 
-    return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
+		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+	@RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    ticketService.changeBecauseTransport(trolleyService.getOne(id).getCode());
+		ticketService.changeBecauseTransport(trolleyService.getOne(id).getCode());
 
-    boolean deleteTrolley = trolleyService.delete(id);
+		boolean deleteTrolley = trolleyService.delete(id);
 
-    return new ResponseEntity<>(deleteTrolley, HttpStatus.OK);
+		return new ResponseEntity<>(deleteTrolley, HttpStatus.OK);
 
-  }
+	}
 
 }

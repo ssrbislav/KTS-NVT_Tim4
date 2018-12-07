@@ -14,46 +14,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="api/ticket")
+@RequestMapping(value = "api/ticket")
 public class TicketController {
 
-  @Autowired
-  ITicketService ticketService;
+	@Autowired
+	ITicketService ticketService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<List<Ticket>> getAll(){
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Ticket>> getAll() {
 
-    List<Ticket> tickets = ticketService.findAll();
+		List<Ticket> tickets = ticketService.findAll();
 
-    return new ResponseEntity<>(tickets, HttpStatus.OK);
-  }
+		return new ResponseEntity<>(tickets, HttpStatus.OK);
+	}
 
-  @RequestMapping(value = "/addTicket", method = RequestMethod.POST)
-  public ResponseEntity<String> create(@RequestBody TicketDTO ticket){
+	@RequestMapping(value = "/addTicket", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody TicketDTO ticket) {
 
-    String newTicket = ticketService.create(ticket);
+		String newTicket = ticketService.create(ticket);
 
-    return new ResponseEntity<>(newTicket,HttpStatus.OK);
+		return new ResponseEntity<>(newTicket, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/updateTicket", method = RequestMethod.POST)
-  public ResponseEntity<Ticket> update(@RequestBody Ticket ticket){
+	@RequestMapping(value = "/updateTicket", method = RequestMethod.POST)
+	public ResponseEntity<Ticket> update(@RequestBody Ticket ticket) {
 
-    Ticket updateTicket = ticketService.update(ticket);
+		Ticket updateTicket = ticketService.update(ticket);
 
-    return new ResponseEntity<>(updateTicket,HttpStatus.OK);
+		return new ResponseEntity<>(updateTicket, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/deleteTicket/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id){
+	@RequestMapping(value = "/deleteTicket/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    boolean delete = ticketService.delete(id);
+		boolean delete = ticketService.delete(id);
 
-    return new ResponseEntity<>(delete,HttpStatus.OK);
+		return new ResponseEntity<>(delete, HttpStatus.OK);
 
-  }
-  
+	}
 
 }

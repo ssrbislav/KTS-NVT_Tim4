@@ -10,68 +10,68 @@ import javax.persistence.*;
 @Table(name = "station")
 public class Station implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue(strategy = IDENTITY)
-  @Column(name = "id", unique = true, nullable = false)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
-  @OneToOne(targetEntity = Location.class)
-  @JoinColumn(name = "location", referencedColumnName = "id")
-  private Location location;
+	@OneToOne(targetEntity = Location.class)
+	@JoinColumn(name = "location", referencedColumnName = "id")
+	private Location location;
 
-  // TODO: Change mapping.
+	// TODO: Change mapping.
 
-  @OneToOne(targetEntity = Timetable.class, cascade = CascadeType.ALL)
-  @JoinColumn(name = "timetable", referencedColumnName = "id")
-  private Timetable timetable;
+	@OneToOne(targetEntity = Timetable.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "timetable", referencedColumnName = "id")
+	private Timetable timetable;
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "line", referencedColumnName = "id")
-  private Line line;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "line", referencedColumnName = "id")
+	private Line line;
 
-  public Station() {
+	public Station() {
 
-  }
+	}
 
-  public Station(Long id) {
-    super();
-    this.id = id;
-  }
+	public Station(Long id) {
+		super();
+		this.id = id;
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public Location getLocation() {
-    return location;
-  }
+	public Location getLocation() {
+		return location;
+	}
 
-  public void setLocation(Location location) {
-    this.location = location;
-  }
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 
-  @JsonIgnore
-  public Timetable getTimetable() {
-    return timetable;
-  }
+	@JsonIgnore
+	public Timetable getTimetable() {
+		return timetable;
+	}
 
-  public void setTimetable(Timetable timetable) {
-    this.timetable = timetable;
-  }
+	public void setTimetable(Timetable timetable) {
+		this.timetable = timetable;
+	}
 
-  @Override
-  public String toString() {
-    return "Station [id=" + id + "]";
-  }
+	@Override
+	public String toString() {
+		return "Station [id=" + id + "]";
+	}
 
-  public Line getLine() {
-    return line;
-  }
+	public Line getLine() {
+		return line;
+	}
 
-  public void setLine(Line line) {
-    this.line = line;
-  }
+	public void setLine(Line line) {
+		this.line = line;
+	}
 
 }

@@ -16,66 +16,63 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.service.IPassengerService;
 
 @RestController
-@RequestMapping(value="api/passenger")
+@RequestMapping(value = "api/passenger")
 public class PassengerController {
 
-  @Autowired
-  IPassengerService passengerService;
+	@Autowired
+	IPassengerService passengerService;
 
-  @RequestMapping(value="", method = RequestMethod.GET)
-  public ResponseEntity<List<Passenger>> getAll(){
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Passenger>> getAll() {
 
-    List <Passenger> passengers = passengerService.findAll();
+		List<Passenger> passengers = passengerService.findAll();
 
-    return new ResponseEntity<>(passengers,HttpStatus.OK);
-  }
+		return new ResponseEntity<>(passengers, HttpStatus.OK);
+	}
 
-  @RequestMapping(value="/addPassenger", method = RequestMethod.POST)
-  public ResponseEntity<Passenger> create(@RequestBody PassengerDTO passenger){
+	@RequestMapping(value = "/addPassenger", method = RequestMethod.POST)
+	public ResponseEntity<Passenger> create(@RequestBody PassengerDTO passenger) {
 
-    Passenger newPassenger = passengerService.create(passenger);
+		Passenger newPassenger = passengerService.create(passenger);
 
-    return new ResponseEntity<>(newPassenger,HttpStatus.OK);
+		return new ResponseEntity<>(newPassenger, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value="/updatePassenger", method = RequestMethod.POST)
-  public ResponseEntity<Passenger> update(@RequestBody Passenger passenger){
+	@RequestMapping(value = "/updatePassenger", method = RequestMethod.POST)
+	public ResponseEntity<Passenger> update(@RequestBody Passenger passenger) {
 
-    Passenger updatePassenger = passengerService.update(passenger);
+		Passenger updatePassenger = passengerService.update(passenger);
 
-    return new ResponseEntity<>(updatePassenger,HttpStatus.OK);
+		return new ResponseEntity<>(updatePassenger, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value="/deletePassenger/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id){
+	@RequestMapping(value = "/deletePassenger/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    boolean delete = passengerService.delete(id);
+		boolean delete = passengerService.delete(id);
 
-    return new ResponseEntity<>(delete,HttpStatus.OK);
+		return new ResponseEntity<>(delete, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value="/logIn", method = RequestMethod.POST)
-  public ResponseEntity<Passenger> logIn(@RequestBody UserDTO user){
+	@RequestMapping(value = "/logIn", method = RequestMethod.POST)
+	public ResponseEntity<Passenger> logIn(@RequestBody UserDTO user) {
 
-    Passenger singInPassenger = passengerService.logIn(user);
+		Passenger singInPassenger = passengerService.logIn(user);
 
-    return new ResponseEntity<>(singInPassenger,HttpStatus.OK);
+		return new ResponseEntity<>(singInPassenger, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value="/changeActive", method = RequestMethod.POST)
-  public ResponseEntity<String> changeActive(@RequestBody PassengerChangeBooleanDTO user){
+	@RequestMapping(value = "/changeActive", method = RequestMethod.POST)
+	public ResponseEntity<String> changeActive(@RequestBody PassengerChangeBooleanDTO user) {
 
-    String changeActive = passengerService.changeActive(user);
+		String changeActive = passengerService.changeActive(user);
 
-    return new ResponseEntity<>(changeActive,HttpStatus.OK);
+		return new ResponseEntity<>(changeActive, HttpStatus.OK);
 
-  }
-
-
-
+	}
 
 }

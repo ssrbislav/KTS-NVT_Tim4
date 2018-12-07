@@ -18,56 +18,56 @@ import com.sbvtransport.sbvtransport.service.ITicketService;
 @RequestMapping(value = "api/bus")
 public class BusController {
 
-  @Autowired
-  IBusService busService;
+	@Autowired
+	IBusService busService;
 
-  @Autowired
-  ITicketService ticketService;
+	@Autowired
+	ITicketService ticketService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<List<Bus>> getAll() {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Bus>> getAll() {
 
-    List<Bus> buses = busService.findAll();
+		List<Bus> buses = busService.findAll();
 
-    return new ResponseEntity<>(buses, HttpStatus.OK);
+		return new ResponseEntity<>(buses, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/getBuss/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Bus> getOne(@PathVariable Long id) {
+	@RequestMapping(value = "/getBuss/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Bus> getOne(@PathVariable Long id) {
 
-    Bus bus = busService.getOne(id);
+		Bus bus = busService.getOne(id);
 
-    return new ResponseEntity<>(bus, HttpStatus.OK);
+		return new ResponseEntity<>(bus, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/addBus", method = RequestMethod.POST)
-  public ResponseEntity<String> create(@RequestBody BusDTO bus) {
+	@RequestMapping(value = "/addBus", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody BusDTO bus) {
 
-    String newBus = busService.create(bus);
+		String newBus = busService.create(bus);
 
-    return new ResponseEntity<>(newBus, HttpStatus.OK);
+		return new ResponseEntity<>(newBus, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/updateBus", method = RequestMethod.POST)
-  public ResponseEntity<Bus> update(@RequestBody Bus bus) {
+	@RequestMapping(value = "/updateBus", method = RequestMethod.POST)
+	public ResponseEntity<Bus> update(@RequestBody Bus bus) {
 
-    Bus updateBus = busService.update(bus);
+		Bus updateBus = busService.update(bus);
 
-    return new ResponseEntity<>(updateBus, HttpStatus.OK);
+		return new ResponseEntity<>(updateBus, HttpStatus.OK);
 
-  }
+	}
 
-  @RequestMapping(value = "/deleteBus/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+	@RequestMapping(value = "/deleteBus/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    ticketService.changeBecauseTransport(busService.getOne(id).getCode());
-    boolean delete = busService.delete(id);
+		ticketService.changeBecauseTransport(busService.getOne(id).getCode());
+		boolean delete = busService.delete(id);
 
-    return new ResponseEntity<>(delete, HttpStatus.OK);
+		return new ResponseEntity<>(delete, HttpStatus.OK);
 
-  }
+	}
 
 }

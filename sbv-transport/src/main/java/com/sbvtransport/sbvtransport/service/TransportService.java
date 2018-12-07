@@ -12,43 +12,43 @@ import com.sbvtransport.sbvtransport.repository.TransportRepository;
 @Service
 public class TransportService implements ITransportService {
 
-  @Autowired
-  TransportRepository transportRepository;
+	@Autowired
+	TransportRepository transportRepository;
 
-  @Override
-  public Transport getOne(Long id) {
-    return transportRepository.getOne(id);
-  }
+	@Override
+	public Transport getOne(Long id) {
+		return transportRepository.getOne(id);
+	}
 
-  @Override
-  public List<Transport> findAll() {
-    return transportRepository.findAll();
-  }
+	@Override
+	public List<Transport> findAll() {
+		return transportRepository.findAll();
+	}
 
-  @Override
-  public Transport create(Transport transport) {
-    return transportRepository.save(transport);
-  }
+	@Override
+	public Transport create(Transport transport) {
+		return transportRepository.save(transport);
+	}
 
-  @Override
-  public Transport update(Transport transport) {
-    Optional<Transport> updatetransport = transportRepository.findById(transport.getId());
-    updatetransport.get().setName(transport.getName());
-    updatetransport.get().setLine(transport.getLine());
-    updatetransport.get().setLate(transport.isLate());
+	@Override
+	public Transport update(Transport transport) {
+		Optional<Transport> updatetransport = transportRepository.findById(transport.getId());
+		updatetransport.get().setName(transport.getName());
+		updatetransport.get().setLine(transport.getLine());
+		updatetransport.get().setLate(transport.isLate());
 
-    return transportRepository.save(updatetransport.get());
-  }
+		return transportRepository.save(updatetransport.get());
+	}
 
-  @Override
-  public boolean delete(Long id) {
+	@Override
+	public boolean delete(Long id) {
 
-    for(Transport transport : findAll())
-      if(transport.getId() == id) {
-        transportRepository.delete(transport);
-        return true;
-      }
-    return false;
-  }
+		for (Transport transport : findAll())
+			if (transport.getId() == id) {
+				transportRepository.delete(transport);
+				return true;
+			}
+		return false;
+	}
 
 }

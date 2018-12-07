@@ -15,46 +15,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="api/line")
+@RequestMapping(value = "api/line")
 public class LineController {
-  
-  @Autowired
-  ILineService lineService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<List<Line>> getAll(){
+	@Autowired
+	ILineService lineService;
 
-    List<Line> lines = lineService.findAll();
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Line>> getAll() {
 
-    return new ResponseEntity<>(lines, HttpStatus.OK);
-  }
+		List<Line> lines = lineService.findAll();
 
-  @RequestMapping(value = "/addLine", method = RequestMethod.POST)
-  public ResponseEntity<String> create(@RequestBody LineDTO line){
+		return new ResponseEntity<>(lines, HttpStatus.OK);
+	}
 
-    String newLine = lineService.create(line);
+	@RequestMapping(value = "/addLine", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody LineDTO line) {
 
-    return new ResponseEntity<>(newLine,HttpStatus.OK);
+		String newLine = lineService.create(line);
 
-  }
-  
+		return new ResponseEntity<>(newLine, HttpStatus.OK);
 
-  @RequestMapping(value = "/updateLine", method = RequestMethod.POST)
-  public ResponseEntity<Line> update(@RequestBody Line line){
+	}
 
-    Line updateLine = lineService.update(line);
+	@RequestMapping(value = "/updateLine", method = RequestMethod.POST)
+	public ResponseEntity<Line> update(@RequestBody Line line) {
 
-    return new ResponseEntity<>(updateLine,HttpStatus.OK);
+		Line updateLine = lineService.update(line);
 
-  }
+		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 
-  @RequestMapping(value = "/deleteLine/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id){
+	}
 
-    boolean delete = lineService.delete(id);
+	@RequestMapping(value = "/deleteLine/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    return new ResponseEntity<>(delete,HttpStatus.OK);
+		boolean delete = lineService.delete(id);
 
-  }
+		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
 
 }

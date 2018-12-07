@@ -12,40 +12,39 @@ import javax.persistence.Table;
 @Table(name = "subway")
 public class Subway extends Transport implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue(strategy = IDENTITY)
-  @Column(name = "id", unique = true, nullable = false)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
-  @Column(name = "code", unique = false, nullable = false)
-  private String code;
+	@Column(name = "code", unique = false, nullable = false)
+	private String code;
 
-  public Subway() {
-  }
+	public Subway() {
+	}
 
-  public Subway(String code, Line line, boolean late, String name) {
-    super(line, late, name);
-    this.code = code;
-  }
+	public Subway(String code, Line line, boolean late, String name) {
+		super(line, late, name);
+		this.code = code;
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public String getCode() {
-    return code;
-  }
+	public String getCode() {
+		return code;
+	}
 
-  public void setCode(String code) {
-    this.code = code;
-  }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-  @Override
-  public String toString() {
-    return "Subway [id=" + id + ", code=" + code + ", line=" + line + ", late=" + late
-        + ", name=" + name + "]";
-  }
+	@Override
+	public String toString() {
+		return "Subway [id=" + id + ", code=" + code + ", line=" + line + ", late=" + late + ", name=" + name + "]";
+	}
 
 }

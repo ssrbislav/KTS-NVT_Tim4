@@ -14,45 +14,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="api/location")
+@RequestMapping(value = "api/location")
 public class LocationController {
-  
-  @Autowired
-  ILocationService locationService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<List<Location>> getAll(){
+	@Autowired
+	ILocationService locationService;
 
-    List<Location> locations = locationService.findAll();
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<List<Location>> getAll() {
 
-    return new ResponseEntity<>(locations, HttpStatus.OK);
-  }
+		List<Location> locations = locationService.findAll();
 
-  @RequestMapping(value = "/addLocation", method = RequestMethod.POST)
-  public ResponseEntity<String> create(@RequestBody LocationDTO location){
+		return new ResponseEntity<>(locations, HttpStatus.OK);
+	}
 
-    String newLocation = locationService.create(location);
+	@RequestMapping(value = "/addLocation", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody LocationDTO location) {
 
-    return new ResponseEntity<>(newLocation,HttpStatus.OK);
+		String newLocation = locationService.create(location);
 
-  }
+		return new ResponseEntity<>(newLocation, HttpStatus.OK);
 
-  @RequestMapping(value = "/updateLocation", method = RequestMethod.POST)
-  public ResponseEntity<Location> update(@RequestBody Location location){
+	}
 
-    Location updateLocation = locationService.update(location);
+	@RequestMapping(value = "/updateLocation", method = RequestMethod.POST)
+	public ResponseEntity<Location> update(@RequestBody Location location) {
 
-    return new ResponseEntity<>(updateLocation,HttpStatus.OK);
+		Location updateLocation = locationService.update(location);
 
-  }
+		return new ResponseEntity<>(updateLocation, HttpStatus.OK);
 
-  @RequestMapping(value = "/deleteLocation/{id}", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> delete(@PathVariable Long id){
+	}
 
-    boolean delete = locationService.delete(id);
+	@RequestMapping(value = "/deleteLocation/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-    return new ResponseEntity<>(delete,HttpStatus.OK);
+		boolean delete = locationService.delete(id);
 
-  }
+		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
 
 }
