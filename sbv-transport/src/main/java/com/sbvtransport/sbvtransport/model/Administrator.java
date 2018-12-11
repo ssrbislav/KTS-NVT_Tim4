@@ -35,6 +35,12 @@ public class Administrator extends User implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
+	
+	public Administrator(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 
 	public Long getId() {
 		return id;
