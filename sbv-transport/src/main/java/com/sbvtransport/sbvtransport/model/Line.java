@@ -40,10 +40,9 @@ public class Line implements Serializable {
 
 	}
 
-	public Line(String name, TypeTransport line_type) {
+	public Line(Long id) {
 		super();
-		this.name = name;
-		this.line_type = line_type;
+		this.id = id;
 	}
 
 	public String getName() {
