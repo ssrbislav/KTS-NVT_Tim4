@@ -10,6 +10,7 @@ import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Subway;
+import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
 @Service
@@ -38,9 +39,9 @@ public class SubwayService implements ISubwayService {
 		Line line = checkLine(subway.getId_line());
 		if (line != null) {
 			String code = "";
-			Subway newSubway = new Subway(code, line, subway.isLate(), subway.getName());
-			code = line.getName() + ":" + (subwayRepository.findAll().size() + 1) + ":" + "bus";
-			newSubway.setCode(code);
+			Transport newSubway = new Subway(code, line, subway.isLate(), subway.getName());
+			code = line.getName() + "_"+ "subway" + "_" + subway.getName();
+			((Subway) newSubway).setCode(code);
 			subwayRepository.save(newSubway);
 			return "Subway successfully created!";
 		}

@@ -41,7 +41,7 @@ public class BusService implements IBusService {
 		if (line != null) {
 			String code = "";
 			Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
-			code = line.getName() + "_"+ "bus" ;
+			code = line.getName() + "_"+ "bus" + "_" + bus.getName() ;
 			((Bus) newBus).setCode(code);
 			busRepository.save(newBus);
 			return "Bus successfully created!";

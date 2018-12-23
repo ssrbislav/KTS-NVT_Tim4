@@ -1,6 +1,8 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Transport;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,9 @@ public class TrolleyService implements ITrolleyService {
 		Line line = checkLine(trolley.getId_line());
 		if (line != null) {
 			String code = "";
-			Trolley newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
-			code = line.getName() + ":" + (trolleyRepository.findAll().size() + 1) + ":" + "bus";
-			newTrolley.setCode(code);
+			Transport  newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
+			code = line.getName() + "_"+ "trolley" + "_" + trolley.getName();
+			((Trolley) newTrolley).setCode(code);
 			trolleyRepository.save(newTrolley);
 			return "Trolley successfully created!";
 		}
