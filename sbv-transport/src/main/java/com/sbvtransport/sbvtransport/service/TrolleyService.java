@@ -29,11 +29,11 @@ public class TrolleyService implements ITrolleyService {
 	@Override
 	public Trolley getOne(Long id) {
 
-		return trolleyRepository.getOne(id);
+		return trolleyRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public String create(TrolleyDTO trolley) {
+	public Trolley create(TrolleyDTO trolley) {
 
 		Line line = checkLine(trolley.getId_line());
 		if (line != null) {
@@ -41,10 +41,10 @@ public class TrolleyService implements ITrolleyService {
 			Transport  newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
 			code = line.getName() + "_"+ "trolley" + "_" + trolley.getName();
 			((Trolley) newTrolley).setCode(code);
-			trolleyRepository.save(newTrolley);
-			return "Trolley successfully created!";
+			
+			return trolleyRepository.save(newTrolley);
 		}
-		return "Trolley has not been created. Some error. God knows what went wrong";
+		return null;
 	}
 
 	@Override
@@ -82,10 +82,13 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public Line checkLine(Long lineId) {
-		for (Line line : lineService.findAll())
-			if (line.getId() == lineService.getOne(lineId).getId())
-				if (line.getLine_type() == TypeTransport.trolley)
-					return line;
+		
+		Line line = lineService.getOne(lineId);
+		if( line != null){
+			if(line.getLine_type() == TypeTransport.trolley){
+				return line;
+			}
+		}
 		return null;
 	}
 

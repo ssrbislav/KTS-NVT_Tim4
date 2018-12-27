@@ -43,6 +43,10 @@ public class Trolley extends Transport implements Serializable {
 		this.code = code;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Trolley [id=" + id + ", code=" + code + ", line=" + line + ", late=" + late
