@@ -2,46 +2,41 @@ package com.sbvtransport.sbvtransport.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.util.Optional;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import org.springframework.transaction.annotation.Transactional;
 import com.sbvtransport.sbvtransport.model.Bus;
-import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Transport;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@ActiveProfiles("test")
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class BusRepositoryTest {
 
+	@Autowired
+	private BusRepository busRepository;
 
 	@Autowired
-	BusRepository busRepository;
-
-	@MockBean
-	LineRepository lineRepositoryMocked;
-
-	@Before
-	public void setUp(){
-		Line l = new Line("nova_linija", TypeTransport.bus);
-		Optional<Line> line = Optional.of(l);
-		Mockito.when(lineRepositoryMocked.findById(1L)).thenReturn(line);
-	}
-
+	private LineRepository lineRepository;
+	
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void testSaveBus(){
-		Transport t = new Bus("nova_linija_bus_7ca",lineRepositoryMocked.findById(1L).get(), false, "7ca");
+		Transport t = new Bus("nova_linija_bus_7ca",lineRepository.getOne(1L), false, "7ca");
 		Bus busSaved = busRepository.save(t);
-		assertEquals(t, busSaved);
+		assertEquals(t.getName(), busSaved.getName());
+		assertEquals(t.getLine().getId(), busSaved.getLine().getId());
+		assertEquals(t.getLine().getLine_type(), busSaved.getLine().getLine_type());
+		assertEquals(t.getLine().getName(), busSaved.getLine().getName());
+		assertEquals("nova_linija_bus_7ca", busSaved.getCode());
 		assertNotNull(busSaved);
 	}
 

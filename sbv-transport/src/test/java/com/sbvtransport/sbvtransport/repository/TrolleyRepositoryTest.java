@@ -2,45 +2,41 @@ package com.sbvtransport.sbvtransport.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.util.Optional;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.model.Line;
+import org.springframework.transaction.annotation.Transactional;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.model.Trolley;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@ActiveProfiles("test")
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class TrolleyRepositoryTest {
 	
 	@Autowired
-	TrolleyRepository trolleyRepository;
+	private TrolleyRepository trolleyRepository;
 	
-	@MockBean
-	LineRepository lineRepositoryMocked;
+	@Autowired
+	private LineRepository lineRepository;
 
-	@Before
-	public void setUp(){
-		Line l = new Line("new_line_2", TypeTransport.trolley);
-		Optional<Line> line = Optional.of(l);
-		Mockito.when(lineRepositoryMocked.findById(1L)).thenReturn(line);
-	}
-	
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void testSaveTrolley(){
-		Transport t = new Trolley("new_line_2_trolley_7ca",lineRepositoryMocked.findById(1L).get(), false, "7ca");
+		Transport t = new Trolley("nova_linija_trolley_12ca",lineRepository.getOne(3L), false, "12ca");
 		Trolley trolleySaved = trolleyRepository.save(t);
-		assertEquals(t, trolleySaved);
+		assertEquals(t.getName(), trolleySaved.getName());
+		assertEquals(t.getLine().getId(), trolleySaved.getLine().getId());
+		assertEquals(t.getLine().getLine_type(), trolleySaved.getLine().getLine_type());
+		assertEquals(t.getLine().getName(), trolleySaved.getLine().getName());
+		assertEquals("nova_linija_trolley_12ca", trolleySaved.getCode());
 		assertNotNull(trolleySaved);
 	}
 
