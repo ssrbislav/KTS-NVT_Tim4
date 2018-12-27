@@ -14,43 +14,40 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.model.Transport;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ActiveProfiles("test")
-public class BusRepositoryTest {
-
-
+public class SubwayRepositoryTest {
+	
 	@Autowired
-	BusRepository busRepository;
-
+	SubwayRepository subwayRepository;
+	
 	@MockBean
 	LineRepository lineRepositoryMocked;
 
 	@Before
 	public void setUp(){
-		Line l = new Line("nova_linija", TypeTransport.bus);
+		Line l = new Line("nova_linija", TypeTransport.subway);
 		Optional<Line> line = Optional.of(l);
 		Mockito.when(lineRepositoryMocked.findById(1L)).thenReturn(line);
 	}
-
+	
 	@Test
-	public void testSaveBus(){
-		Transport t = new Bus("nova_linija_bus_7ca",lineRepositoryMocked.findById(1L).get(), false, "7ca");
-		Bus busSaved = busRepository.save(t);
-		assertEquals(t, busSaved);
-		assertNotNull(busSaved);
+	public void testSaveSubway(){
+		Transport t = new Subway("nova_linija_subway_11ca",lineRepositoryMocked.findById(1L).get(), false, "11ca");
+		Subway subwaySaved = subwayRepository.save(t);
+		assertEquals(t, subwaySaved);
+		assertNotNull(subwaySaved);
 	}
 
 	//trying to save empty object
 	@Test(expected = DataIntegrityViolationException.class)
-	public void testSaveBus2(){
-		busRepository.save(new Bus());
+	public void testSaveSubway2(){
+		subwayRepository.save(new Subway());
 	}
-
-
 
 }

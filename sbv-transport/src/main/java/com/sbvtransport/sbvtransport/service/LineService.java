@@ -18,7 +18,7 @@ public class LineService implements ILineService {
 
 	@Override
 	public Line getOne(Long id) {
-		return lineRepository.getOne(id);
+		return lineRepository.findById(id).orElse(null);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Subway;
+import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
 @Service
@@ -29,22 +30,22 @@ public class SubwayService implements ISubwayService {
 	@Override
 	public Subway getOne(Long id) {
 
-		return subwayRepository.getOne(id);
+		return subwayRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public String create(SubwayDTO subway) {
+	public Subway create(SubwayDTO subway) {
 		
 		Line line = checkLine(subway.getId_line());
 		if (line != null) {
 			String code = "";
-			Subway newSubway = new Subway(code, line, subway.isLate(), subway.getName());
-			code = line.getName() + ":" + (subwayRepository.findAll().size() + 1) + ":" + "bus";
-			newSubway.setCode(code);
-			subwayRepository.save(newSubway);
-			return "Subway successfully created!";
+			Transport newSubway = new Subway(code, line, subway.isLate(), subway.getName());
+			code = line.getName() + "_"+ "subway" + "_" + subway.getName();
+			((Subway) newSubway).setCode(code);
+			
+			return subwayRepository.save(newSubway);
 		}
-		return "Subway has not been created. Some error. God knows what went wrong";
+		return null;
 	}
 
 	@Override
@@ -83,10 +84,13 @@ public class SubwayService implements ISubwayService {
 
 	@Override
 	public Line checkLine(Long lineId) {
-		for (Line line : lineService.findAll())
-			if (line.getId() == lineService.getOne(lineId).getId())
-				if (line.getLine_type() == TypeTransport.subway)
-					return line;
+		
+		Line line = lineService.getOne(lineId);
+		if( line != null){
+			if(line.getLine_type() == TypeTransport.subway){
+				return line;
+			}
+		}
 		return null;
 	}
 

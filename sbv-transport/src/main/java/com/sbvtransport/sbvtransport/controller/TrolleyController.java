@@ -43,9 +43,9 @@ public class TrolleyController {
 	}
 
 	@RequestMapping(value = "/createTrolley", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody TrolleyDTO trolley) {
+	public ResponseEntity<Trolley> create(@RequestBody TrolleyDTO trolley) {
 
-		String newTrolley = trolleyService.create(trolley);
+		Trolley newTrolley = trolleyService.create(trolley);
 
 		return new ResponseEntity<>(newTrolley, HttpStatus.OK);
 

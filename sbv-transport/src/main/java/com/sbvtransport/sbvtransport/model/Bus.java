@@ -25,7 +25,7 @@ public class Bus extends Transport implements Serializable {
 	public Bus() {
 
 	}
-
+	
 	public Bus(String code, Line line, boolean late, String name) {
 		super(line, late, name);
 		this.code = code;
@@ -42,6 +42,12 @@ public class Bus extends Transport implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	@Override
 	public String toString() {
