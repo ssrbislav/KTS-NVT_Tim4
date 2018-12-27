@@ -63,7 +63,9 @@ public class BusController {
 	@RequestMapping(value = "/deleteBus/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-		ticketService.changeBecauseTransport(busService.getOne(id).getCode());
+		if(busService.getOne(id)!= null)
+			ticketService.changeBecauseTransport(busService.getOne(id).getCode());
+		
 		boolean delete = busService.delete(id);
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);

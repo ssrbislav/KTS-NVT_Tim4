@@ -278,6 +278,10 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public void changeBecauseTransport(String code) {
+		
+		if(code == null){
+			return;
+		}
 
 		for (Ticket ticket : findAll()) {
 			if (ticket.getCode_transport().equals(code)) {
