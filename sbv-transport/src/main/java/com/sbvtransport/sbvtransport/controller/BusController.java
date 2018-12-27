@@ -33,7 +33,7 @@ public class BusController {
 
 	}
 
-	@RequestMapping(value = "/getBuss/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getBus/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Bus> getOne(@PathVariable Long id) {
 
 		Bus bus = busService.getOne(id);

@@ -62,8 +62,9 @@ public class TrolleyController {
 
 	@RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-
-		ticketService.changeBecauseTransport(trolleyService.getOne(id).getCode());
+		
+		if(trolleyService.getOne(id)!= null)
+			ticketService.changeBecauseTransport(trolleyService.getOne(id).getCode());
 
 		boolean deleteTrolley = trolleyService.delete(id);
 
