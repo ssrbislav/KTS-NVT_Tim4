@@ -43,9 +43,9 @@ public class BusController {
 	}
 
 	@RequestMapping(value = "/addBus", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody BusDTO bus) {
+	public ResponseEntity<Bus> create(@RequestBody BusDTO bus) {
 
-		String newBus = busService.create(bus);
+		Bus newBus = busService.create(bus);
 
 		return new ResponseEntity<>(newBus, HttpStatus.OK);
 

@@ -11,7 +11,7 @@ public interface IBusService {
 
 	Bus getOne(Long id);
 
-	String create(BusDTO bus);
+	Bus create(BusDTO bus);
 
 	Bus update(Bus bus);
 
