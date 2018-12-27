@@ -9,7 +9,7 @@ public interface ITrolleyService {
 
   List<Trolley> findAll();
   Trolley getOne(Long id);
-  String create(TrolleyDTO trolley);
+  Trolley create(TrolleyDTO trolley);
   Trolley update(Trolley trolley);
   boolean delete(Long id);
   boolean codeExist(String code);
