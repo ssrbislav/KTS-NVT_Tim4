@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
+import com.sbvtransport.sbvtransport.repository.LineRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -29,12 +31,15 @@ public class BusServiceJUnitTest {
 	@MockBean
 	private BusRepository busRepository;
 
+	@MockBean
+	private LineRepository lineRepository;
+
 	@Before
 	public void setUp() {
 
 		List<Bus> buses = new ArrayList<>();
-		buses.add(new Bus("neki_kod", new Line("nova_linija", TypeTransport.bus), false, "ime"));
-		buses.add(new Bus("neki_kod2", new Line("nova_linija", TypeTransport.bus), true, "ime2"));
+		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), false, "ime", 1L, "neki_kod"));
+		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), true, "ime2", 2L, "neki_kod2"));
 		Mockito.when(busRepository.findAll()).thenReturn(buses);
 
 		Bus b = new Bus(new Line("nova_linija", TypeTransport.bus), false, "6ca", 1L, "nova_linija_bus_6ca");
@@ -42,6 +47,14 @@ public class BusServiceJUnitTest {
 		Mockito.when(busRepository.findById(1L)).thenReturn(oBus);
 
 		Mockito.when(busRepository.findById(10L)).thenReturn(null);
+
+		Line line = new Line("nova_linija", TypeTransport.bus);
+		line.setId(1L);
+		line.setStation_list(new ArrayList<>());
+		Optional<Line> oLine = Optional.of(line);
+		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
+		Bus b2 = new Bus("nova_linija_bus_5ca", line, false, "5ca");
+		Mockito.when(busRepository.save(b2)).thenReturn(b2);
 
 	}
 
@@ -76,6 +89,67 @@ public class BusServiceJUnitTest {
 	public void getOneTest2() {
 		// find bus that doesn't exist
 		busService.getOne(10L);
+
+	}
+
+	// @Test
+	// public void createTest(){
+	//
+	// BusDTO bus = new BusDTO(false, "5ca", 1L);
+	// Bus createBus = busService.create(bus);
+	//
+	// //assertThat(createBus).isNotNull();
+	// //assertThat(createBus.getId()).isEqualTo(1L);
+	// assertThat(createBus.getCode()).isEqualTo("nova_linija_bus_5ca");
+	// assertThat(createBus.getName()).isEqualTo("5ca");
+	// assertThat(createBus.isLate()).isEqualTo(false);
+	// assertThat(createBus.getLine().getId()).isEqualTo(1L);
+	// assertThat(createBus.getLine().getLine_type()).isEqualTo(TypeTransport.bus);
+	// assertThat(createBus.getLine().getName()).isEqualTo("nova_linija");
+	//
+	// }
+
+	@Test
+	public void updateTest() {
+		// do this when you correct update
+	}
+
+	// bus with id that exist return true
+	@Test
+	public void deleteTest() {
+
+		boolean successfull = busService.delete(1L);
+		assertThat(successfull).isTrue();
+
+	}
+
+	// bus with id that doesn't exist return false
+	@Test
+	public void deleteTest2() {
+
+		boolean successfull = busService.delete(10L);
+		assertThat(successfull).isFalse();
+
+	}
+
+	// return line
+	@Test
+	public void checkLineTest() {
+
+		Line line = busService.checkLine(1L);
+
+		assertThat(line).isNotNull();
+		assertThat(line.getId()).isEqualTo(1L);
+		assertThat(line.getLine_type()).isEqualTo(TypeTransport.bus);
+		assertThat(line.getName()).isEqualTo("nova_linija");
+
+	}
+
+	// that line doesn't exist
+	@Test(expected = NoSuchElementException.class)
+	public void checkLineTest2() {
+
+		busService.checkLine(20L);
 
 	}
 

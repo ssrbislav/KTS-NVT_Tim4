@@ -10,6 +10,7 @@ import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
+import com.sbvtransport.sbvtransport.repository.LineRepository;
 
 @Service
 public class BusService implements IBusService {
@@ -18,7 +19,7 @@ public class BusService implements IBusService {
 	BusRepository busRepository;
 
 	@Autowired
-	LineService lineService;
+	LineRepository lineRepository;
 
 	@Override
 	public List<Bus> findAll() {
@@ -39,9 +40,9 @@ public class BusService implements IBusService {
 		if (line != null) {
 			String code = "";
 			Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
-			code = line.getName() + "_"+ "bus" + "_" + bus.getName() ;
+			code = line.getName() + "_" + "bus" + "_" + bus.getName();
 			((Bus) newBus).setCode(code);
-			
+
 			return busRepository.save(newBus);
 		}
 		return null;
@@ -49,22 +50,21 @@ public class BusService implements IBusService {
 
 	@Override
 	public Bus update(Bus bus) {
-		
+
 		Line line = checkLine(bus.getLine().getId());
-		
-		if(line != null){
+
+		if (line != null) {
 			Optional<Bus> updateBus = busRepository.findById(bus.getId());
 			updateBus.get().setCode(bus.getCode());
 			updateBus.get().setName(bus.getName());
 			updateBus.get().setLate(bus.isLate());
 			updateBus.get().setLine(bus.getLine());
-			//updateBus.get().setTimetable(bus.getTimetable());
+			// updateBus.get().setTimetable(bus.getTimetable());
 
 			return busRepository.save(updateBus.get());
 		}
 		return null;
-		
-		
+
 	}
 
 	@Override
@@ -89,10 +89,11 @@ public class BusService implements IBusService {
 
 	@Override
 	public Line checkLine(Long lineId) {
-		
-		Line line = lineService.getOne(lineId);
-		if( line != null){
-			if(line.getLine_type() == TypeTransport.bus){
+
+		Line line = lineRepository.findById(lineId).get();
+		System.out.println(line);
+		if (line != null) {
+			if (line.getLine_type() == TypeTransport.bus) {
 				return line;
 			}
 		}

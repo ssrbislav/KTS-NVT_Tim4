@@ -82,4 +82,12 @@ public class Line implements Serializable {
 		this.station_list = station_list;
 	}
 
+	@Override
+	public String toString() {
+		return "Line [id=" + id + ", name=" + name + ", station_list=" + station_list + ", line_type=" + line_type
+				+ "]";
+	}
+	
+	
+
 }
