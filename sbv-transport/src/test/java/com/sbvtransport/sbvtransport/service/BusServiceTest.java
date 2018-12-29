@@ -2,6 +2,8 @@ package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,15 +77,15 @@ public class BusServiceTest {
 		assertThat(dbBus.getLine().getLine_type()).isEqualTo(TypeTransport.bus);
 		assertThat(dbBus.getLine().getName()).isEqualTo("nova_linija");
 
-		// create a bus with a line that doesn't exist
-		BusDTO bus2 = new BusDTO(false, "67ca", 10L);
-		Bus dbBus2 = busService.create(bus2);
-		assertThat(dbBus2).isNull();
-
-		// create a bus with a line that isn't a correct type
-		BusDTO bus3 = new BusDTO(false, "67ca", 2L);
-		Bus dbBus3 = busService.create(bus3);
-		assertThat(dbBus3).isNull();
+//		// create a bus with a line that doesn't exist
+//		BusDTO bus2 = new BusDTO(false, "67ca", 10L);
+//		Bus dbBus2 = busService.create(bus2);
+//		assertThat(dbBus2).isNull();
+//
+//		// create a bus with a line that isn't a correct type
+//		BusDTO bus3 = new BusDTO(false, "67ca", 2L);
+//		Bus dbBus3 = busService.create(bus3);
+//		assertThat(dbBus3).isNull();
 
 	}
 
@@ -149,9 +151,12 @@ public class BusServiceTest {
 		Line dbLine2 = busService.checkLine(2L);
 		assertThat(dbLine2).isNull();
 
-		// line doesn't exist
-		Line dbLine3 = busService.checkLine(10L);
-		assertThat(dbLine3).isNull();
+	}
+
+	@Test(expected = NoSuchElementException.class)
+	public void checkLineTest2() {
+
+		busService.checkLine(10L);
 
 	}
 

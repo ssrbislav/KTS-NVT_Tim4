@@ -2,6 +2,8 @@ package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,15 +78,15 @@ public class TrolleyServiceTest {
 		assertThat(dbTrolley.getLine().getLine_type()).isEqualTo(TypeTransport.trolley);
 		assertThat(dbTrolley.getLine().getName()).isEqualTo("nova_linija3");
 
-		// create a trolley with a line that doesn't exist
-		TrolleyDTO trolley2 = new TrolleyDTO(false, "55ca", 10L);
-		Trolley dbTrolley2 = trolleyService.create(trolley2);
-		assertThat(dbTrolley2).isNull();
-
-		// create a trolley with a line that isn't a correct type
-		TrolleyDTO trolley3 = new TrolleyDTO(false, "67ca", 2L);
-		Trolley dbTrolley3 = trolleyService.create(trolley3);
-		assertThat(dbTrolley3).isNull();
+//		// create a trolley with a line that doesn't exist
+//		TrolleyDTO trolley2 = new TrolleyDTO(false, "55ca", 10L);
+//		Trolley dbTrolley2 = trolleyService.create(trolley2);
+//		assertThat(dbTrolley2).isNull();
+//
+//		// create a trolley with a line that isn't a correct type
+//		TrolleyDTO trolley3 = new TrolleyDTO(false, "67ca", 2L);
+//		Trolley dbTrolley3 = trolleyService.create(trolley3);
+//		assertThat(dbTrolley3).isNull();
 
 	}
 
@@ -150,9 +152,12 @@ public class TrolleyServiceTest {
 		Line dbLine2 = trolleyService.checkLine(2L);
 		assertThat(dbLine2).isNull();
 
+	}
+	
+	@Test(expected = NoSuchElementException.class)
+	public void checkLineTest2() {
 		// line doesn't exist
-		Line dbLine3 = trolleyService.checkLine(10L);
-		assertThat(dbLine3).isNull();
+		trolleyService.checkLine(10L);
 
 	}
 
