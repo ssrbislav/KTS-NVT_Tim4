@@ -2,7 +2,6 @@ package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Transport;
-
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Trolley;
+import com.sbvtransport.sbvtransport.repository.LineRepository;
 import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 
 @Service
@@ -17,8 +17,9 @@ public class TrolleyService implements ITrolleyService {
 
 	@Autowired
 	TrolleyRepository trolleyRepository;
+	
 	@Autowired
-	LineService lineService;
+	LineRepository lineRepository;
 
 	@Override
 	public List<Trolley> findAll() {
@@ -83,7 +84,7 @@ public class TrolleyService implements ITrolleyService {
 	@Override
 	public Line checkLine(Long lineId) {
 		
-		Line line = lineService.getOne(lineId);
+		Line line = lineRepository.findById(lineId).get();
 		if( line != null){
 			if(line.getLine_type() == TypeTransport.trolley){
 				return line;
