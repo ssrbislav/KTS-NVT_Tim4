@@ -11,6 +11,7 @@ import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.model.Transport;
+import com.sbvtransport.sbvtransport.repository.LineRepository;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
 @Service
@@ -20,10 +21,11 @@ public class SubwayService implements ISubwayService {
 	SubwayRepository subwayRepository;
 	
 	@Autowired
-	LineService lineService;
+	LineRepository lineRepository;
 
 	@Override
 	public List<Subway> findAll() {
+		
 		return subwayRepository.findAll();
 	}
 
@@ -85,7 +87,7 @@ public class SubwayService implements ISubwayService {
 	@Override
 	public Line checkLine(Long lineId) {
 		
-		Line line = lineService.getOne(lineId);
+		Line line = lineRepository.findById(lineId).get();
 		if( line != null){
 			if(line.getLine_type() == TypeTransport.subway){
 				return line;
