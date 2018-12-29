@@ -42,7 +42,6 @@ public class BusService implements IBusService {
 			Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
 			code = line.getName() + "_" + "bus" + "_" + bus.getName();
 			((Bus) newBus).setCode(code);
-
 			return busRepository.save(newBus);
 		}
 		return null;

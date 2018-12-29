@@ -78,15 +78,18 @@ public class SubwayServiceTest {
 		assertThat(dbSubway.getLine().getLine_type()).isEqualTo(TypeTransport.subway);
 		assertThat(dbSubway.getLine().getName()).isEqualTo("nova_linija2");
 
-//		// create a subway with a line that doesn't exist
-//		SubwayDTO subway2 = new SubwayDTO(false, "107ca", 10L);
-//		Subway dbSubway2 = subwayService.create(subway2);
-//		assertThat(dbSubway2).isNull();
-//
-//		// create a subway with a line that isn't a correct type
-//		SubwayDTO subway3 = new SubwayDTO(false, "107ca", 1L);
-//		Subway dbSubway3 = subwayService.create(subway3);
-//		assertThat(dbSubway3).isNull();
+		// create a subway with a line that isn't a correct type
+		SubwayDTO subway3 = new SubwayDTO(false, "107ca", 1L);
+		Subway dbSubway3 = subwayService.create(subway3);
+		assertThat(dbSubway3).isNull();
+
+	}
+
+	// create a subway with a line that doesn't exist
+	@Test(expected = NoSuchElementException.class)
+	public void createTest2() {
+		SubwayDTO subway2 = new SubwayDTO(false, "107ca", 10L);
+		subwayService.create(subway2);
 
 	}
 
@@ -153,7 +156,7 @@ public class SubwayServiceTest {
 		assertThat(dbLine2).isNull();
 
 	}
-	
+
 	@Test(expected = NoSuchElementException.class)
 	public void checkLineTest2() {
 		// line doesn't exist

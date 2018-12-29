@@ -77,16 +77,18 @@ public class BusServiceTest {
 		assertThat(dbBus.getLine().getLine_type()).isEqualTo(TypeTransport.bus);
 		assertThat(dbBus.getLine().getName()).isEqualTo("nova_linija");
 
-//		// create a bus with a line that doesn't exist
-//		BusDTO bus2 = new BusDTO(false, "67ca", 10L);
-//		Bus dbBus2 = busService.create(bus2);
-//		assertThat(dbBus2).isNull();
-//
-//		// create a bus with a line that isn't a correct type
-//		BusDTO bus3 = new BusDTO(false, "67ca", 2L);
-//		Bus dbBus3 = busService.create(bus3);
-//		assertThat(dbBus3).isNull();
+		// create a bus with a line that isn't a correct type
+		BusDTO bus3 = new BusDTO(false, "67ca", 2L);
+		Bus dbBus3 = busService.create(bus3);
+		assertThat(dbBus3).isNull();
 
+	}
+
+	// create a bus with a line that doesn't exist
+	@Test(expected = NoSuchElementException.class)
+	public void createTest2() {
+		BusDTO bus2 = new BusDTO(false, "67ca", 10L);
+		busService.create(bus2);
 	}
 
 	// change a test for update because you need to change a update depending
