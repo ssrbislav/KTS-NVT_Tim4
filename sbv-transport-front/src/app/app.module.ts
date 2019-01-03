@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './header/login/login.component';
 import { HeaderComponent } from './header/header.component';
+import {PopupModule} from 'ng2-opd-popup';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PopupModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
