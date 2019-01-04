@@ -28,6 +28,15 @@ public class LocationController {
 		return new ResponseEntity<>(locations, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getLocation/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Location> getOne(@PathVariable Long id) {
+
+		Location location = locationService.getOne(id);
+
+		return new ResponseEntity<>(location, HttpStatus.OK);
+
+	}
+
 	@RequestMapping(value = "/addLocation", method = RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestBody LocationDTO location) {
 

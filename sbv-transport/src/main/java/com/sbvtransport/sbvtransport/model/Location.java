@@ -50,6 +50,23 @@ public class Location {
 		this.station = station;
 	}
 
+	public Location(String location_name, String address, Float latitude, Float longitude, String type) {
+		this.location_name = location_name;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.type = type;
+	}
+
+	public Location(Long id, String location_name, String address, Float latitude, Float longitude, String type) {
+		this.id = id;
+		this.location_name = location_name;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.type = type;
+	}
+
 	public Long getId() {
 		return id;
 	}

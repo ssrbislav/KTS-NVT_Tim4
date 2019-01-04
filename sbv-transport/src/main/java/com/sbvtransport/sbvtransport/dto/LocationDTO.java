@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sbvtransport.sbvtransport.model.Station;
 
 public class LocationDTO {
@@ -13,6 +14,14 @@ public class LocationDTO {
 
 	public LocationDTO(Long id, String location_name, String address, Float latitude, Float longitude, String type) {
 		this.id = id;
+		this.location_name = location_name;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.type = type;
+	}
+
+	public LocationDTO(@JsonProperty String location_name, @JsonProperty String address, @JsonProperty Float latitude, @JsonProperty Float longitude, @JsonProperty String type) {
 		this.location_name = location_name;
 		this.address = address;
 		this.latitude = latitude;

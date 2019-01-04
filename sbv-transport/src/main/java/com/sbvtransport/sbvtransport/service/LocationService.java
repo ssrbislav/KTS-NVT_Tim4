@@ -19,7 +19,7 @@ public class LocationService implements ILocationService {
 
 	@Override
 	public Location getOne(Long id) {
-		return locationRepository.getOne(id);
+		return locationRepository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -53,9 +53,11 @@ public class LocationService implements ILocationService {
 
 	@Override
 	public boolean delete(Long id) {
-		if (locationRepository.findAll().contains(locationRepository.getOne(id))) {
-			locationRepository.delete(locationRepository.getOne(id));
-			return true;
+		for (Location l : findAll()) {
+			if (l.getId() == id) {
+				locationRepository.delete(l);
+				return true;
+			}
 		}
 		return false;
 	}
