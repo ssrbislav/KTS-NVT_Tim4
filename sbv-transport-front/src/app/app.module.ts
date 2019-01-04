@@ -9,6 +9,9 @@ import {PopupModule} from 'ng2-opd-popup';
 import { RegistrationComponent } from './header/registration/registration.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './mainPage/mainPage.component';
+import { AdministratorComponent } from './administrator/administrator.component';
+import { BusComponent } from './administrator/bus/bus.component';
+import { BusTableComponent } from './administrator/bus/bus-table/bus-table.component';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -17,6 +20,7 @@ const appRoutes: Routes = [
     redirectTo: '/mainPage',
     pathMatch: 'full'
   },
+  { path: 'administrator', component: AdministratorComponent},
 ];
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ const appRoutes: Routes = [
     LoginComponent,
     HeaderComponent,
     RegistrationComponent,
-    MainPageComponent
+    MainPageComponent,
+    AdministratorComponent,
+    BusComponent,
+    BusTableComponent
   ],
   imports: [
     BrowserModule,

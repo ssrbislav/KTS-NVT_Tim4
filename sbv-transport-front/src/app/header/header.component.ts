@@ -10,6 +10,8 @@ export class HeaderComponent implements OnInit {
 
   @Output() featureSelected = new EventEmitter<string>();
 
+  showView: string = 'notregister';
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -21,6 +23,10 @@ export class HeaderComponent implements OnInit {
 
   clickButtonRegistration(){
     this.router.navigateByUrl('/registration');
+  }
+
+  administratorView(){
+    this.showView = 'administrator';
   }
 
 

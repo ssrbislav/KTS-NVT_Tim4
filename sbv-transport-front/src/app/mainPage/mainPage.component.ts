@@ -22,7 +22,7 @@ export class MainPageComponent implements OnInit {
   showPopUp : string;
 
   onNavigate(feature: string){
-
+    
     this.showPopUp = feature;
     console.log(feature);
     if(feature == 'login'){
