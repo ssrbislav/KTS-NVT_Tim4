@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Popup } from 'ng2-opd-popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -8,17 +9,15 @@ import { Popup } from 'ng2-opd-popup';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private popup2: Popup) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  showRegistration() {
-    this.popup2.options = {
-      header: "Registration",
-      confirmBtnContent: "Registration"
-      };
-    this.popup2.show(this.popup2.options);
+  cancelClicked(){
+
+    this.router.navigateByUrl('/');
   }
+  
 
 }

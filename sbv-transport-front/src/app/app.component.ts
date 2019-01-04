@@ -9,27 +9,9 @@ import { RegistrationComponent } from './header/registration/registration.compon
 })
 export class AppComponent {
 
-  @ViewChild("login") login: LoginComponent;
-  @ViewChild("registration") registration: RegistrationComponent;
-
-  constructor(){
-
-  }
   title = 'sbv-transport';
 
-  showPopUp : string;
-
-  onNavigate(feature: string){
-
-    this.showPopUp = feature;
-    console.log(feature);
-    if(feature == 'login'){
-      this.login.showLogin();
-    }else{
-      this.registration.showRegistration();
-    }
-  }
-
+  constructor() { }
 
 }
 
