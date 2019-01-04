@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './header/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import {PopupModule} from 'ng2-opd-popup';
+import { RegistrationComponent } from './header/registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

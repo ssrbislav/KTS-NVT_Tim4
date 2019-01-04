@@ -1,2 +1,11 @@
-<popup>Bojanaaaa</popup>
+<popup (confirmClick)="logIn()">
+  <div>
+    <img src ="assets/pictures/group.png" alt="Log in">
+    <br>
+    <label for="username">Username:</label>
+    <input type="text" class="form-control" #usernameInput>
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" #passwordInput>
+  </div>
+</popup>
 

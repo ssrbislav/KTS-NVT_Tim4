@@ -1,5 +1,6 @@
 import { Component,ViewChild} from '@angular/core';
 import { LoginComponent } from './header/login/login.component';
+import { RegistrationComponent } from './header/registration/registration.component';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { LoginComponent } from './header/login/login.component';
 export class AppComponent {
 
   @ViewChild("login") login: LoginComponent;
+  @ViewChild("registration") registration: RegistrationComponent;
 
   constructor(){
 
@@ -20,9 +22,12 @@ export class AppComponent {
   onNavigate(feature: string){
 
     this.showPopUp = feature;
-
-    if(feature == 'login') 
-        this.login.showLogin();
+    console.log(feature);
+    if(feature == 'login'){
+      this.login.showLogin();
+    }else{
+      this.registration.showRegistration();
+    }
   }
 
 

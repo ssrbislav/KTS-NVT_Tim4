@@ -18,5 +18,10 @@ export class HeaderComponent implements OnInit {
     this.featureSelected.emit('login');
 }
 
+  clickButtonRegistration(){
+    this.featureSelected.emit('registration');
+
+  }
+
 
 }
