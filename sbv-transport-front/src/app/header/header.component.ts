@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,9 @@ export class HeaderComponent implements OnInit {
 
   @Output() featureSelected = new EventEmitter<string>();
 
-  constructor() { }
+  showView: string = 'notregister';
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,8 +22,11 @@ export class HeaderComponent implements OnInit {
 }
 
   clickButtonRegistration(){
-    this.featureSelected.emit('registration');
+    this.router.navigateByUrl('/registration');
+  }
 
+  administratorView(){
+    this.showView = 'administrator';
   }
 
 
