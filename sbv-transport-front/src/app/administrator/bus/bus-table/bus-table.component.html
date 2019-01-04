@@ -1,3 +1,18 @@
-<p>
-  bus-table works!
-</p>
+<h1 style="text-align: center">All buses</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Code</th>
+        <th scope="col">Late</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let bus of buses">
+        <th scope="row">{{numb_table + 1}}</th>
+        <td>{{bus.name}}</td>
+        <td>{{bus.code}}</td>
+        <td>{{bus.late}}</td>
+      </tr>
+  </table>

@@ -12,6 +12,8 @@ import { MainPageComponent } from './mainPage/mainPage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BusComponent } from './administrator/bus/bus.component';
 import { BusTableComponent } from './administrator/bus/bus-table/bus-table.component';
+import { BusService } from './services/bus.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -36,13 +38,14 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     PopupModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [BusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

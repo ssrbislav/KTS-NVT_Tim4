@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Bus } from 'src/app/models/bus.model';
+import { BusService } from 'src/app/services/bus.service';
 
 @Component({
   selector: 'app-bus-table',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusTableComponent implements OnInit {
 
-  constructor() { }
+  numb_table = 0;
+  buses: Bus[];
+
+  constructor(private busService:BusService) { }
 
   ngOnInit() {
+    
+    this.busService.getBuses()
+      .subscribe( data => {
+        this.buses = data;
+      });
+      
   }
 
 }
