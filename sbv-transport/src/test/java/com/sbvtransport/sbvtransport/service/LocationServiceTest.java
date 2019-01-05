@@ -3,6 +3,7 @@ package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.dto.LocationDTO;
 import com.sbvtransport.sbvtransport.model.Location;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,14 @@ public class LocationServiceTest {
 
         assertThat(location).isNotNull();
         assertThat(location.getId()).isEqualTo(3L);
-        assertThat(location.getLocation_name()).isEqualTo("Stanica2");
-        assertThat(location.getAddress()).isEqualTo("Vojvode Supljikca 99");
-        assertThat(location.getLatitude()).isEqualTo(32.40f);
-        assertThat(location.getLongitude()).isEqualTo(34.02f);
-        assertThat(location.getType()).isEqualTo("Station");
+        assertThat(location.getLocation_name()).isEqualTo("stanica3");
+        assertThat(location.getAddress()).isEqualTo("Vojvode Supljikca 52");
+        assertThat(location.getLatitude()).isEqualTo(39.40f);
+        assertThat(location.getLongitude()).isEqualTo(35.20f);
+        assertThat(location.getType()).isEqualTo("station");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getNOneTest() {
         Location location = locationService.getOne(10L);
         assertThat(location).isNull();
@@ -76,7 +77,6 @@ public class LocationServiceTest {
         try {
             Location loc = locationService.getOne(3L);
             assertThat(loc).isNull();
-            fail("Did not throw an exception.");
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(EntityNotFoundException.class);
         }

@@ -45,13 +45,13 @@ public class LocationControllerTest {
     public void getAllTest() throws Exception {
         mockMvc.perform(get(URL_PREFIX)).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(2)))
-                .andExpect(jsonPath("$.[*].location_name").value(hasItem("Stanica1")))
-                .andExpect(jsonPath("$.[*].address").value(hasItem("Vojvode Supljikca 50")))
-                .andExpect(jsonPath("$.[*].latitude").value(hasItem(30.4)))
-                .andExpect(jsonPath("$.[*].longitude").value(hasItem(32.02)))
-                .andExpect(jsonPath("$.[*].type").value(hasItem("Station")));
+                .andExpect(jsonPath("$.[*].location_name").value(hasItem("stanica2")))
+                .andExpect(jsonPath("$.[*].address").value(hasItem("Vojvode Supljikca 51")))
+                .andExpect(jsonPath("$.[*].latitude").value(hasItem(31.40)))
+                .andExpect(jsonPath("$.[*].longitude").value(hasItem(30.50)))
+                .andExpect(jsonPath("$.[*].type").value(hasItem("station")));
     }
 
     @Test
@@ -59,11 +59,11 @@ public class LocationControllerTest {
         mockMvc.perform(get(URL_PREFIX + "/getLocation/2")).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.location_name").value("Stanica1"))
-                .andExpect(jsonPath("$.address").value("Vojvode Supljikca 50"))
-                .andExpect(jsonPath("$.latitude").value(30.4))
-                .andExpect(jsonPath("$.longitude").value(32.02))
-                .andExpect(jsonPath("$.type").value("Station"));
+                .andExpect(jsonPath("$.location_name").value("stanica2"))
+                .andExpect(jsonPath("$.address").value("Vojvode Supljikca 51"))
+                .andExpect(jsonPath("$.latitude").value(31.40))
+                .andExpect(jsonPath("$.longitude").value(30.50))
+                .andExpect(jsonPath("$.type").value("station"));
     }
 
     @Test
