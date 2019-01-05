@@ -43,5 +43,10 @@ export class HeaderComponent implements OnInit {
     this.featureSelected.emit('trolley');
   }
 
+  clickController(){
+    this.featureSelected.emit('controller');
+
+  }
+
 
 }

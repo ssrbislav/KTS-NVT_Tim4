@@ -19,6 +19,10 @@ import { SubwayService } from './services/subway.service';
 import { TrolleyComponent } from './administrator/trolley/trolley.component';
 import { TrolleyTableComponent } from './administrator/trolley/trolley-table/trolley-table.component';
 import { TrolleyService } from './services/trolley.service';
+import { ControllerComponent } from './administrator/controller/controller.component';
+import { ControllerTableComponent } from './administrator/controller/controller-table/controller-table.component';
+import { ControllerService } from './services/controller.service';
+import { ControllerAddComponent } from './administrator/controller/controller-add/controller-add.component';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -28,6 +32,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'administrator', component: AdministratorComponent},
+  {path: 'addController', component: ControllerAddComponent},
 ];
 @NgModule({
   declarations: [
@@ -42,7 +47,10 @@ const appRoutes: Routes = [
     SubwayComponent,
     SubwayTableComponent,
     TrolleyComponent,
-    TrolleyTableComponent
+    TrolleyTableComponent,
+    ControllerComponent,
+    ControllerTableComponent,
+    ControllerAddComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +62,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [BusService,SubwayService,TrolleyService],
+  providers: [BusService,SubwayService,TrolleyService,ControllerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

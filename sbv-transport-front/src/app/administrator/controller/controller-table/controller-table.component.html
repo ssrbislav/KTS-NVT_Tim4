@@ -1,0 +1,28 @@
+<h1 style="text-align: center">All controllers</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Date birth</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let controller of controllers; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{controller.username}}</td>
+        <td>{{controller.email}}</td>
+        <td>{{controller.first_name}}</td>
+        <td> {{controller.last_name}}</td>
+        <td> {{controller.address}}</td>
+        <td> {{controller.phone_number}}</td>
+        <td> {{controller.date_birth}}</td>
+        <td> <img (click) ="deleteController(controller.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
+      </tr>
+  </table>

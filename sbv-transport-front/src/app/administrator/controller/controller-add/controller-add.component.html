@@ -1,0 +1,40 @@
+
+  <div class="addController" >
+      <h1 style="text-align: center">Add controller</h1>
+      <hr>
+      <label for="first_name"><b>First Name</b></label>
+      <input type="text" placeholder="Enter First Name" name="first_name" #firstNameInput required>
+  
+      <label for="last_name"><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last Name" name="last_name" #lastNameInput required>
+  
+      <label for="email"><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" name="email" #emailInput required>
+  
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" #usernameInput required>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" #pass1Input required>
+  
+      <label for="psw-repeat"><b>Repeat Password*</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" #pass2Input required>
+  
+      <label for="address"><b>Address</b></label>
+      <input type="text" placeholder="Enter Address" name="adress" #addressInput required>
+  
+      <label for="phone_number"><b>Phone number</b></label>
+      <input type="text" placeholder="Enter Phone Number" name="phone_number" #phoneInput required>
+  
+      <label for="date_birth"><b>Date of birth</b></label><br>
+      <input type="date" placeholder="Enter Date of birth" name="date_birth" #dateInput required><br><br>
+      
+      <br>
+      
+      <div class="clearfix">
+        <button class="cancelbtn" (click) = "cancelClicked()">Cancel</button>
+        <button class="signupbtn" (click) = "addController()">Add Controller</button>
+      </div>
+    </div>
+  
+    
