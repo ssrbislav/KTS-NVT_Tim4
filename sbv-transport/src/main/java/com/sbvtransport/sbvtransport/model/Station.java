@@ -31,6 +31,11 @@ public class Station implements Serializable {
 	@JoinColumn(name = "line", referencedColumnName = "id")
 	private Line line;
 
+	public Station(Location location, Line line) {
+		this.location = location;
+		this.line = line;
+	}
+
 	public Station() {
 
 	}

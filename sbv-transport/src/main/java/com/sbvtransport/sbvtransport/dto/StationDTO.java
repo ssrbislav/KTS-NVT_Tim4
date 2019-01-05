@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 
@@ -16,6 +17,11 @@ public class StationDTO {
 		this.line_id = line_id;
 		this.line = line;
 		this.location = location;
+	}
+
+	public StationDTO(@JsonProperty Long location_id, @JsonProperty Long line_id) {
+		this.location_id = location_id;
+		this.line_id = line_id;
 	}
 
 	public Long getId() {

@@ -28,6 +28,15 @@ public class StationController {
 		return new ResponseEntity<>(stations, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getStation/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Station> getOne(@PathVariable Long id) {
+
+		Station station = stationService.getOne(id);
+
+		return new ResponseEntity<>(station, HttpStatus.OK);
+
+	}
+
 	@RequestMapping(value = "/addStation", method = RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestBody StationDTO station) {
 

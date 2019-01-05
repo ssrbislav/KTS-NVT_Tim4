@@ -17,6 +17,10 @@ insert into trolley(code,line,late,name) values('nova_linija3_trolley_17ca',3,fa
 
 --- V ---
 
-insert into location(location_name, address, latitude, longitude, type) values('stanica1', 'Vojvode Supljikca 50', 30.40f, 30.20f, 'station');
-insert into location(location_name, address, latitude, longitude, type) values('stanica2', 'Vojvode Supljikca 51', 31.40f, 30.50f, 'station');
-insert into location(location_name, address, latitude, longitude, type) values('stanica3', 'Vojvode Supljikca 52', 39.40f, 35.20f, 'station');
+insert into location(location_name, address, latitude, longitude, type) values('stanica1', 'Vojvode Supljikca 50', 30.40, 30.20, 'station');
+insert into location(location_name, address, latitude, longitude, type) values('stanica2', 'Vojvode Supljikca 51', 31.40, 30.50, 'station');
+insert into location(location_name, address, latitude, longitude, type) values('stanica3', 'Vojvode Supljikca 52', 39.40, 35.20, 'station');
+
+insert into station(location, line) values(1, 1);
+insert into station(location, line) values(2, 1);
+insert into station(location, line) values(2, 1);
