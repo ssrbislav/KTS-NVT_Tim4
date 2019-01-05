@@ -46,7 +46,11 @@ public class Line implements Serializable {
 		this.line_type = line_type;
 	}
 
-
+	public Line(String name, List<Station> station_list, TypeTransport line_type) {
+		this.name = name;
+		this.station_list = station_list;
+		this.line_type = line_type;
+	}
 
 	public String getName() {
 		return name;

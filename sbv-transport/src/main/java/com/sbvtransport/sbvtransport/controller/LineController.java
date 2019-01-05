@@ -29,6 +29,15 @@ public class LineController {
 		return new ResponseEntity<>(lines, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getLine/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Line> getOne(@PathVariable Long id) {
+
+		Line line = lineService.getOne(id);
+
+		return new ResponseEntity<>(line, HttpStatus.OK);
+
+	}
+
 	@RequestMapping(value = "/addLine", method = RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestBody LineDTO line) {
 
