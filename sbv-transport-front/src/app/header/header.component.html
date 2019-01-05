@@ -12,11 +12,14 @@
                   <li><a (click)="clickSubway()" style="cursor: pointer;">Subway</a></li>
                 </ul>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'notregister'">
                 <ul class="nav navbar-nav">
                   <li><a (click)="clickButtonLogin()" style="cursor: pointer;">Login</a></li>
                   <li><a (click) = "clickButtonRegistration()" style="cursor: pointer;">Registration</a></li>
                 </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'administrator'">
+                <li><a  style="cursor: pointer;">Logout</a></li>
             </ul>
         </div>
     </div>
