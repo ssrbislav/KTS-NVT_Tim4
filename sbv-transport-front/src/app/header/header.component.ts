@@ -29,5 +29,19 @@ export class HeaderComponent implements OnInit {
     this.showView = 'administrator';
   }
 
+  clickBus(){
+    this.featureSelected.emit('bus');
+    
+  }
+
+  clickSubway(){
+    this.featureSelected.emit('subway');
+
+  }
+
+  clickTrolley(){
+    this.featureSelected.emit('trolley');
+  }
+
 
 }

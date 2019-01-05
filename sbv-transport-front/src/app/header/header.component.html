@@ -7,9 +7,9 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left" *ngIf = "(showView) == 'administrator'">
                 <ul class="nav navbar-nav">
-                  <li><a style="cursor: pointer;">Bus</a></li>
-                  <li><a style="cursor: pointer;">Trolley</a></li>
-                  <li><a style="cursor: pointer;">Subway</a></li>
+                  <li><a (click)="clickBus()" style="cursor: pointer;">Bus</a></li>
+                  <li><a (click) = "clickTrolley()" style="cursor: pointer;">Trolley</a></li>
+                  <li><a (click)="clickSubway()" style="cursor: pointer;">Subway</a></li>
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">

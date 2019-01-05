@@ -1,4 +1,4 @@
-<h1 style="text-align: center">All buses</h1>
+<h1 style="text-align: center">All subways</h1>
 <table class="table table-hover">
     <thead>
       <tr>
@@ -9,10 +9,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let bus of buses; let i = index">
+      <tr *ngFor = "let subway of subways; let i = index">
         <th scope="row">{{i + 1}}</th>
-        <td>{{bus.name}}</td>
-        <td>{{bus.code}}</td>
-        <td>{{bus.late}}</td>
+        <td>{{subway.name}}</td>
+        <td>{{subway.code}}</td>
+        <td>{{subway.late}}</td>
       </tr>
   </table>

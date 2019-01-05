@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './header/login/login.component';
@@ -14,6 +13,9 @@ import { BusComponent } from './administrator/bus/bus.component';
 import { BusTableComponent } from './administrator/bus/bus-table/bus-table.component';
 import { BusService } from './services/bus.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SubwayComponent } from './administrator/subway/subway.component';
+import { SubwayTableComponent } from './administrator/subway/subway-table/subway-table.component';
+import { SubwayService } from './services/subway.service';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -33,7 +35,9 @@ const appRoutes: Routes = [
     MainPageComponent,
     AdministratorComponent,
     BusComponent,
-    BusTableComponent
+    BusTableComponent,
+    SubwayComponent,
+    SubwayTableComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [BusService],
+  providers: [BusService,SubwayService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,2 +1,3 @@
-<app-header #header></app-header>
-<app-bus></app-bus>
+<app-header #header (featureSelected)= "onNavigate($event)"></app-header>
+<app-bus *ngIf = "(showView) == 'bus'"></app-bus>
+<app-subway *ngIf = "(showView) == 'subway'"></app-subway>

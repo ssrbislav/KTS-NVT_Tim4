@@ -9,7 +9,6 @@ import { BusService } from 'src/app/services/bus.service';
 })
 export class BusTableComponent implements OnInit {
 
-  numb_table = 0;
   buses: Bus[];
 
   constructor(private busService:BusService) { }
