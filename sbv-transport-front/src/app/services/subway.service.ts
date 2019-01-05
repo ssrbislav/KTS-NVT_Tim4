@@ -18,5 +18,11 @@ const httpOptions = {
     public getSubways() {
         return this.http.get<Subway[]>(this.subwayUrl);
       }
+    
+    public deleteSubway(id: BigInteger){
+      const url = `${this.subwayUrl + 'deleteSubway'}/${id}`;
+      return this.http.get<boolean>(url);
+
+    }
 
   }

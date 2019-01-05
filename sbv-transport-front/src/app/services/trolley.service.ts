@@ -19,4 +19,10 @@ const httpOptions = {
         return this.http.get<Trolley[]>(this.trolleyUrl);
       }
 
+    public deleteTrolley(id: BigInteger){
+      const url = `${this.trolleyUrl + 'deleteTrolley'}/${id}`;
+      return this.http.get<boolean>(url);
+
+    }
+
   }

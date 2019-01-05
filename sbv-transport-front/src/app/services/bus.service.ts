@@ -18,5 +18,11 @@ const httpOptions = {
     public getBuses() {
         return this.http.get<Bus[]>(this.busUrl);
       }
+      
+    public deleteBus(id: BigInteger){
+      const url = `${this.busUrl + 'deleteBus'}/${id}`;
+      return this.http.get<boolean>(url);
+
+    }
 
   }

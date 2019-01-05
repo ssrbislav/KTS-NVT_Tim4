@@ -14,9 +14,26 @@ export class TrolleyTableComponent implements OnInit {
   constructor(private trolleyService: TrolleyService) { }
 
   ngOnInit() {
+    this.loadAllTrolleys();
+  }
+
+  loadAllTrolleys(){
     this.trolleyService.getTrolley()
+    .subscribe( data => {
+      this.trolleys = data;
+    });
+  }
+
+  deleteTrolley(id: BigInteger){
+    console.log(id);
+    this.trolleyService.deleteTrolley(id)
       .subscribe( data => {
-        this.trolleys = data;
+        if(data == true){
+          alert("Trolley is deleted!");
+          this.loadAllTrolleys();
+        }else{
+          alert("Something went wrong!");
+        }
       });
   }
 

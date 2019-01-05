@@ -13,13 +13,28 @@ export class BusTableComponent implements OnInit {
 
   constructor(private busService:BusService) { }
 
-  ngOnInit() {
-    
+  ngOnInit() { 
+    this.loadAllBuses();     
+  }
+  
+  loadAllBuses(){
     this.busService.getBuses()
       .subscribe( data => {
         this.buses = data;
       });
-      
+  }
+
+  deleteBus(id: BigInteger){
+    console.log(id);
+    this.busService.deleteBus(id)
+      .subscribe( data => {
+        if(data == true){
+          alert("Bus is deleted!");
+          this.loadAllBuses();
+        }else{
+          alert("Something went wrong!");
+        }
+      });
   }
 
 }
