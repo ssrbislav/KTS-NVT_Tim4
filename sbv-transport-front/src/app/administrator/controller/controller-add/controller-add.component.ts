@@ -43,11 +43,21 @@ export class ControllerAddComponent implements OnInit {
       const lastName = this.lastNameInputRef.nativeElement.value;
       const email = this.emailInputRef.nativeElement.value;
       const username = this.usernameInputRef.nativeElement.value;
-      const address = this.addressInputRef.nativeElement.value;
+      const address2 = this.addressInputRef.nativeElement.value;
       const phone = this.phoneInputRef.nativeElement.value;
-      const date = this.dateInputRef.nativeElement.valueAsDate;
+      const date = this.dateInputRef.nativeElement.value;
 
-      const newController = new Controller(email,username,pass1,firstName,lastName,address,phone,date);
+      console.log("Ime: " + firstName);
+      console.log("Prezime: " + lastName);
+
+      console.log("Email: " + email);
+      console.log("Username: " + username);
+      console.log("adresa: " + address2);
+      console.log("phone: " + phone);
+      console.log("date: " + date);
+
+
+      const newController = new Controller(email,username,pass1,firstName,lastName,address2,phone,date);
 
       this.controllerService.addController(newController)
       .subscribe( data => {

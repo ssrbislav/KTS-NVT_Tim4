@@ -22,7 +22,7 @@
         <td> {{controller.last_name}}</td>
         <td> {{controller.address}}</td>
         <td> {{controller.phone_number}}</td>
-        <td> {{controller.date_birth}}</td>
+        <td> {{controller.date_birth | date: 'dd.MM.yyyy.'}}</td>
         <td> <img (click) ="deleteController(controller.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>
   </table>
