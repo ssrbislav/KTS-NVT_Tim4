@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SubwayComponent } from './administrator/subway/subway.component';
 import { SubwayTableComponent } from './administrator/subway/subway-table/subway-table.component';
 import { SubwayService } from './services/subway.service';
+import { TrolleyComponent } from './administrator/trolley/trolley.component';
+import { TrolleyTableComponent } from './administrator/trolley/trolley-table/trolley-table.component';
+import { TrolleyService } from './services/trolley.service';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -37,7 +40,9 @@ const appRoutes: Routes = [
     BusComponent,
     BusTableComponent,
     SubwayComponent,
-    SubwayTableComponent
+    SubwayTableComponent,
+    TrolleyComponent,
+    TrolleyTableComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [BusService,SubwayService],
+  providers: [BusService,SubwayService,TrolleyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

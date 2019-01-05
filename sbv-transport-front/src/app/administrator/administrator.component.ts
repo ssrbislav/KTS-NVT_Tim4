@@ -17,15 +17,7 @@ export class AdministratorComponent implements OnInit {
   ngOnInit() {
     this.header.administratorView();
   }
-
-  // busView(){
-  //   this.showView = 'bus';
-  // }
-
-  // subwayView(){
-  //   this.showView = 'subway';
-  // }
-
+  
   onNavigate(feature: string){
     console.log(feature);
     this.showView = feature;
