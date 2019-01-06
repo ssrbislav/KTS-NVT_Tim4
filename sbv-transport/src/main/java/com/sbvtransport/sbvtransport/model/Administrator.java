@@ -25,9 +25,7 @@ public class Administrator extends User implements Serializable {
 	@Column(name = "password", unique = false, nullable = false)
 	private String password;
 
-	public Administrator() {
-
-	}
+	public Administrator() {}
 
 	public Administrator(Long id, String username, String password) {
 		super();
