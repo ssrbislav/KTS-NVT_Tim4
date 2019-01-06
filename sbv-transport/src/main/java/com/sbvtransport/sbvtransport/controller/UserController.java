@@ -24,6 +24,7 @@ import com.sbvtransport.sbvtransport.dto.RegisterDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
 import com.sbvtransport.sbvtransport.enumeration.RoleName;
 import com.sbvtransport.sbvtransport.messages.ResponseMessage;
+import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.model.Role;
 import com.sbvtransport.sbvtransport.model.User;
 import com.sbvtransport.sbvtransport.repository.RoleRepository;
@@ -76,27 +77,28 @@ public class UserController {
 		}
  
 		// Creating user's account
-		/*User user = new User(signUpRequest.getEmail(), signUpRequest.getUsername(), 
+		User user = new Passenger(false, false, signUpRequest.getEmail(), signUpRequest.getUsername(), 
 				encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirst_name(),
 				signUpRequest.getLast_name(), signUpRequest.getAddress(), 
 				signUpRequest.getPhone_number(), signUpRequest.getDate_birth()
 				);
- */
-		Set<String> strRoles = signUpRequest.getRole();
+ 
+		//Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
  
+		/*
 		strRoles.forEach(role -> {
 			switch (role) {
-			case "admin":
+			case "user":
 				Role adminRole = roleRepository.findByName(RoleName.ADMIN)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 				roles.add(adminRole);
  
 				break;
 			case "controller":
-				Role pmRole = roleRepository.findByName(RoleName.CONTROLLER)
+				Role controllerRole = roleRepository.findByName(RoleName.CONTROLLER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-				roles.add(pmRole);
+				roles.add(controllerRole);
  
 				break;
 			default:
@@ -105,10 +107,11 @@ public class UserController {
 				roles.add(userRole);
 			}
 		});
- /*
+ */
+		roles.add(roleRepository.findByName(RoleName.PASSENGER));
 		user.setRoles(roles);
 		userRepository.save(user);
- */
+ 
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
 }

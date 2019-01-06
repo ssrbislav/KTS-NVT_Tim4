@@ -11,37 +11,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class RegisterDTO {
 
 	@NotBlank
-	@Size(min = 3, max = 50)
-	private String username;
-
-	@NotBlank
-	@Size(max = 60)
 	private String email;
+	
+	@NotBlank
+	private String username;
 
 	private Set<String> role;
 
 	@NotBlank
-	@Size(min = 3, max = 50)
 	private String password;
 
 	@NotBlank
-	@Size(min = 3, max = 50)
 	private String first_name;
 
 	@NotBlank
-	@Size(min = 3, max = 50)
 	private String last_name;
 
 	@NotBlank
-	@Size(min = 5, max = 50)
 	private String address;
 
 	@NotBlank
-	@Size(min = 9, max = 13)
 	private String phone_number;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
-	@NotBlank
 	private Date date_birth;
 
 	public String getUsername() {

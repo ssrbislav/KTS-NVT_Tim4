@@ -1,24 +1,39 @@
 package com.sbvtransport.sbvtransport.dto;
 
 import java.util.Date;
+import java.util.Set;
+
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PassengerDTO {
 
+	@NotBlank
 	private String email;
+
+	@NotBlank
 	private String username;
+
+	@NotBlank
 	private String password;
+
+	@NotBlank
 	private String first_name;
+
+	@NotBlank
 	private String last_name;
+
+	@NotBlank
 	private String address;
+
+	@NotBlank
 	private String phone_number;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Date date_birth;
 
-	public PassengerDTO() {
-
-	}
+	private Set<String> role;
 
 	public PassengerDTO(String email, String username, String password, String first_name, String last_name,
 			String address, String phone_number, Date date_birth) {
@@ -95,6 +110,14 @@ public class PassengerDTO {
 
 	public void setDate_birth(Date date_birth) {
 		this.date_birth = date_birth;
+	}
+
+	public Set<String> getRole() {
+		return role;
+	}
+
+	public void setRole(Set<String> role) {
+		this.role = role;
 	}
 
 }
