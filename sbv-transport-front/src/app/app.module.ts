@@ -25,6 +25,10 @@ import { ControllerService } from './services/controller.service';
 import { ControllerAddComponent } from './administrator/controller/controller-add/controller-add.component';
 import { ProfilComponent } from './administrator/profil/profil.component';
 import { AdministratorService } from './services/administrator.service';
+import { LineComponent } from './administrator/line/line.component';
+import { StationComponent } from './administrator/station/station.component';
+import { LocationComponent } from './administrator/location/location.component';
+import { ReportComponent } from './administrator/report/report.component';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -53,7 +57,11 @@ const appRoutes: Routes = [
     ControllerComponent,
     ControllerTableComponent,
     ControllerAddComponent,
-    ProfilComponent
+    ProfilComponent,
+    LineComponent,
+    StationComponent,
+    LocationComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

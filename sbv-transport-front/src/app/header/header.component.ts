@@ -47,8 +47,25 @@ export class HeaderComponent implements OnInit {
     this.featureSelected.emit('controller');
 
   }
+
   clickButtonProfil(){
     this.featureSelected.emit('profil');
+  }
+  
+  clickButtonLine(){
+    this.featureSelected.emit('line');
+  }
+
+  clickButtonStation(){
+    this.featureSelected.emit('station');
+  }
+
+  clickButtonLocation(){
+    this.featureSelected.emit('location');
+  }
+
+  clickButtonReport(){
+    this.featureSelected.emit('report');
   }
 
 
