@@ -1,22 +1,29 @@
 package com.sbvtransport.sbvtransport.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+
+import org.hibernate.annotations.NaturalId;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
-		@UniqueConstraint(columnNames = { "email" }) })
+@Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
@@ -24,6 +31,8 @@ public abstract class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Email
+	@NaturalId
 	@Column(name = "email", unique = true, nullable = false)
 	protected String email;
 
@@ -48,6 +57,10 @@ public abstract class User {
 	@Column(name = "date_birth", unique = false, nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	protected Date date_birth;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 
@@ -136,6 +149,14 @@ public abstract class User {
 
 	public void setDate_birth(Date date_birth) {
 		this.date_birth = date_birth;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }
