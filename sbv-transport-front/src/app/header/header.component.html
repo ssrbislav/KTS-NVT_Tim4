@@ -7,10 +7,15 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left" *ngIf = "(showView) == 'administrator'">
                 <ul class="nav navbar-nav">
-                  <li><a (click)="clickBus()" style="cursor: pointer;">Bus</a></li>
-                  <li><a (click) = "clickTrolley()" style="cursor: pointer;">Trolley</a></li>
-                  <li><a (click)="clickSubway()" style="cursor: pointer;">Subway</a></li>
-                  <li><a (click)="clickController()" style="cursor: pointer;">Controller</a></li>
+                  <li><a (click)="clickButtonBus()" style="cursor: pointer;">Bus</a></li>
+                  <li><a (click) = "clickButtonTrolley()" style="cursor: pointer;">Trolley</a></li>
+                  <li><a (click)="clickButtonSubway()" style="cursor: pointer;">Subway</a></li>
+                  <li><a (click)="clickButtonController()" style="cursor: pointer;">Controller</a></li>
+                  <li><a (click)="clickButtonLine()" style="cursor: pointer;">Line</a></li>
+                  <li><a (click)="clickButtonStation()" style="cursor: pointer;">Station</a></li>
+                  <li><a (click)="clickButtonLocation()" style="cursor: pointer;">Location</a></li>
+                  <li><a (click)="clickButtonReport()" style="cursor: pointer;">Report</a></li>
+
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'notregister'">
@@ -20,6 +25,7 @@
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'administrator'">
+                <li><a (click) = "clickButtonProfil()"  style="cursor: pointer;">Profil</a></li>
                 <li><a  style="cursor: pointer;">Logout</a></li>
             </ul>
         </div>
