@@ -23,6 +23,8 @@ import { ControllerComponent } from './administrator/controller/controller.compo
 import { ControllerTableComponent } from './administrator/controller/controller-table/controller-table.component';
 import { ControllerService } from './services/controller.service';
 import { ControllerAddComponent } from './administrator/controller/controller-add/controller-add.component';
+import { ProfilComponent } from './administrator/profil/profil.component';
+import { AdministratorService } from './services/administrator.service';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     TrolleyTableComponent,
     ControllerComponent,
     ControllerTableComponent,
-    ControllerAddComponent
+    ControllerAddComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [BusService,SubwayService,TrolleyService,ControllerService],
+  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
