@@ -31,6 +31,10 @@ public class Controller extends User implements Serializable {
 		this.id = id;
 	}
 
+	public Controller() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}
