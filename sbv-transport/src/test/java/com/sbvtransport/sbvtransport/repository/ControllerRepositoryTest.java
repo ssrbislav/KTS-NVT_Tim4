@@ -25,12 +25,12 @@ public class ControllerRepositoryTest {
 
 	@Autowired
 	private ControllerRepository repository;
-	
+
 	@Test
 	@Transactional
 	@Rollback(true)
 	public void testIfControllerExists() {
-		
+
 		Controller controller = new Controller();
 		controller.setUsername("controller");
 		controller.setEmail("email@gmail.com");
@@ -40,19 +40,18 @@ public class ControllerRepositoryTest {
 		controller.setAddress("Neka adresa");
 		controller.setPhone_number("0604566258");
 		controller.setDate_birth(new Date());
-		
+
 		repository.save(controller);
-		
+
 		Controller findController = repository.getOne(controller.getId());
-		
+
 		assertEquals(controller.getId(), findController.getId());
-		
+
 	}
-	
+
 	@Test(expected = DataIntegrityViolationException.class)
 	public void testSaveEmptyController() {
 		repository.save(new Controller());
 	}
-	
-	
+
 }
