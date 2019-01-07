@@ -57,15 +57,6 @@ public class PassengerController {
 
 	}
 
-	@RequestMapping(value = "/logIn", method = RequestMethod.POST)
-	public ResponseEntity<Passenger> logIn(@RequestBody UserDTO user) {
-
-		Passenger singInPassenger = passengerService.logIn(user);
-
-		return new ResponseEntity<>(singInPassenger, HttpStatus.OK);
-
-	}
-
 	@RequestMapping(value = "/changeActive", method = RequestMethod.POST)
 	public ResponseEntity<String> changeActive(@RequestBody PassengerChangeBooleanDTO user) {
 

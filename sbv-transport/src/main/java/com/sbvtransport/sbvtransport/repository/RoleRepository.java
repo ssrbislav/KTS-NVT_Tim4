@@ -7,5 +7,5 @@ import com.sbvtransport.sbvtransport.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-	Role findByName(RoleName roleNMame);
+	Role findByName(RoleName roleName);
 }

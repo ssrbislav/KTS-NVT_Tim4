@@ -1,7 +1,7 @@
 package com.sbvtransport.sbvtransport.enumeration;
 
 public enum RoleName {
-	ADMIN,
-	PASSENGER,
-	CONTROLLER
+	ROLE_ADMIN,
+	ROLE_PASSENGER,
+	ROLE_CONTROLLER
 }

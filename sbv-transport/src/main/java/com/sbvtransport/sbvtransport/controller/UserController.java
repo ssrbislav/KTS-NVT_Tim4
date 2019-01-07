@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -82,33 +83,13 @@ public class UserController {
 				signUpRequest.getLast_name(), signUpRequest.getAddress(), 
 				signUpRequest.getPhone_number(), signUpRequest.getDate_birth()
 				);
- 
-		//Set<String> strRoles = signUpRequest.getRole();
+
+		Role role = new Role();
+		role.setName(RoleName.ROLE_PASSENGER);
+		
 		Set<Role> roles = new HashSet<>();
- 
-		/*
-		strRoles.forEach(role -> {
-			switch (role) {
-			case "user":
-				Role adminRole = roleRepository.findByName(RoleName.ADMIN)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-				roles.add(adminRole);
- 
-				break;
-			case "controller":
-				Role controllerRole = roleRepository.findByName(RoleName.CONTROLLER)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-				roles.add(controllerRole);
- 
-				break;
-			default:
-				Role userRole = roleRepository.findByName(RoleName.PASSENGER)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-				roles.add(userRole);
-			}
-		});
- */
-		roles.add(roleRepository.findByName(RoleName.PASSENGER));
+		roles.add(role);
+	
 		user.setRoles(roles);
 		userRepository.save(user);
  
