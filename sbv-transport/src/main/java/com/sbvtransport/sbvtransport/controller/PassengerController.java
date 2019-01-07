@@ -29,7 +29,7 @@ public class PassengerController {
 
 		return new ResponseEntity<>(passengers, HttpStatus.OK);
 	}
-
+/*
 	@RequestMapping(value = "/addPassenger", method = RequestMethod.POST)
 	public ResponseEntity<Passenger> create(@RequestBody PassengerDTO passenger) {
 
@@ -38,7 +38,7 @@ public class PassengerController {
 		return new ResponseEntity<>(newPassenger, HttpStatus.OK);
 
 	}
-
+*/
 	@RequestMapping(value = "/updatePassenger", method = RequestMethod.POST)
 	public ResponseEntity<Passenger> update(@RequestBody Passenger passenger) {
 

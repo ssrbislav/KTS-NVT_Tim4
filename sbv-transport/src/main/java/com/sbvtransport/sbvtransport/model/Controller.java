@@ -2,6 +2,8 @@ package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +21,9 @@ public class Controller extends User implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	public Controller() {
-		super();
+	public Controller(String email, String username, String password,
+			String first_name, String last_name, String address, String phone_number, Date date_birth) {
+		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
 	}
 
 	public Controller(Long id) {

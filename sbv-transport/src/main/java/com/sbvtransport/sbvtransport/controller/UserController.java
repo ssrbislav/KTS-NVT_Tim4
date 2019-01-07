@@ -77,7 +77,7 @@ public class UserController {
 					HttpStatus.BAD_REQUEST);
 		}
  
-		// Creating user's account
+		// Creating passenger's account
 		User user = new Passenger(false, false, signUpRequest.getEmail(), signUpRequest.getUsername(), 
 				encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirst_name(),
 				signUpRequest.getLast_name(), signUpRequest.getAddress(), 
