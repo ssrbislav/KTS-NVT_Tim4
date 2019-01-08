@@ -1,19 +1,20 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import com.sbvtransport.sbvtransport.enumeration.Zone;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,11 +31,27 @@ public class Line implements Serializable {
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
-	private List<Station> station_list = new ArrayList<Station>();
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "line_Project", 
+        joinColumns = { @JoinColumn(name = "id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "station_id") }
+    )
+	public Set<Station> station_list = new HashSet<Station>(0);
 
 	@Column(name = "line_type", unique = false, nullable = false)
 	private TypeTransport line_type;
+	
+	@Column(name = "zone", unique = false, nullable = false)
+	private Zone zone;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
+	@JoinColumn(name = "line", referencedColumnName = "id")
+	private Timetable timetable;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "line_first_station", cascade = CascadeType.ALL)
+	@JoinColumn(name = "line_first_station", referencedColumnName = "id")
+	private Station first_station;
 
 	public Line() {
 
@@ -46,10 +63,18 @@ public class Line implements Serializable {
 		this.line_type = line_type;
 	}
 
-	public Line(String name, List<Station> station_list, TypeTransport line_type) {
+	public Line(String name, Set<Station> station_list, TypeTransport line_type) {
 		this.name = name;
 		this.station_list = station_list;
 		this.line_type = line_type;
+	}
+
+	public Line(String name, TypeTransport line_type, Zone zone, Station first_station) {
+		super();
+		this.name = name;
+		this.line_type = line_type;
+		this.zone = zone;
+		this.first_station = first_station;
 	}
 
 	public String getName() {
@@ -77,13 +102,41 @@ public class Line implements Serializable {
 		this.id = id;
 	}
 
-	@JsonIgnore
-	public List<Station> getStation_list() {
+//	@JsonIgnore
+	public Set<Station> getStation_list() {
 		return station_list;
 	}
 
-	public void setStation_list(List<Station> station_list) {
+	public void setStation_list(Set<Station> station_list) {
 		this.station_list = station_list;
+	}
+	
+
+	public Zone getZone() {
+		return zone;
+	}
+
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
+
+	public Timetable getTimetable() {
+		return timetable;
+	}
+
+	public void setTimetable(Timetable timetable) {
+		this.timetable = timetable;
+	}
+
+	public Station getFirst_station() {
+		return first_station;
+	}
+
+	public void setFirst_station(Station first_station) {
+		this.first_station = first_station;
+	}
+	public void addStation(Station station){
+		this.station_list.add(station);
 	}
 
 	@Override

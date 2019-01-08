@@ -1,10 +1,13 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
 import com.sbvtransport.sbvtransport.dto.LineDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.repository.LineRepository;
-import java.util.ArrayList;
+import com.sbvtransport.sbvtransport.repository.StationRepository;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ public class LineService implements ILineService {
 
 	@Autowired
 	LineRepository lineRepository;
+	
+	@Autowired
+	StationRepository stationRepository;
 
 	@Override
 	public Line getOne(Long id) {
@@ -39,7 +45,8 @@ public class LineService implements ILineService {
 		} else {
 			return "Transport type " + lineDTO.getLine_type() + " doesn't exist!";
 		}
-		line.setStation_list(new ArrayList<>());
+		line.setStation_list(new HashSet<>());
+		line.setZone(lineDTO.getZone());
 		lineRepository.save(line);
 		return "The line has been successfully created!";
 	}
@@ -60,6 +67,26 @@ public class LineService implements ILineService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String addStation(AddFirstStationDTO addStation) {
+		
+		Line l = lineRepository.getOne(addStation.getId_line());
+		if(l==null){
+			return "The line doesn't exist!";
+			
+		}
+		Station s = stationRepository.findById(addStation.getId_station()).orElse(null);
+		if(s==null){
+			return "The station doesn't exist!";
+		}
+		l.addStation(s);
+		s.setLine(l);
+		stationRepository.save(s);
+		lineRepository.save(l);
+		
+		return "Successfully station added!";
 	}
 
 }

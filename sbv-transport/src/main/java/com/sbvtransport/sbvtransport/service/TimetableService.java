@@ -90,8 +90,8 @@ public class TimetableService implements ITimetableService {
 		} else {
 			return "The transport with code " + timetableDTO.getTransportCode() + " doesn't exist in the database.";
 		}
-		station.setTimetable(tmtbl);
-		stationService.update(station);
+		//station.setTimetable(tmtbl);
+		//stationService.update(station);
 		update(tmtbl);
 		return "The timetable has been successfully created!\n" + timetable.toString();
 	}

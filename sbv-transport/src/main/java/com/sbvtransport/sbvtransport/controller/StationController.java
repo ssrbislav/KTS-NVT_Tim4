@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.service.IStationService;
@@ -64,5 +65,15 @@ public class StationController {
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(value = "/addFirstStation", method = RequestMethod.POST)
+	public ResponseEntity<String> addFirst(@RequestBody AddFirstStationDTO addFirst) {
+
+		String updateStation = stationService.addFirstStation(addFirst);
+
+		return new ResponseEntity<>(updateStation, HttpStatus.OK);
+
+	}
+
 
 }

@@ -40,15 +40,6 @@ public class Location {
 	public Location() {
 	}
 
-	public Location(String location_name, String address, Float latitude, Float longitude, String type,
-			Station station) {
-		this.location_name = location_name;
-		this.address = address;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.type = type;
-		this.station = station;
-	}
 
 	public Location(String location_name, String address, Float latitude, Float longitude, String type) {
 		this.location_name = location_name;

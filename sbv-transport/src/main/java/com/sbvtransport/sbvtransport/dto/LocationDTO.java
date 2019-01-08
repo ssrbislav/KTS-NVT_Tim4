@@ -1,24 +1,17 @@
 package com.sbvtransport.sbvtransport.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sbvtransport.sbvtransport.model.Station;
 
 public class LocationDTO {
 
-	private Long id;
 	private String location_name;
 	private String address;
 	private Float latitude;
 	private Float longitude;
 	private String type;
 
-	public LocationDTO(Long id, String location_name, String address, Float latitude, Float longitude, String type) {
-		this.id = id;
-		this.location_name = location_name;
-		this.address = address;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.type = type;
+	public LocationDTO(){
+		
 	}
 
 	public LocationDTO(@JsonProperty String location_name, @JsonProperty String address, @JsonProperty Float latitude, @JsonProperty Float longitude, @JsonProperty String type) {
@@ -27,14 +20,6 @@ public class LocationDTO {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.type = type;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getLocation_name() {

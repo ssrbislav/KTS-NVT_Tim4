@@ -56,7 +56,7 @@ public abstract class User {
 	protected String phone_number;
 
 	@Column(name = "date_birth", unique = false, nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected Date date_birth;
 
 	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)

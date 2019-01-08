@@ -50,7 +50,7 @@ public class BusServiceJUnitTest {
 
 		Line line = new Line("nova_linija", TypeTransport.bus);
 		line.setId(1L);
-		line.setStation_list(new ArrayList<>());
+//		line.setStation_list(new ArrayList<>());
 		Optional<Line> oLine = Optional.of(line);
 		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
 		Bus b2 = new Bus("nova_linija_bus_5ca", line, false, "5ca");

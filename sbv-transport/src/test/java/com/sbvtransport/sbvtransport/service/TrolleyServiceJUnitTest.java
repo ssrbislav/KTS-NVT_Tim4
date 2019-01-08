@@ -56,7 +56,7 @@ public class TrolleyServiceJUnitTest {
 
 		Line line = new Line("nova_linija", TypeTransport.trolley);
 		line.setId(1L);
-		line.setStation_list(new ArrayList<>());
+//		line.setStation_list(new ArrayList<>());
 		Optional<Line> oLine = Optional.of(line);
 		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
 		Trolley t2 = new Trolley("nova_linija_trolley_5ca", line, false, "5ca");

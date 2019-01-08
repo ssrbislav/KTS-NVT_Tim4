@@ -91,7 +91,7 @@ public class ControllerController {
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/addController")
 	public ResponseEntity<?> registerController(@Valid @RequestBody RegisterDTO signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {

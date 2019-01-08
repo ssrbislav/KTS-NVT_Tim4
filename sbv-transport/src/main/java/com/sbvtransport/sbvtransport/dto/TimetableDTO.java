@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sbvtransport.sbvtransport.model.Station;
 import java.util.Date;
 import java.util.Map;
 

@@ -1,11 +1,12 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
+import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.repository.StationRepository;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,24 +36,19 @@ public class StationService implements IStationService {
 
 	@Override
 	public String create(StationDTO stationDTO) {
-		Line line = new Line();
 		Location location = new Location();
 		Station station = new Station();
-		if (!lineService.findAll().contains(lineService.getOne(stationDTO.getLine_id()))) {
-			return "Line with ID " + stationDTO.getLine_id() + " not found!";
-		} else {
-			line = lineService.getOne(stationDTO.getLine_id());
-		}
+
 		if (!locationService.findAll().contains(locationService.getOne(stationDTO.getLocation_id()))) {
-			return "Line with ID " + stationDTO.getLine_id() + " not found!";
+			return "Location with ID " + stationDTO.getLocation_id() + " not found!";
 		} else {
 			location = locationService.getOne(stationDTO.getLocation_id());
 		}
 		station.setLocation(location);
-		station.setLine(line);
+		station.setZone(Zone.valueOf(stationDTO.getZone()));
+		
 		stationRepository.save(station);
-		location.setStation(station);
-		locationService.update(location);
+
 		return "The station has been successfully created.";
 	}
 
@@ -60,8 +56,7 @@ public class StationService implements IStationService {
 	public Station update(Station station) {
 		Optional<Station> updateStation = stationRepository.findById(station.getId());
 		updateStation.get().setLocation(station.getLocation());
-		updateStation.get().setTimetable(station.getTimetable());
-		updateStation.get().setLine(station.getLine());
+
 		return stationRepository.save(updateStation.get());
 	}
 
@@ -72,5 +67,24 @@ public class StationService implements IStationService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String addFirstStation(AddFirstStationDTO addFirst) {
+		
+		Line l = lineService.getOne(addFirst.getId_line());
+		
+		if(l == null){
+			return "The line doesn't exist";
+		}
+		Station s = stationRepository.getOne(addFirst.getId_station());
+		if(s== null){
+			return "The station doesn't exist";
+
+		}
+		s.setLine_first_station(l);
+		stationRepository.save(s);
+		
+		return "First station succesfully changed";
 	}
 }

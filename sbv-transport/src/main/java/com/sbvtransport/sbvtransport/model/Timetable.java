@@ -2,8 +2,9 @@ package com.sbvtransport.sbvtransport.model;
 
 import java.util.Map;
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
-import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -23,6 +24,10 @@ public class Timetable {
 	@Column(name = "date", unique = false, nullable = false)
 	@ElementCollection(targetClass = Date.class)
 	private Map<Station, Date> schedule;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	private Line line;
+
 
 	public Timetable() {
 	}
@@ -51,4 +56,15 @@ public class Timetable {
 	public void setSchedule(Map<Station, Date> schedule) {
 		this.schedule = schedule;
 	}
+	
+	@JsonIgnore
+	public Line getLine() {
+		return line;
+	}
+	@JsonProperty
+	public void setLine(Line line) {
+		this.line = line;
+	}
+	
+	
 }

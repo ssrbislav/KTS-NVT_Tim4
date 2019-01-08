@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
 import com.sbvtransport.sbvtransport.dto.LineDTO;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.service.ILineService;
@@ -64,6 +65,15 @@ public class LineController {
 		boolean delete = lineService.delete(id);
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/addStation", method = RequestMethod.POST)
+	public ResponseEntity<String> addStation(@RequestBody AddFirstStationDTO addStation) {
+
+		String updateLine = lineService.addStation(addStation);
+
+		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 
 	}
 

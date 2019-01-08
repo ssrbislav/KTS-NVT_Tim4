@@ -51,7 +51,7 @@ public class SubwayServiceJUnitTest {
 
 		Line line = new Line("nova_linija", TypeTransport.subway);
 		line.setId(1L);
-		line.setStation_list(new ArrayList<>());
+//		line.setStation_list(new ArrayList<>());
 		Optional<Line> oLine = Optional.of(line);
 		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
 		Subway s2 = new Subway("nova_linija_subway_5ca", line, false, "5ca");

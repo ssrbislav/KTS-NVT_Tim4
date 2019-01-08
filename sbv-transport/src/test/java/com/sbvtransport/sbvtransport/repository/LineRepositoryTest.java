@@ -34,19 +34,19 @@ public class LineRepositoryTest {
     public void saveLineTest() {
         Line line = new Line("9", TypeTransport.bus);
         Location l1 = new Location("Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
-        Station s1 = new Station(l1, line);
-        Location l2 = new Location("Stanica2", "Vojvode Supljikca 1", 30.42f, 32.02f, "Station");
-        Station s2 = new Station(l2, line);
-        Location l3 = new Location("Stanica3", "Vojvode Bojovica 11", 30.42f, 32.04f, "Station");
-        Station s3 = new Station(l3, line);
-        Location l4 = new Location("Stanica4", "Vojvode Bojovica 99", 30.42f, 32.06f, "Station");
-        Station s4 = new Station(l4, line);
+//        Station s1 = new Station(l1, line);
+//        Location l2 = new Location("Stanica2", "Vojvode Supljikca 1", 30.42f, 32.02f, "Station");
+//        Station s2 = new Station(l2, line);
+//        Location l3 = new Location("Stanica3", "Vojvode Bojovica 11", 30.42f, 32.04f, "Station");
+//        Station s3 = new Station(l3, line);
+//        Location l4 = new Location("Stanica4", "Vojvode Bojovica 99", 30.42f, 32.06f, "Station");
+//        Station s4 = new Station(l4, line);
         List<Station> stations = new ArrayList<>();
-        stations.add(s1);
-        stations.add(s2);
-        stations.add(s3);
-        stations.add(s4);
-        line.setStation_list(stations);
+//        stations.add(s1);
+//        stations.add(s2);
+//        stations.add(s3);
+//        stations.add(s4);
+//        line.setStation_list(stations);
 
         Line savedLine = lineRepository.save(line);
         assertNotNull(savedLine);

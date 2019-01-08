@@ -37,10 +37,10 @@ public class LocationServiceJUnitTest {
     @Before
     public void setUp() {
         List<Location> locations = new ArrayList<>();
-        Location l1 = new Location(1L, "Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
-        Location l2 = new Location(2L, "Stanica2", "Vojvode Supljikca 99", 50.35f, 32.22f, "Station");
-        locations.add(l1);
-        locations.add(l2);
+//        Location l1 = new Location(1L, "Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
+//        Location l2 = new Location(2L, "Stanica2", "Vojvode Supljikca 99", 50.35f, 32.22f, "Station");
+//        locations.add(l1);
+//        locations.add(l2);
         Mockito.when(locationRepository.findAll()).thenReturn(locations);
 
         Location location = new Location("Stanica3", "Vojvode Bojovica 11", 12.33f, 12.02f, "Station");

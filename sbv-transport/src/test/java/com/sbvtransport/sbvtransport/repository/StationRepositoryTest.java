@@ -39,18 +39,18 @@ public class StationRepositoryTest {
     @Rollback(true)
     public void saveLineTest() {
         Line line = new Line("9", TypeTransport.bus);
-        Location l1 = new Location("Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
-        Station s1 = new Station(l1, line);
-        List<Station> stations = new ArrayList<>();
-        stations.add(s1);
-        line.setStation_list(stations);
-
-        locationRepository.save(l1);
-        lineRepository.save(line);
-        Station savedStation = stationRepository.save(s1);
-        assertNotNull(savedStation);
-        assertEquals(s1.getLine(), savedStation.getLine());
-        assertEquals(s1.getLocation(), savedStation.getLocation());
+//        Location l1 = new Location("Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
+//        Station s1 = new Station(l1, line);
+//        List<Station> stations = new ArrayList<>();
+//        stations.add(s1);
+//        line.setStation_list(stations);
+//
+//        locationRepository.save(l1);
+//        lineRepository.save(line);
+//        Station savedStation = stationRepository.save(s1);
+//        assertNotNull(savedStation);
+//        assertEquals(s1.getLine(), savedStation.getLine());
+//        assertEquals(s1.getLocation(), savedStation.getLocation());
     }
 
     @Test(expected = DataIntegrityViolationException.class)
