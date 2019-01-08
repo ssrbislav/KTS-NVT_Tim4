@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,7 @@ import com.sbvtransport.sbvtransport.repository.RoleRepository;
 import com.sbvtransport.sbvtransport.repository.UserRepository;
 import com.sbvtransport.sbvtransport.security.JwtProvider;
 import com.sbvtransport.sbvtransport.service.IControllerService;
-
+@CrossOrigin
 @RestController
 @RequestMapping(value = "api/controller")
 public class ControllerController {
