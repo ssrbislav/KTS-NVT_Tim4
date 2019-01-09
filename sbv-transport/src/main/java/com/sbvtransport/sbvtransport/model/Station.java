@@ -2,6 +2,7 @@ package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "station")
 public class Station implements Serializable {
@@ -23,8 +25,6 @@ public class Station implements Serializable {
 	@OneToOne(targetEntity = Location.class)
 	@JoinColumn(name = "location", referencedColumnName = "id")
 	private Location location;
-
-	// TODO: Change mapping.
 	
     @ManyToMany(mappedBy = "station_list")
     private Set<Line> lines = new HashSet<>();

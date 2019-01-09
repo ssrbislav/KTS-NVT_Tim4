@@ -6,12 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.LineRepository;
+import com.sbvtransport.sbvtransport.repository.LocationRepository;
 import com.sbvtransport.sbvtransport.repository.SubwayRepository;
 
 @Service
@@ -22,6 +25,9 @@ public class SubwayService implements ISubwayService {
 	
 	@Autowired
 	LineRepository lineRepository;
+	
+	@Autowired
+	LocationRepository locationRepository;
 
 	@Override
 	public List<Subway> findAll() {
@@ -94,6 +100,22 @@ public class SubwayService implements ISubwayService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Subway addLocation(AddLocationDTO addLocation) {
+		
+		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
+		if(l==null){
+			return null;
+		}
+		
+		Subway s = subwayRepository.getOne(addLocation.getId_transport());
+		if(s==null){
+			return null;
+		}
+		s.setLocation(l);
+		return subwayRepository.save(s);
 	}
 
 }

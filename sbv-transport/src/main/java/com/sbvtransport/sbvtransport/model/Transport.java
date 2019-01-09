@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @MappedSuperclass
 public class Transport implements Serializable {
 
@@ -34,6 +36,7 @@ public class Transport implements Serializable {
 	protected String name;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "location", referencedColumnName = "id")
 	protected Location location;
 
 	@OneToOne(targetEntity = Timetable.class, cascade = CascadeType.ALL)

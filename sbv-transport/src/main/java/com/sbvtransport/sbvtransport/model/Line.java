@@ -1,6 +1,8 @@
 package com.sbvtransport.sbvtransport.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
 import java.io.Serializable;
@@ -18,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "line")
 public class Line implements Serializable {

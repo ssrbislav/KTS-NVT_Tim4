@@ -4,13 +4,17 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
 import com.sbvtransport.sbvtransport.repository.LineRepository;
+import com.sbvtransport.sbvtransport.repository.LocationRepository;
 
 @Service
 public class BusService implements IBusService {
@@ -20,6 +24,9 @@ public class BusService implements IBusService {
 
 	@Autowired
 	LineRepository lineRepository;
+	
+	@Autowired
+	LocationRepository locationRepository;
 
 	@Override
 	public List<Bus> findAll() {
@@ -97,6 +104,22 @@ public class BusService implements IBusService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Bus addLocation(AddLocationDTO addLocation) {
+		
+		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
+		if(l==null){
+			return null;
+		}
+		
+		Bus b = busRepository.getOne(addLocation.getId_transport());
+		if(b==null){
+			return null;
+		}
+		b.setLocation(l);
+		return busRepository.save(b);
 	}
 
 }

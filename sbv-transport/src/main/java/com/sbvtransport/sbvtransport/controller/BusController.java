@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.service.IBusService;
@@ -70,6 +72,15 @@ public class BusController {
 		boolean delete = busService.delete(id);
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
+	//add current location of the bus
+	@RequestMapping(value = "/addLocation", method = RequestMethod.POST)
+	public ResponseEntity<Bus> addLocation(@RequestBody AddLocationDTO bus) {
+
+		Bus updateBus = busService.addLocation(bus);
+
+		return new ResponseEntity<>(updateBus, HttpStatus.OK);
 
 	}
 

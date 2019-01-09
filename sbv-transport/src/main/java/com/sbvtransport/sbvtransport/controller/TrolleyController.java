@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
+import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.service.ITicketService;
 import com.sbvtransport.sbvtransport.service.ITrolleyService;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/trolley")
@@ -43,7 +47,7 @@ public class TrolleyController {
 
 	}
 
-	@RequestMapping(value = "/createTrolley", method = RequestMethod.POST)
+	@RequestMapping(value = "/addTrolley", method = RequestMethod.POST)
 	public ResponseEntity<Trolley> create(@RequestBody TrolleyDTO trolley) {
 
 		Trolley newTrolley = trolleyService.create(trolley);
@@ -63,13 +67,23 @@ public class TrolleyController {
 
 	@RequestMapping(value = "/deleteTrolley/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-		
-		if(trolleyService.getOne(id)!= null)
+
+		if (trolleyService.getOne(id) != null)
 			ticketService.changeBecauseTransport(trolleyService.getOne(id).getCode());
 
 		boolean deleteTrolley = trolleyService.delete(id);
 
 		return new ResponseEntity<>(deleteTrolley, HttpStatus.OK);
+
+	}
+
+	// add current location of the trolley
+	@RequestMapping(value = "/addLocation", method = RequestMethod.POST)
+	public ResponseEntity<Trolley> addLocation(@RequestBody AddLocationDTO trolley) {
+
+		Trolley updateTrolley = trolleyService.addLocation(trolley);
+
+		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
 
 	}
 

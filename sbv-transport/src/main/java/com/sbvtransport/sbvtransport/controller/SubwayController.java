@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.service.ISubwayService;
 import com.sbvtransport.sbvtransport.service.ITicketService;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/subway")
@@ -63,13 +65,23 @@ public class SubwayController {
 
 	@RequestMapping(value = "/deleteSubway/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-		
-		if(subwayService.getOne(id)!=null)
+
+		if (subwayService.getOne(id) != null)
 			ticketService.changeBecauseTransport(subwayService.getOne(id).getCode());
 
 		boolean delete = subwayService.delete(id);
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
+
+	// add current location of the subway
+	@RequestMapping(value = "/addLocation", method = RequestMethod.POST)
+	public ResponseEntity<Subway> addLocation(@RequestBody AddLocationDTO subway) {
+
+		Subway updateSubway = subwayService.addLocation(subway);
+
+		return new ResponseEntity<>(updateSubway, HttpStatus.OK);
 
 	}
 

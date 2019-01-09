@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
@@ -20,4 +21,6 @@ public interface IBusService {
 	boolean codeExist(String code);
 
 	Line checkLine(Long lineId);
+	
+	Bus addLocation(AddLocationDTO addLocation);
 }

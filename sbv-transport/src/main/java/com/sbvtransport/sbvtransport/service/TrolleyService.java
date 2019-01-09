@@ -1,15 +1,19 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Transport;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.repository.LineRepository;
+import com.sbvtransport.sbvtransport.repository.LocationRepository;
 import com.sbvtransport.sbvtransport.repository.TrolleyRepository;
 
 @Service
@@ -20,6 +24,9 @@ public class TrolleyService implements ITrolleyService {
 	
 	@Autowired
 	LineRepository lineRepository;
+	
+	@Autowired
+	LocationRepository locationRepository;
 
 	@Override
 	public List<Trolley> findAll() {
@@ -91,6 +98,23 @@ public class TrolleyService implements ITrolleyService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Trolley addLocation(AddLocationDTO addLocation) {
+		
+		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
+		if(l==null){
+			return null;
+		}
+		
+		Trolley t = trolleyRepository.getOne(addLocation.getId_transport());
+		if(t==null){
+			return null;
+		}
+		t.setLocation(l);
+		
+		return trolleyRepository.save(t);
 	}
 
 }
