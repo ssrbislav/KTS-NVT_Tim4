@@ -2,6 +2,7 @@ package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.dto.TimetableDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
+import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.model.Timetable;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TimetableService implements ITimetableService {
@@ -43,57 +45,68 @@ public class TimetableService implements ITimetableService {
 	@Override
 	public String create(TimetableDTO timetableDTO) {
 		Timetable timetable = new Timetable();
-		Station station = new Station();
-		Transport transport;
-		Bus bus = new Bus();
-		Subway subway = new Subway();
-		Trolley trolley = new Trolley();
+		
+		
 		HashMap<Station, Date> schedule = new HashMap<>();
 
-		timetable.setCode(timetableDTO.getTransportCode());
-		for (Long stationID : timetableDTO.getTimetable().keySet()) {
-			if (!stationService.findAll().contains(stationService.getOne(stationID))) {
-				return "Station with ID " + stationID + " doesn't exist!";
-			} else {
-				station = stationService.getOne(stationID);
-
-				schedule.put(station, timetableDTO.getTimetable().get(station.getId()));
+		if(timetableDTO.getTransportType() == "bus"){
+			Bus b = busService.getOne(timetableDTO.getId_transport());
+			if(b== null){
+				return "Bus not found";
 			}
+			Set<Station> stations = b.getLine().getStation_list();
+			
+		}else if(timetableDTO.getTransportType() == "trolley"){
+			
+		}else if(timetableDTO.getTransportType() == "subway"){
+			
+		}else{
+			return "Error!";
 		}
-		timetable.setSchedule(schedule);
-		Timetable tmtbl = timetableRepository.save(timetable);
-
-		if (busService.codeExist(timetableDTO.getTransportCode())) {
-			for (Bus b : busService.findAll()) {
-				if (b.getCode().equals(timetableDTO.getTransportCode())) {
-					bus = b;
-					bus.setTimetable(tmtbl);
-					busService.update(bus);
-				}
-			}
-		} else if (subwayService.codeExist(timetableDTO.getTransportCode())) {
-			for (Subway s : subwayService.findAll()) {
-				if (s.getCode().equals(timetableDTO.getTransportCode())) {
-					subway = s;
-					subway.setTimetable(tmtbl);
-					subwayService.update(subway);
-				}
-			}
-		} else if (trolleyService.codeExist(timetableDTO.getTransportCode())) {
-			for (Trolley t : trolleyService.findAll()) {
-				if (t.getCode().equals(timetableDTO.getTransportCode())) {
-					trolley = t;
-					trolley.setTimetable(tmtbl);
-					trolleyService.update(trolley);
-				}
-			}
-		} else {
-			return "The transport with code " + timetableDTO.getTransportCode() + " doesn't exist in the database.";
-		}
-		//station.setTimetable(tmtbl);
-		//stationService.update(station);
-		update(tmtbl);
-		return "The timetable has been successfully created!\n" + timetable.toString();
+//		timetable.setCode(timetableDTO.getTransportCode());
+//		for (Long stationID : timetableDTO.getTimetable().keySet()) {
+//			if (!stationService.findAll().contains(stationService.getOne(stationID))) {
+//				return "Station with ID " + stationID + " doesn't exist!";
+//			} else {
+//				station = stationService.getOne(stationID);
+//
+//				schedule.put(station, timetableDTO.getTimetable().get(station.getId()));
+//			}
+//		}
+//		timetable.setSchedule(schedule);
+//		Timetable tmtbl = timetableRepository.save(timetable);
+//
+//		if (busService.codeExist(timetableDTO.getTransportCode())) {
+//			for (Bus b : busService.findAll()) {
+//				if (b.getCode().equals(timetableDTO.getTransportCode())) {
+//					bus = b;
+//					bus.setTimetable(tmtbl);
+//					busService.update(bus);
+//				}
+//			}
+//		} else if (subwayService.codeExist(timetableDTO.getTransportCode())) {
+//			for (Subway s : subwayService.findAll()) {
+//				if (s.getCode().equals(timetableDTO.getTransportCode())) {
+//					subway = s;
+//					subway.setTimetable(tmtbl);
+//					subwayService.update(subway);
+//				}
+//			}
+//		} else if (trolleyService.codeExist(timetableDTO.getTransportCode())) {
+//			for (Trolley t : trolleyService.findAll()) {
+//				if (t.getCode().equals(timetableDTO.getTransportCode())) {
+//					trolley = t;
+//					trolley.setTimetable(tmtbl);
+//					trolleyService.update(trolley);
+//				}
+//			}
+//		} else {
+//			return "The transport with code " + timetableDTO.getTransportCode() + " doesn't exist in the database.";
+//		}
+//		//station.setTimetable(tmtbl);
+//		//stationService.update(station);
+//		update(tmtbl);
+		return "The timetable has been successfully created!\n";
 	}
 
 	@Override

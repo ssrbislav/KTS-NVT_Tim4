@@ -6,34 +6,18 @@ import java.util.Map;
 
 public class TimetableDTO {
 
-	private StationDTO stationDTO;
-	private String transportCode;
+	private String transportType; // bus/subway/trolley
+	private Long id_transport;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy. HH:mm")
 	private Map<Long, Date> timetable;
 
-	public TimetableDTO(StationDTO stationDTO, String transportCode, Map<Long, Date> timetable) {
-		this.stationDTO = stationDTO;
-		this.transportCode = transportCode;
+	public TimetableDTO( String transportType, Map<Long, Date> timetable,Long id) {
+		this.transportType = transportType;
 		this.timetable = timetable;
+		this.id_transport = id;
 	}
 
 	public TimetableDTO() {
-	}
-
-	public StationDTO getStationDTO() {
-		return stationDTO;
-	}
-
-	public void setStationDTO(StationDTO stationDTO) {
-		this.stationDTO = stationDTO;
-	}
-
-	public String getTransportCode() {
-		return transportCode;
-	}
-
-	public void setTransportCode(String transportCode) {
-		this.transportCode = transportCode;
 	}
 
 	public Map<Long, Date> getTimetable() {
@@ -43,5 +27,22 @@ public class TimetableDTO {
 	public void setTimetable(Map<Long, Date> timetable) {
 		this.timetable = timetable;
 	}
+
+	public String getTransportType() {
+		return transportType;
+	}
+
+	public void setTransportType(String transportType) {
+		this.transportType = transportType;
+	}
+
+	public Long getId_transport() {
+		return id_transport;
+	}
+
+	public void setId_transport(Long id_transport) {
+		this.id_transport = id_transport;
+	}
+	
 
 }

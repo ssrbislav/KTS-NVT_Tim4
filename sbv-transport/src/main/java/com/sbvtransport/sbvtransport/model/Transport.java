@@ -16,8 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @MappedSuperclass
 public class Transport implements Serializable {
 
-	// TODO: Add current location.
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,7 +40,8 @@ public class Transport implements Serializable {
 	@JoinColumn(name = "location", referencedColumnName = "id")
 	protected Location location;
 
-	@OneToOne(targetEntity = Timetable.class, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "timetable", referencedColumnName = "id")
 	protected Timetable timetable;
 
 	public Transport() {
