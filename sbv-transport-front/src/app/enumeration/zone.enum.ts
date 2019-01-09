@@ -1,0 +1,3 @@
+enum Zone{
+    first,second
+}

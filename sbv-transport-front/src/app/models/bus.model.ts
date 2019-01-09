@@ -4,11 +4,12 @@ import { Timetable } from './timetable.model';
 
 export class Bus {
 
-    id: BigInteger;
-    code: string;
-    line: Line;
-    late: boolean;
-    name: string;
-    location: Location;
-    timetable: Timetable;
+  id: BigInteger;
+  code: string;
+  line: Line;
+  late: boolean;
+  name: string;
+  location: Location;
+  timetable: Timetable;
+  time_arrive: number;
   }
