@@ -42,25 +42,25 @@ public class TrolleyServiceJUnitTest {
 	@Before
 	public void setUp() {
 
-		List<Trolley> trolleys = new ArrayList<>();
-		trolleys.add(new Trolley(new Line("nova_linija", TypeTransport.trolley), false, "ime", 1L, "neki_kod"));
-		trolleys.add(new Trolley(new Line("nova_linija", TypeTransport.trolley), true, "ime2", 2L, "neki_kod2"));
-		Mockito.when(trolleyRepository.findAll()).thenReturn(trolleys);
-
-		Trolley t = new Trolley(new Line("nova_linija", TypeTransport.trolley), false, "6ca", 1L,
-				"nova_linija_trolley_6ca");
-		Optional<Trolley> oTrolley = Optional.of(t);
-		Mockito.when(trolleyRepository.findById(1L)).thenReturn(oTrolley);
-
-		Mockito.when(trolleyRepository.findById(10L)).thenReturn(null);
-
-		Line line = new Line("nova_linija", TypeTransport.trolley);
-		line.setId(1L);
-//		line.setStation_list(new ArrayList<>());
-		Optional<Line> oLine = Optional.of(line);
-		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
-		Trolley t2 = new Trolley("nova_linija_trolley_5ca", line, false, "5ca");
-		Mockito.when(trolleyRepository.save(t2)).thenReturn(t2);
+//		List<Trolley> trolleys = new ArrayList<>();
+//		trolleys.add(new Trolley(new Line("nova_linija", TypeTransport.trolley), false, "ime", 1L, "neki_kod"));
+//		trolleys.add(new Trolley(new Line("nova_linija", TypeTransport.trolley), true, "ime2", 2L, "neki_kod2"));
+//		Mockito.when(trolleyRepository.findAll()).thenReturn(trolleys);
+//
+//		Trolley t = new Trolley(new Line("nova_linija", TypeTransport.trolley), false, "6ca", 1L,
+//				"nova_linija_trolley_6ca");
+//		Optional<Trolley> oTrolley = Optional.of(t);
+//		Mockito.when(trolleyRepository.findById(1L)).thenReturn(oTrolley);
+//
+//		Mockito.when(trolleyRepository.findById(10L)).thenReturn(null);
+//
+//		Line line = new Line("nova_linija", TypeTransport.trolley);
+//		line.setId(1L);
+////		line.setStation_list(new ArrayList<>());
+//		Optional<Line> oLine = Optional.of(line);
+//		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
+//		Trolley t2 = new Trolley("nova_linija_trolley_5ca", line, false, "5ca");
+//		Mockito.when(trolleyRepository.save(t2)).thenReturn(t2);
 
 	}
 

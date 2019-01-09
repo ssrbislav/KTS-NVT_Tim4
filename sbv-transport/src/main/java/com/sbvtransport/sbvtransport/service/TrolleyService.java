@@ -45,8 +45,12 @@ public class TrolleyService implements ITrolleyService {
 
 		Line line = checkLine(trolley.getId_line());
 		if (line != null) {
+			if(trolley.getTime_arrive()< 5){
+				return null;
+			}
+			boolean late = checkIfLate(trolley.getTime_arrive());
 			String code = "";
-			Transport  newTrolley = new Trolley(code, line, trolley.isLate(), trolley.getName());
+			Transport  newTrolley = new Trolley(code, line, late, trolley.getName(),trolley.getTime_arrive());
 			code = line.getName() + "_"+ "trolley" + "_" + trolley.getName();
 			((Trolley) newTrolley).setCode(code);
 			
@@ -115,6 +119,16 @@ public class TrolleyService implements ITrolleyService {
 		t.setLocation(l);
 		
 		return trolleyRepository.save(t);
+	}
+
+	@Override
+	public boolean checkIfLate(int time) {
+		if(time > 5){
+			return true;
+		}else if (time == 5) {
+			return false;
+		}
+		return true;
 	}
 
 }

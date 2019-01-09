@@ -37,24 +37,24 @@ public class BusServiceJUnitTest {
 	@Before
 	public void setUp() {
 
-		List<Bus> buses = new ArrayList<>();
-		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), false, "ime", 1L, "neki_kod"));
-		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), true, "ime2", 2L, "neki_kod2"));
-		Mockito.when(busRepository.findAll()).thenReturn(buses);
-
-		Bus b = new Bus(new Line("nova_linija", TypeTransport.bus), false, "6ca", 1L, "nova_linija_bus_6ca");
-		Optional<Bus> oBus = Optional.of(b);
-		Mockito.when(busRepository.findById(1L)).thenReturn(oBus);
-
-		Mockito.when(busRepository.findById(10L)).thenReturn(null);
-
-		Line line = new Line("nova_linija", TypeTransport.bus);
-		line.setId(1L);
-//		line.setStation_list(new ArrayList<>());
-		Optional<Line> oLine = Optional.of(line);
-		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
-		Bus b2 = new Bus("nova_linija_bus_5ca", line, false, "5ca");
-		Mockito.when(busRepository.save(b2)).thenReturn(b2);
+//		List<Bus> buses = new ArrayList<>();
+//		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), false, "ime", 1L, "neki_kod"));
+//		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), true, "ime2", 2L, "neki_kod2"));
+//		Mockito.when(busRepository.findAll()).thenReturn(buses);
+//
+//		Bus b = new Bus(new Line("nova_linija", TypeTransport.bus), false, "6ca", 1L, "nova_linija_bus_6ca");
+//		Optional<Bus> oBus = Optional.of(b);
+//		Mockito.when(busRepository.findById(1L)).thenReturn(oBus);
+//
+//		Mockito.when(busRepository.findById(10L)).thenReturn(null);
+//
+//		Line line = new Line("nova_linija", TypeTransport.bus);
+//		line.setId(1L);
+////		line.setStation_list(new ArrayList<>());
+//		Optional<Line> oLine = Optional.of(line);
+//		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
+//		Bus b2 = new Bus("nova_linija_bus_5ca", line, false, "5ca");
+//		Mockito.when(busRepository.save(b2)).thenReturn(b2);
 
 	}
 

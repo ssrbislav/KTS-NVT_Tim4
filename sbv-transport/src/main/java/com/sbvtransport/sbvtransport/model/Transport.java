@@ -34,6 +34,9 @@ public class Transport implements Serializable {
 
 	@Column(name = "name", unique = false, nullable = false)
 	protected String name;
+	
+	@Column(name = "time_arrive", unique = false, nullable = false)
+	protected int time_arrive;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "location", referencedColumnName = "id")
@@ -46,17 +49,19 @@ public class Transport implements Serializable {
 
 	}
 
-	public Transport(Line line, boolean late, String name, Location location) {
+	public Transport(Line line, boolean late, String name, Location location, int time) {
 		this.line = line;
 		this.late = late;
 		this.name = name;
 		this.location = location;
+		this.time_arrive = time;
 	}
 
-	public Transport(Line line, boolean late, String name) {
+	public Transport(Line line, boolean late, String name,int time) {
 		this.line = line;
 		this.late = late;
 		this.name = name;
+		this.time_arrive = time;
 	}
 
 	public Transport(Line line, boolean late, String name, Timetable timetable) {
@@ -109,4 +114,13 @@ public class Transport implements Serializable {
 	public void setTimetable(Timetable timetable) {
 		this.timetable = timetable;
 	}
+
+	public int getTime_arrive() {
+		return time_arrive;
+	}
+
+	public void setTime_arrive(int time_arrive) {
+		this.time_arrive = time_arrive;
+	}
+	
 }

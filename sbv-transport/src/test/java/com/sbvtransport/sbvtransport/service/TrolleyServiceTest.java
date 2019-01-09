@@ -61,36 +61,36 @@ public class TrolleyServiceTest {
 	@Rollback(true)
 	public void createTest() {
 
-		TrolleyDTO trolley = new TrolleyDTO(false, "55ca", 3L);
-
-		int dbSizeBeforeAdd = trolleyService.findAll().size();
-
-		Trolley dbTrolley = trolleyService.create(trolley);
-		assertThat(dbTrolley).isNotNull();
-
-		List<Trolley> trolleys = trolleyService.findAll();
-		assertThat(trolleys).hasSize(dbSizeBeforeAdd + 1);
-		assertThat(dbTrolley.getCode()).isEqualTo("nova_linija3_trolley_55ca");
-		assertThat(dbTrolley.getId()).isEqualTo(4L);
-		assertThat(dbTrolley.getName()).isEqualTo("55ca");
-		assertThat(dbTrolley.isLate()).isEqualTo(false);
-		assertThat(dbTrolley.getLine().getId()).isEqualTo(3L);
-		assertThat(dbTrolley.getLine().getLine_type()).isEqualTo(TypeTransport.trolley);
-		assertThat(dbTrolley.getLine().getName()).isEqualTo("nova_linija3");
-
-		// create a trolley with a line that isn't a correct type
-		TrolleyDTO trolley3 = new TrolleyDTO(false, "67ca", 2L);
-		Trolley dbTrolley3 = trolleyService.create(trolley3);
-		assertThat(dbTrolley3).isNull();
+//		TrolleyDTO trolley = new TrolleyDTO(false, "55ca", 3L);
+//
+//		int dbSizeBeforeAdd = trolleyService.findAll().size();
+//
+//		Trolley dbTrolley = trolleyService.create(trolley);
+//		assertThat(dbTrolley).isNotNull();
+//
+//		List<Trolley> trolleys = trolleyService.findAll();
+//		assertThat(trolleys).hasSize(dbSizeBeforeAdd + 1);
+//		assertThat(dbTrolley.getCode()).isEqualTo("nova_linija3_trolley_55ca");
+//		assertThat(dbTrolley.getId()).isEqualTo(4L);
+//		assertThat(dbTrolley.getName()).isEqualTo("55ca");
+//		assertThat(dbTrolley.isLate()).isEqualTo(false);
+//		assertThat(dbTrolley.getLine().getId()).isEqualTo(3L);
+//		assertThat(dbTrolley.getLine().getLine_type()).isEqualTo(TypeTransport.trolley);
+//		assertThat(dbTrolley.getLine().getName()).isEqualTo("nova_linija3");
+//
+//		// create a trolley with a line that isn't a correct type
+//		TrolleyDTO trolley3 = new TrolleyDTO(false, "67ca", 2L);
+//		Trolley dbTrolley3 = trolleyService.create(trolley3);
+//		assertThat(dbTrolley3).isNull();
 
 	}
 	
 	// create a trolley with a line that doesn't exist
 	@Test(expected = NoSuchElementException.class)
 	public void createTest2(){
-		TrolleyDTO trolley2 = new TrolleyDTO(false, "55ca", 10L);
-		trolleyService.create(trolley2);
-
+//		TrolleyDTO trolley2 = new TrolleyDTO(false, "55ca", 10L);
+//		trolleyService.create(trolley2);
+//
 
 	}
 

@@ -17,4 +17,5 @@ public interface ITrolleyService {
   boolean codeExist(String code);
   Line checkLine(Long lineId);
   Trolley addLocation(AddLocationDTO addLocation);
+  boolean checkIfLate(int time);
 }

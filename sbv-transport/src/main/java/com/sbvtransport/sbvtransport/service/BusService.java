@@ -45,8 +45,12 @@ public class BusService implements IBusService {
 
 		Line line = checkLine(bus.getId_line());
 		if (line != null) {
+			if(bus.getTime_arrive()< 5){
+				return null;
+			}
+			boolean late = checkIfLate(bus.getTime_arrive());
 			String code = "";
-			Transport newBus = new Bus(code, line, bus.isLate(), bus.getName());
+			Transport newBus = new Bus(code, line, late, bus.getName(),bus.getTime_arrive());
 			code = line.getName() + "_" + "bus" + "_" + bus.getName();
 			((Bus) newBus).setCode(code);
 			return busRepository.save(newBus);
@@ -120,6 +124,17 @@ public class BusService implements IBusService {
 		}
 		b.setLocation(l);
 		return busRepository.save(b);
+	}
+
+	@Override
+	public boolean checkIfLate(int time) {
+		
+		if(time > 5){
+			return true;
+		}else if (time == 5) {
+			return false;
+		}
+		return true;
 	}
 
 }

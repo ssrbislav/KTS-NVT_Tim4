@@ -2,7 +2,7 @@ package com.sbvtransport.sbvtransport.dto;
 
 public class TrolleyDTO {
 
-	private boolean late;
+	private int time_arrive;
 	private String name;
 	private Long id_line;
 
@@ -10,19 +10,11 @@ public class TrolleyDTO {
 
 	}
 
-	public TrolleyDTO(boolean late, String name, Long id_line) {
+	public TrolleyDTO(boolean late, String name, Long id_line,int time) {
 		super();
-		this.late = late;
 		this.name = name;
 		this.id_line = id_line;
-	}
-
-	public boolean isLate() {
-		return late;
-	}
-
-	public void setLate(boolean late) {
-		this.late = late;
+		this.time_arrive = time;
 	}
 
 	public String getName() {
@@ -41,9 +33,14 @@ public class TrolleyDTO {
 		this.id_line = id_line;
 	}
 
-	@Override
-	public String toString() {
-		return "TrolleyDTO [late=" + late + ", name=" + name + ", id_line=" + id_line + "]";
+	public int getTime_arrive() {
+		return time_arrive;
 	}
+
+	public void setTime_arrive(int time_arrive) {
+		this.time_arrive = time_arrive;
+	}
+
+	
 
 }

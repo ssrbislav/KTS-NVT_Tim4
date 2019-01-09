@@ -37,25 +37,25 @@ public class SubwayServiceJUnitTest {
 	@Before
 	public void setUp() {
 
-		List<Subway> subways = new ArrayList<>();
-		subways.add(new Subway(new Line("nova_linija", TypeTransport.subway), false, "ime", 1L, "neki_kod"));
-		subways.add(new Subway(new Line("nova_linija", TypeTransport.subway), true, "ime2", 2L, "neki_kod2"));
-		Mockito.when(subwayRepository.findAll()).thenReturn(subways);
-
-		Subway s = new Subway(new Line("nova_linija", TypeTransport.subway), false, "6ca", 1L,
-				"nova_linija_subway_6ca");
-		Optional<Subway> oSubway = Optional.of(s);
-		Mockito.when(subwayRepository.findById(1L)).thenReturn(oSubway);
-
-		Mockito.when(subwayRepository.findById(10L)).thenReturn(null);
-
-		Line line = new Line("nova_linija", TypeTransport.subway);
-		line.setId(1L);
-//		line.setStation_list(new ArrayList<>());
-		Optional<Line> oLine = Optional.of(line);
-		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
-		Subway s2 = new Subway("nova_linija_subway_5ca", line, false, "5ca");
-		Mockito.when(subwayRepository.save(s2)).thenReturn(s2);
+//		List<Subway> subways = new ArrayList<>();
+//		subways.add(new Subway(new Line("nova_linija", TypeTransport.subway), false, "ime", 1L, "neki_kod"));
+//		subways.add(new Subway(new Line("nova_linija", TypeTransport.subway), true, "ime2", 2L, "neki_kod2"));
+//		Mockito.when(subwayRepository.findAll()).thenReturn(subways);
+//
+//		Subway s = new Subway(new Line("nova_linija", TypeTransport.subway), false, "6ca", 1L,
+//				"nova_linija_subway_6ca");
+//		Optional<Subway> oSubway = Optional.of(s);
+//		Mockito.when(subwayRepository.findById(1L)).thenReturn(oSubway);
+//
+//		Mockito.when(subwayRepository.findById(10L)).thenReturn(null);
+//
+//		Line line = new Line("nova_linija", TypeTransport.subway);
+//		line.setId(1L);
+////		line.setStation_list(new ArrayList<>());
+//		Optional<Line> oLine = Optional.of(line);
+//		Mockito.when(lineRepository.findById(1L)).thenReturn(oLine);
+//		Subway s2 = new Subway("nova_linija_subway_5ca", line, false, "5ca");
+//		Mockito.when(subwayRepository.save(s2)).thenReturn(s2);
 
 	}
 

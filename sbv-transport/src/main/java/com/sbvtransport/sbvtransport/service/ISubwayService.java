@@ -17,5 +17,6 @@ public interface ISubwayService {
   boolean codeExist(String code);
   Line checkLine(Long lineId);
   Subway addLocation(AddLocationDTO addLocation);
+  boolean checkIfLate(int time);
   
 }

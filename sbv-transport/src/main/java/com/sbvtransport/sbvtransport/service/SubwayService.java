@@ -46,8 +46,12 @@ public class SubwayService implements ISubwayService {
 		
 		Line line = checkLine(subway.getId_line());
 		if (line != null) {
+			if(subway.getTime_arrive()< 5){
+				return null;
+			}
+			boolean late = checkIfLate(subway.getTime_arrive());
 			String code = "";
-			Transport newSubway = new Subway(code, line, subway.isLate(), subway.getName());
+			Transport newSubway = new Subway(code, line, late, subway.getName(),subway.getTime_arrive());
 			code = line.getName() + "_"+ "subway" + "_" + subway.getName();
 			((Subway) newSubway).setCode(code);
 			
@@ -116,6 +120,17 @@ public class SubwayService implements ISubwayService {
 		}
 		s.setLocation(l);
 		return subwayRepository.save(s);
+	}
+
+	@Override
+	public boolean checkIfLate(int time) {
+		
+		if(time > 5){
+			return true;
+		}else if (time == 5) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -2,26 +2,18 @@ package com.sbvtransport.sbvtransport.dto;
 
 public class BusDTO {
 
-	private boolean late;
 	private String name;
 	private Long id_line;
+	private int time_arrive;
 
 	public BusDTO() {
 
 	}
 
-	public BusDTO(boolean late, String name, Long id_line) {
-		this.late = late;
+	public BusDTO(boolean late, String name, Long id_line,int time_arrive) {
 		this.name = name;
 		this.id_line = id_line;
-	}
-
-	public boolean isLate() {
-		return late;
-	}
-
-	public void setLate(boolean late) {
-		this.late = late;
+		this.time_arrive = time_arrive;
 	}
 
 	public String getName() {
@@ -39,5 +31,14 @@ public class BusDTO {
 	public void setId_line(Long id_line) {
 		this.id_line = id_line;
 	}
+
+	public int getTime_arrive() {
+		return time_arrive;
+	}
+
+	public void setTime_arrive(int time_arrive) {
+		this.time_arrive = time_arrive;
+	}
+	
 
 }

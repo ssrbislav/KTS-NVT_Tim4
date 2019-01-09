@@ -36,9 +36,9 @@ public class BusControllerJUnitTest {
 	@Before
 	public void setUp(){
 		List<Bus> buses = new ArrayList<>();
-		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), false, "ime", 1L, "neki_kod"));
-		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), true, "ime2", 2L, "neki_kod2"));
-		Mockito.when(busService.findAll()).thenReturn(buses);
+//		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), false, "ime", 1L, "neki_kod"));
+//		buses.add(new Bus(new Line("nova_linija", TypeTransport.bus), true, "ime2", 2L, "neki_kod2"));
+//		Mockito.when(busService.findAll()).thenReturn(buses);
 	}
 	
 	@Test
