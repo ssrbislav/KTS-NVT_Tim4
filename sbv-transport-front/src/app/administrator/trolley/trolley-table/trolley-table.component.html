@@ -18,7 +18,7 @@
         <td>{{trolley.name}}</td>
         <td>{{trolley.code}}</td>
         <td>{{trolley.late}}</td>
-        <td> <img src ="assets/pictures/substract.png" alt="Line" style="cursor: pointer;"></td>
+        <td> <img (click) = "openModal(trolley.line)" src ="assets/pictures/substract.png" alt="Line" style="cursor: pointer;"></td>
         <td> <img src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
         <td> <img src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
         <td> <img (click) ="deleteTrolley(trolley.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>

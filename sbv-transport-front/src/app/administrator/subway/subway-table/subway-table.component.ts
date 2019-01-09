@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subway } from 'src/app/models/subway.model';
 import { SubwayService } from 'src/app/services/subway.service';
+import { Line } from 'src/app/models/line.model';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MyDialogComponent } from '../../my-dialog-line/my-dialog-line.component';
 
 @Component({
   selector: 'app-subway-table',
@@ -11,7 +14,7 @@ export class SubwayTableComponent implements OnInit {
   
   subways: Subway[];
 
-  constructor(private subwayService: SubwayService) { }
+  constructor(private subwayService: SubwayService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadAllSubways();
@@ -36,5 +39,25 @@ export class SubwayTableComponent implements OnInit {
         }
       });
   }
+
+  openModal(line: Line) {
+    const dialogConfig = new MatDialogConfig();
+
+   dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+    id: 1,
+    title: "Bojana",
+    line: line
+    };
+
+   const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+
+   dialogRef.afterClosed().subscribe(result => {
+   console.log("Dialog was closed")
+   console.log(result)
+
+   });
+    }
 
 }

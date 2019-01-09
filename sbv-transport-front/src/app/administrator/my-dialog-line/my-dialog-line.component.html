@@ -1,0 +1,37 @@
+<h1 style="text-align: center;">{{line.name}}</h1>
+<mat-dialog-content>
+  <div>
+    <!-- mozda ovde prikazemo mapu i putanju linije<img src="assets/pictures/line.jpg" style="height: 100px; width: 400px;" > -->
+    <p>line type: {{line.line_type}}</p>
+    <p>zone: {{line.zone}}</p><br>
+
+  </div>
+  <div>
+    <h2 style="text-align: center;">Stations</h2>
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Location name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Latitude</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let station of line.station_list; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{station.location.location_name}}</td>
+        <td>{{station.location.address}}</td>
+        <td>{{station.location.latitude}}</td>
+        <td>{{station.location.longitude}}</td>
+        <td>{{station.location.type}}</td>
+      </tr>
+    </table>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-button mat-dialog-close >Back</button>
+</mat-dialog-actions>

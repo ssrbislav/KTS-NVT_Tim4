@@ -29,6 +29,10 @@ import { LineComponent } from './administrator/line/line.component';
 import { StationComponent } from './administrator/station/station.component';
 import { LocationComponent } from './administrator/location/location.component';
 import { ReportComponent } from './administrator/report/report.component';
+import { MyDialogComponent } from './administrator/my-dialog-line/my-dialog-line.component';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
     LineComponent,
     StationComponent,
     LocationComponent,
-    ReportComponent
+    ReportComponent,
+    MyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,8 +76,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    MatDialogModule,
+    MatButtonModule,
+    BrowserAnimationsModule
   ],
+  entryComponents: [
+    MyDialogComponent
+   ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService],
   bootstrap: [AppComponent]
 })
