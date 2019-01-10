@@ -60,8 +60,7 @@ export class ControllerAddComponent implements OnInit {
       this.controllerService.addController(newController)
       .subscribe( data => {
           alert("Successfully controller added!");
-          // this.route.navigateByUrl('/administrator')
-          
+          this.dialogRef.close();  
 
       });
 

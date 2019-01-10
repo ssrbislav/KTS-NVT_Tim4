@@ -4,6 +4,7 @@ import { BusService } from 'src/app/services/bus.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Line } from 'src/app/models/line.model';
 import {MyDialogComponent} from 'src/app/administrator/my-dialog-line/my-dialog-line.component'
+import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class BusTableComponent implements OnInit {
       });
   }
 
-  openModal(line: Line) {
+  openModalLine(line: Line) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -60,5 +61,24 @@ export class BusTableComponent implements OnInit {
 
     });
  }
+
+ openModalLocation(location: Location) {
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+    id: 1,
+    location: location
+    };
+
+  const dialogRef = this.dialog.open(MyDialogCurrentLocationComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+  console.log("Dialog was closed")
+  console.log(result)
+
+  });
+}
 
 }

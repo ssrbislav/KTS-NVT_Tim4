@@ -6,8 +6,9 @@
         <th scope="col">Name</th>
         <th scope="col">Code</th>
         <th scope="col">Late</th>
+        <th scope="col">Time arrive</th>
         <th scope="col">Line</th>
-        <th scope="col">Location</th>
+        <th scope="col">Current location</th>
         <th scope="col">Timetable</th>
         <th scope="col">Delete</th>
       </tr>
@@ -18,8 +19,9 @@
         <td>{{subway.name}}</td>
         <td>{{subway.code}}</td>
         <td>{{subway.late}}</td>
+        <td>{{subway.time_arrive}}</td>
         <td> <img (click) = "openModal(subway.line)" src ="assets/pictures/substract.png" alt="Line" style="cursor: pointer;"></td>
-        <td> <img src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
+        <td> <img (click) = "openModalLocation(subway.location)" src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
         <td> <img src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
         <td> <img (click) ="deleteSubway(subway.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>

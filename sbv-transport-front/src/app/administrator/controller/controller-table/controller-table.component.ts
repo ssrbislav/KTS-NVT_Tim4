@@ -18,7 +18,6 @@ export class ControllerTableComponent implements OnInit{
   }
 
   loadAllControllers(){
-    console.log("Uslo u ucitavanje kontrolera");
     this.controllerService.getControllers()
       .subscribe( data => {
         this.controllers = data;

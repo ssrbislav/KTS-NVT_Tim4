@@ -6,8 +6,9 @@
         <th scope="col">Name</th>
         <th scope="col">Code</th>
         <th scope="col">Late</th>
+        <th scope="col">Time arrive</th>
         <th scope="col">Line</th>
-        <th scope="col">Location</th>
+        <th scope="col">Current location</th>
         <th scope="col">Timetable</th>
         <th scope="col">Delete</th>
       </tr>
@@ -18,8 +19,9 @@
         <td>{{trolley.name}}</td>
         <td>{{trolley.code}}</td>
         <td>{{trolley.late}}</td>
+        <td>{{trolley.time_arrive}}</td>
         <td> <img (click) = "openModal(trolley.line)" src ="assets/pictures/substract.png" alt="Line" style="cursor: pointer;"></td>
-        <td> <img src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
+        <td> <img (click) = "openModalLocation(trolley.location)" src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
         <td> <img src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
         <td> <img (click) ="deleteTrolley(trolley.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>

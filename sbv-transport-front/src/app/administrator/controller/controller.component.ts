@@ -19,14 +19,15 @@ export class ControllerComponent implements OnInit {
   }
 
   addController(){
-    
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.data = {
       id: 1,
-      title: "Bojana"
+      title: "Bojana",
+      added: false
       };
 
     const dialogRef = this.dialog.open(ControllerAddComponent, dialogConfig);
@@ -37,6 +38,8 @@ export class ControllerComponent implements OnInit {
     this.table.loadAllControllers();
 
     });
+
+    
 
   }
 

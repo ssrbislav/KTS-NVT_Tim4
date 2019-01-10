@@ -4,6 +4,7 @@ import { TrolleyService } from 'src/app/services/trolley.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Line } from 'src/app/models/line.model';
 import { MyDialogComponent } from '../../my-dialog-line/my-dialog-line.component';
+import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
 
 @Component({
   selector: 'app-trolley-table',
@@ -58,6 +59,26 @@ export class TrolleyTableComponent implements OnInit {
    console.log(result)
 
    });
+    }
+  
+
+    openModalLocation(location: Location) {
+      const dialogConfig = new MatDialogConfig();
+    
+      dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+        id: 1,
+        location: location
+        };
+    
+      const dialogRef = this.dialog.open(MyDialogCurrentLocationComponent, dialogConfig);
+    
+      dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog was closed")
+      console.log(result)
+    
+      });
     }
 
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Controller } from '../models/controller.model';
+import { throwError } from 'rxjs';
 
 
 const httpOptions = {
@@ -26,7 +27,13 @@ const httpOptions = {
     }
 
     public addController(controller: Controller){
-      return this.http.post(this.controllerUrl + 'addController',controller);
+      return this.http.post(this.controllerUrl + 'addController',controller)
+                      .pipe(e => throwError(this.errorHandler(e)));
+                      
+    }
+
+    errorHandler(e){
+      alert(e);
     }
 
   }
