@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Controller } from 'src/app/models/controller.model';
 import { ControllerService } from 'src/app/services/controller.service';
 
@@ -7,7 +7,7 @@ import { ControllerService } from 'src/app/services/controller.service';
   templateUrl: './controller-table.component.html',
   styleUrls: ['./controller-table.component.css']
 })
-export class ControllerTableComponent implements OnInit {
+export class ControllerTableComponent implements OnInit{
 
   controllers: Controller[];
 
@@ -18,6 +18,7 @@ export class ControllerTableComponent implements OnInit {
   }
 
   loadAllControllers(){
+    console.log("Uslo u ucitavanje kontrolera");
     this.controllerService.getControllers()
       .subscribe( data => {
         this.controllers = data;

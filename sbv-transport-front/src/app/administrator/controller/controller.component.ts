@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ControllerAddComponent } from './controller-add/controller-add.component';
+import { ControllerTableComponent } from './controller-table/controller-table.component';
 
 @Component({
   selector: 'app-controller',
@@ -8,13 +11,32 @@ import { Router } from '@angular/router';
 })
 export class ControllerComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  @ViewChild("appTable") table: ControllerTableComponent;
+
+  constructor(private router:Router,public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
   addController(){
-    this.router.navigateByUrl('/addController');
+    
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: "Bojana"
+      };
+
+    const dialogRef = this.dialog.open(ControllerAddComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.table.loadAllControllers();
+
+    });
 
   }
 

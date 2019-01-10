@@ -1,4 +1,4 @@
-
+<mat-dialog-content>
   <div class="addController" >
     <form>
       <h1 style="text-align: center">Add controller</h1>
@@ -18,7 +18,7 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" #pass1Input required>
   
-      <label for="psw-repeat"><b>Repeat Password*</b></label>
+      <label for="psw-repeat"><b>Repeat Password</b></label>
       <input type="password" placeholder="Repeat Password" name="psw-repeat" #pass2Input required>
   
       <label for="address"><b>Address</b></label>
@@ -33,10 +33,12 @@
       <br>
       
       <div class="clearfix">
-        <button class="cancelbtn" (click) = "cancelClicked()">Cancel</button>
-        <button type="submit" class="signupbtn" (click) = "addController()">Add Controller</button>
+        <mat-dialog-actions>
+          <button class="cancelbtn" mat-button mat-dialog-close>Cancel</button>
+          <button type="submit" class="signupbtn" mat-button mat-dialog-close (click) = "addController()">Add Controller</button>
+      </mat-dialog-actions>
       </div>
     </form>
     </div>
-  
+</mat-dialog-content> 
     

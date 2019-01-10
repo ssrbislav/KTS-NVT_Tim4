@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef ,Inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { ControllerService } from 'src/app/services/controller.service';
 import { Controller } from 'src/app/models/controller.model';
+import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-controller-add',
@@ -22,15 +23,12 @@ export class ControllerAddComponent implements OnInit {
 
   controller: Controller;
 
-  constructor(private route: Router,private controllerService: ControllerService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,private route: Router
+  ,private controllerService: ControllerService) {
+    console.log(data)
+    }
 
   ngOnInit() {
-  }
-
-  cancelClicked(){
-
-    this.route.navigateByUrl('/administrator')
-
   }
 
   addController(){
@@ -62,7 +60,8 @@ export class ControllerAddComponent implements OnInit {
       this.controllerService.addController(newController)
       .subscribe( data => {
           alert("Successfully controller added!");
-          this.route.navigateByUrl('/administrator')
+          // this.route.navigateByUrl('/administrator')
+          
 
       });
 

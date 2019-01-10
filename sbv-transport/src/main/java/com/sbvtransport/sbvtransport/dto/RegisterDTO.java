@@ -32,7 +32,7 @@ public class RegisterDTO {
 	@NotBlank
 	private String phone_number;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date_birth;
 
 	public String getUsername() {

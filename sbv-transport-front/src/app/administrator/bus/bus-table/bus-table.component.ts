@@ -44,21 +44,21 @@ export class BusTableComponent implements OnInit {
   openModal(line: Line) {
     const dialogConfig = new MatDialogConfig();
 
-   dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-    id: 1,
-    title: "Bojana",
-    line: line
-    };
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: "Bojana",
+      line: line
+      };
 
-   const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
 
-   dialogRef.afterClosed().subscribe(result => {
-   console.log("Dialog was closed")
-   console.log(result)
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
 
-   });
-    }
+    });
+ }
 
 }
