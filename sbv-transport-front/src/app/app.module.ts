@@ -33,6 +33,8 @@ import { MyDialogComponent } from './administrator/my-dialog-line/my-dialog-line
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDialogCurrentLocationComponent } from './administrator/my-dialog-current-location/my-dialog-current-location.component';
+import { LineTableComponent } from './administrator/line/line-table/line-table.component';
+import { LineService } from './services/line.service';
 
 
 const appRoutes: Routes = [
@@ -68,7 +70,8 @@ const appRoutes: Routes = [
     LocationComponent,
     ReportComponent,
     MyDialogComponent,
-    MyDialogCurrentLocationComponent
+    MyDialogCurrentLocationComponent,
+    LineTableComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +90,7 @@ const appRoutes: Routes = [
     MyDialogComponent,
     MyDialogCurrentLocationComponent
    ],
-  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService],
+  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
