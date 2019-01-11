@@ -21,6 +21,9 @@ public class LineService implements ILineService {
 	
 	@Autowired
 	StationRepository stationRepository;
+	
+	@Autowired
+	StationService stationService;
 
 	@Override
 	public Line getOne(Long id) {
@@ -80,6 +83,9 @@ public class LineService implements ILineService {
 		Station s = stationRepository.findById(addStation.getId_station()).orElse(null);
 		if(s==null){
 			return "The station doesn't exist!";
+		}
+		if(l.getStation_list().size() == 0){
+			stationService.addFirstStation(addStation);
 		}
 		l.addStation(s);
 		s.setLine(l);

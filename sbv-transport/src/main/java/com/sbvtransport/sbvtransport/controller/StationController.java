@@ -65,15 +65,6 @@ public class StationController {
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
 	}
-	
-	@RequestMapping(value = "/addFirstStation", method = RequestMethod.POST)
-	public ResponseEntity<String> addFirst(@RequestBody AddFirstStationDTO addFirst) {
-
-		String updateStation = stationService.addFirstStation(addFirst);
-
-		return new ResponseEntity<>(updateStation, HttpStatus.OK);
-
-	}
 
 
 }
