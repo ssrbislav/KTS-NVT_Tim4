@@ -27,7 +27,6 @@ import { ProfilComponent } from './administrator/profil/profil.component';
 import { AdministratorService } from './services/administrator.service';
 import { LineComponent } from './administrator/line/line.component';
 import { StationComponent } from './administrator/station/station.component';
-import { LocationComponent } from './administrator/location/location.component';
 import { ReportComponent } from './administrator/report/report.component';
 import { MyDialogComponent } from './administrator/my-dialog-line/my-dialog-line.component';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
@@ -35,6 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDialogCurrentLocationComponent } from './administrator/my-dialog-current-location/my-dialog-current-location.component';
 import { LineTableComponent } from './administrator/line/line-table/line-table.component';
 import { LineService } from './services/line.service';
+import { StationTableComponent } from './administrator/station/station-table/station-table.component';
+import { StationService } from './services/station.service';
 
 
 const appRoutes: Routes = [
@@ -67,11 +68,11 @@ const appRoutes: Routes = [
     ProfilComponent,
     LineComponent,
     StationComponent,
-    LocationComponent,
     ReportComponent,
     MyDialogComponent,
     MyDialogCurrentLocationComponent,
-    LineTableComponent
+    LineTableComponent,
+    StationTableComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +91,7 @@ const appRoutes: Routes = [
     MyDialogComponent,
     MyDialogCurrentLocationComponent
    ],
-  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService],
+  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

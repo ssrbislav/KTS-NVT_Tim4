@@ -19,7 +19,7 @@ public getLines() {
  }
     
 public deleteLine(id: BigInteger){
-    const url = `${this.lineUrl + 'deleteSubway'}/${id}`;
+    const url = `${this.lineUrl + 'deleteLine'}/${id}`;
     return this.http.get<boolean>(url);
 
     }

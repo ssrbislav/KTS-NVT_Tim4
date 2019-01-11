@@ -1,4 +1,4 @@
-import { Location } from './location.model';
+import { MyLocation } from './location.model';
 import { Line } from './line.model';
 import { Timetable } from './timetable.model';
 
@@ -9,7 +9,7 @@ export class Bus {
   line: Line;
   late: boolean;
   name: string;
-  location: Location;
+  location: MyLocation;
   timetable: Timetable;
   time_arrive: number;
   }

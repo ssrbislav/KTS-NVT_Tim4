@@ -1,12 +1,11 @@
 package com.sbvtransport.sbvtransport.service;
 
-import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
-import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.repository.StationRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +25,19 @@ public class StationService implements IStationService {
 
 	@Override
 	public Station getOne(Long id) {
-		return stationRepository.getOne(id);
+		return stationRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<Station> findAll() {
-		return stationRepository.findAll();
+		List <Station> notDeleted = new ArrayList<>();
+		List<Station> findAll = stationRepository.findAll();
+		for (Station station : findAll) {
+			if(!station.isDeleted()){
+				notDeleted.add(station);
+			}
+		}
+		return notDeleted;
 	}
 
 	@Override
@@ -46,7 +52,7 @@ public class StationService implements IStationService {
 		}
 		station.setLocation(location);
 		station.setZone(Zone.valueOf(stationDTO.getZone()));
-		
+		station.setDeleted(false);
 		stationRepository.save(station);
 
 		return "The station has been successfully created.";
@@ -63,28 +69,14 @@ public class StationService implements IStationService {
 	@Override
 	public boolean delete(Long id) {
 		if (stationRepository.findAll().contains(stationRepository.getOne(id))) {
-			stationRepository.delete(stationRepository.getOne(id));
+			Station s = getOne(id);
+			s.setDeleted(true);
+			stationRepository.save(s);
+			lineService.checkFirstStation(s.getId());
 			return true;
 		}
 		return false;
 	}
 
-	@Override
-	public String addFirstStation(AddFirstStationDTO addFirst) {
-		
-		Line l = lineService.getOne(addFirst.getId_line());
-		
-		if(l == null){
-			return "The line doesn't exist";
-		}
-		Station s = stationRepository.getOne(addFirst.getId_station());
-		if(s== null){
-			return "The station doesn't exist";
-
-		}
-		s.setLine_first_station(l);
-		stationRepository.save(s);
-		
-		return "First station succesfully changed";
-	}
+	
 }

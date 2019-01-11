@@ -54,7 +54,7 @@ public class TimetableService implements ITimetableService {
 			if(b== null){
 				return "Bus not found";
 			}
-			Set<Station> stations = b.getLine().getStation_list();
+			List<Station> stations = b.getLine().getStation_list();
 			
 		}else if(timetableDTO.getTransportType() == "trolley"){
 			

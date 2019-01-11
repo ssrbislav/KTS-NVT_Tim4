@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,15 @@ public class BusService implements IBusService {
 	LocationRepository locationRepository;
 
 	@Override
-	public List<Bus> findAll() {
-
-		return busRepository.findAll();
+	public List<Bus> findAll() {	
+		List <Bus> notDeleted = new ArrayList<>();
+		List<Bus> findAll = busRepository.findAll();
+		for (Bus bus : findAll) {
+			if(!bus.isDeleted()){
+				notDeleted.add(bus);
+			}
+		}
+		return notDeleted;
 	}
 
 	@Override
@@ -50,7 +57,7 @@ public class BusService implements IBusService {
 			}
 			boolean late = checkIfLate(bus.getTime_arrive());
 			String code = "";
-			Transport newBus = new Bus(code, line, late, bus.getName(),bus.getTime_arrive());
+			Transport newBus = new Bus(code, line, late, bus.getName(),bus.getTime_arrive(),false);
 			code = line.getName() + "_" + "bus" + "_" + bus.getName();
 			((Bus) newBus).setCode(code);
 			return busRepository.save(newBus);
@@ -81,7 +88,8 @@ public class BusService implements IBusService {
 	public boolean delete(Long id) {
 		for (Bus bus : findAll())
 			if (bus.getId() == id) {
-				busRepository.delete(bus);
+				bus.setDeleted(true);
+				busRepository.save(bus);
 				return true;
 			}
 		return false;
@@ -101,11 +109,13 @@ public class BusService implements IBusService {
 	public Line checkLine(Long lineId) {
 
 		Line line = lineRepository.findById(lineId).get();
-		System.out.println(line);
 		if (line != null) {
-			if (line.getLine_type() == TypeTransport.bus) {
-				return line;
+			if(!line.isDeleted()){
+				if (line.getLine_type() == TypeTransport.bus) {
+					return line;
+				}
 			}
+			
 		}
 		return null;
 	}
@@ -114,12 +124,12 @@ public class BusService implements IBusService {
 	public Bus addLocation(AddLocationDTO addLocation) {
 		
 		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
-		if(l==null){
+		if(l==null || l.isDeleted()){
 			return null;
 		}
 		
-		Bus b = busRepository.getOne(addLocation.getId_transport());
-		if(b==null){
+		Bus b = getOne(addLocation.getId_transport());
+		if(b==null || b.isDeleted()){
 			return null;
 		}
 		b.setLocation(l);
@@ -135,6 +145,17 @@ public class BusService implements IBusService {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public void deleteBecauseLine(Long id_line){
+		List<Bus> buses = findAll();
+		for (Bus bus : buses) {
+			if(bus.getLine().getId() == id_line){
+				bus.setDeleted(true);
+				busRepository.save(bus);
+			}
+		}
 	}
 
 }

@@ -43,6 +43,9 @@ public class Transport implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "timetable", referencedColumnName = "id")
 	protected Timetable timetable;
+	
+	@Column(name = "deleted", unique = false, nullable = false)
+	private boolean deleted;
 
 	public Transport() {
 
@@ -56,11 +59,12 @@ public class Transport implements Serializable {
 		this.time_arrive = time;
 	}
 
-	public Transport(Line line, boolean late, String name,int time) {
+	public Transport(Line line, boolean late, String name,int time,boolean deleted) {
 		this.line = line;
 		this.late = late;
 		this.name = name;
 		this.time_arrive = time;
+		this.deleted = deleted;
 	}
 
 	public Transport(Line line, boolean late, String name, Timetable timetable) {
@@ -121,5 +125,14 @@ public class Transport implements Serializable {
 	public void setTime_arrive(int time_arrive) {
 		this.time_arrive = time_arrive;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 	
 }

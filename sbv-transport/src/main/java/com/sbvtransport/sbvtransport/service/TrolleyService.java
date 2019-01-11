@@ -3,11 +3,11 @@ package com.sbvtransport.sbvtransport.service;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Transport;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
@@ -30,8 +30,15 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public List<Trolley> findAll() {
+		List <Trolley> notDeleted = new ArrayList<>();
+		List<Trolley> findAll = trolleyRepository.findAll();
+		for (Trolley trolley : findAll) {
+			if(!trolley.isDeleted()){
+				notDeleted.add(trolley);
+			}
+		}
 
-		return trolleyRepository.findAll();
+		return notDeleted;
 	}
 
 	@Override
@@ -50,7 +57,7 @@ public class TrolleyService implements ITrolleyService {
 			}
 			boolean late = checkIfLate(trolley.getTime_arrive());
 			String code = "";
-			Transport  newTrolley = new Trolley(code, line, late, trolley.getName(),trolley.getTime_arrive());
+			Transport  newTrolley = new Trolley(code, line, late, trolley.getName(),trolley.getTime_arrive(),false);
 			code = line.getName() + "_"+ "trolley" + "_" + trolley.getName();
 			((Trolley) newTrolley).setCode(code);
 			
@@ -76,7 +83,8 @@ public class TrolleyService implements ITrolleyService {
 
 		for (Trolley trolley : findAll())
 			if (trolley.getId() == id) {
-				trolleyRepository.delete(trolley);
+				trolley.setDeleted(true);
+				trolleyRepository.save(trolley);
 				return true;
 			}
 		return false;
@@ -97,9 +105,11 @@ public class TrolleyService implements ITrolleyService {
 		
 		Line line = lineRepository.findById(lineId).get();
 		if( line != null){
-			if(line.getLine_type() == TypeTransport.trolley){
-				return line;
-			}
+			if(!line.isDeleted()){
+				if(line.getLine_type() == TypeTransport.trolley){
+					return line;
+				}
+			}	
 		}
 		return null;
 	}
@@ -108,12 +118,12 @@ public class TrolleyService implements ITrolleyService {
 	public Trolley addLocation(AddLocationDTO addLocation) {
 		
 		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
-		if(l==null){
+		if(l==null || l.isDeleted()){
 			return null;
 		}
 		
-		Trolley t = trolleyRepository.getOne(addLocation.getId_transport());
-		if(t==null){
+		Trolley t = getOne(addLocation.getId_transport());
+		if(t==null || t.isDeleted()){
 			return null;
 		}
 		t.setLocation(l);
@@ -130,5 +140,16 @@ public class TrolleyService implements ITrolleyService {
 		}
 		return true;
 	}
+	@Override
+	public void deleteBecauseLine(Long id_line){
+		List<Trolley> trolleys = findAll();
+		for (Trolley trolley :trolleys) {
+			if(trolley.getLine().getId() == id_line){
+				trolley.setDeleted(true);
+				trolleyRepository.save(trolley);
+			}
+		}
+	}
+
 
 }

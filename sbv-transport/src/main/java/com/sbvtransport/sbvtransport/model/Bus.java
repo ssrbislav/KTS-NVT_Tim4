@@ -26,14 +26,15 @@ public class Bus extends Transport implements Serializable {
 
 	}
 	
-	public Bus(String code, Line line, boolean late, String name,int time) {
-		super(line, late, name,time);
+	public Bus(String code, Line line, boolean late, String name,int time,boolean deleted) {
+		super(line, late, name,time,deleted);
 		this.code = code;
+		
 	}
 	
 	
-	public Bus(Line line, boolean late, String name, Long id, String code,int time) {
-		super(line, late, name,time);
+	public Bus(Line line, boolean late, String name, Long id, String code,int time,boolean deleted) {
+		super(line, late, name,time,deleted);
 		this.id = id;
 		this.code = code;
 	}

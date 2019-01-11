@@ -7,7 +7,7 @@ import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.repository.LineRepository;
 import com.sbvtransport.sbvtransport.repository.StationRepository;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,21 @@ public class LineService implements ILineService {
 
 	@Autowired
 	LineRepository lineRepository;
-	
+
 	@Autowired
 	StationRepository stationRepository;
-	
+
 	@Autowired
 	StationService stationService;
+	
+	@Autowired
+	BusService busService;
+	
+	@Autowired
+	SubwayService subwayService;
+	
+	@Autowired
+	TrolleyService trolleyService;
 
 	@Override
 	public Line getOne(Long id) {
@@ -32,7 +41,14 @@ public class LineService implements ILineService {
 
 	@Override
 	public List<Line> findAll() {
-		return lineRepository.findAll();
+		List<Line> notDeleted = new ArrayList<>();
+		List<Line> findAll = lineRepository.findAll();
+		for (Line line : findAll) {
+			if (!line.isDeleted()) {
+				notDeleted.add(line);
+			}
+		}
+		return notDeleted;
 	}
 
 	@Override
@@ -48,8 +64,10 @@ public class LineService implements ILineService {
 		} else {
 			return "Transport type " + lineDTO.getLine_type() + " doesn't exist!";
 		}
-		line.setStation_list(new HashSet<>());
+		line.setStation_list(new ArrayList<Station>());
 		line.setZone(lineDTO.getZone());
+		line.setDeleted(false);
+		line.setFirst_station(null);
 		lineRepository.save(line);
 		return "The line has been successfully created!";
 	}
@@ -66,7 +84,16 @@ public class LineService implements ILineService {
 	@Override
 	public boolean delete(Long id) {
 		if (lineRepository.findAll().contains(lineRepository.getOne(id))) {
-			lineRepository.delete(lineRepository.getOne(id));
+			Line l = lineRepository.getOne(id);
+			if (l.getLine_type().equals(TypeTransport.bus)) {
+				busService.deleteBecauseLine(l.getId());
+			} else if (l.getLine_type().equals(TypeTransport.subway)) {
+				subwayService.deleteBecauseLine(l.getId());
+			} else if (l.getLine_type().equals(TypeTransport.trolley)) {
+				trolleyService.deleteBecauseLine(l.getId());
+			}
+			l.setDeleted(true);
+			lineRepository.save(l);
 			return true;
 		}
 		return false;
@@ -74,25 +101,62 @@ public class LineService implements ILineService {
 
 	@Override
 	public String addStation(AddFirstStationDTO addStation) {
-		
+
 		Line l = lineRepository.getOne(addStation.getId_line());
-		if(l==null){
+		if (l == null || l.isDeleted()) {
 			return "The line doesn't exist!";
-			
+
 		}
 		Station s = stationRepository.findById(addStation.getId_station()).orElse(null);
-		if(s==null){
+		if (s == null || s.isDeleted()) {
 			return "The station doesn't exist!";
 		}
-		if(l.getStation_list().size() == 0){
-			stationService.addFirstStation(addStation);
+		
+		if (l.getStation_list().size() == 0) {
+			l.setFirst_station(s.getId());
+		}else{
+			List<Station> stations = l.getStation_list();
+			int i = 1;
+			for (Station station : stations) {
+				if(!station.isDeleted()){
+					i ++;
+					break;
+				}
+			}
+			if(i ==1){
+				l.setFirst_station(s.getId());
+			}
 		}
+		
 		l.addStation(s);
 		s.setLine(l);
 		stationRepository.save(s);
 		lineRepository.save(l);
-		
+
 		return "Successfully station added!";
 	}
-
+	
+	public void checkFirstStation(Long idStation){
+		for (Line line : findAll()) {
+			if(line.getFirst_station().equals(idStation)){
+				List<Station> stations = line.getStation_list();
+				int i = 1;
+				for (Station station : stations) {
+					if(!station.isDeleted()){
+						i ++;
+						line.setFirst_station(station.getId());
+						lineRepository.save(line);
+						break;
+					}					
+				}
+				if(i==1){
+					line.setFirst_station(null);
+					lineRepository.save(line);
+				}
+				
+			}
+		}
+	}
+	
+	
 }

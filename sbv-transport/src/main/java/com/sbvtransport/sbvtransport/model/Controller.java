@@ -20,6 +20,10 @@ public class Controller extends User implements Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
+	
+	@Column(name = "deleted", unique = false, nullable = false)
+	private boolean deleted;
+
 
 	public Controller(String email, String username, String password,
 			String first_name, String last_name, String address, String phone_number, Date date_birth) {
@@ -37,6 +41,15 @@ public class Controller extends User implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	@Override

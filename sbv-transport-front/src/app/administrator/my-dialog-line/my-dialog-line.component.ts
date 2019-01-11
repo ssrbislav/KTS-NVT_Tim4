@@ -1,6 +1,8 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { Line } from 'src/app/models/line.model';
+import { Station } from 'src/app/models/station.model';
+import { StationService } from 'src/app/services/station.service';
 
 
 
@@ -13,15 +15,31 @@ export class MyDialogComponent implements OnInit {
 
   modalTitle: string;
   line: Line;
+  fstation: string = "";
+  s: Station;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>) {
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>, private stationService: StationService) {
    this.modalTitle = data.title;
-   this.line = data.line;
+   this.line = this.data.line;
+    
+    
    console.log(data)
    }
    
   ngOnInit() {
-    this.dialogRef.updateSize('80%', '80%');
+    this.dialogRef.updateSize('80%', '80%'); 
+    this.loadFirstStation();
+  }
+
+  loadFirstStation(){
+    if(this.line.first_station != null){
+      this.stationService.getStation(this.line.first_station)
+      .subscribe( data => {
+        this.s =  data; 
+        this.fstation = this.s.location.location_name;
+      });
+    }
+    
   }
 
 }

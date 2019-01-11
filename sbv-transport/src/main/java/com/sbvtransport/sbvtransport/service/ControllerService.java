@@ -1,11 +1,10 @@
 package com.sbvtransport.sbvtransport.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.model.Controller;
 import com.sbvtransport.sbvtransport.repository.ControllerRepository;
 
@@ -17,11 +16,19 @@ public class ControllerService implements IControllerService {
 
 	@Override
 	public List<Controller> findAll() {
-		return controllerRepository.findAll();
+		List <Controller> notDeleted = new ArrayList<>();
+		List<Controller> findAll = controllerRepository.findAll();
+		for (Controller controller : findAll) {
+			if(!controller.isDeleted()){
+				notDeleted.add(controller);
+			}
+		}
+		return notDeleted;
 	}
 
 	@Override
 	public Controller create(Controller controller) {
+		controller.setDeleted(false);
 		return controllerRepository.save(controller);
 	}
 
@@ -43,7 +50,8 @@ public class ControllerService implements IControllerService {
 	public boolean delete(Long id) {
 		for (Controller controller : findAll()) {
 			if (controller.getId() == id) {
-				controllerRepository.delete(controller);
+				controller.setDeleted(true);
+				controllerRepository.save(controller);
 				return true;
 			}
 		}

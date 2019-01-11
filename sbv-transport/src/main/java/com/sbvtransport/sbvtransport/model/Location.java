@@ -39,6 +39,9 @@ public class Location {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Station station;
+	
+	@Column(name = "deleted", unique = false, nullable = false)
+	private boolean deleted;
 
 	public Location() {
 	}
@@ -113,6 +116,16 @@ public class Location {
 	public void setStation(Station station) {
 		this.station = station;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 
 	@Override
 	public String toString() {

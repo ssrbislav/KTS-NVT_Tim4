@@ -69,6 +69,9 @@ public class Pricelist {
 	private Double trolley_monthly_use_price;
 	@Column(name = "trolley_yearly_use_price", unique = false, nullable = false)
 	private Double trolley_yearly_use_price;
+	
+	@Column(name = "deleted", unique = false, nullable = false)
+	private boolean deleted;
 
 	public Pricelist(Date valid_since, Date valid_until, Boolean active,
 			@Range(min = 0, max = 99) Integer senior_discount_percentage,
@@ -258,4 +261,13 @@ public class Pricelist {
 	public void setTrolley_yearly_use_price(Double trolley_yearly_use_price) {
 		this.trolley_yearly_use_price = trolley_yearly_use_price;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 }

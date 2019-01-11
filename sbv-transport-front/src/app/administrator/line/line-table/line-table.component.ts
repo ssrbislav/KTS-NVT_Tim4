@@ -24,4 +24,17 @@ export class LineTableComponent implements OnInit {
       });
   }
 
+  deleteLine(id: BigInteger){
+    console.log(id);
+    this.lineService.deleteLine(id)
+      .subscribe( data => {
+        if(data == true){
+          alert("Line is deleted!");
+          this.loadAllLines();
+        }else{
+          alert("Something went wrong!");
+        }
+      });
+  }
+
 }

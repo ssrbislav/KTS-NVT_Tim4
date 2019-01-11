@@ -1,6 +1,8 @@
+import { MyLocation } from './location.model';
 
 export class Station{
     id: BigInteger;
-    location: Location;
+    location: MyLocation;
     zone: Zone;
+    deleted: boolean;
 }

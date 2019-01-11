@@ -8,5 +8,5 @@ export class Line {
     line_type: TypeTransport;
     zone: Zone;
     timetable: Timetable;
-    first_station: Station;
+    first_station: BigInteger;
 }

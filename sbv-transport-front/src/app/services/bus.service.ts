@@ -8,21 +8,21 @@ const httpOptions = {
   };
 
 
-  @Injectable()
-  export class BusService{
+@Injectable()
+export class BusService{
 
-    constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient) {}
 
-    private busUrl = 'http://localhost:8080/api/bus/';
+  private busUrl = 'http://localhost:8080/api/bus/';
 
-    public getBuses() {
-        return this.http.get<Bus[]>(this.busUrl);
-      }
-      
-    public deleteBus(id: BigInteger){
-      const url = `${this.busUrl + 'deleteBus'}/${id}`;
-      return this.http.get<boolean>(url);
-
+  public getBuses() {
+      return this.http.get<Bus[]>(this.busUrl);
     }
+      
+  public deleteBus(id: BigInteger){
+    const url = `${this.busUrl + 'deleteBus'}/${id}`;
+    return this.http.get<boolean>(url);
+
+  }
 
   }

@@ -18,4 +18,5 @@ public interface ITrolleyService {
   Line checkLine(Long lineId);
   Trolley addLocation(AddLocationDTO addLocation);
   boolean checkIfLate(int time);
+  void deleteBecauseLine(Long id_line);
 }

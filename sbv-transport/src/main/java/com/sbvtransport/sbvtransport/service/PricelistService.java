@@ -4,6 +4,7 @@ import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
 import com.sbvtransport.sbvtransport.enumeration.TicketType;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -92,12 +93,20 @@ public class PricelistService implements IPricelistService {
 
 	@Override
 	public List<Pricelist> findAll() {
+		List <Pricelist> notDeleted = new ArrayList<>();
+		List<Pricelist> findAll = pricelistRepository.findAll();
+		for (Pricelist pricelist : findAll) {
+			if(!pricelist.isDeleted()){
+				notDeleted.add(pricelist);
+			}
+		}
 		return pricelistRepository.findAll();
 	}
 
 	@Override
 	public Pricelist create(Pricelist pricelist) {
 
+		pricelist.setDeleted(false);
 		return pricelistRepository.save(pricelist);
 	}
 
@@ -131,7 +140,8 @@ public class PricelistService implements IPricelistService {
 	public boolean delete(Long id) {
 		for (Pricelist pricelist : findAll()) {
 			if (pricelist.getId() == id) {
-				pricelistRepository.delete(pricelist);
+				pricelist.setDeleted(true);
+				pricelistRepository.save(pricelist);
 				return true;
 			}
 		}

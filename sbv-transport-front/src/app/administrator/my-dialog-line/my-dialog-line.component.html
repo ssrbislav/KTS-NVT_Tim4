@@ -3,7 +3,7 @@
   <div>
     <!-- mozda ovde prikazemo mapu i putanju linije<img src="assets/pictures/line.jpg" style="height: 100px; width: 400px;" > -->
     <p>line type: {{line.line_type}}</p>
-    <p>first station: {{line.first_station}}</p>
+    <p *ngIf = "line.first_station != null">first station: {{fstation}}</p>
     <p>zone: {{line.zone}}</p><br>
 
   </div>
@@ -12,7 +12,6 @@
     <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Location name</th>
         <th scope="col">Address</th>
         <th scope="col">Latitude</th>
@@ -21,13 +20,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let station of line.station_list; let i = index">
-        <th scope="row">{{i + 1}}</th>
-        <td>{{station.location.location_name}}</td>
-        <td>{{station.location.address}}</td>
-        <td>{{station.location.latitude}}</td>
-        <td>{{station.location.longitude}}</td>
-        <td>{{station.location.type}}</td>
+      <tr *ngFor = "let station of line.station_list">
+        <ng-container *ngIf= "!station.deleted">
+          <td>{{station.location.location_name}}</td>
+          <td>{{station.location.address}}</td>
+          <td>{{station.location.latitude}}</td>
+          <td>{{station.location.longitude}}</td>
+          <td>{{station.location.type}}</td>
+      </ng-container>
       </tr>
     </table>
   </div>

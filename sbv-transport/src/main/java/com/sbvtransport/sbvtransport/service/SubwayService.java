@@ -1,11 +1,10 @@
 package com.sbvtransport.sbvtransport.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
@@ -31,8 +30,14 @@ public class SubwayService implements ISubwayService {
 
 	@Override
 	public List<Subway> findAll() {
-		
-		return subwayRepository.findAll();
+		List <Subway> notDeleted = new ArrayList<>();
+		List<Subway> findAll = subwayRepository.findAll();
+		for (Subway subway : findAll) {
+			if(!subway.isDeleted()){
+				notDeleted.add(subway);
+			}
+		}
+		return notDeleted;
 	}
 
 	@Override
@@ -51,7 +56,7 @@ public class SubwayService implements ISubwayService {
 			}
 			boolean late = checkIfLate(subway.getTime_arrive());
 			String code = "";
-			Transport newSubway = new Subway(code, line, late, subway.getName(),subway.getTime_arrive());
+			Transport newSubway = new Subway(code, line, late, subway.getName(),subway.getTime_arrive(),false);
 			code = line.getName() + "_"+ "subway" + "_" + subway.getName();
 			((Subway) newSubway).setCode(code);
 			
@@ -78,7 +83,8 @@ public class SubwayService implements ISubwayService {
 
 		for (Subway subway : findAll())
 			if (subway.getId() == id) {
-				subwayRepository.delete(subway);
+				subway.setDeleted(true);
+				subwayRepository.save(subway);
 				return true;
 			}
 		return false;
@@ -99,8 +105,10 @@ public class SubwayService implements ISubwayService {
 		
 		Line line = lineRepository.findById(lineId).get();
 		if( line != null){
-			if(line.getLine_type() == TypeTransport.subway){
-				return line;
+			if(!line.isDeleted()){
+				if(line.getLine_type() == TypeTransport.subway){
+					return line;
+				}
 			}
 		}
 		return null;
@@ -110,12 +118,12 @@ public class SubwayService implements ISubwayService {
 	public Subway addLocation(AddLocationDTO addLocation) {
 		
 		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
-		if(l==null){
+		if(l==null || l.isDeleted()){
 			return null;
 		}
 		
-		Subway s = subwayRepository.getOne(addLocation.getId_transport());
-		if(s==null){
+		Subway s = getOne(addLocation.getId_transport());
+		if(s==null || s.isDeleted()){
 			return null;
 		}
 		s.setLocation(l);
@@ -132,5 +140,16 @@ public class SubwayService implements ISubwayService {
 		}
 		return true;
 	}
+	@Override
+	public void deleteBecauseLine(Long id_line){
+		List<Subway> subways = findAll();
+		for (Subway subway : subways) {
+			if(subway.getLine().getId() == id_line){
+				subway.setDeleted(true);
+				subwayRepository.save(subway);
+			}
+		}
+	}
+
 
 }

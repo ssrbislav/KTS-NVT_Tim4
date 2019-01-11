@@ -17,4 +17,5 @@ public interface IBusService {
 	Line checkLine(Long lineId);
 	Bus addLocation(AddLocationDTO addLocation);
 	boolean checkIfLate(int time);
+	void deleteBecauseLine(Long id_line);
 }

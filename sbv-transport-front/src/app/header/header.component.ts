@@ -60,10 +60,6 @@ export class HeaderComponent implements OnInit {
     this.featureSelected.emit('station');
   }
 
-  clickButtonLocation(){
-    this.featureSelected.emit('location');
-  }
-
   clickButtonReport(){
     this.featureSelected.emit('report');
   }

@@ -3,6 +3,7 @@ package com.sbvtransport.sbvtransport.service;
 import com.sbvtransport.sbvtransport.dto.LocationDTO;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.repository.LocationRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,14 @@ public class LocationService implements ILocationService {
 
 	@Override
 	public List<Location> findAll() {
-		return locationRepository.findAll();
+		List <Location> notDeleted = new ArrayList<>();
+		List<Location> findAll = locationRepository.findAll();
+		for (Location location : findAll) {
+			if(!location.isDeleted()){
+				notDeleted.add(location);
+			}
+		}
+		return notDeleted;
 	}
 
 	@Override
@@ -35,6 +43,7 @@ public class LocationService implements ILocationService {
 		location.setLocation_name(locationDTO.getLocation_name());
 		location.setLatitude(locationDTO.getLatitude());
 		location.setAddress(locationDTO.getAddress());
+		location.setDeleted(false);
 		locationRepository.save(location);
 		return "Location has been successfully created!";
 	}
@@ -55,7 +64,8 @@ public class LocationService implements ILocationService {
 	public boolean delete(Long id) {
 		for (Location l : findAll()) {
 			if (l.getId() == id) {
-				locationRepository.delete(l);
+				l.setDeleted(true);
+				locationRepository.save(l);
 				return true;
 			}
 		}

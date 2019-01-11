@@ -1,5 +1,5 @@
 
-export class Location {
+export class MyLocation {
   id: BigInteger;
   location_name: string;
   address: string;
