@@ -1,0 +1,22 @@
+<h1 style="text-align: center;">First station</h1>
+<mat-dialog-content>
+  <div *ngIf = "show == 'exist'">
+    <!-- mozda ovde prikazemo na mapi lokaciju<img src="assets/pictures/line.jpg" style="height: 100px; width: 400px;" > -->
+    <p>Zone: {{station.zone}} </p>
+    <p>Location name: {{station.location.location_name}}</p>
+    <p>Address: {{station.location.address}}</p>
+    <p>Latitude: {{station.location.latitude}}</p>
+    <p>Longitude: {{station.location.longitude}}</p>
+    <p>Type: {{station.location.type}}</p>
+
+  </div>
+
+  <div *ngIf = "show == 'not'">
+    <p>There is no stations yet!</p>
+  </div>
+  
+
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-button mat-dialog-close >Back</button>
+</mat-dialog-actions>

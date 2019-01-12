@@ -10,6 +10,7 @@ export class Controller{
 	address:string;
 	phone_number:string;
 	date_birth:Date;
+	deleted: boolean;
 	
 	constructor(email:string, username:string, password:string, fname:string, 
 		lname:string, address:string, phone:string, date:Date){
@@ -21,5 +22,6 @@ export class Controller{
 		this.address = address;
 		this.phone_number = phone;
 		this.date_birth = date;
+		
     }
 }

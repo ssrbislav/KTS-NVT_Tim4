@@ -19,14 +19,12 @@ export class MyDialogComponent implements OnInit {
   s: Station;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>, private stationService: StationService) {
-   this.modalTitle = data.title;
-   this.line = this.data.line;
-    
-    
+   this.modalTitle = data.title; 
    console.log(data)
    }
    
   ngOnInit() {
+    this.line = this.data.line;
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadFirstStation();
   }

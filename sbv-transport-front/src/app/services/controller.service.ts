@@ -27,13 +27,9 @@ const httpOptions = {
     }
 
     public addController(controller: Controller){
-      return this.http.post(this.controllerUrl + 'addController',controller)
-                      .pipe(e => throwError(this.errorHandler(e)));
+      return this.http.post(this.controllerUrl + 'addController',controller);
                       
-    }
-
-    errorHandler(e){
-      alert(e);
+                      
     }
 
   }

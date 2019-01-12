@@ -1,0 +1,26 @@
+<h1 style="text-align: center">All stations</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Zone</th>
+        <th scope="col">Location name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Latitude</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">Type</th>      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let station of stations; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{station.zone}}</td>
+        <td>{{station.location.location_name}}</td>
+        <td>{{station.location.address}}</td>
+        <td>{{station.location.latitude}}</td>
+        <td>{{station.location.longitude}}</td>
+        <td>{{station.location.type}}</td>
+      </tr>
+  </table>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close >Back</button>
+  </mat-dialog-actions>

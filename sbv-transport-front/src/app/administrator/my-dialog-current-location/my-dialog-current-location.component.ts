@@ -13,10 +13,11 @@ export class MyDialogCurrentLocationComponent implements OnInit {
   show :string = 'exist';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>) {
-    this.location = data.location;
+    
    }
 
   ngOnInit() {
+    this.location = this.data.location;
     this.loadPage();
   }
 

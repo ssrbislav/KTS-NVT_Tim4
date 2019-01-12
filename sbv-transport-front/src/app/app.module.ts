@@ -36,6 +36,8 @@ import { LineTableComponent } from './administrator/line/line-table/line-table.c
 import { LineService } from './services/line.service';
 import { StationTableComponent } from './administrator/station/station-table/station-table.component';
 import { StationService } from './services/station.service';
+import { MyDialogFirstStationComponent } from './administrator/line/line-table/my-dialog-first-station/my-dialog-first-station.component';
+import { MyDialogStationsComponent } from './administrator/line/line-table/my-dialog-stations/my-dialog-stations.component';
 
 
 const appRoutes: Routes = [
@@ -72,7 +74,9 @@ const appRoutes: Routes = [
     MyDialogComponent,
     MyDialogCurrentLocationComponent,
     LineTableComponent,
-    StationTableComponent
+    StationTableComponent,
+    MyDialogFirstStationComponent,
+    MyDialogStationsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,9 @@ const appRoutes: Routes = [
   ],
   entryComponents: [
     MyDialogComponent,
-    MyDialogCurrentLocationComponent
+    MyDialogCurrentLocationComponent,
+    MyDialogFirstStationComponent,
+    MyDialogStationsComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService],
   bootstrap: [AppComponent]
