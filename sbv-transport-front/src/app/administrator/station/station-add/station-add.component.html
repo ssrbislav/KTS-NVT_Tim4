@@ -1,0 +1,35 @@
+
+  <div class="addStation" >
+    <form>
+      <h1 style="text-align: center">Add station</h1>
+      
+      <label for="first_name"><b>Zone</b></label>
+
+      <select [(ngModel)]="station.zone" id="category" name="zone" [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>select a zone</option>
+        <option [value]="first">first</option>
+        <option [value]="second">second</option>
+      </select>
+
+      <label for="location_name"><b>Location name</b></label>
+      <input type="text" placeholder="Enter Location name" name="location_name" [(ngModel)]="mylocation.location_name" 
+      [ngModelOptions]="{standalone: true}" required>
+
+      <label for="type"><b>Type</b></label>
+      <input type="text" placeholder="Enter Type of location" name="type" [(ngModel)]="mylocation.type"
+       [ngModelOptions]="{standalone: true}" required>
+
+      <div id="map" class="map" style="width:100%;height:400px"></div>
+     
+      <br>
+      
+      <div class="clearfix">
+        <mat-dialog-actions>
+          <button class="cancelbtn" mat-button mat-dialog-close>Cancel</button>
+          <button class="signupbtn" type="button" mat-button (click) = "addStation()" >Add Station</button>
+      </mat-dialog-actions>
+      </div>
+    </form>
+    </div>
+
+    

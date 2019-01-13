@@ -27,8 +27,7 @@ const httpOptions = {
     }
 
     public addController(controller: Controller){
-      return this.http.post(this.controllerUrl + 'addController',controller);
-                      
+      return this.http.post(this.controllerUrl + 'addController',controller);                 
                       
     }
 

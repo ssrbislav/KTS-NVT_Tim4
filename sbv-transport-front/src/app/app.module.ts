@@ -38,6 +38,9 @@ import { StationTableComponent } from './administrator/station/station-table/sta
 import { StationService } from './services/station.service';
 import { MyDialogFirstStationComponent } from './administrator/line/line-table/my-dialog-first-station/my-dialog-first-station.component';
 import { MyDialogStationsComponent } from './administrator/line/line-table/my-dialog-stations/my-dialog-stations.component';
+import { StationAddComponent } from './administrator/station/station-add/station-add.component';
+import { LocationService } from './services/location.service';
+import { FormsModule } from '@angular/forms';
 
 
 const appRoutes: Routes = [
@@ -76,7 +79,8 @@ const appRoutes: Routes = [
     LineTableComponent,
     StationTableComponent,
     MyDialogFirstStationComponent,
-    MyDialogStationsComponent
+    MyDialogStationsComponent,
+    StationAddComponent
   ],
   imports: [
     BrowserModule,
@@ -89,15 +93,18 @@ const appRoutes: Routes = [
     ),
     MatDialogModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   entryComponents: [
     MyDialogComponent,
     MyDialogCurrentLocationComponent,
     MyDialogFirstStationComponent,
-    MyDialogStationsComponent
+    MyDialogStationsComponent,
+    StationAddComponent
    ],
-  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService],
+  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
+    LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

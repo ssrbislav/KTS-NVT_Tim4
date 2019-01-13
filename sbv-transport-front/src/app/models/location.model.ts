@@ -6,6 +6,7 @@ export class MyLocation {
   latitude: number;
   longitude:number;
   type: string;
+  deleted: boolean;
 
  
 }
