@@ -1,20 +1,11 @@
 <h1 style="text-align: center;">Current location</h1>
 <mat-dialog-content>
-  <div *ngIf = "show == 'exist'">
+  <div *ngIf = "show == 'not'">
+    <br><h1 style="text-align: center;">Transport didn't start!</h1>
+  </div>
     <!-- mozda ovde prikazemo na mapi lokaciju<img src="assets/pictures/line.jpg" style="height: 100px; width: 400px;" > -->
 
-    <p>Location name: {{location.location_name}}</p>
-    <p>Address: {{location.address}}</p>
-    <p>Latitude: {{location.latitude}}</p>
-    <p>Longitude: {{location.longitude}}</p>
-    <p>Type: {{location.type}}</p>
-
-  </div>
-
-  <div *ngIf = "show == 'not'">
-    <p>The transport didn't start!</p>
-  </div>
-  
+  <div id="map" class="map" style="width:100%;height:400px"></div>
 
 </mat-dialog-content>
 <mat-dialog-actions>

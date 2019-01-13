@@ -1,4 +1,4 @@
-import { Component, OnInit , Inject, ViewChild, NgZone} from '@angular/core';
+import { Component, OnInit , Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { LocationService } from 'src/app/services/location.service';
 import { LocationDTO } from 'src/app/models.dto/location.dto';
