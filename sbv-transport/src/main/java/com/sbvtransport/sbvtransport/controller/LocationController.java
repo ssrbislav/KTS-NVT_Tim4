@@ -39,9 +39,9 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "/addLocation", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody LocationDTO location) {
+	public ResponseEntity<Location> create(@RequestBody LocationDTO location) {
 
-		String newLocation = locationService.create(location);
+		Location newLocation = locationService.create(location);
 
 		return new ResponseEntity<>(newLocation, HttpStatus.OK);
 

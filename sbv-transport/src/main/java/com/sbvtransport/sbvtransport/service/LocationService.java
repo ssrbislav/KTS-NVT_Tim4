@@ -36,7 +36,7 @@ public class LocationService implements ILocationService {
 	}
 
 	@Override
-	public String create(LocationDTO locationDTO) {
+	public Location create(LocationDTO locationDTO) {
 		Location location = new Location();
 		location.setType(locationDTO.getType());
 		location.setLongitude(locationDTO.getLongitude());
@@ -45,7 +45,7 @@ public class LocationService implements ILocationService {
 		location.setAddress(locationDTO.getAddress());
 		location.setDeleted(false);
 		locationRepository.save(location);
-		return "Location has been successfully created!";
+		return locationRepository.save(location);
 	}
 
 	@Override

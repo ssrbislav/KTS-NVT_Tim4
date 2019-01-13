@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Station } from '../models/station.model';
+import { StationDTO } from '../models.dto/station.dto';
 
 
 const httpOptions = {
@@ -24,10 +25,15 @@ export class StationService{
 
   }
 
-  public getStation(id: BigInteger){
-    const url = `${this.stationUrl + 'getStation'}/${id}`;
-    return this.http.get<Station>(url);
+    public getStation(id: BigInteger){
+        const url = `${this.stationUrl + 'getStation'}/${id}`;
+        return this.http.get<Station>(url);
 
 }
+
+    public addStation(station: StationDTO){
+        return this.http.post<Station>(this.stationUrl + 'addStation',station);                 
+                    
+    }
 
 }

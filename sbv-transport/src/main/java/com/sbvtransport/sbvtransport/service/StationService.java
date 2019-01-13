@@ -41,21 +41,21 @@ public class StationService implements IStationService {
 	}
 
 	@Override
-	public String create(StationDTO stationDTO) {
+	public Station create(StationDTO stationDTO) {
 		Location location = new Location();
 		Station station = new Station();
 
 		if (!locationService.findAll().contains(locationService.getOne(stationDTO.getLocation_id()))) {
-			return "Location with ID " + stationDTO.getLocation_id() + " not found!";
+			return null;
 		} else {
 			location = locationService.getOne(stationDTO.getLocation_id());
 		}
 		station.setLocation(location);
 		station.setZone(Zone.valueOf(stationDTO.getZone()));
 		station.setDeleted(false);
-		stationRepository.save(station);
+		
 
-		return "The station has been successfully created.";
+		return stationRepository.save(station);
 	}
 
 	@Override

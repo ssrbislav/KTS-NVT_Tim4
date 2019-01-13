@@ -8,7 +8,7 @@ public interface IStationService {
 
   Station getOne(Long id);
   List<Station> findAll();
-  String create(StationDTO stationDTO);
+  Station create(StationDTO stationDTO);
   Station update(Station station);
   boolean delete(Long id);
 

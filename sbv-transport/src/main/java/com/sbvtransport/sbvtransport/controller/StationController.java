@@ -39,9 +39,9 @@ public class StationController {
 	}
 
 	@RequestMapping(value = "/addStation", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody StationDTO station) {
+	public ResponseEntity<Station> create(@RequestBody StationDTO station) {
 
-		String newStation = stationService.create(station);
+		Station newStation = stationService.create(station);
 
 		return new ResponseEntity<>(newStation, HttpStatus.OK);
 

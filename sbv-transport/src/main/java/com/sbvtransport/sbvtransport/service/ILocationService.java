@@ -8,7 +8,7 @@ public interface ILocationService {
 
   Location getOne(Long id);
   List<Location> findAll();
-  String create(LocationDTO locationDTO);
+  Location create(LocationDTO locationDTO);
   Location update(Location location);
   boolean delete(Long id);
 

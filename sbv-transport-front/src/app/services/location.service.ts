@@ -27,7 +27,7 @@ public deleteLocation(id: BigInteger){
 }
 
 public addLocation(location: LocationDTO){
-    return this.http.post(this.locationUrl + 'addLocation',location);                 
+    return this.http.post<MyLocation>(this.locationUrl + 'addLocation',location);                 
                     
 }
 

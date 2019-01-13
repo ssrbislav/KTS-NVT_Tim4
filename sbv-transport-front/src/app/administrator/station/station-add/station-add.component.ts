@@ -3,9 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { LocationService } from 'src/app/services/location.service';
 import { LocationDTO } from 'src/app/models.dto/location.dto';
 import { StationDTO } from 'src/app/models.dto/station.dto';
-declare var ol: any;
-declare var address :string;
-
+import { StationService } from 'src/app/services/station.service';
+declare var ol: any; 
 
 
 @Component({
@@ -14,7 +13,6 @@ declare var address :string;
   styleUrls: ['./station-add.component.css']
 })
 export class StationAddComponent implements OnInit {
-
   mylocation : LocationDTO = new LocationDTO();
   station : StationDTO = new StationDTO();
   map: any;
@@ -23,7 +21,7 @@ export class StationAddComponent implements OnInit {
   address:any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private locationService: LocationService, private ngZone: NgZone) { }
+  private locationService: LocationService, private stationService: StationService) { }
 
   ngOnInit() {
     this.dialogRef.updateSize('80%', '80%'); 
@@ -61,7 +59,7 @@ export class StationAddComponent implements OnInit {
         console.log(lonlat);
         this.lon = lonlat[0];
         this.lat = lonlat[1];
-        alert(`lat: ${this.lat} long: ${this.lon}`);
+        //alert(`lat: ${this.lat} long: ${this.lon}`);
         var iconFeatures = [];
   
         var iconFeature = new ol.Feature({
@@ -69,12 +67,13 @@ export class StationAddComponent implements OnInit {
                 'EPSG:3857'))
 
         });
+        document.getElementById('lon').innerHTML = lonlat[0];
+        document.getElementById('lan').innerHTML = lonlat[1];
 
         markerSource.clear();
         markerSource.addFeature(iconFeature);
-        reverseGeocode(this.lon,this.lat); 
+        reverseGeocode(this.lon,this.lat);
         
-
       });
 
       function reverseGeocode(lon, lat) {
@@ -84,29 +83,51 @@ export class StationAddComponent implements OnInit {
              })
              .then(function(json) {
                 console.log(json.display_name);
-                this.ngZone.run(() => {
-                  address = json.display_name;
-                })
-                // this.address = json.display_name;
-                alert(json.display_name)
+                document.getElementById('address').innerHTML  = json.display_name;
              });
      }
+
+     
     
   }
 
+  addLocation(){
+    
+    if(document.getElementById('lan').innerHTML == ""){
+      alert("Please click on map to add location!");
+    }else if(this.station.zone == null){
+      alert("Please select zone!");
+    }else if(this.mylocation.location_name == null){
+      alert("Please write location name!");
+    }else{
+
+      this.mylocation.latitude = parseFloat(document.getElementById('lan').innerHTML);
+      this.mylocation.longitude = parseFloat(document.getElementById('lon').innerHTML);
+      this.mylocation.address = document.getElementById('address').innerHTML;
+      this.mylocation.type = 'station';
+
+      this.locationService.addLocation(this.mylocation)
+        .subscribe( data => {
+          this.station.location_id = data.id;
+          this.addStation();
+        
+         });
+    }
+    
+  }
 
   addStation(){
-    this.mylocation.latitude = this.lat;
-    this.mylocation.longitude = this.lon;
-    this.mylocation.address = this.address;
-    this.locationService.addLocation(this.mylocation)
-    .subscribe( data => {
-       if(data == "Location has been successfully created!"){
-         alert("Kreirana lokacije");
-       }
-        // this.dialogRef.close();  
+    this.stationService.addStation(this.station)
+      .subscribe( data => {
+          if(data == null){
+            alert("Something went wrong!");
+          }else{
+            alert("Successfully station added!");
+            this.dialogRef.close();  
+          }
+          
 
-    });
+      });
 
   }
 
