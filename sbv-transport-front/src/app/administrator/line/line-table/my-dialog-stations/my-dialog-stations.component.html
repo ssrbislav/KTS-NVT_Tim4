@@ -2,7 +2,6 @@
 <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Zone</th>
         <th scope="col">Location name</th>
         <th scope="col">Address</th>
@@ -12,13 +11,14 @@
     </thead>
     <tbody>
       <tr *ngFor = "let station of stations; let i = index">
-        <th scope="row">{{i + 1}}</th>
-        <td>{{station.zone}}</td>
-        <td>{{station.location.location_name}}</td>
-        <td>{{station.location.address}}</td>
-        <td>{{station.location.latitude}}</td>
-        <td>{{station.location.longitude}}</td>
-        <td>{{station.location.type}}</td>
+        <ng-container *ngIf= "!station.deleted">
+          <td>{{station.zone}}</td>
+          <td>{{station.location.location_name}}</td>
+          <td>{{station.location.address}}</td>
+          <td>{{station.location.latitude}}</td>
+          <td>{{station.location.longitude}}</td>
+          <td>{{station.location.type}}</td>
+        </ng-container>
       </tr>
   </table>
   <mat-dialog-actions>
