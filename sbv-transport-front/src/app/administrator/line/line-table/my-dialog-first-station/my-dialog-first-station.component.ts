@@ -37,7 +37,7 @@ export class MyDialogFirstStationComponent implements OnInit {
     
     var iconStyle = new ol.style.Style({
       image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-        src: 'assets/pictures/station-map.png'
+        src: 'assets/pictures/bus-stop.png'
       }))
       });
 
