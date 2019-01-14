@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Output,EventEmitter} from '@angular/core';
 import { StationService } from 'src/app/services/station.service';
 import { Station } from 'src/app/models/station.model';
 
@@ -10,6 +10,7 @@ import { Station } from 'src/app/models/station.model';
 export class StationTableComponent implements OnInit {
 
   stations: Station[];
+  @Output() deleted = new EventEmitter<boolean>();
 
   constructor(private stationService:StationService) { }
 
@@ -31,6 +32,7 @@ export class StationTableComponent implements OnInit {
         if(data == true){
           alert("Station is deleted!");
           this.loadAllStations();
+          this.deleted.emit(true); 
         }else{
           alert("Something went wrong!");
         }

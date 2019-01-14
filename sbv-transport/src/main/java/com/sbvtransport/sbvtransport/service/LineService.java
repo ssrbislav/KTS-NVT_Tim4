@@ -24,13 +24,13 @@ public class LineService implements ILineService {
 
 	@Autowired
 	StationService stationService;
-	
+
 	@Autowired
 	BusService busService;
-	
+
 	@Autowired
 	SubwayService subwayService;
-	
+
 	@Autowired
 	TrolleyService trolleyService;
 
@@ -111,23 +111,23 @@ public class LineService implements ILineService {
 		if (s == null || s.isDeleted()) {
 			return "The station doesn't exist!";
 		}
-		
+
 		if (l.getStation_list().size() == 0) {
 			l.setFirst_station(s.getId());
-		}else{
+		} else {
 			List<Station> stations = l.getStation_list();
 			int i = 1;
 			for (Station station : stations) {
-				if(!station.isDeleted()){
-					i ++;
+				if (!station.isDeleted()) {
+					i++;
 					break;
 				}
 			}
-			if(i ==1){
+			if (i == 1) {
 				l.setFirst_station(s.getId());
 			}
 		}
-		
+
 		l.addStation(s);
 		s.setLine(l);
 		stationRepository.save(s);
@@ -135,28 +135,30 @@ public class LineService implements ILineService {
 
 		return "Successfully station added!";
 	}
-	
-	public void checkFirstStation(Long idStation){
+
+	public void checkFirstStation(Long idStation) {
 		for (Line line : findAll()) {
-			if(line.getFirst_station().equals(idStation)){
-				List<Station> stations = line.getStation_list();
-				int i = 1;
-				for (Station station : stations) {
-					if(!station.isDeleted()){
-						i ++;
-						line.setFirst_station(station.getId());
+			if (line.getFirst_station() != null) {
+				if (line.getFirst_station().equals(idStation)) {
+					List<Station> stations = line.getStation_list();
+					int i = 1;
+					for (Station station : stations) {
+						if (!station.isDeleted()) {
+							i++;
+							line.setFirst_station(station.getId());
+							lineRepository.save(line);
+							break;
+						}
+					}
+					if (i == 1) {
+						line.setFirst_station(null);
 						lineRepository.save(line);
-						break;
-					}					
+					}
+
 				}
-				if(i==1){
-					line.setFirst_station(null);
-					lineRepository.save(line);
-				}
-				
 			}
+
 		}
 	}
-	
-	
+
 }
