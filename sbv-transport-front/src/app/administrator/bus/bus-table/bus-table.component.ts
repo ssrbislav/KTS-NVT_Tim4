@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { Bus } from 'src/app/models/bus.model';
 import { BusService } from 'src/app/services/bus.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -15,6 +15,7 @@ import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-locati
 export class BusTableComponent implements OnInit {
 
   buses: Bus[];
+  @Output() deleted = new EventEmitter<boolean>();
 
   constructor(private busService:BusService, public dialog: MatDialog) { }
 
@@ -36,6 +37,7 @@ export class BusTableComponent implements OnInit {
         if(data == true){
           alert("Bus is deleted!");
           this.loadAllBuses();
+          this.deleted.emit(true); 
         }else{
           alert("Something went wrong!");
         }

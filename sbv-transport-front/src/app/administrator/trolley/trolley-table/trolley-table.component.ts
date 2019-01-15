@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { Trolley } from 'src/app/models/trolley.model';
 import { TrolleyService } from 'src/app/services/trolley.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -14,6 +14,7 @@ import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-locati
 export class TrolleyTableComponent implements OnInit {
 
   trolleys: Trolley[];
+  @Output() deleted = new EventEmitter<boolean>();
 
   constructor(private trolleyService: TrolleyService, public dialog: MatDialog) { }
 
@@ -35,6 +36,7 @@ export class TrolleyTableComponent implements OnInit {
         if(data == true){
           alert("Trolley is deleted!");
           this.loadAllTrolleys();
+          this.deleted.emit(true); 
         }else{
           alert("Something went wrong!");
         }

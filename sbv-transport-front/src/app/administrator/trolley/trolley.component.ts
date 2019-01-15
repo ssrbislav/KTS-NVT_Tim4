@@ -57,13 +57,16 @@ export class TrolleyComponent implements OnInit {
       });
 
       this.trolleys.forEach(function (value) {
-        var iconFeature = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.transform([value.location.longitude, value.location.latitude], 'EPSG:4326',
-                  'EPSG:3857'))
-    
-          });
-        markerSource.addFeature(iconFeature);
-    
+        if(value.location != null){
+          var iconFeature = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.transform([value.location.longitude, value.location.latitude], 'EPSG:4326',
+                    'EPSG:3857'))
+      
+            });
+          markerSource.addFeature(iconFeature);
+      
+        }
+        
       })
     }else{
 
@@ -72,13 +75,16 @@ export class TrolleyComponent implements OnInit {
       const markerSource2 = new ol.source.Vector();
     
       this.trolleys.forEach(function (value) {
-        var iconFeature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.transform([value.location.longitude, value.location.latitude], 'EPSG:4326',
-                'EPSG:3857'))
-  
-        });
-        markerSource2.addFeature(iconFeature);
-   
+        if(value.location!= null){
+          var iconFeature = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.transform([value.location.longitude, value.location.latitude], 'EPSG:4326',
+                    'EPSG:3857'))
+      
+            });
+            markerSource2.addFeature(iconFeature);
+       
+        }
+        
   
     })
       l.setSource(markerSource2);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { Subway } from 'src/app/models/subway.model';
 import { SubwayService } from 'src/app/services/subway.service';
 import { Line } from 'src/app/models/line.model';
@@ -14,6 +14,7 @@ import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-locati
 export class SubwayTableComponent implements OnInit {
   
   subways: Subway[];
+  @Output() deleted = new EventEmitter<boolean>();
 
   constructor(private subwayService: SubwayService, public dialog: MatDialog) { }
 
@@ -35,6 +36,7 @@ export class SubwayTableComponent implements OnInit {
         if(data == true){
           alert("Subway is deleted!");
           this.loadAllSubways();
+          this.deleted.emit(true); 
         }else{
           alert("Something went wrong!");
         }
