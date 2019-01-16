@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Popup } from 'ng2-opd-popup';
 import { Router } from '@angular/router';
 
 @Component({
