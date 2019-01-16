@@ -1,6 +1,7 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { LoginComponent } from '../header/login/login.component';
 import { RegistrationComponent } from '../header/registration/registration.component';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-main-page',
@@ -9,10 +10,9 @@ import { RegistrationComponent } from '../header/registration/registration.compo
 })
 export class MainPageComponent implements OnInit {
 
-  @ViewChild("login") login: LoginComponent;
   @ViewChild("registration") registration: RegistrationComponent;
 
-  constructor(){
+  constructor(public dialog: MatDialog){
 
   }
 
@@ -26,9 +26,31 @@ export class MainPageComponent implements OnInit {
     this.showPopUp = feature;
     console.log(feature);
     if(feature == 'login'){
-      this.login.showLogin();
+      this.showLogin();
     }
   }
+
+  showLogin(){
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: "Bojana"
+      };
+
+    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+
+    });
+
+  }
+  
  
 
 }

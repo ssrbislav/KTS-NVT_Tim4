@@ -29,7 +29,7 @@ import { LineComponent } from './administrator/line/line.component';
 import { StationComponent } from './administrator/station/station.component';
 import { ReportComponent } from './administrator/report/report.component';
 import { MyDialogComponent } from './administrator/my-dialog-line/my-dialog-line.component';
-import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDialogCurrentLocationComponent } from './administrator/my-dialog-current-location/my-dialog-current-location.component';
 import { LineTableComponent } from './administrator/line/line-table/line-table.component';
@@ -104,10 +104,13 @@ const appRoutes: Routes = [
     MyDialogFirstStationComponent,
     MyDialogStationsComponent,
     StationAddComponent,
-    LineAddComponent
+    LineAddComponent,
+    LoginComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService],
+    LocationService,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

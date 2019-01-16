@@ -1,5 +1,6 @@
-import { Component, OnInit ,Input,ViewChild,ElementRef} from '@angular/core';
-import {Popup} from 'ng2-opd-popup';
+import { Component, OnInit ,Inject} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+
 
 @Component({
   selector: 'app-login',
@@ -8,34 +9,16 @@ import {Popup} from 'ng2-opd-popup';
 })
 export class LoginComponent implements OnInit {
 
-  @ViewChild('usernameInput') usernameInputRef: ElementRef;
-  @ViewChild('passwordInput') passwordInputRef: ElementRef;
+  // @ViewChild('usernameInput') usernameInputRef: ElementRef;
+  // @ViewChild('passwordInput') passwordInputRef: ElementRef;
 
-
-  @Input() show: boolean = false;
-
-  constructor(private popup : Popup) {
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>) {
   }
 
   ngOnInit() {
     
   }
 
-  showLogin() {
-    this.popup.options = {
-      header: "Login",
-      confirmBtnContent: "Login"
-      };
-    this.popup.show(this.popup.options);
-  }
-
-  logIn(){
-    const username = this.usernameInputRef.nativeElement.value;
-    const password = this.passwordInputRef.nativeElement.value;
-    console.log("username je " + username);
-    console.log("password je:" + password);
-
-    this.popup.hide();
-  }
+  
 
 }

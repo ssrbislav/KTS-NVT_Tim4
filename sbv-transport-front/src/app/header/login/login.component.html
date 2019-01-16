@@ -1,11 +1,20 @@
-<popup (confirmClick)="logIn()">
-  <div>
-    <img src ="assets/pictures/group.png" alt="Log in">
-    <br>
-    <label for="username">Username:</label>
-    <input type="text" class="form-control" #usernameInput>
-    <label for="password">Password:</label>
-    <input type="password" class="form-control" #passwordInput>
-  </div>
-</popup>
 
+  <div class="logIn" >
+
+        <form>
+          <h1> Log in</h1>
+        </form>
+      
+  
+    <div class="clearfix">
+        <mat-dialog-actions>
+              
+          <button class="cancelbtn" type="button" mat-button mat-dialog-close >Back</button>
+          <button class="signupbtn" type="button" mat-button (click) = "logIn()" >Log In</button>  
+        </mat-dialog-actions>
+    </div>
+  
+  
+  </div>
+  
+      
