@@ -42,9 +42,9 @@ public class LineController {
 	}
 
 	@RequestMapping(value = "/addLine", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody LineDTO line) {
+	public ResponseEntity<Line> create(@RequestBody LineDTO line) {
 
-		String newLine = lineService.create(line);
+		Line newLine = lineService.create(line);
 
 		return new ResponseEntity<>(newLine, HttpStatus.OK);
 
@@ -72,6 +72,15 @@ public class LineController {
 	public ResponseEntity<String> addStation(@RequestBody AddFirstStationDTO addStation) {
 
 		String updateLine = lineService.addStation(addStation);
+
+		return new ResponseEntity<>(updateLine, HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/addListStation", method = RequestMethod.POST)
+	public ResponseEntity<Line> addListStation(@RequestBody List<AddFirstStationDTO> addStation) {
+		
+		Line updateLine = lineService.addListStations(addStation);
 
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 

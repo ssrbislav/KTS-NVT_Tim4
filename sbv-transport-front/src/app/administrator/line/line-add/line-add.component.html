@@ -1,0 +1,81 @@
+
+  <div class="addLine" >
+
+    <div *ngIf= "show == 'line'">
+      <form>
+        <h1 style="text-align: center">Add line</h1>
+    
+        <label for="line_name"><b>Line name</b></label>
+        <input type="text" placeholder="Enter Line name" name="line_name" [(ngModel)]="line.name" 
+        [ngModelOptions]="{standalone: true}" required />
+
+        <label for="zone"><b>Zone</b></label>
+
+        <select [(ngModel)]="line.zone" id="category" name="zone" [ngModelOptions]="{standalone: true}" required >
+          <option value="first">first</option>
+          <option value="second">second</option>
+        </select>
+
+        <label for="line_type"><b>Line type</b></label>
+
+        <select [(ngModel)]="line.line_type" id="category" name="line_type" [ngModelOptions]="{standalone: true}" required >
+          <option value="bus">bus</option>
+          <option value="subway">subway</option>
+          <option value="trolley">trolley</option>
+        </select>
+      
+        <br>  
+       
+      </form>
+    </div>
+
+    <div *ngIf= "show == 'station'">
+      <h1 style="text-align: center">Add stations</h1>
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Zone</th>
+              <th scope="col">Location name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Latitude</th>
+              <th scope="col">Longitude</th>
+              <th scope="col">Type</th>
+              <th scope="col">Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = "let item of checkBoxItems">
+              <ng-container *ngIf = " line.zone == item.value.zone" >
+                <td>{{item.value.zone}}</td>
+                <td>{{item.value.location.location_name}}</td>
+                <td>{{item.value.location.address}}</td>
+                <td>{{item.value.location.latitude}}</td>
+                <td>{{item.value.location.longitude}}</td>
+                <td>{{item.value.location.type}}</td>
+                <td> <input type="checkbox" [(ngModel)] = "item.checked"></td>
+              </ng-container>   
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="clearfix">
+        <mat-dialog-actions>
+
+          <ng-container *ngIf= "show == 'line'">
+            <button class="cancelbtn" mat-button mat-dialog-close>Cancel</button>
+            <button class="signupbtn" type="button" mat-button (click) = "nextClick()" >Next</button>
+          </ng-container>
+            
+          <ng-container *ngIf= "show == 'station'">
+            <button class="cancelbtn" type="button" mat-button (click) = "backClick()">Back</button>
+            <button class="signupbtn" type="button" mat-button (click) = "addLine()" >Save</button>
+          </ng-container>
+          
+        </mat-dialog-actions>
+      </div>
+
+
+  </div>
+
+    

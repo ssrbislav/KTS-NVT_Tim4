@@ -41,6 +41,7 @@ import { MyDialogStationsComponent } from './administrator/line/line-table/my-di
 import { StationAddComponent } from './administrator/station/station-add/station-add.component';
 import { LocationService } from './services/location.service';
 import { FormsModule } from '@angular/forms';
+import { LineAddComponent } from './administrator/line/line-add/line-add.component';
 
 
 const appRoutes: Routes = [
@@ -80,7 +81,8 @@ const appRoutes: Routes = [
     StationTableComponent,
     MyDialogFirstStationComponent,
     MyDialogStationsComponent,
-    StationAddComponent
+    StationAddComponent,
+    LineAddComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +103,8 @@ const appRoutes: Routes = [
     MyDialogCurrentLocationComponent,
     MyDialogFirstStationComponent,
     MyDialogStationsComponent,
-    StationAddComponent
+    StationAddComponent,
+    LineAddComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService],

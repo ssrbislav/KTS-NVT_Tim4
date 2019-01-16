@@ -52,7 +52,7 @@ public class LineService implements ILineService {
 	}
 
 	@Override
-	public String create(LineDTO lineDTO) {
+	public Line create(LineDTO lineDTO) {
 		Line line = new Line();
 		line.setName(lineDTO.getName());
 		if (lineDTO.getLine_type().equals("bus")) {
@@ -62,14 +62,14 @@ public class LineService implements ILineService {
 		} else if (lineDTO.getLine_type().equals("trolley")) {
 			line.setLine_type(TypeTransport.trolley);
 		} else {
-			return "Transport type " + lineDTO.getLine_type() + " doesn't exist!";
+			return null;
 		}
 		line.setStation_list(new ArrayList<Station>());
 		line.setZone(lineDTO.getZone());
 		line.setDeleted(false);
 		line.setFirst_station(null);
-		lineRepository.save(line);
-		return "The line has been successfully created!";
+		
+		return lineRepository.save(line);
 	}
 
 	@Override
@@ -104,12 +104,12 @@ public class LineService implements ILineService {
 
 		Line l = lineRepository.getOne(addStation.getId_line());
 		if (l == null || l.isDeleted()) {
-			return "The line doesn't exist!";
+			return null;
 
 		}
 		Station s = stationRepository.findById(addStation.getId_station()).orElse(null);
 		if (s == null || s.isDeleted()) {
-			return "The station doesn't exist!";
+			return null;
 		}
 
 		if (l.getStation_list().size() == 0) {
@@ -132,8 +132,9 @@ public class LineService implements ILineService {
 		s.setLine(l);
 		stationRepository.save(s);
 		lineRepository.save(l);
+		
 
-		return "Successfully station added!";
+		return "Station successfully added!";
 	}
 
 	public void checkFirstStation(Long idStation) {
@@ -159,6 +160,35 @@ public class LineService implements ILineService {
 			}
 
 		}
+	}
+
+	@Override
+	public Line addListStations(List<AddFirstStationDTO> list) {
+		
+		Line l = lineRepository.getOne(list.get(0).getId_line());
+		if (l == null || l.isDeleted()) {
+			return null;
+
+		}
+		l.setFirst_station(list.get(0).getId_station());
+		
+		List<Station> addStations = new ArrayList<>();
+		for (AddFirstStationDTO addFirstStationDTO : list) {
+			for (Station station : stationRepository.findAll()) {
+				if(addFirstStationDTO.getId_station() == station.getId()){
+					addStations.add(station);
+				}
+			}	
+		}
+		
+		l.setStation_list(addStations);
+		
+		for (Station station : addStations) {
+			station.setLine(l);
+			stationRepository.save(station);
+		}
+		
+		return lineRepository.save(l);
 	}
 
 }
