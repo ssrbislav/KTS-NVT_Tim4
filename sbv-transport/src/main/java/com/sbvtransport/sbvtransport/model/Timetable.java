@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.model;
 
+import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,7 +24,7 @@ public class Timetable {
 
 	@Column(name = "date", unique = false, nullable = false)
 	@ElementCollection(targetClass = Date.class)
-	private Map<Station, Date> schedule;
+	private Map<Station, List<Date>> schedule;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Line line;
@@ -32,7 +33,7 @@ public class Timetable {
 	public Timetable() {
 	}
 
-	public Timetable(String code, Map<Station, Date> schedule) {
+	public Timetable(String code, Map<Station, List<Date>> schedule) {
 		this.code = code;
 		this.schedule = schedule;
 	}
@@ -49,11 +50,11 @@ public class Timetable {
 		this.code = code;
 	}
 
-	public Map<Station, Date> getSchedule() {
+	public Map<Station, List<Date>> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(Map<Station, Date> schedule) {
+	public void setSchedule(Map<Station, List<Date>> schedule) {
 		this.schedule = schedule;
 	}
 	

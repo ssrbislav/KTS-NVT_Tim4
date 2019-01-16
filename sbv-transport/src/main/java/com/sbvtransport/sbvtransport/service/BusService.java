@@ -72,11 +72,15 @@ public class BusService implements IBusService {
 
 		if (line != null) {
 			Optional<Bus> updateBus = busRepository.findById(bus.getId());
-			updateBus.get().setCode(bus.getCode());
+			if (bus.getCode() != null) {
+				updateBus.get().setCode(bus.getCode());
+			} else {
+				updateBus.get().setCode(line.getName() + "_" + "bus" + "_" + bus.getName());
+			}
 			updateBus.get().setName(bus.getName());
 			updateBus.get().setLate(bus.isLate());
 			updateBus.get().setLine(bus.getLine());
-			// updateBus.get().setTimetable(bus.getTimetable());
+			updateBus.get().setTimetable(bus.getTimetable());
 
 			return busRepository.save(updateBus.get());
 		}

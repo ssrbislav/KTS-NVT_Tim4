@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.AltTimetableDTO;
 import com.sbvtransport.sbvtransport.dto.TimetableDTO;
 import com.sbvtransport.sbvtransport.model.Timetable;
 import com.sbvtransport.sbvtransport.service.ITimetableService;
@@ -26,6 +27,15 @@ public class TimetableController {
 
 	@RequestMapping(value = "/addTimetable", method = RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestBody TimetableDTO timetableDTO) {
+
+		String newTimetable = timetableService.create(timetableDTO);
+
+		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/addAltTimetable", method = RequestMethod.POST)
+	public ResponseEntity<String> create(@RequestBody AltTimetableDTO timetableDTO) {
 
 		String newTimetable = timetableService.create(timetableDTO);
 
