@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bus } from '../models/bus.model';
+import { TransportDTO } from '../models.dto/transport.dto';
+import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
 
 
 const httpOptions = {
@@ -24,5 +26,16 @@ export class BusService{
     return this.http.get<boolean>(url);
 
   }
+
+  public addBus(bus: TransportDTO){
+    return this.http.post<Bus>(this.busUrl + 'addBus',bus);                 
+                
+  }
+
+  public addLocation(location: AddLocationToTransportDTO){
+    return this.http.post<Bus>(this.busUrl + 'addLocation',location);                 
+                
+  }
+
 
   }

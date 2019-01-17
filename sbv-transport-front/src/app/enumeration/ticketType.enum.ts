@@ -1,3 +1,3 @@
-enum TicketType{
+export enum TicketType{
     oneUse,daily,monthly,year
 }

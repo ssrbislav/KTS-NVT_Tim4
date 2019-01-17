@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { Bus } from 'src/app/models/bus.model';
 import { BusService } from 'src/app/services/bus.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { BusAddComponent } from './bus-add/bus-add.component';
+import { BusTableComponent } from './bus-table/bus-table.component';
 declare var ol: any;
 
 @Component({
@@ -12,8 +15,9 @@ export class BusComponent implements OnInit {
 
   map: any;
   buses: Bus[];
+  @ViewChild("busTable") table: BusTableComponent;
 
-  constructor(private busService: BusService) { }
+  constructor(private busService: BusService,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadAllBuses(false);
@@ -89,6 +93,29 @@ export class BusComponent implements OnInit {
       l.setSource(markerSource2);
     } 
     
+  }
+
+  addBus(){
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: "Bojana",
+      added: false
+      };
+
+    const dialogRef = this.dialog.open(BusAddComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.table.loadAllBuses();
+    this.loadAllBuses(true);
+  
+  });
   }
 
 }
