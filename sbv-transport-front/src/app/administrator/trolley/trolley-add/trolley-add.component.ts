@@ -22,12 +22,11 @@ export class TrolleyAddComponent implements OnInit {
   showMap: boolean = true;
   trolley: TransportDTO = new TransportDTO();
   mylocation : LocationDTO = new LocationDTO();
+  lineSelected: Line = new Line();
+  selectedLocation: MyLocation = new MyLocation();
   lines: Line[] = [];
   allLines: Line[];
   map: any;
-  lon: any;
-  lat:any;
-  address:any;
   newTrolley: Trolley;
   newLocation: MyLocation;
 
@@ -37,7 +36,7 @@ export class TrolleyAddComponent implements OnInit {
   ngOnInit() {
     this.loadAlllines();
     this.dialogRef.updateSize('80%', '80%'); 
-    this.loadMap();
+    this.loadMap(false);
   }
 
   loadAlllines(){
@@ -60,7 +59,7 @@ export class TrolleyAddComponent implements OnInit {
   }
 
   nextClick(){
-
+    this.trolley.id_line = this.lineSelected.id;
     if(this.trolley.name == null){
       alert("Please write trolley name!");
     }else if(this.trolley.time_arrive == null){
@@ -91,67 +90,48 @@ export class TrolleyAddComponent implements OnInit {
     this.showMap = false;
   }
 
-  loadMap(){
+  loadMap(i:boolean){
     const markerSource = new ol.source.Vector();
     
     var iconStyle = new ol.style.Style({
       image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-        src: 'assets/pictures/pin.png'
+        src: 'assets/pictures/trolley-map.png'
       }))
       });
 
-    this.map = new ol.Map({
-      target: 'mapLocT',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        }),
-        new ol.layer.Vector({
-          source: markerSource,
-          style: iconStyle,
-          
-        }),
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([19.833549,45.267136]),
-        zoom: 15
-      })
-      
-      });
-
-      this.map.on('click', function (args) {
-        console.log(args.coordinate);
-        var lonlat = ol.proj.transform(args.coordinate, 'EPSG:3857', 'EPSG:4326');
-        console.log(lonlat);
-        this.lon = lonlat[0];
-        this.lat = lonlat[1];
-        //alert(`lat: ${this.lat} long: ${this.lon}`);
-        var iconFeatures = [];
-  
-        var iconFeature = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.transform([this.lon, this.lat], 'EPSG:4326',
-                'EPSG:3857'))
-
-        });
-        document.getElementById('lon').innerHTML = lonlat[0];
-        document.getElementById('lan').innerHTML = lonlat[1];
-
-        markerSource.clear();
-        markerSource.addFeature(iconFeature);
-        reverseGeocode(this.lon,this.lat);
+    if(!i){
+      this.map = new ol.Map({
+        target: 'mapLocT',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+          new ol.layer.Vector({
+            source: markerSource,
+            style: iconStyle,
+            
+          }),
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([19.833549,45.267136]),
+          zoom: 13
+        })
         
       });
+           
+    }else{
 
-      function reverseGeocode(lon, lat) {
-        fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + lon + '&lat=' + lat)
-          .then(function(response) {
-                 return response.json();
-             })
-             .then(function(json) {
-                console.log(json.display_name);
-                document.getElementById('address').innerHTML  = json.display_name;
-             });
-     }
+      const l= this.map.getLayers().getArray()[1];
+      const markerSource2 = new ol.source.Vector();
+      var iconFeature = new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.transform([this.selectedLocation.longitude, this.selectedLocation.latitude], 'EPSG:4326',
+                'EPSG:3857'))
+      
+        });
+          markerSource2.addFeature(iconFeature);  
+      l.setSource(markerSource2);
+    } 
+    
   }
 
   addTrolley(){
@@ -169,10 +149,10 @@ export class TrolleyAddComponent implements OnInit {
 
   addLocation(){
 
-    if(document.getElementById('lan').innerHTML != ""){
-      this.mylocation.latitude = parseFloat(document.getElementById('lan').innerHTML);
-      this.mylocation.longitude = parseFloat(document.getElementById('lon').innerHTML);
-      this.mylocation.address = document.getElementById('address').innerHTML;
+    if(this.selectedLocation.id != undefined){
+      this.mylocation.latitude = this.selectedLocation.latitude;
+      this.mylocation.longitude = this.selectedLocation.longitude
+      this.mylocation.address =this.selectedLocation.address;
       this.mylocation.type = 'transport';
       this.mylocation.location_name = "Trolley location";
       this.locationService.addLocation(this.mylocation)

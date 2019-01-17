@@ -10,10 +10,10 @@
           [ngModelOptions]="{standalone: true}" required />
   
           <label for="line"><b>Line</b></label>
-  
-          <select [(ngModel)]="trolley.id_line" id="trolley_id_line" name="line" [ngModelOptions]="{standalone: true}" required >
-            <option *ngFor="let line of lines" [value]="line.id">{{line.name}}</option>
-          </select>
+
+          <select [(ngModel)]="lineSelected" id="bus_id_line" name="line" [ngModelOptions]="{standalone: true}" required >
+            <option *ngFor="let line of lines" [ngValue]="line">{{line.name}}</option>
+          </select>  
   
           <label for="time_arrive"><b>Time arrive (=> 5)</b></label>
           <input type="number" placeholder="Enter time arrive" name="time_arrive" [(ngModel)]="trolley.time_arrive" 
@@ -23,15 +23,15 @@
          
         </form>
       </div>
-  
+
       <div [hidden]="showMap">
-        <h1 style="text-align: center">Add location</h1>
-        <p>*Click on the map where you want to add current location(If you don't want to, just click Next):</p>
-        Address: <div id="address"></div>
-        Longitude:<div id="lon"></div>
-        Latitude: <div id="lan"></div>
-        <div id="mapLocT" class="mapLoc" style="width:100%;height:400px"></div>
-       
+          <h1 style="text-align: center">Add location</h1>
+          <label for="line"><b>Select location:</b></label>
+          <select [(ngModel)]="selectedLocation" id="selected_location" name="selected_location" (change)="loadMap(true)" required >
+            <option *ngFor="let station of lineSelected.station_list" [ngValue]="station.location">{{ station.location.location_name}}</option>
+          </select>
+          <div id="mapLocT" class="mapLoc" style="width:100%;height:400px"></div>
+         
       </div>
   
       <div *ngIf= "show == 'timetable'">
