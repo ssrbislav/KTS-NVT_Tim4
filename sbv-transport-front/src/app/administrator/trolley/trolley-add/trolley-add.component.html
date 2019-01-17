@@ -1,0 +1,66 @@
+
+  <div class="addTrolley" >
+
+      <div *ngIf= "show == 'trolley'">
+        <form>
+          <h1 style="text-align: center">Add trolley</h1>
+      
+          <label for="trolley_name"><b>Trolley name</b></label>
+          <input type="text" placeholder="Enter trolley name" name="trolley_name" [(ngModel)]="trolley.name" 
+          [ngModelOptions]="{standalone: true}" required />
+  
+          <label for="line"><b>Line</b></label>
+  
+          <select [(ngModel)]="trolley.id_line" id="trolley_id_line" name="line" [ngModelOptions]="{standalone: true}" required >
+            <option *ngFor="let line of lines" [value]="line.id">{{line.name}}</option>
+          </select>
+  
+          <label for="time_arrive"><b>Time arrive (=> 5)</b></label>
+          <input type="number" placeholder="Enter time arrive" name="time_arrive" [(ngModel)]="trolley.time_arrive" 
+          [ngModelOptions]="{standalone: true}" required />
+        
+          <br>  
+         
+        </form>
+      </div>
+  
+      <div [hidden]="showMap">
+        <h1 style="text-align: center">Add location</h1>
+        <p>*Click on the map where you want to add current location(If you don't want to, just click Next):</p>
+        Address: <div id="address"></div>
+        Longitude:<div id="lon"></div>
+        Latitude: <div id="lan"></div>
+        <div id="mapLocT" class="mapLoc" style="width:100%;height:400px"></div>
+       
+      </div>
+  
+      <div *ngIf= "show == 'timetable'">
+        <h1 style="text-align: center">Add timetable</h1>
+  
+      </div>
+  
+      <div class="clearfix">
+          <mat-dialog-actions>
+  
+            <ng-container *ngIf= "show == 'trolley'">
+              <button class="cancelbtn" mat-button mat-dialog-close>Cancel</button>
+              <button class="signupbtn" type="button" mat-button (click) = "nextClick()" >Next</button>
+            </ng-container>
+              
+            <ng-container *ngIf= "show == 'location'">
+              <button class="cancelbtn" type="button" mat-button (click) = "backClick()">Back</button>
+              <button class="signupbtn" type="button" mat-button (click) = "next2Click()" >Next</button>
+            </ng-container>
+  
+            <ng-container *ngIf= "show == 'timetable'">
+              <button class="cancelbtn" type="button" mat-button (click) = "back2Click()">Back</button>
+              <button class="signupbtn" type="button" mat-button (click) = "addTrolley()" >Save</button>
+            </ng-container>
+            
+          </mat-dialog-actions>
+        </div>
+  
+  
+    </div>
+  
+      

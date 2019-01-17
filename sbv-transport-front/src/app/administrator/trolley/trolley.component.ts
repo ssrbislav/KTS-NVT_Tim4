@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Trolley } from 'src/app/models/trolley.model';
 import { TrolleyService } from 'src/app/services/trolley.service';
+import { TrolleyTableComponent } from './trolley-table/trolley-table.component';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { TrolleyAddComponent } from './trolley-add/trolley-add.component';
 declare var ol: any;
 
 @Component({
@@ -12,8 +15,9 @@ export class TrolleyComponent implements OnInit {
 
   map: any;
   trolleys: Trolley[];
+  @ViewChild("trolleyTable") table: TrolleyTableComponent;
 
-  constructor(private trolleyService: TrolleyService) { }
+  constructor(private trolleyService: TrolleyService,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadAllTrolleys(false);
@@ -90,6 +94,29 @@ export class TrolleyComponent implements OnInit {
       l.setSource(markerSource2);
     } 
     
+  }
+
+  addTrolley(){
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: "Bojana",
+      added: false
+      };
+
+    const dialogRef = this.dialog.open(TrolleyAddComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.table.loadAllTrolleys();
+    this.loadAllTrolleys(true);
+  
+  });
   }
 
 
