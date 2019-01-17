@@ -1,26 +1,26 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { TransportDTO } from 'src/app/models.dto/transport.dto';
-import { Line } from 'src/app/models/line.model';
-import { LineService } from 'src/app/services/line.service';
-import { BusService } from 'src/app/services/bus.service';
-import { Bus } from 'src/app/models/bus.model';
-import { LocationService } from 'src/app/services/location.service';
 import { LocationDTO } from 'src/app/models.dto/location.dto';
+import { Line } from 'src/app/models/line.model';
+import { Subway } from 'src/app/models/subway.model';
 import { MyLocation } from 'src/app/models/location.model';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { LineService } from 'src/app/services/line.service';
+import { SubwayService } from 'src/app/services/subway.service';
+import { LocationService } from 'src/app/services/location.service';
 import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
 declare var ol: any; 
 
 @Component({
-  selector: 'app-bus-add',
-  templateUrl: './bus-add.component.html',
-  styleUrls: ['./bus-add.component.css']
+  selector: 'app-subway-add',
+  templateUrl: './subway-add.component.html',
+  styleUrls: ['./subway-add.component.css']
 })
-export class BusAddComponent implements OnInit {
+export class SubwayAddComponent implements OnInit {
 
-  show: string = 'bus';
+  show: string = 'subway';
   showMap: boolean = true;
-  bus: TransportDTO = new TransportDTO();
+  subway: TransportDTO = new TransportDTO();
   mylocation : LocationDTO = new LocationDTO();
   lines: Line[] = [];
   allLines: Line[];
@@ -28,11 +28,11 @@ export class BusAddComponent implements OnInit {
   lon: any;
   lat:any;
   address:any;
-  newBus: Bus;
+  newSubway: Subway;
   newLocation: MyLocation;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private busService: BusService, private locationService: LocationService) { }
+  private lineService: LineService, private subwayService: SubwayService, private locationService: LocationService) { }
 
   ngOnInit() {
     this.loadAlllines();
@@ -44,15 +44,15 @@ export class BusAddComponent implements OnInit {
     this.lineService.getLines()
       .subscribe( data => {
         this.allLines = data;
-        this.loadBusLines();
+        this.loadSubwayLines();
       });
 
   }
 
-  loadBusLines(){
+  loadSubwayLines(){
 
     for (var i = 0; i < this.allLines.length; i++){
-      if(this.allLines[i].line_type.toString() == "bus"){
+      if(this.allLines[i].line_type.toString() == "subway"){
         this.lines.push(this.allLines[i]);
       }
     }
@@ -61,13 +61,13 @@ export class BusAddComponent implements OnInit {
 
   nextClick(){
 
-    if(this.bus.name == null){
-      alert("Please write bus name!");
-    }else if(this.bus.time_arrive == null){
+    if(this.subway.name == null){
+      alert("Please write subway name!");
+    }else if(this.subway.time_arrive == null){
       alert("Please write time arrive between stations!");
-    }else if(this.bus.id_line == null){
+    }else if(this.subway.id_line == null){
       alert("Please select line!");
-    }else if(this.bus.time_arrive <5){
+    }else if(this.subway.time_arrive <5){
       alert("Time arrive need to be => 5!")
     }else{
       this.show = 'location';
@@ -77,7 +77,7 @@ export class BusAddComponent implements OnInit {
   }
 
   backClick(){
-    this.show = 'bus';
+    this.show = 'subway';
     this.showMap = true;
   }
 
@@ -101,7 +101,7 @@ export class BusAddComponent implements OnInit {
       });
 
     this.map = new ol.Map({
-      target: 'mapLoc',
+      target: 'mapLocS',
       layers: [
         new ol.layer.Tile({
           source: new ol.source.OSM()
@@ -154,11 +154,11 @@ export class BusAddComponent implements OnInit {
      }
   }
 
-  addBus(){
-    this.busService.addBus(this.bus)
+  addSubway(){
+    this.subwayService.addSubway(this.subway)
     .subscribe( data => {
       if(data!= null){
-        this.newBus = data;
+        this.newSubway = data;
         this.addLocation();
       }else{
         alert("Something went wrong!");
@@ -174,31 +174,31 @@ export class BusAddComponent implements OnInit {
       this.mylocation.longitude = parseFloat(document.getElementById('lon').innerHTML);
       this.mylocation.address = document.getElementById('address').innerHTML;
       this.mylocation.type = 'transport';
-      this.mylocation.location_name = "Bus location";
+      this.mylocation.location_name = "Subway location";
       this.locationService.addLocation(this.mylocation)
       .subscribe( data => {
         if(data!= null){
           this.newLocation = data;
-          this.addLocationToBus();
+          this.addLocationToSubway();
         }else{
           alert("Something went wrong!");
         }    
       });
 
     }else{
-      alert("Successfully bus added!");
+      alert("Successfully subway added!");
       this.dialogRef.close();
     }
 
   }
 
-  addLocationToBus(){
+  addLocationToSubway(){
 
-    var addLocationTransport = new AddLocationToTransportDTO(this.newBus.id, this.newLocation.id);
-    this.busService.addLocation(addLocationTransport)
+    var addLocationTransport = new AddLocationToTransportDTO(this.newSubway.id, this.newLocation.id);
+    this.subwayService.addLocation(addLocationTransport)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully bus added!");
+        alert("Successfully subway added!");
         this.dialogRef.close();
       }else{
         alert("Something went wrong!");

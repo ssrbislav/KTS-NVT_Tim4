@@ -1,3 +1,3 @@
-export enum TypeTransport {
+enum TypeTransport {
     bus,subway,trolley
 }

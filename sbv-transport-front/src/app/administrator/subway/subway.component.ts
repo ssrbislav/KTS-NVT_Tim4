@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { Subway } from 'src/app/models/subway.model';
 import { SubwayService } from 'src/app/services/subway.service';
+import { SubwayTableComponent } from './subway-table/subway-table.component';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { SubwayAddComponent } from './subway-add/subway-add.component';
 declare var ol: any;
 
 @Component({
@@ -12,8 +15,9 @@ export class SubwayComponent implements OnInit {
 
   map: any;
   subways: Subway[];
+  @ViewChild("subwayTable") table: SubwayTableComponent;
 
-  constructor(private subwayService: SubwayService) { }
+  constructor(private subwayService: SubwayService,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadAllSubways(false);
@@ -83,13 +87,36 @@ export class SubwayComponent implements OnInit {
             });
           markerSource2.addFeature(iconFeature);
         }
-        
-   
   
     })
       l.setSource(markerSource2);
     } 
     
   }
+
+  addSubway(){
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      title: "Bojana",
+      added: false
+      };
+
+    const dialogRef = this.dialog.open(SubwayAddComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.table.loadAllSubways();
+    this.loadAllSubways(true);
+  
+  });
+  }
+
+
 
 }

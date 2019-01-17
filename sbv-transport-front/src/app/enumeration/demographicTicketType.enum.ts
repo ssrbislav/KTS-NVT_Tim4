@@ -1,3 +1,3 @@
-export enum DemographicTicketType{
+enum DemographicTicketType{
     student,standard,senior
 }

@@ -1,3 +1,3 @@
-export enum UserType{
+enum UserType{
     standard, student, senior
 }

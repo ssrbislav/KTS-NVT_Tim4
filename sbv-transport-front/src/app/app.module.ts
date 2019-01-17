@@ -42,6 +42,7 @@ import { LocationService } from './services/location.service';
 import { FormsModule } from '@angular/forms';
 import { LineAddComponent } from './administrator/line/line-add/line-add.component';
 import { BusAddComponent } from './administrator/bus/bus-add/bus-add.component';
+import { SubwayAddComponent } from './administrator/subway/subway-add/subway-add.component';
 
 
 const appRoutes: Routes = [
@@ -83,7 +84,8 @@ const appRoutes: Routes = [
     MyDialogStationsComponent,
     StationAddComponent,
     LineAddComponent,
-    BusAddComponent
+    BusAddComponent,
+    SubwayAddComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,8 @@ const appRoutes: Routes = [
     StationAddComponent,
     LineAddComponent,
     LoginComponent,
-    BusAddComponent
+    BusAddComponent,
+    SubwayAddComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService,

@@ -1,3 +1,3 @@
-export enum Zone{
+enum Zone{
     first,second
 }
