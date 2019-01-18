@@ -96,7 +96,7 @@ public class TimetableService implements ITimetableService {
 			bus = busService.getOne(timetableDTO.getId_transport());
       tmtbl.setLine(bus.getLine());
 			bus.setTimetable(tmtbl);
-			busService.update(bus);
+			//busService.update(bus);
 			bus.getLine().setTimetable(tmtbl);
 		} else if (timetableDTO.getTransportType().equals("subway")) {
 			subway = subwayService.getOne(timetableDTO.getId_transport());

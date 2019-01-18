@@ -12,4 +12,5 @@ export class Bus {
   location: MyLocation;
   timetable: Timetable;
   time_arrive: number;
+  deleted: boolean;
   }

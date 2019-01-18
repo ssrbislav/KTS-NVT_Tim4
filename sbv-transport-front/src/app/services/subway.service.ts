@@ -32,8 +32,8 @@ const httpOptions = {
                   
     }
   
-    public addLocation(location: AddLocationToTransportDTO){
-      return this.http.post<Subway>(this.subwayUrl + 'addLocation',location);                 
+    public addLocation(lo: AddLocationToTransportDTO){
+      return this.http.post<Subway>(this.subwayUrl + 'addLocation',lo);                 
                   
     }
 

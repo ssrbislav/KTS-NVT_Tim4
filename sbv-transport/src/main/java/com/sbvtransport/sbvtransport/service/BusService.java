@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.repository.BusRepository;
-import com.sbvtransport.sbvtransport.repository.LineRepository;
 import com.sbvtransport.sbvtransport.repository.LocationRepository;
 
 @Service
@@ -67,27 +66,16 @@ public class BusService implements IBusService {
 
 	@Override
 	public Bus update(Bus bus) {
-
-		Line line = checkLine(bus.getLine().getId());
-
-		if (line != null) {
-			Optional<Bus> updateBus = busRepository.findById(bus.getId());
-			if (bus.getCode() != null) {
-				updateBus.get().setCode(bus.getCode());
-			} else {
-				updateBus.get().setCode(line.getName() + "_" + "bus" + "_" + bus.getName());
-			}
-			updateBus.get().setName(bus.getName());
-			updateBus.get().setLate(bus.isLate());
-			updateBus.get().setLine(bus.getLine());
-			updateBus.get().setTimetable(bus.getTimetable());
-
-			return busRepository.save(updateBus.get());
-		}
-		return null;
-
+		
+		Optional<Bus> updateBus = busRepository.findById(bus.getId());
+		updateBus.get().setCode(bus.getCode());
+		updateBus.get().setName(bus.getName());
+		updateBus.get().setLate(bus.isLate());
+		updateBus.get().setLine(bus.getLine());
+		updateBus.get().setTimetable(bus.getTimetable());
+		return busRepository.save(updateBus.get());
 	}
-
+	
 	@Override
 	public boolean delete(Long id) {
 		for (Bus bus : findAll())
@@ -160,6 +148,27 @@ public class BusService implements IBusService {
 				busRepository.save(bus);
 			}
 		}
+	}
+	
+	@Override
+	public Bus change(ChangeTransportDTO bus) {
+
+		Optional<Bus> updateBus = busRepository.findById(bus.getId_transport());
+		
+		updateBus.get().setName(bus.getName());
+		if(bus.getTime_arrive() >5){
+			updateBus.get().setLate(true);
+
+		}else{
+			updateBus.get().setLate(false);
+		}
+		updateBus.get().setTime_arrive(bus.getTime_arrive());
+		updateBus.get().setTimetable(bus.getTimetable());
+		updateBus.get().setLocation(bus.getCurrent_location());
+
+		return busRepository.save(updateBus.get());
+	
+
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.service.IBusService;
 import com.sbvtransport.sbvtransport.service.ITicketService;
@@ -55,9 +56,9 @@ public class BusController {
 	}
 
 	@RequestMapping(value = "/updateBus", method = RequestMethod.POST)
-	public ResponseEntity<Bus> update(@RequestBody Bus bus) {
+	public ResponseEntity<Bus> update(@RequestBody ChangeTransportDTO bus) {
 
-		Bus updateBus = busService.update(bus);
+		Bus updateBus = busService.change(bus);
 
 		return new ResponseEntity<>(updateBus, HttpStatus.OK);
 
