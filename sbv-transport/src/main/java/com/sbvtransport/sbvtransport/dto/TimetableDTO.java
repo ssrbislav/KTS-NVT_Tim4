@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,24 +10,16 @@ public class TimetableDTO {
 
 	private String transportType; // bus/subway/trolley
 	private Long id_transport;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy. HH:mm")
-	private Map<Long, List<Date>> timetable;
+	private List<ScheduleDTO> schedules;
 
-	public TimetableDTO( String transportType, Map<Long, List<Date>> timetable,Long id) {
+
+	public TimetableDTO(@JsonProperty String transportType, @JsonProperty Long id_transport, List<ScheduleDTO> schedules) {
 		this.transportType = transportType;
-		this.timetable = timetable;
-		this.id_transport = id;
+		this.id_transport = id_transport;
+		this.schedules = schedules;
 	}
 
 	public TimetableDTO() {
-	}
-
-	public Map<Long, List<Date>> getTimetable() {
-		return timetable;
-	}
-
-	public void setTimetable(Map<Long, List<Date>> timetable) {
-		this.timetable = timetable;
 	}
 
 	public String getTransportType() {
@@ -45,5 +38,11 @@ public class TimetableDTO {
 		this.id_transport = id_transport;
 	}
 
+	public List<ScheduleDTO> getSchedules() {
+		return schedules;
+	}
 
+	public void setSchedules(List<ScheduleDTO> schedules) {
+		this.schedules = schedules;
+	}
 }

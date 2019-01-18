@@ -4,6 +4,7 @@ import com.sbvtransport.sbvtransport.dto.AltTimetableDTO;
 import com.sbvtransport.sbvtransport.dto.TimetableDTO;
 import com.sbvtransport.sbvtransport.model.Timetable;
 import com.sbvtransport.sbvtransport.service.ITimetableService;
+import java.text.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,8 @@ public class TimetableController {
 	}
 
 	@RequestMapping(value = "/addTimetable", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody TimetableDTO timetableDTO) {
+	public ResponseEntity<String> create(@RequestBody TimetableDTO timetableDTO)
+			throws ParseException {
 
 		String newTimetable = timetableService.create(timetableDTO);
 

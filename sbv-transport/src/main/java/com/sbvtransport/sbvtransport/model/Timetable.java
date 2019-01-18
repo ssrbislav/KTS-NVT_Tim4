@@ -1,13 +1,16 @@
 package com.sbvtransport.sbvtransport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "timetable")
 public class Timetable {
@@ -22,9 +25,10 @@ public class Timetable {
 	@Column(name = "code", unique = false, nullable = false)
 	private String code;
 
-	@Column(name = "date", unique = false, nullable = false)
-	@ElementCollection(targetClass = Date.class)
-	private Map<Station, List<Date>> schedule;
+	@Column(name = "schedule", unique = false, nullable = false)
+	@ElementCollection(targetClass = Schedule.class)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, targetEntity = Schedule.class)
+	private Set<Schedule> schedule;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Line line;
@@ -33,7 +37,7 @@ public class Timetable {
 	public Timetable() {
 	}
 
-	public Timetable(String code, Map<Station, List<Date>> schedule) {
+	public Timetable(String code, Set<Schedule> schedule) {
 		this.code = code;
 		this.schedule = schedule;
 	}
@@ -50,11 +54,11 @@ public class Timetable {
 		this.code = code;
 	}
 
-	public Map<Station, List<Date>> getSchedule() {
+	public Set<Schedule> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(Map<Station, List<Date>> schedule) {
+	public void setSchedule(Set<Schedule> schedule) {
 		this.schedule = schedule;
 	}
 	

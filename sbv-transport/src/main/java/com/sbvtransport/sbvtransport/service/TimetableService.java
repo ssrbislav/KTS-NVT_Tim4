@@ -1,9 +1,11 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.dto.AltTimetableDTO;
+import com.sbvtransport.sbvtransport.dto.ScheduleDTO;
 import com.sbvtransport.sbvtransport.dto.TimetableDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Schedule;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.model.Timetable;
@@ -11,10 +13,15 @@ import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.repository.StationRepository;
 import com.sbvtransport.sbvtransport.repository.TimetableRepository;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +44,8 @@ public class TimetableService implements ITimetableService {
 	SubwayService subwayService;
 	@Autowired
 	TrolleyService trolleyService;
+	@Autowired
+	ScheduleService scheduleService;
 
 	@Override
 	public Timetable getOne(Long id) {
@@ -49,60 +58,34 @@ public class TimetableService implements ITimetableService {
 	}
 
 	@Override
-	public String create(TimetableDTO timetableDTO) {
+	public String create(TimetableDTO timetableDTO) throws ParseException {
 		Timetable timetable = new Timetable();
 		Station station;
 		Bus bus;
 		Subway subway;
 		Trolley trolley;
-		HashMap<Station, List<Date>> schedule = new HashMap<>();
+		Set<Schedule> schedule = new HashSet<>();
 
-//		if(timetableDTO.getTransportType() == "bus"){
-//			Bus b = busService.getOne(timetableDTO.getId_transport());
-//			if(b== null){
-//				return "Bus not found";
-//			}
-//			List<Station> stations = b.getLine().getStation_list();
-//
-//		}else if(timetableDTO.getTransportType() == "trolley"){
-//
-//		}else if(timetableDTO.getTransportType() == "subway"){
-//
-//		}else{
-//			return "Error!";
-//		}
-//		timetable.setCode(timetableDTO.getTransportCode());
-//		for (Long stationID : timetableDTO.getTimetable().keySet()) {
-//			if (!stationService.findAll().contains(stationService.getOne(stationID))) {
-//				return "Station with ID " + stationID + " doesn't exist!";
-//			} else {
-//				station = stationService.getOne(stationID);
-//
-//				schedule.put(station, timetableDTO.getTimetable().get(station.getId()));
-
-//		if(timetableDTO.getTransportType() == "bus"){
-//			Bus b = busService.getOne(timetableDTO.getId_transport());
-//			if(b== null){
-//				return "Bus not found";
-
-//			}
-//			Set<Station> stations = b.getLine().getStation_list();
-//
-//		}else if(timetableDTO.getTransportType() == "trolley"){
-//
-//		}else if(timetableDTO.getTransportType() == "subway"){
-//
-//		}else{
-//			return "Error!";
-//		}
-		for (Long stationID : timetableDTO.getTimetable().keySet()) {
+		for (ScheduleDTO scheduleDTO : timetableDTO.getSchedules()) {
+			Long stationID = scheduleDTO.getStation_id();
 			if (!stationService.findAll().contains(stationService.getOne(stationID))) {
 				return "Station with ID " + stationID + " doesn't exist!";
 			} else {
 				station = stationService.getOne(stationID);
-				List<Date> order = new ArrayList<>();
-				order.addAll(timetableDTO.getTimetable().get(stationID));
-				schedule.put(station, order);
+				Schedule s = new Schedule();
+				s.setStation(station);
+				Set<Date> dts = new HashSet<>();
+				for(Date d : scheduleDTO.getDates()) {
+					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+					String tm = sdf.format(d);
+					Date time = sdf.parse(tm);
+					dts.add(time);
+				}
+
+				s.setTimes(dts);
+				s.setDeleted(false);
+				Schedule ss = scheduleService.scheduleRepository.save(s);
+				schedule.add(ss);
 			}
 		}
 		timetable.setSchedule(schedule);
@@ -111,16 +94,19 @@ public class TimetableService implements ITimetableService {
 
 		if (timetableDTO.getTransportType().equals("bus")) {
 			bus = busService.getOne(timetableDTO.getId_transport());
+      tmtbl.setLine(bus.getLine());
 			bus.setTimetable(tmtbl);
 			busService.update(bus);
 			bus.getLine().setTimetable(tmtbl);
 		} else if (timetableDTO.getTransportType().equals("subway")) {
 			subway = subwayService.getOne(timetableDTO.getId_transport());
+      tmtbl.setLine(subway.getLine());
 			subway.setTimetable(timetable);
 			subwayService.update(subway);
 			subway.getLine().setTimetable(tmtbl);
 		} else if (timetableDTO.getTransportType().equals("trolley")) {
 			trolley = trolleyService.getOne(timetableDTO.getId_transport());
+      tmtbl.setLine(trolley.getLine());
 			trolley.setTimetable(timetable);
 			trolleyService.update(trolley);
 			trolley.getLine().setTimetable(tmtbl);
@@ -134,24 +120,30 @@ public class TimetableService implements ITimetableService {
 	}
 
 	public String create(AltTimetableDTO timetableDTO) {
-		Timetable timetable = new Timetable();
+//		Timetable timetable = new Timetable();
 		Station station;
 		Bus bus;
 		Subway subway;
 		Trolley trolley;
 		Timetable tmtbl = new Timetable();
-		timetable.setCode("blabla");
+//		timetable.setCode("blabla");
+    tmtbl.setCode("blabla");
 		if (timetableDTO.getTransportType().equals("bus")) {
 			bus = busService.getOne(timetableDTO.getId_transport());
 			Line line = lineService.getOne(bus.getLine().getId());
 			station = stationService.getOne(line.getFirst_station());
-			List<Date> lst = new ArrayList<>(timetableDTO.getTimetable());
-			tmtbl.setSchedule(new HashMap<>());
-			tmtbl.getSchedule().put(station, lst);
+			Set<Schedule> schedules = new HashSet<>();
+			Schedule schedule = new Schedule();
+			tmtbl.setSchedule(new HashSet<>());
+			schedule.setStation(station);
+			Set<Date> dts = new HashSet<>();
+			dts.addAll(timetableDTO.getTimetable());
+			schedule.setTimes(dts);
+			schedules.add(schedule);
 			int addMins = 5;
 			for (Station s : bus.getLine().getStation_list()) {
 				long minInMillis = 60000;
-				List<Date> order = new ArrayList<>();
+				Set<Date> order = new HashSet<>();
 				if (!s.equals(bus.getLine().getFirst_station())) {
 					for (Date d : timetableDTO.getTimetable()) {
 						Calendar cal = Calendar.getInstance();
@@ -160,26 +152,37 @@ public class TimetableService implements ITimetableService {
 						Date x = new Date(t + (addMins * minInMillis));
 						order.add(x);
 					}
+					Schedule ss = new Schedule(s, order, false);
+					Schedule sss = scheduleService.scheduleRepository.save(ss);
+					schedules.add(sss);
 				} else {
 					order.addAll(timetableDTO.getTimetable());
 				}
-				tmtbl.getSchedule().put(s, order);
+				tmtbl.setSchedule(schedules);
 				addMins += 5;
 			}
 			bus.setTimetable(tmtbl);
 //			busService(bus);
 			line = lineService.getOne(bus.getLine().getId());
 			line.setTimetable(tmtbl);
+      tmtbl.setLine(line);
 //      lineService.update(bus.getLine());
 		} else if (timetableDTO.getTransportType().equals("subway")) {
 			subway = subwayService.getOne(timetableDTO.getId_transport());
 			Line line = lineService.getOne(subway.getLine().getId());
 			station = stationService.getOne(line.getFirst_station());
-			tmtbl.getSchedule().put(station, timetableDTO.getTimetable());
+			Set<Schedule> schedules = new HashSet<>();
+			Schedule schedule = new Schedule();
+			tmtbl.setSchedule(new HashSet<>());
+			schedule.setStation(station);
+      Set<Date> dts = new HashSet<>();
+      dts.addAll(timetableDTO.getTimetable());
+      schedule.setTimes(dts);
+			schedules.add(schedule);
 			int addMins = 5;
 			for (Station s : subway.getLine().getStation_list()) {
 				long minInMillis = 60000;
-				List<Date> order = new ArrayList<>();
+				Set<Date> order = new HashSet<>();
 				if (!s.equals(subway.getLine().getFirst_station())) {
 					for (Date d : timetableDTO.getTimetable()) {
 						Calendar cal = Calendar.getInstance();
@@ -188,23 +191,36 @@ public class TimetableService implements ITimetableService {
 						Date x = new Date(t + (addMins * minInMillis));
 						order.add(x);
 					}
+					Schedule ss = new Schedule(s, order, false);
+					Schedule sss = scheduleService.scheduleRepository.save(ss);
+					schedules.add(sss);
+				} else {
+					order.addAll(timetableDTO.getTimetable());
 				}
-				tmtbl.getSchedule().put(s, order);
+				tmtbl.setSchedule(schedules);
 				addMins += 5;
 			}
 			subway.setTimetable(tmtbl);
 			subwayService.update(subway);
 			subway.getLine().setTimetable(tmtbl);
+      tmtbl.setLine(line);
 			lineService.update(subway.getLine());
 		} else if (timetableDTO.getTransportType().equals("trolley")) {
 			trolley = trolleyService.getOne(timetableDTO.getId_transport());
 			Line line = lineService.getOne(trolley.getLine().getId());
 			station = stationService.getOne(line.getFirst_station());
-			tmtbl.getSchedule().put(station, timetableDTO.getTimetable());
+			Set<Schedule> schedules = new HashSet<>();
+			Schedule schedule = new Schedule();
+			tmtbl.setSchedule(new HashSet<>());
+			schedule.setStation(station);
+      Set<Date> dts = new HashSet<>();
+      dts.addAll(timetableDTO.getTimetable());
+      schedule.setTimes(dts);
+			schedules.add(schedule);
 			int addMins = 5;
 			for (Station s : trolley.getLine().getStation_list()) {
 				long minInMillis = 60000;
-				List<Date> order = new ArrayList<>();
+				Set<Date> order = new HashSet<>();
 				if (!s.equals(trolley.getLine().getFirst_station())) {
 					for (Date d : timetableDTO.getTimetable()) {
 						Calendar cal = Calendar.getInstance();
@@ -213,13 +229,19 @@ public class TimetableService implements ITimetableService {
 						Date x = new Date(t + (addMins * minInMillis));
 						order.add(x);
 					}
+					Schedule ss = new Schedule(s, order, false);
+					Schedule sss = scheduleService.scheduleRepository.save(ss);
+					schedules.add(sss);
+				} else {
+					order.addAll(timetableDTO.getTimetable());
 				}
-				tmtbl.getSchedule().put(s, order);
+				tmtbl.setSchedule(schedules);
 				addMins += 5;
 			}
 			trolley.setTimetable(tmtbl);
 			trolleyService.update(trolley);
 			trolley.getLine().setTimetable(tmtbl);
+      tmtbl.setLine(line);
 			lineService.update(trolley.getLine());
 		} else {
 			return "Transport type and/or ID do not exist. Try typing one of the following: bus/subway/trolley, or a correct ID.";

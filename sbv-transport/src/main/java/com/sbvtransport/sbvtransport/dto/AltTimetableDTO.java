@@ -9,7 +9,7 @@ public class AltTimetableDTO {
 
   private String transportType; // bus/subway/trolley
   private Long id_transport;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy. HH:mm")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
   private List<Date> timetable;
 
   public AltTimetableDTO(@JsonProperty String transportType, @JsonProperty Long id_transport, @JsonProperty @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy. HH:mm") List<Date> timetable) {

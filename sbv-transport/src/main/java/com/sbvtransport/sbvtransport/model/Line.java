@@ -48,8 +48,8 @@ public class Line implements Serializable {
 	@Column(name = "zone", unique = false, nullable = false)
 	private Zone zone;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "line", cascade = CascadeType.ALL)
-	@JoinColumn(name = "line", referencedColumnName = "id")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "timetable", referencedColumnName = "id")
 	private Timetable timetable;
 	
 	@Column(name = "first_station", unique = false, nullable = true)

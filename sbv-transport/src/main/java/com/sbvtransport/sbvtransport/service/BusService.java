@@ -24,7 +24,7 @@ public class BusService implements IBusService {
 	BusRepository busRepository;
 
 	@Autowired
-	LineRepository lineRepository;
+	LineService lineService;
 	
 	@Autowired
 	LocationRepository locationRepository;
@@ -112,7 +112,7 @@ public class BusService implements IBusService {
 	@Override
 	public Line checkLine(Long lineId) {
 
-		Line line = lineRepository.findById(lineId).get();
+		Line line = lineService.getOne(lineId);
 		if (line != null) {
 			if(!line.isDeleted()){
 				if (line.getLine_type() == TypeTransport.bus) {
