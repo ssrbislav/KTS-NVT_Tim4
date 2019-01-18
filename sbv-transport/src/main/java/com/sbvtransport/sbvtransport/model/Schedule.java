@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,8 +29,8 @@ public class Schedule {
   @Column(name = "id", unique = true, nullable = false)
   private Long id;
 
-  @JoinColumn(name = "station", referencedColumnName = "station_id")
-  @OneToOne
+  @JoinColumn(name = "station", referencedColumnName = "station_id", unique = false)
+  @OneToOne(fetch = FetchType.LAZY)
   private Station station;
 
   @Column(name = "times", unique = false, nullable = false)

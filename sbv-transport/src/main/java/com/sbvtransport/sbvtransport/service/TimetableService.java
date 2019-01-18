@@ -97,25 +97,77 @@ public class TimetableService implements ITimetableService {
       tmtbl.setLine(bus.getLine());
 			bus.setTimetable(tmtbl);
 			busService.update(bus);
-			bus.getLine().setTimetable(tmtbl);
+			Line line = lineService.getOne(bus.getLine().getId());
+			if (line.getTimetable() != null) {
+				for (Schedule s : tmtbl.getSchedule()) {
+					for (Station st : line.getStation_list()) {
+						if (s.getStation() == st) {
+							for (Schedule ss : line.getTimetable().getSchedule()) {
+								if (ss.getStation() == s.getStation()) {
+									ss.getTimes().addAll(s.getTimes());
+								}
+							}
+						}
+					}
+				}
+			} else {
+				line.setTimetable(tmtbl);
+			}
+			lineService.update(line);
+//			bus.getLine().setTimetable(t);
+//			bus.getLine().setTimetable(tmtbl);
 		} else if (timetableDTO.getTransportType().equals("subway")) {
 			subway = subwayService.getOne(timetableDTO.getId_transport());
       tmtbl.setLine(subway.getLine());
 			subway.setTimetable(timetable);
 			subwayService.update(subway);
-			subway.getLine().setTimetable(tmtbl);
+			Line line = lineService.getOne(subway.getLine().getId());
+			if (line.getTimetable() != null) {
+				for (Schedule s : tmtbl.getSchedule()) {
+					for (Station st : line.getStation_list()) {
+						if (s.getStation() == st) {
+							for (Schedule ss : line.getTimetable().getSchedule()) {
+								if (ss.getStation() == s.getStation()) {
+									ss.getTimes().addAll(s.getTimes());
+								}
+							}
+						}
+					}
+				}
+			} else {
+				line.setTimetable(tmtbl);
+			}
+			lineService.update(line);
+//			subway.getLine().setTimetable(tmtbl);
 		} else if (timetableDTO.getTransportType().equals("trolley")) {
 			trolley = trolleyService.getOne(timetableDTO.getId_transport());
       tmtbl.setLine(trolley.getLine());
 			trolley.setTimetable(timetable);
 			trolleyService.update(trolley);
-			trolley.getLine().setTimetable(tmtbl);
+			Line line = lineService.getOne(trolley.getLine().getId());
+			if (line.getTimetable() != null) {
+				for (Schedule s : tmtbl.getSchedule()) {
+					for (Station st : line.getStation_list()) {
+						if (s.getStation() == st) {
+							for (Schedule ss : line.getTimetable().getSchedule()) {
+								if (ss.getStation() == s.getStation()) {
+									ss.getTimes().addAll(s.getTimes());
+								}
+							}
+						}
+					}
+				}
+			} else {
+				line.setTimetable(tmtbl);
+			}
+			lineService.update(line);
+//			trolley.getLine().setTimetable(tmtbl);
 		} else {
 			return "Transport type and/or ID do not exist. Try typing one of the following: bus/subway/trolley, or a correct ID.";
 		}
 		//station.setTimetable(tmtbl);
 		//stationService.update(station);
-		update(tmtbl);
+//		update(tmtbl);
 		return "The timetable has been successfully created!\n";
 	}
 
@@ -163,8 +215,23 @@ public class TimetableService implements ITimetableService {
 			}
 			bus.setTimetable(tmtbl);
 //			busService(bus);
-			line = lineService.getOne(bus.getLine().getId());
-			line.setTimetable(tmtbl);
+			if (line.getTimetable() != null) {
+				for (Schedule s : tmtbl.getSchedule()) {
+					for (Station st : line.getStation_list()) {
+						if (s.getStation() == st) {
+							for (Schedule ss : line.getTimetable().getSchedule()) {
+								if (ss.getStation() == s.getStation()) {
+									ss.getTimes().addAll(s.getTimes());
+								}
+							}
+						}
+					}
+				}
+			} else {
+				line.setTimetable(tmtbl);
+			}
+			lineService.update(line);
+//			line.setTimetable(tmtbl);
       tmtbl.setLine(line);
 //      lineService.update(bus.getLine());
 		} else if (timetableDTO.getTransportType().equals("subway")) {
@@ -202,7 +269,23 @@ public class TimetableService implements ITimetableService {
 			}
 			subway.setTimetable(tmtbl);
 			subwayService.update(subway);
-			subway.getLine().setTimetable(tmtbl);
+			if (line.getTimetable() != null) {
+				for (Schedule s : tmtbl.getSchedule()) {
+					for (Station st : line.getStation_list()) {
+						if (s.getStation() == st) {
+							for (Schedule ss : line.getTimetable().getSchedule()) {
+								if (ss.getStation() == s.getStation()) {
+									ss.getTimes().addAll(s.getTimes());
+								}
+							}
+						}
+					}
+				}
+			} else {
+				line.setTimetable(tmtbl);
+			}
+			lineService.update(line);
+//			line.setTimetable(tmtbl);
       tmtbl.setLine(line);
 			lineService.update(subway.getLine());
 		} else if (timetableDTO.getTransportType().equals("trolley")) {
@@ -240,7 +323,23 @@ public class TimetableService implements ITimetableService {
 			}
 			trolley.setTimetable(tmtbl);
 			trolleyService.update(trolley);
-			trolley.getLine().setTimetable(tmtbl);
+			if (line.getTimetable() != null) {
+				for (Schedule s : tmtbl.getSchedule()) {
+					for (Station st : line.getStation_list()) {
+						if (s.getStation() == st) {
+							for (Schedule ss : line.getTimetable().getSchedule()) {
+								if (ss.getStation() == s.getStation()) {
+									ss.getTimes().addAll(s.getTimes());
+								}
+							}
+						}
+					}
+				}
+			} else {
+				line.setTimetable(tmtbl);
+			}
+			lineService.update(line);
+//			line.setTimetable(tmtbl);
       tmtbl.setLine(line);
 			lineService.update(trolley.getLine());
 		} else {

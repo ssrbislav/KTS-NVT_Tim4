@@ -78,6 +78,7 @@ public class LineService implements ILineService {
 		updateLine.get().setName(line.getName());
 		updateLine.get().setLine_type(line.getLine_type());
 		updateLine.get().setStation_list(line.getStation_list());
+		updateLine.get().setTimetable(line.getTimetable());
 		return lineRepository.save(updateLine.get());
 	}
 
