@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.service.ISubwayService;
@@ -55,9 +56,9 @@ public class SubwayController {
 	}
 
 	@RequestMapping(value = "/updateSubway", method = RequestMethod.POST)
-	public ResponseEntity<Subway> update(@RequestBody Subway subway) {
+	public ResponseEntity<Subway> update(@RequestBody ChangeTransportDTO subway) {
 
-		Subway updateSubway = subwayService.update(subway);
+		Subway updateSubway = subwayService.change(subway);
 
 		return new ResponseEntity<>(updateSubway, HttpStatus.OK);
 

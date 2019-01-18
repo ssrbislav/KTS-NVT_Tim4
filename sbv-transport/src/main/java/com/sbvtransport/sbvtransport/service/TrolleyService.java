@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Trolley;
@@ -149,6 +150,25 @@ public class TrolleyService implements ITrolleyService {
 				trolleyRepository.save(trolley);
 			}
 		}
+	}
+
+	@Override
+	public Trolley change(ChangeTransportDTO trolley) {
+		
+		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId_transport());
+
+		updateTrolley.get().setName(trolley.getName());
+		if (trolley.getTime_arrive() > 5) {
+			updateTrolley.get().setLate(true);
+
+		} else {
+			updateTrolley.get().setLate(false);
+		}
+		updateTrolley.get().setTime_arrive(trolley.getTime_arrive());
+		updateTrolley.get().setTimetable(trolley.getTimetable());
+		updateTrolley.get().setLocation(trolley.getCurrent_location());
+
+		return trolleyRepository.save(updateTrolley.get());
 	}
 
 

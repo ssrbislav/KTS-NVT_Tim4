@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bus } from '../models/bus.model';
 import { TransportDTO } from '../models.dto/transport.dto';
 import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
+import { ChangeTransportDTO } from '../models.dto/changeTransport.dto';
 
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=UTF-8'})
   };
-
 
 @Injectable()
 export class BusService{
@@ -32,8 +32,13 @@ export class BusService{
                 
   }
 
-  public addLocation(location: AddLocationToTransportDTO){
-    return this.http.post<Bus>(this.busUrl + 'addLocation',location);                 
+  public addLocation(lo: AddLocationToTransportDTO){
+    return this.http.post<Bus>(this.busUrl + 'addLocation',lo);                 
+                
+  }
+
+  public updateBus(bus: ChangeTransportDTO){
+    return this.http.post<Bus>(this.busUrl + 'updateBus',bus,httpOptions);                 
                 
   }
 

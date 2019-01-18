@@ -61,6 +61,8 @@ export class ControllerAddComponent implements OnInit {
       .subscribe( data => {
           alert("Successfully controller added!");
           this.dialogRef.close();  
+      },error =>{
+          alert("Username or email already exist!");
 
       });
 

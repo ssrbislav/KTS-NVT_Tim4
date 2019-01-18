@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Line } from 'src/app/models/line.model';
 import {MyDialogComponent} from 'src/app/administrator/my-dialog-line/my-dialog-line.component'
 import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
+import { BusEditComponent } from '../bus-edit/bus-edit.component';
 
 
 @Component({
@@ -81,6 +82,29 @@ export class BusTableComponent implements OnInit {
   console.log(result)
 
   });
+}
+
+editBus(bus : Bus){
+
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+    id: 1,
+    bus: bus
+    };
+
+  const dialogRef = this.dialog.open(BusEditComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+  console.log("Dialog was closed")
+  console.log(result)
+  this.loadAllBuses();
+  this.deleted.emit(true); 
+
+  });
+
 }
 
 }
