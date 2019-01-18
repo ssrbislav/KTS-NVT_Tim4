@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subway } from '../models/subway.model';
 import { TransportDTO } from '../models.dto/transport.dto';
 import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
+import { ChangeTransportDTO } from '../models.dto/changeTransport.dto';
 
 
 const httpOptions = {
@@ -34,6 +35,11 @@ const httpOptions = {
   
     public addLocation(lo: AddLocationToTransportDTO){
       return this.http.post<Subway>(this.subwayUrl + 'addLocation',lo);                 
+                  
+    }
+
+    public updateSubway(subway: ChangeTransportDTO){
+      return this.http.post<Subway>(this.subwayUrl + 'updateSubway',subway,httpOptions);                 
                   
     }
 

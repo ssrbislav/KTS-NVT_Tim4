@@ -1,0 +1,60 @@
+
+  <div class="editSubway" >
+
+      <div *ngIf= "show == 'subway'">
+        <form>
+          <h1 style="text-align: center">Edit subway</h1>
+      
+          <label for="subway_name"><b>Bus name</b></label>
+          <input type="text" placeholder="Enter Subway name" id="edit_name_subway" [(ngModel)]="subway.name" 
+          [ngModelOptions]="{standalone: true}" required />
+  
+          <label for="time_arrive"><b>Time arrive (=> 5)</b></label>
+          <input type="number" placeholder="Enter time arrive" id="edit_time_arrive_subway" [(ngModel)]="subway.time_arrive" 
+          [ngModelOptions]="{standalone: true}" required />
+        
+          <br>  
+         
+        </form>
+      </div>
+  
+      <div [hidden]="showMap">
+        <h1 style="text-align: center">Edit location</h1>
+        <label for="line"><b>Select location:</b></label>
+        <select [(ngModel)]="subway.location" id="selected_location_subway" name="selected_location" (change)="loadMap(true)" required >
+          <option *ngFor="let station of subway.line.station_list" [ngValue]="station.location">{{ station.location.location_name}}</option>
+        </select>
+        <div id="mapLoc" class="mapLoc" style="width:100%;height:400px"></div>
+       
+      </div>
+  
+      <div *ngIf= "show == 'timetable'">
+        <h1 style="text-align: center">Edit timetable</h1>
+  
+      </div>
+  
+      <div class="clearfix">
+          <mat-dialog-actions>
+  
+            <ng-container *ngIf= "show == 'subway'">
+              <button class="cancelbtn" mat-button mat-dialog-close>Cancel</button>
+              <button class="signupbtn" type="button" mat-button (click) = "nextClick()" >Next</button>
+            </ng-container>
+              
+            <ng-container *ngIf= "show == 'location'">
+              <button class="cancelbtn" type="button" mat-button (click) = "backClick()">Back</button>
+              <button class="signupbtn" type="button" mat-button (click) = "next2Click()" >Next</button>
+            </ng-container>
+  
+            <ng-container *ngIf= "show == 'timetable'">
+              <button class="cancelbtn" type="button" mat-button (click) = "back2Click()">Back</button>
+              <button class="signupbtn" type="button" mat-button (click) = "editSubway()" >Save</button>
+            </ng-container>
+            
+          </mat-dialog-actions>
+        </div>
+  
+  
+    </div>
+  
+      

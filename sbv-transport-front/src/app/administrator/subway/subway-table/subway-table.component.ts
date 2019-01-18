@@ -5,6 +5,7 @@ import { Line } from 'src/app/models/line.model';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MyDialogComponent } from '../../my-dialog-line/my-dialog-line.component';
 import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
+import { SubwayEditComponent } from '../subway-edit/subway-edit.component';
 
 @Component({
   selector: 'app-subway-table',
@@ -80,6 +81,29 @@ export class SubwayTableComponent implements OnInit {
       console.log(result)
     
       });
+    }
+
+    editSubway(subway : Subway){
+
+      const dialogConfig = new MatDialogConfig();
+    
+      dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+        id: 1,
+        subway:subway
+        };
+    
+      const dialogRef = this.dialog.open(SubwayEditComponent, dialogConfig);
+    
+      dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog was closed")
+      console.log(result)
+      this.loadAllSubways();
+      this.deleted.emit(true); 
+    
+      });
+    
     }
 
 }

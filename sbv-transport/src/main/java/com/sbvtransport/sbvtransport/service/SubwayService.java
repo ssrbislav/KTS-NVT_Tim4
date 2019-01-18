@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Subway;
@@ -149,6 +151,25 @@ public class SubwayService implements ISubwayService {
 				subwayRepository.save(subway);
 			}
 		}
+	}
+
+	@Override
+	public Subway change(ChangeTransportDTO subway) {
+		
+		Optional<Subway> updateSubway = subwayRepository.findById(subway.getId_transport());
+
+		updateSubway.get().setName(subway.getName());
+		if (subway.getTime_arrive() > 5) {
+			updateSubway.get().setLate(true);
+
+		} else {
+			updateSubway.get().setLate(false);
+		}
+		updateSubway.get().setTime_arrive(subway.getTime_arrive());
+		updateSubway.get().setTimetable(subway.getTimetable());
+		updateSubway.get().setLocation(subway.getCurrent_location());
+
+		return subwayRepository.save(updateSubway.get());
 	}
 
 

@@ -10,5 +10,6 @@ export class Trolley {
     late: boolean;
     name: string;
     location: MyLocation;
+    time_arrive: number;
     timetable: Timetable;
   }
