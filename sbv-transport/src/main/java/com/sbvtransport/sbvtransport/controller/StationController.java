@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.ChangeStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.service.IStationService;
@@ -48,9 +49,9 @@ public class StationController {
 	}
 
 	@RequestMapping(value = "/updateStation", method = RequestMethod.POST)
-	public ResponseEntity<Station> update(@RequestBody Station station) {
+	public ResponseEntity<Station> update(@RequestBody ChangeStationDTO station) {
 
-		Station updateStation = stationService.update(station);
+		Station updateStation = stationService.change(station);
 
 		return new ResponseEntity<>(updateStation, HttpStatus.OK);
 

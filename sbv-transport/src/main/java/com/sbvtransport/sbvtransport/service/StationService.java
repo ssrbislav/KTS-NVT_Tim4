@@ -1,5 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.dto.ChangeStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Location;
@@ -76,6 +77,16 @@ public class StationService implements IStationService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Station change(ChangeStationDTO station) {
+		
+		Optional<Station> changeStation = stationRepository.findById(station.getId_station()); 
+		changeStation.get().setZone(station.getZone());
+		changeStation.get().getLocation().setLocation_name(station.getLocation_name());
+		
+		return stationRepository.save(changeStation.get());
 	}
 
 	

@@ -1,6 +1,8 @@
 import { Component, OnInit ,Output,EventEmitter} from '@angular/core';
 import { StationService } from 'src/app/services/station.service';
 import { Station } from 'src/app/models/station.model';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { StationEditComponent } from '../station-edit/station-edit.component';
 
 @Component({
   selector: 'app-station-table',
@@ -12,7 +14,7 @@ export class StationTableComponent implements OnInit {
   stations: Station[];
   @Output() deleted = new EventEmitter<boolean>();
 
-  constructor(private stationService:StationService) { }
+  constructor(private stationService:StationService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadAllStations();
@@ -37,6 +39,28 @@ export class StationTableComponent implements OnInit {
           alert("Something went wrong!");
         }
       });
+  }
+
+  editStation(station : Station){
+
+    const dialogConfig = new MatDialogConfig();
+  
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      station:station
+      };
+  
+    const dialogRef = this.dialog.open(StationEditComponent, dialogConfig);
+  
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.loadAllStations();
+  
+    });
+  
   }
 
 }

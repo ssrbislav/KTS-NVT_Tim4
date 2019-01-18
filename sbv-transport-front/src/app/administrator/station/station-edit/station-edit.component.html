@@ -1,0 +1,31 @@
+
+  <div class="editStation" >
+
+      <form>
+        <h1 style="text-align: center">Edit station</h1>
+      
+        <label for="station_name"><b>Location name</b></label>
+        <input type="text" placeholder="Enter station name" id="edit_name_station" [(ngModel)]="station.location.location_name" 
+          [ngModelOptions]="{standalone: true}" required />
+  
+        <select [(ngModel)]="station.zone" id="category" name="zone" [ngModelOptions]="{standalone: true}" required >
+            <option value="first">first</option>
+            <option value="second">second</option>
+        </select>
+        <br>  
+         
+      </form>
+
+      <div class="clearfix">
+          <mat-dialog-actions>
+  
+            <button class="cancelbtn" type="button"mat-button mat-dialog-close>Cancel</button>
+            <button class="signupbtn" type="button" mat-button (click) = "editStation()" >Save</button>
+            
+          </mat-dialog-actions>
+        </div>
+  
+  
+    </div>
+  
+      

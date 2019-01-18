@@ -8,6 +8,7 @@
         <th scope="col">Latitude</th>
         <th scope="col">Longitude</th>
         <th scope="col">Type</th>
+        <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
         <td>{{station.location.latitude}}</td>
         <td>{{station.location.longitude}}</td>
         <td>{{station.location.type}}</td>
+        <td> <img (click) ="editStation(station)" src ="assets/pictures/edit.png" alt="Edit" style="cursor: pointer;"></td>
         <td> <img (click) ="deleteStation(station.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>
   </table>

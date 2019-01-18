@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Station } from '../models/station.model';
 import { StationDTO } from '../models.dto/station.dto';
+import { changeStationDTO } from '../models.dto/changeStation.dto';
 
 
 const httpOptions = {
@@ -35,5 +36,11 @@ export class StationService{
         return this.http.post<Station>(this.stationUrl + 'addStation',station);                 
                     
     }
+
+    public updateStation(station: changeStationDTO){
+        return this.http.post<Station>(this.stationUrl + 'updateStation',station,httpOptions);                 
+                    
+      }
+    
 
 }
