@@ -37,7 +37,7 @@ export class SubwayEditComponent implements OnInit {
 
   nextClick(){
 
-    if(this.subway.name == null){
+    if(this.subway.name == ""){
       alert("Please write subway name!");
     }else if(this.subway.time_arrive == null){
       alert("Please write time arrive between stations!");

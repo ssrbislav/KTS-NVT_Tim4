@@ -1,35 +1,35 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Bus } from 'src/app/models/bus.model';
+import { Trolley } from 'src/app/models/trolley.model';
 import { LocationDTO } from 'src/app/models.dto/location.dto';
 import { MyLocation } from 'src/app/models/location.model';
-import { LineService } from 'src/app/services/line.service';
-import { BusService } from 'src/app/services/bus.service';
-import { LocationService } from 'src/app/services/location.service';
 import { ChangeTransportDTO } from 'src/app/models.dto/changeTransport.dto';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { LineService } from 'src/app/services/line.service';
+import { TrolleyService } from 'src/app/services/trolley.service';
+import { LocationService } from 'src/app/services/location.service';
 declare var ol: any; 
 
 @Component({
-  selector: 'app-bus-edit',
-  templateUrl: './bus-edit.component.html',
-  styleUrls: ['./bus-edit.component.css']
+  selector: 'app-trolley-edit',
+  templateUrl: './trolley-edit.component.html',
+  styleUrls: ['./trolley-edit.component.css']
 })
-export class BusEditComponent implements OnInit {
+export class TrolleyEditComponent implements OnInit {
 
-  bus: Bus;
-  show: string = 'bus';
+  trolley: Trolley;
+  show: string = 'trolley';
   showMap: boolean = true;
   mylocation : LocationDTO = new LocationDTO();
   map: any;
-  newBus: Bus;
+  newTrolley: Trolley;
   newLocation: MyLocation;
-  changeBus: ChangeTransportDTO = new ChangeTransportDTO();
+  changeTrolley: ChangeTransportDTO = new ChangeTransportDTO();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private busService: BusService, private locationService: LocationService) { }
+  private lineService: LineService, private trolleyService: TrolleyService, private locationService: LocationService) { }
 
   ngOnInit() {
-    this.bus = this.data.bus;
+    this.trolley = this.data.trolley;
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadMap(false);
   }
@@ -37,13 +37,13 @@ export class BusEditComponent implements OnInit {
 
   nextClick(){
 
-    if(this.bus.name == ""){
-      alert("Please write bus name!");
-    }else if(this.bus.time_arrive == null){
+    if(this.trolley.name == ""){
+      alert("Please write trolley name!");
+    }else if(this.trolley.time_arrive == null){
       alert("Please write time arrive between stations!");
-    }else if(this.bus.line == null){
+    }else if(this.trolley.line == null){
       alert("Please select line!");
-    }else if(this.bus.time_arrive <5){
+    }else if(this.trolley.time_arrive <5){
       alert("Time arrive need to be => 5!")
     }else{
       this.show = 'location';
@@ -53,7 +53,7 @@ export class BusEditComponent implements OnInit {
   }
 
   backClick(){
-    this.show = 'bus';
+    this.show = 'trolley';
     this.showMap = true;
   }
 
@@ -72,7 +72,7 @@ export class BusEditComponent implements OnInit {
     
     var iconStyle = new ol.style.Style({
       image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-        src: 'assets/pictures/bus-map.png'
+        src: 'assets/pictures/trolley-map.png'
       }))
       });
 
@@ -101,7 +101,7 @@ export class BusEditComponent implements OnInit {
       const l= this.map.getLayers().getArray()[1];
       const markerSource2 = new ol.source.Vector();
       var iconFeature = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.transform([this.bus.location.longitude, this.bus.location.latitude], 'EPSG:4326',
+          geometry: new ol.geom.Point(ol.proj.transform([this.trolley.location.longitude, this.trolley.location.latitude], 'EPSG:4326',
                 'EPSG:3857'))
       
         });
@@ -111,16 +111,16 @@ export class BusEditComponent implements OnInit {
     
   }
 
-  editBus(){
-    this.changeBus.id_transport = this.bus.id;
-    this.changeBus.current_location = this.bus.location;
-    this.changeBus.name = this.bus.name;
-    this.changeBus.time_arrive = this.bus.time_arrive;
-    this.changeBus.timetable = null;
-    this.busService.updateBus(this.changeBus)
+  editTrolley(){
+    this.changeTrolley.id_transport = this.trolley.id;
+    this.changeTrolley.current_location = this.trolley.location;
+    this.changeTrolley.name = this.trolley.name;
+    this.changeTrolley.time_arrive = this.trolley.time_arrive;
+    this.changeTrolley.timetable = null;
+    this.trolleyService.updateTrolley(this.changeTrolley)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully bus updated!");
+        alert("Successfully trolley updated!");
         this.dialogRef.close();
         
       }else{
@@ -130,6 +130,5 @@ export class BusEditComponent implements OnInit {
     });
   }
 
-  
 
 }

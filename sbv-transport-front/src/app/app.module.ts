@@ -46,6 +46,7 @@ import { SubwayAddComponent } from './administrator/subway/subway-add/subway-add
 import { TrolleyAddComponent } from './administrator/trolley/trolley-add/trolley-add.component';
 import { BusEditComponent } from './administrator/bus/bus-edit/bus-edit.component';
 import { SubwayEditComponent } from './administrator/subway/subway-edit/subway-edit.component';
+import { TrolleyEditComponent } from './administrator/trolley/trolley-edit/trolley-edit.component';
 
 
 const appRoutes: Routes = [
@@ -91,7 +92,8 @@ const appRoutes: Routes = [
     SubwayAddComponent,
     TrolleyAddComponent,
     BusEditComponent,
-    SubwayEditComponent
+    SubwayEditComponent,
+    TrolleyEditComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,8 @@ const appRoutes: Routes = [
     SubwayAddComponent,
     TrolleyAddComponent,
     BusEditComponent,
-    SubwayEditComponent
+    SubwayEditComponent,
+    TrolleyEditComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService,

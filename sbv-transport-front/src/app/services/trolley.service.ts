@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Trolley } from '../models/trolley.model';
 import { TransportDTO } from '../models.dto/transport.dto';
 import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
+import { ChangeTransportDTO } from '../models.dto/changeTransport.dto';
 
 
 const httpOptions = {
@@ -36,5 +37,11 @@ const httpOptions = {
       return this.http.post<Trolley>(this.trolleyUrl + 'addLocation',lo);                 
                   
     }
+
+    public updateTrolley(trolley: ChangeTransportDTO){
+      return this.http.post<Trolley>(this.trolleyUrl + 'updateTrolley',trolley,httpOptions);                 
+                  
+    }
+  
 
   }

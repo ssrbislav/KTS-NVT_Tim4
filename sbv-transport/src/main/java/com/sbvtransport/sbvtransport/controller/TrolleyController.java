@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.service.ITicketService;
@@ -55,9 +56,9 @@ public class TrolleyController {
 	}
 
 	@RequestMapping(value = "/updateTrolley", method = RequestMethod.POST)
-	public ResponseEntity<Trolley> update(@RequestBody Trolley trolley) {
+	public ResponseEntity<Trolley> update(@RequestBody ChangeTransportDTO trolley) {
 
-		Trolley updateTrolley = trolleyService.update(trolley);
+		Trolley updateTrolley = trolleyService.change(trolley);
 
 		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
 
