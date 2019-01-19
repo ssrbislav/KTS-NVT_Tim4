@@ -15,6 +15,8 @@ public interface ILineService {
   boolean delete(Long id);
   String addStation(AddFirstStationDTO addFirst);
   Line addListStations(List<AddFirstStationDTO> list);
+  Line changeListStations(List<AddFirstStationDTO> list);
+
 
 
 }

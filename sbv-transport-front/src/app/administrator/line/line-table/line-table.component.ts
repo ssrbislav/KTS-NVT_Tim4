@@ -6,6 +6,7 @@ import { MyDialogFirstStationComponent } from './my-dialog-first-station/my-dial
 import { Station } from 'src/app/models/station.model';
 import { StationService } from 'src/app/services/station.service';
 import { MyDialogStationsComponent } from './my-dialog-stations/my-dialog-stations.component';
+import { LineEditComponent } from '../line-edit/line-edit.component';
 
 @Component({
   selector: 'app-line-table',
@@ -97,5 +98,28 @@ export class LineTableComponent implements OnInit {
   });
 
   }
+
+  editLine(line : Line){
+
+    const dialogConfig = new MatDialogConfig();
+  
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      line: line
+      };
+  
+    const dialogRef = this.dialog.open(LineEditComponent, dialogConfig);
+  
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.loadAllLines();
+  
+    });
+  
+  }
+  
 
 }

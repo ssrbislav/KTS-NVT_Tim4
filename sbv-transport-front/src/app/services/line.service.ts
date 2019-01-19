@@ -35,4 +35,9 @@ export class LineService{
 
   }
 
+  public updateLine(line: AddStationToList[]){
+    return this.http.post<Line>(this.lineUrl + 'updateLine',line,httpOptions);                 
+                
+  }
+
   }

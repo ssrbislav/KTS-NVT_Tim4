@@ -51,9 +51,9 @@ public class LineController {
 	}
 
 	@RequestMapping(value = "/updateLine", method = RequestMethod.POST)
-	public ResponseEntity<Line> update(@RequestBody Line line) {
+	public ResponseEntity<Line> update(@RequestBody List<AddFirstStationDTO> line) {
 
-		Line updateLine = lineService.update(line);
+		Line updateLine = lineService.changeListStations(line);
 
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 

@@ -191,5 +191,23 @@ public class LineService implements ILineService {
 		
 		return lineRepository.save(l);
 	}
+	
+	@Override
+	public Line changeListStations(List<AddFirstStationDTO> list){
+		
+		Line l = lineRepository.getOne(list.get(0).getId_line());
+		if (l == null || l.isDeleted()) {
+			return null;
+
+		}
+		List<Station> oldStations = l.getStation_list();
+		for (Station station : oldStations) {
+			station.getLine().remove(l);
+			stationRepository.save(station);
+
+		}
+		return addListStations(list);
+		
+	}
 
 }
