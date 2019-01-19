@@ -6,6 +6,8 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { MyDialogComponent } from '../../my-dialog-line/my-dialog-line.component';
 import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
 import { SubwayEditComponent } from '../subway-edit/subway-edit.component';
+import { Timetable } from 'src/app/models/timetable.model';
+import { MyDialogTimetableComponent } from '../../my-dialog-timetable/my-dialog-timetable.component';
 
 @Component({
   selector: 'app-subway-table',
@@ -81,6 +83,26 @@ export class SubwayTableComponent implements OnInit {
       console.log(result)
     
       });
+    }
+
+    openModalTimetable(timetable: Timetable){
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+        id: 1,
+        timetable: timetable
+        };
+  
+      const dialogRef = this.dialog.open(MyDialogTimetableComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog was closed")
+      console.log(result)
+  
+      });
+  
     }
 
     editSubway(subway : Subway){

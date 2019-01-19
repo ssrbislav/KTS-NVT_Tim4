@@ -20,7 +20,7 @@
         <td>{{line.line_type}}</td>
         <td> <img (click) = "findFirstStation(line.first_station)" src ="assets/pictures/bus-stop.png" alt="First station" style="cursor: pointer;"></td>
         <td> <img (click) ="openStations(line.station_list)" src ="assets/pictures/stations.png" alt="Stations" style="cursor: pointer;"></td>
-        <td> <img src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
+        <td> <img (click) = "openModalTimetable(line.timetable)"src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
         <td> <img (click) ="editLine(line)" src ="assets/pictures/edit.png" alt="Edit" style="cursor: pointer;"></td>
         <td> <img (click)= "deleteLine(line.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>

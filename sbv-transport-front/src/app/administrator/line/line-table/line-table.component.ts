@@ -7,6 +7,8 @@ import { Station } from 'src/app/models/station.model';
 import { StationService } from 'src/app/services/station.service';
 import { MyDialogStationsComponent } from './my-dialog-stations/my-dialog-stations.component';
 import { LineEditComponent } from '../line-edit/line-edit.component';
+import { Timetable } from 'src/app/models/timetable.model';
+import { MyDialogTimetableComponent } from '../../my-dialog-timetable/my-dialog-timetable.component';
 
 @Component({
   selector: 'app-line-table',
@@ -120,6 +122,26 @@ export class LineTableComponent implements OnInit {
     });
   
   }
+
+  openModalTimetable(timetable: Timetable){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      timetable: timetable
+      };
+
+    const dialogRef = this.dialog.open(MyDialogTimetableComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+
+    });
+  }
+
   
 
 }

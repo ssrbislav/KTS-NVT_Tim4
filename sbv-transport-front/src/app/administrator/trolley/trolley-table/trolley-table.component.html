@@ -23,7 +23,7 @@
         <td>{{trolley.time_arrive}}</td>
         <td> <img (click) = "openModal(trolley.line)" src ="assets/pictures/substract.png" alt="Line" style="cursor: pointer;"></td>
         <td> <img (click) = "openModalLocation(trolley.location)" src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
-        <td> <img src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
+        <td> <img (click) = "openModalTimetable(trolley.timetable)" src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
         <td> <img (click) ="editTrolley(trolley)" src ="assets/pictures/edit.png" alt="Edit" style="cursor: pointer;"></td>
         <td> <img (click) ="deleteTrolley(trolley.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>

@@ -6,6 +6,8 @@ import { Line } from 'src/app/models/line.model';
 import {MyDialogComponent} from 'src/app/administrator/my-dialog-line/my-dialog-line.component'
 import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
 import { BusEditComponent } from '../bus-edit/bus-edit.component';
+import { Timetable } from 'src/app/models/timetable.model';
+import { MyDialogTimetableComponent } from '../../my-dialog-timetable/my-dialog-timetable.component';
 
 
 @Component({
@@ -68,43 +70,63 @@ export class BusTableComponent implements OnInit {
  openModalLocation(location: Location) {
   const dialogConfig = new MatDialogConfig();
 
-  dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-    id: 1,
-    location: location
-    };
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      location: location
+      };
 
-  const dialogRef = this.dialog.open(MyDialogCurrentLocationComponent, dialogConfig);
+    const dialogRef = this.dialog.open(MyDialogCurrentLocationComponent, dialogConfig);
 
-  dialogRef.afterClosed().subscribe(result => {
-  console.log("Dialog was closed")
-  console.log(result)
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
 
-  });
+    });
 }
 
-editBus(bus : Bus){
+  openModalTimetable(timetable: Timetable){
+    const dialogConfig = new MatDialogConfig();
 
-  const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      timetable: timetable
+      };
 
-  dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-    id: 1,
-    bus: bus
-    };
+    const dialogRef = this.dialog.open(MyDialogTimetableComponent, dialogConfig);
 
-  const dialogRef = this.dialog.open(BusEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
 
-  dialogRef.afterClosed().subscribe(result => {
-  console.log("Dialog was closed")
-  console.log(result)
-  this.loadAllBuses();
-  this.deleted.emit(true); 
+    });
 
-  });
+  }
 
-}
+  editBus(bus : Bus){
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 1,
+      bus: bus
+      };
+
+    const dialogRef = this.dialog.open(BusEditComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed")
+    console.log(result)
+    this.loadAllBuses();
+    this.deleted.emit(true); 
+
+    });
+
+  }
 
 }

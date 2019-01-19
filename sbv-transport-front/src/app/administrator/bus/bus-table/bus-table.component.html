@@ -23,7 +23,7 @@
         <td>{{bus.time_arrive}}</td>
         <td> <img (click) = "openModalLine(bus.line)" src ="assets/pictures/substract.png" alt="Line" style="cursor: pointer;"></td>
         <td> <img (click) = "openModalLocation(bus.location)" src ="assets/pictures/placeholder.png" alt="Location" style="cursor: pointer;"></td>
-        <td> <img src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
+        <td> <img (click) = "openModalTimetable(bus.timetable)" src ="assets/pictures/schedule.png" alt="Timetable" style="cursor: pointer;"></td>
         <td> <img (click) ="editBus(bus)" src ="assets/pictures/edit.png" alt="Edit" style="cursor: pointer;"></td>
         <td> <img (click) ="deleteBus(bus.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
       </tr>

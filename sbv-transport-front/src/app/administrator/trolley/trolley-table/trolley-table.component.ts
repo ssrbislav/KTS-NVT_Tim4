@@ -6,6 +6,8 @@ import { Line } from 'src/app/models/line.model';
 import { MyDialogComponent } from '../../my-dialog-line/my-dialog-line.component';
 import { MyDialogCurrentLocationComponent } from '../../my-dialog-current-location/my-dialog-current-location.component';
 import { TrolleyEditComponent } from '../trolley-edit/trolley-edit.component';
+import { Timetable } from 'src/app/models/timetable.model';
+import { MyDialogTimetableComponent } from '../../my-dialog-timetable/my-dialog-timetable.component';
 
 @Component({
   selector: 'app-trolley-table',
@@ -83,6 +85,27 @@ export class TrolleyTableComponent implements OnInit {
     
       });
     }
+
+    openModalTimetable(timetable: Timetable){
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+        id: 1,
+        timetable: timetable
+        };
+  
+      const dialogRef = this.dialog.open(MyDialogTimetableComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog was closed")
+      console.log(result)
+  
+      });
+  
+    }
+
 
     editTrolley(trolley : Trolley){
 

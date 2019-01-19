@@ -1,0 +1,36 @@
+<mat-dialog-content>
+
+  <div class="timetable">
+    <h1 style="text-align: center;">Timetable</h1>
+
+    <div *ngFor = "let s of timetable.schedule">
+      <div >
+        <h3>{{s.station.location.location_name}}</h3>
+      </div>
+      <div>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" colspan="5">Time</th>     
+              </tr>
+            </thead>
+            <tbody>
+
+            <ng-container *ngFor="let time of s.times; let i = index" >
+              <tr *ngIf="i % 7 === 0">
+                <td *ngFor="let x of [i,i+1,i+2,i+3,i+4,i+5,i+6]">
+                  {{s.times[x]}}
+                </td>
+              </tr>
+            </ng-container>
+           </tbody>    
+        </table>
+
+      </div>
+    </div>
+
+    <mat-dialog-actions>
+      <button class="cancelbtn" mat-button mat-dialog-close>Back</button> 
+    </mat-dialog-actions>
+  </div>
+</mat-dialog-content>

@@ -49,6 +49,7 @@ import { SubwayEditComponent } from './administrator/subway/subway-edit/subway-e
 import { TrolleyEditComponent } from './administrator/trolley/trolley-edit/trolley-edit.component';
 import { StationEditComponent } from './administrator/station/station-edit/station-edit.component';
 import { LineEditComponent } from './administrator/line/line-edit/line-edit.component';
+import { MyDialogTimetableComponent } from './administrator/my-dialog-timetable/my-dialog-timetable.component';
 
 
 const appRoutes: Routes = [
@@ -97,7 +98,8 @@ const appRoutes: Routes = [
     SubwayEditComponent,
     TrolleyEditComponent,
     StationEditComponent,
-    LineEditComponent
+    LineEditComponent,
+    MyDialogTimetableComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +129,8 @@ const appRoutes: Routes = [
     SubwayEditComponent,
     TrolleyEditComponent,
     StationEditComponent,
-    LineEditComponent
+    LineEditComponent,
+    MyDialogTimetableComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService,
