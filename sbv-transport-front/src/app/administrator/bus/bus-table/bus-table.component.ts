@@ -30,7 +30,9 @@ export class BusTableComponent implements OnInit {
     this.busService.getBuses()
       .subscribe( data => {
         this.buses = data;
+         
       });
+     
   }
 
   deleteBus(id: BigInteger){
@@ -127,6 +129,10 @@ export class BusTableComponent implements OnInit {
 
     });
 
+  }
+
+  loadSearchFilter(filterBuses: Bus[]){
+    this.buses = filterBuses;
   }
 
 }

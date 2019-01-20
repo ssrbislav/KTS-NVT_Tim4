@@ -51,6 +51,7 @@ import { StationEditComponent } from './administrator/station/station-edit/stati
 import { LineEditComponent } from './administrator/line/line-edit/line-edit.component';
 import { MyDialogTimetableComponent } from './administrator/my-dialog-timetable/my-dialog-timetable.component';
 import { TimetableService } from './services/timetable.service';
+import { BusSearchFilterComponent } from './administrator/bus/bus-search-filter/bus-search-filter.component';
 
 
 const appRoutes: Routes = [
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
     TrolleyEditComponent,
     StationEditComponent,
     LineEditComponent,
-    MyDialogTimetableComponent
+    MyDialogTimetableComponent,
+    BusSearchFilterComponent
   ],
   imports: [
     BrowserModule,

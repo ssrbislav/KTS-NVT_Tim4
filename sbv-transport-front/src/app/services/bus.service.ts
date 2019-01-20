@@ -4,6 +4,7 @@ import { Bus } from '../models/bus.model';
 import { TransportDTO } from '../models.dto/transport.dto';
 import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
 import { ChangeTransportDTO } from '../models.dto/changeTransport.dto';
+import { FilterSearchDTO } from '../models.dto/filterSearch.dto';
 
 
 const httpOptions = {
@@ -39,6 +40,11 @@ export class BusService{
 
   public updateBus(bus: ChangeTransportDTO){
     return this.http.post<Bus>(this.busUrl + 'updateBus',bus,httpOptions);                 
+                
+  }
+
+  public filterSearch(values: FilterSearchDTO){
+    return this.http.post<Bus[]>(this.busUrl + 'searchFilter',values);                 
                 
   }
 

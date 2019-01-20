@@ -31,6 +31,13 @@ export class BusComponent implements OnInit {
       });
   }
 
+  loadBecauseFilter(filterBuses:Bus[]){
+
+    this.buses = filterBuses;
+    this.loadMap(true);
+
+  }
+
 
   loadMap(i:boolean){
     const markerSource = new ol.source.Vector();
@@ -117,5 +124,7 @@ export class BusComponent implements OnInit {
   
   });
   }
+
+  
 
 }
