@@ -128,4 +128,8 @@ export class SubwayTableComponent implements OnInit {
     
     }
 
+    loadSearchFilter(filterSubways:Subway[]){
+      this.subways = filterSubways;
+    }
+
 }

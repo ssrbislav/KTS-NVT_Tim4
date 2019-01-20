@@ -31,6 +31,13 @@ export class SubwayComponent implements OnInit {
       });
   }
 
+  loadBecauseFilter(filterBuses:Subway[]){
+
+    this.subways = filterBuses;
+    this.loadMap(true);
+
+  }
+
   loadMap(i:boolean){
     const markerSource = new ol.source.Vector();
     

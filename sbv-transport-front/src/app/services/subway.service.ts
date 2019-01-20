@@ -4,6 +4,7 @@ import { Subway } from '../models/subway.model';
 import { TransportDTO } from '../models.dto/transport.dto';
 import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
 import { ChangeTransportDTO } from '../models.dto/changeTransport.dto';
+import { FilterSearchDTO } from '../models.dto/filterSearch.dto';
 
 
 const httpOptions = {
@@ -40,6 +41,11 @@ const httpOptions = {
 
     public updateSubway(subway: ChangeTransportDTO){
       return this.http.post<Subway>(this.subwayUrl + 'updateSubway',subway,httpOptions);                 
+                  
+    }
+
+    public filterSearch(values: FilterSearchDTO){
+      return this.http.post<Subway[]>(this.subwayUrl + 'searchFilter',values);                 
                   
     }
 

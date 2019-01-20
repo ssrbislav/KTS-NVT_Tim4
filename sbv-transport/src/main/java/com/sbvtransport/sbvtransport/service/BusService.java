@@ -207,9 +207,12 @@ public class BusService implements IBusService {
 		//filter current location
 		if(filterSearch.getId_location() != null){
 			for (Bus bus :lateFilter) {
-				if(bus.getLocation().getId() == filterSearch.getId_location()){
-					currentLocationFilter.add(bus);
+				if(bus.getLocation()!=null){
+					if(bus.getLocation().getId() == filterSearch.getId_location()){
+						currentLocationFilter.add(bus);
+					}
 				}
+				
 			}
 			
 		}else{

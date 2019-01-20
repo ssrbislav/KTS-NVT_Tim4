@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Subway;
@@ -171,6 +171,70 @@ public class SubwayService implements ISubwayService {
 
 		return subwayRepository.save(updateSubway.get());
 	}
+
+	@Override
+	public List<Subway> searchFilter(FilterSearchDTO filterSearch) {
+		
+		List<Subway> allSubways = findAll();
+		List<Subway> lineFilter = new ArrayList<>();
+		List<Subway> lateFilter = new ArrayList<>();
+		List<Subway> currentLocationFilter = new ArrayList<>();
+		List<Subway> finalList = new ArrayList<>();
+		
+		//filter line 
+		if(filterSearch.getId_line() != null){
+			for (Subway subway : allSubways) {
+				if(filterSearch.getId_line() == subway.getLine().getId()){
+					lineFilter.add(subway);
+				}
+			}
+			
+		}else{
+			lineFilter = allSubways;
+		}
+		
+		// filter is late
+		if(filterSearch.isLate()){
+			for (Subway subway : lineFilter) {
+				if(subway.isLate()){
+					lateFilter.add(subway);
+				}
+			}
+			
+		}else{
+			lateFilter = lineFilter;	
+		}
+		
+		//filter current location
+		if(filterSearch.getId_location() != null){
+			for (Subway subway :lateFilter) {
+				if(subway.getLocation() != null){
+					if(subway.getLocation().getId() == filterSearch.getId_location()){
+						currentLocationFilter.add(subway);
+					}
+				}
+				
+			}
+			
+		}else{
+			currentLocationFilter = lateFilter;
+		}
+		//search by names
+		if(filterSearch.getText_search() != ""){
+			for (Subway subway : currentLocationFilter) {
+				if(subway.getName().contains(filterSearch.getText_search())){
+					finalList.add(subway);
+				}
+			}
+			
+		}else{
+			finalList = currentLocationFilter;
+		}
+		
+		return finalList;
+	}
+
+	
 
 
 }

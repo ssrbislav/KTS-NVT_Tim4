@@ -38,7 +38,6 @@ export class BusComponent implements OnInit {
 
   }
 
-
   loadMap(i:boolean){
     const markerSource = new ol.source.Vector();
     
