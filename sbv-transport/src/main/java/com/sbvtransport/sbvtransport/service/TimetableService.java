@@ -58,7 +58,7 @@ public class TimetableService implements ITimetableService {
 	}
 
 	@Override
-	public String create(TimetableDTO timetableDTO) throws ParseException {
+	public Timetable create(TimetableDTO timetableDTO) throws ParseException {
 		Timetable timetable = new Timetable();
 		Station station;
 		Bus bus;
@@ -69,7 +69,7 @@ public class TimetableService implements ITimetableService {
 		for (ScheduleDTO scheduleDTO : timetableDTO.getSchedules()) {
 			Long stationID = scheduleDTO.getStation_id();
 			if (!stationService.findAll().contains(stationService.getOne(stationID))) {
-				return "Station with ID " + stationID + " doesn't exist!";
+				return null;
 			} else {
 				station = stationService.getOne(stationID);
 				Schedule s = new Schedule();
@@ -163,15 +163,15 @@ public class TimetableService implements ITimetableService {
 			lineService.update(line);
 //			trolley.getLine().setTimetable(tmtbl);
 		} else {
-			return "Transport type and/or ID do not exist. Try typing one of the following: bus/subway/trolley, or a correct ID.";
+			return null;
 		}
 		//station.setTimetable(tmtbl);
 		//stationService.update(station);
 //		update(tmtbl);
-		return "The timetable has been successfully created!\n";
+		return tmtbl;
 	}
 
-	public String create(AltTimetableDTO timetableDTO) {
+	public Timetable create(AltTimetableDTO timetableDTO) {
 //		Timetable timetable = new Timetable();
 		Station station;
 		Bus bus;
@@ -343,13 +343,13 @@ public class TimetableService implements ITimetableService {
       tmtbl.setLine(line);
 			lineService.update(trolley.getLine());
 		} else {
-			return "Transport type and/or ID do not exist. Try typing one of the following: bus/subway/trolley, or a correct ID.";
+			return null;
 		}
-		timetableRepository.save(tmtbl);
+//		timetableRepository.save(tmtbl);
 		//station.setTimetable(tmtbl);
 		//stationService.update(station);
 //		update(tmtbl);
-		return "The timetable has been successfully created!\n";
+		return timetableRepository.save(tmtbl);
 	}
 
 	@Override

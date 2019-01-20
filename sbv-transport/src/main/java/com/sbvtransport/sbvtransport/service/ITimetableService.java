@@ -10,8 +10,8 @@ public interface ITimetableService {
 
   Timetable getOne(Long id);
   List<Timetable> findAll();
-  String create(TimetableDTO timetableDTO) throws ParseException;
-  String create(AltTimetableDTO timetableDTO);
+  Timetable create(TimetableDTO timetableDTO) throws ParseException;
+  Timetable create(AltTimetableDTO timetableDTO);
   Timetable update(Timetable timetable);
   boolean delete (Long id);
 }

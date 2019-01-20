@@ -27,19 +27,19 @@ public class TimetableController {
 	}
 
 	@RequestMapping(value = "/addTimetable", method = RequestMethod.POST,produces = "application/json")
-	public ResponseEntity<String> create(@RequestBody TimetableDTO timetableDTO)
+	public ResponseEntity<Timetable> create(@RequestBody TimetableDTO timetableDTO)
 			throws ParseException {
 
-		String newTimetable = timetableService.create(timetableDTO);
+		Timetable newTimetable = timetableService.create(timetableDTO);
 
 		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
 
 	}
 
 	@RequestMapping(value = "/addAltTimetable", method = RequestMethod.POST,produces = "application/json")
-	public ResponseEntity<String> create(@RequestBody AltTimetableDTO timetableDTO) {
+	public ResponseEntity<Timetable> create(@RequestBody AltTimetableDTO timetableDTO) {
 
-		String newTimetable = timetableService.create(timetableDTO);
+		Timetable newTimetable = timetableService.create(timetableDTO);
 
 		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
 
