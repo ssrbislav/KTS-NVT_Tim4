@@ -1,4 +1,4 @@
-import { Component, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
 import { Bus } from 'src/app/models/bus.model';
 import { BusService } from 'src/app/services/bus.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -19,6 +19,7 @@ export class BusTableComponent implements OnInit {
 
   buses: Bus[];
   @Output() deleted = new EventEmitter<boolean>();
+  @Input() busSearch: any;
 
   constructor(private busService:BusService, public dialog: MatDialog) { }
 
@@ -42,7 +43,9 @@ export class BusTableComponent implements OnInit {
         if(data == true){
           alert("Bus is deleted!");
           this.loadAllBuses();
-          this.deleted.emit(true); 
+          this.deleted.emit(true);
+          this.busSearch.resetSearch();  
+ 
         }else{
           alert("Something went wrong!");
         }
@@ -125,7 +128,8 @@ export class BusTableComponent implements OnInit {
     console.log("Dialog was closed")
     console.log(result)
     this.loadAllBuses();
-    this.deleted.emit(true); 
+    this.deleted.emit(true);
+    this.busSearch.resetSearch(); 
 
     });
 

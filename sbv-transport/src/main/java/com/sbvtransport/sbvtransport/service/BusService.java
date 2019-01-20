@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
-import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
@@ -172,7 +172,7 @@ public class BusService implements IBusService {
 	}
 
 	@Override
-	public List<Bus> searchFilter(FilterSearchDTO filterSearch) {
+	public List<Bus> searchFilter(FilterSearchTransportDTO filterSearch) {
 
 		List<Bus> allBuses = findAll();
 		List<Bus> lineFilter = new ArrayList<>();

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
-import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.model.Subway;
 import com.sbvtransport.sbvtransport.service.ISubwayService;
@@ -88,7 +88,7 @@ public class SubwayController {
 	}
 	
 	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
-	public ResponseEntity<List<Subway>> filterSearch(@RequestBody FilterSearchDTO filterSearch) {
+	public ResponseEntity<List<Subway>> filterSearch(@RequestBody FilterSearchTransportDTO filterSearch) {
 		
 		List<Subway> list = subwayService.searchFilter(filterSearch);
 

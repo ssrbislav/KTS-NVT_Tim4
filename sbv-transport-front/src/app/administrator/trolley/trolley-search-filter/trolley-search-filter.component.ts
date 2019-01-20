@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FilterSearchDTO } from 'src/app/models.dto/filterSearch.dto';
+import { FilterSearchTransportDTO } from 'src/app/models.dto/filterSearchTransport.dto';
 import { Line } from 'src/app/models/line.model';
 import { Station } from 'src/app/models/station.model';
 import { Trolley } from 'src/app/models/trolley.model';
@@ -14,7 +14,7 @@ import { StationService } from 'src/app/services/station.service';
 })
 export class TrolleySearchFilterComponent implements OnInit {
 
-  filterSearch: FilterSearchDTO = new FilterSearchDTO(null,false,null,"");
+  filterSearch: FilterSearchTransportDTO = new  FilterSearchTransportDTO(null,false,null,"");
   lines: Line[];
   stations: Station[];
   result: Trolley[];
@@ -54,4 +54,9 @@ export class TrolleySearchFilterComponent implements OnInit {
       });
 
   }
+
+  resetSearch(){
+    this.filterSearch = new FilterSearchTransportDTO(null,false,null,"");
+  }
+
 }

@@ -1,4 +1,4 @@
-export class FilterSearchDTO{
+export class FilterSearchTransportDTO{
 
     id_line: BigInteger;
 	late: boolean;

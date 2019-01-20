@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
-import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Trolley;
@@ -174,7 +174,7 @@ public class TrolleyService implements ITrolleyService {
 	}
 
 	@Override
-	public List<Trolley> searchFilter(FilterSearchDTO filterSearch) {
+	public List<Trolley> searchFilter(FilterSearchTransportDTO filterSearch) {
 
 		List<Trolley> allTrolleys = findAll();
 		List<Trolley> lineFilter = new ArrayList<>();

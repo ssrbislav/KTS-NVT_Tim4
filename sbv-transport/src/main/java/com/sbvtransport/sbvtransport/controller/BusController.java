@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
-import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.service.IBusService;
 import com.sbvtransport.sbvtransport.service.ITicketService;
@@ -88,7 +88,7 @@ public class BusController {
 	
 
 	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
-	public ResponseEntity<List<Bus>> filterSearch(@RequestBody FilterSearchDTO filterSearch) {
+	public ResponseEntity<List<Bus>> filterSearch(@RequestBody FilterSearchTransportDTO filterSearch) {
 		
 		List<Bus> list = busService.searchFilter(filterSearch);
 

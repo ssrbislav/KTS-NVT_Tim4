@@ -4,7 +4,7 @@ import java.util.List;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
-import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
 
@@ -21,5 +21,5 @@ public interface IBusService {
 	Bus addLocation(AddLocationDTO addLocation);
 	boolean checkIfLate(int time);
 	void deleteBecauseLine(Long id_line);
-	List<Bus> searchFilter(FilterSearchDTO filterSearch);
+	List<Bus> searchFilter(FilterSearchTransportDTO filterSearch);
 }

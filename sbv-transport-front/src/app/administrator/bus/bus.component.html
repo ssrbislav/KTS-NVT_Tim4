@@ -4,5 +4,5 @@
     <p>On the map are buses that are driving:</p>
 </div>
 <div id="mapBus" class="map" style="width:100%;height:400px"></div><br>
-<app-bus-search-filter [busTable]="busTable" (filter) = 'loadBecauseFilter($event)'></app-bus-search-filter><br>
-<app-bus-table #busTable (deleted)=' loadAllBuses($event)'></app-bus-table>
+<app-bus-search-filter [busTable]="busTable" (filter) = 'loadBecauseFilter($event)' #busSearch></app-bus-search-filter><br>
+<app-bus-table #busTable (deleted)=' loadAllBuses($event)' [busSearch]="busSearch"></app-bus-table>

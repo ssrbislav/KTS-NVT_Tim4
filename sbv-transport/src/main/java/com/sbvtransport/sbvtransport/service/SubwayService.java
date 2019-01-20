@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
-import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
 import com.sbvtransport.sbvtransport.dto.SubwayDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
@@ -173,7 +173,7 @@ public class SubwayService implements ISubwayService {
 	}
 
 	@Override
-	public List<Subway> searchFilter(FilterSearchDTO filterSearch) {
+	public List<Subway> searchFilter(FilterSearchTransportDTO filterSearch) {
 		
 		List<Subway> allSubways = findAll();
 		List<Subway> lineFilter = new ArrayList<>();

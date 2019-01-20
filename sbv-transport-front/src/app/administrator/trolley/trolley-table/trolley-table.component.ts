@@ -1,4 +1,4 @@
-import { Component, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
 import { Trolley } from 'src/app/models/trolley.model';
 import { TrolleyService } from 'src/app/services/trolley.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -18,6 +18,7 @@ export class TrolleyTableComponent implements OnInit {
 
   trolleys: Trolley[];
   @Output() deleted = new EventEmitter<boolean>();
+  @Input() trolleySearch: any;
 
   constructor(private trolleyService: TrolleyService, public dialog: MatDialog) { }
 
@@ -39,7 +40,8 @@ export class TrolleyTableComponent implements OnInit {
         if(data == true){
           alert("Trolley is deleted!");
           this.loadAllTrolleys();
-          this.deleted.emit(true); 
+          this.deleted.emit(true);
+          this.trolleySearch.resetSearch();   
         }else{
           alert("Something went wrong!");
         }
@@ -124,7 +126,8 @@ export class TrolleyTableComponent implements OnInit {
       console.log("Dialog was closed")
       console.log(result)
       this.loadAllTrolleys();
-      this.deleted.emit(true); 
+      this.deleted.emit(true);
+      this.trolleySearch.resetSearch();  
     
       });
     

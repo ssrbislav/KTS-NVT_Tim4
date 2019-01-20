@@ -4,5 +4,5 @@
     <p>On the map are trolleys that are driving:</p>
 </div>
 <div id="mapTrolley" class="map" style="width:100%;height:400px"></div><br>
-<app-trolley-search-filter [trolleyTable]="trolleyTable" (filter) = 'loadBecauseFilter($event)'></app-trolley-search-filter><br>
-<app-trolley-table #trolleyTable (deleted)='loadAllTrolleys($event)'></app-trolley-table>
+<app-trolley-search-filter [trolleyTable]="trolleyTable" (filter) = 'loadBecauseFilter($event)' #trolleySearch></app-trolley-search-filter><br>
+<app-trolley-table #trolleyTable (deleted)='loadAllTrolleys($event)' [trolleySearch]="trolleySearch"></app-trolley-table>

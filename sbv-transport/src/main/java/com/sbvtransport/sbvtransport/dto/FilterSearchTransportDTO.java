@@ -1,17 +1,17 @@
 package com.sbvtransport.sbvtransport.dto;
 
-public class FilterSearchDTO {
+public class FilterSearchTransportDTO {
 	
 	private Long id_line;
 	private boolean late;
 	private Long id_location;
 	private String text_search;
 	
-	public FilterSearchDTO(){
+	public FilterSearchTransportDTO(){
 		
 	}
 
-	public FilterSearchDTO(Long id_line, boolean late, Long id_location, String text_search) {
+	public FilterSearchTransportDTO(Long id_line, boolean late, Long id_location, String text_search) {
 		super();
 		this.id_line = id_line;
 		this.late = late;
