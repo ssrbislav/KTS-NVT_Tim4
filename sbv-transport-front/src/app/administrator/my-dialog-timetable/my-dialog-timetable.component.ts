@@ -10,11 +10,21 @@ import { Timetable } from 'src/app/models/timetable.model';
 export class MyDialogTimetableComponent implements OnInit {
 
   timetable: Timetable;
+  show: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>) { }
 
   ngOnInit() {
     this.timetable = this.data.timetable;
+    this.checkExist();
+  }
+
+  checkExist(){
+    if(this.timetable == null){
+      this.show = 'not';
+    }else{
+      this.show = 'exist';
+    }
   }
 
 }

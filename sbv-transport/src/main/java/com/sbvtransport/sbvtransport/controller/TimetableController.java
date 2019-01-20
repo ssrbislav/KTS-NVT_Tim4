@@ -26,7 +26,7 @@ public class TimetableController {
 		return new ResponseEntity<>(timetables, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/addTimetable", method = RequestMethod.POST)
+	@RequestMapping(value = "/addTimetable", method = RequestMethod.POST,produces = "application/json")
 	public ResponseEntity<String> create(@RequestBody TimetableDTO timetableDTO)
 			throws ParseException {
 
@@ -36,7 +36,7 @@ public class TimetableController {
 
 	}
 
-	@RequestMapping(value = "/addAltTimetable", method = RequestMethod.POST)
+	@RequestMapping(value = "/addAltTimetable", method = RequestMethod.POST,produces = "application/json")
 	public ResponseEntity<String> create(@RequestBody AltTimetableDTO timetableDTO) {
 
 		String newTimetable = timetableService.create(timetableDTO);

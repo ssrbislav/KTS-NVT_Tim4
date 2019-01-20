@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
@@ -168,6 +169,67 @@ public class BusService implements IBusService {
 
 		return busRepository.save(updateBus.get());
 
+	}
+
+	@Override
+	public List<Bus> searchFilter(FilterSearchDTO filterSearch) {
+		
+		List<Bus> allBuses = findAll();
+		List<Bus> lineFilter = new ArrayList<>();
+		List<Bus> lateFilter = new ArrayList<>();
+		List<Bus> currentLocationFilter = new ArrayList<>();
+		List<Bus> finalList = new ArrayList<>();
+		
+		//filter line 
+		if(filterSearch.getId_line() != null){
+			for (Bus bus : allBuses) {
+				if(filterSearch.getId_line() == bus.getLine().getId()){
+					lineFilter.add(bus);
+				}
+			}
+			
+		}else{
+			lineFilter = allBuses;
+		}
+		
+		// filter is late
+		if(filterSearch.isLate()){
+			for (Bus bus : lineFilter) {
+				if(bus.isLate()){
+					lateFilter.add(bus);
+				}
+			}
+			
+		}else{
+			lateFilter = lineFilter;	
+		}
+		
+		//filter current location
+		if(filterSearch.getId_location() != null){
+			for (Bus bus :lateFilter) {
+				if(bus.getLocation().getId() == filterSearch.getId_location()){
+					currentLocationFilter.add(bus);
+				}
+			}
+			
+		}else{
+			currentLocationFilter = lateFilter;
+		}
+		//search by names
+		if(filterSearch.getText_search() != ""){
+			for (Bus bus : currentLocationFilter) {
+				if(bus.getName().contains(filterSearch.getText_search())){
+					finalList.add(bus);
+				}
+			}
+			
+		}else{
+			finalList = currentLocationFilter;
+		}
+		
+		
+		
+		return finalList;
 	}
 
 }

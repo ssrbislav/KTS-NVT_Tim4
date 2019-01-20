@@ -9,6 +9,10 @@ import { LineService } from 'src/app/services/line.service';
 import { SubwayService } from 'src/app/services/subway.service';
 import { LocationService } from 'src/app/services/location.service';
 import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { TimetableDTO } from 'src/app/models.dto/timetable.dto';
+import { ScheduleDTO } from 'src/app/models.dto/schedule.dto';
+import { TimetableService } from 'src/app/services/timetable.service';
 declare var ol: any; 
 
 @Component({
@@ -28,15 +32,22 @@ export class SubwayAddComponent implements OnInit {
   allLines: Line[];
   map: any;
   newSubway: Subway;
-  newLocation: MyLocation;
+  productForm: FormGroup;
+  timetable : TimetableDTO = new TimetableDTO();
+  listSchedules: ScheduleDTO[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private subwayService: SubwayService, private locationService: LocationService) { }
+  private lineService: LineService, private subwayService: SubwayService,
+  private timetableService: TimetableService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.loadAlllines();
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadMap(false);
+
+    this.productForm = this.fb.group({
+      time: this.fb.array([this.fb.group({point:Date})])
+    });
   }
 
   loadAlllines(){
@@ -151,23 +162,11 @@ export class SubwayAddComponent implements OnInit {
   addLocation(){
 
     if(this.selectedLocation.id != undefined){
-      this.mylocation.latitude = this.selectedLocation.latitude;
-      this.mylocation.longitude = this.selectedLocation.longitude
-      this.mylocation.address =this.selectedLocation.address;
-      this.mylocation.type = 'transport';
-      this.mylocation.location_name = "Subway location";
-      this.locationService.addLocation(this.mylocation)
-      .subscribe( data => {
-        if(data!= null){
-          this.newLocation = data;
-          this.addLocationToSubway();
-        }else{
-          alert("Something went wrong!");
-        }    
-      });
+      
+      this.addLocationToSubway();
 
     }else{
-      alert("Successfully subway added!");
+      this.addTimetable();
       this.dialogRef.close();
     }
 
@@ -175,11 +174,11 @@ export class SubwayAddComponent implements OnInit {
 
   addLocationToSubway(){
 
-    var addLocationTransport = new AddLocationToTransportDTO(this.newSubway.id, this.newLocation.id);
+    var addLocationTransport = new AddLocationToTransportDTO(this.newSubway.id, this.selectedLocation.id);
     this.subwayService.addLocation(addLocationTransport)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully subway added!");
+        this.addTimetable();
         this.dialogRef.close();
       }else{
         alert("Something went wrong!");
@@ -188,5 +187,79 @@ export class SubwayAddComponent implements OnInit {
     });
 
   }
+
+  addTimetable(){
+    
+    if(this.productForm.value.time.length ==1 && this.productForm.value.time[0].point == 'function Date() { [native code] }'){
+      alert("Successfully subway created!");
+      this.dialogRef.close();
+    }else{
+
+      this.timetable.id_transport = this.newSubway.id;
+      this.timetable.transportType = 'subway';
+      var firstTime = true;
+
+      for (var i = 0; i < this.productForm.value.time.length; i++){
+        if(firstTime){
+          
+          var number = -5;
+          for (var item of Array.from(this.lineSelected.station_list.values())){ 
+
+            number = number + 5;
+            var schedule : ScheduleDTO = new ScheduleDTO();
+            schedule.dates = [];
+            schedule.station_id = item.id;
+
+            var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
+            datetime.setMinutes(datetime.getMinutes() + number);
+            datetime.setHours(datetime.getHours() -1);
+            var s = datetime.toTimeString();
+            var str = s.substring(0, 5);
+            schedule.dates.push(str);
+
+            this.listSchedules.push(schedule);
+
+          }
+          firstTime = false;
+          
+          
+
+        }else{
+          var number = -5;
+          for (var m = 0; m < this.listSchedules.length; m++){
+
+            number = number + 5;
+            var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
+            datetime.setMinutes(datetime.getMinutes() + number);
+            datetime.setHours(datetime.getHours() -1);
+            var s = datetime.toTimeString();
+            var str = s.substring(0, 5);
+            
+            this.listSchedules[m].dates.push(str);
+          }
+        }  
+      }
+      
+      this.timetable.schedules = this.listSchedules;
+      this.timetableService.addTimetable(this.timetable)
+        .subscribe( data => {
+          alert("Successfully subway added!");
+          this.dialogRef.close();
+          
+        });
+
+
+      }  
+
+  }
+
+  get Times() {
+    return this.productForm.get('time') as FormArray;
+  }
+
+  addSellingPoint() {
+    this.Times.push(this.fb.group({point:Date}));
+  }
+
 
 }

@@ -28,10 +28,10 @@ export class TrolleyAddComponent implements OnInit {
   allLines: Line[];
   map: any;
   newTrolley: Trolley;
-  newLocation: MyLocation;
+  
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private trolleyService: TrolleyService, private locationService: LocationService) { }
+  private lineService: LineService, private trolleyService: TrolleyService) { }
 
   ngOnInit() {
     this.loadAlllines();
@@ -150,20 +150,7 @@ export class TrolleyAddComponent implements OnInit {
   addLocation(){
 
     if(this.selectedLocation.id != undefined){
-      this.mylocation.latitude = this.selectedLocation.latitude;
-      this.mylocation.longitude = this.selectedLocation.longitude
-      this.mylocation.address =this.selectedLocation.address;
-      this.mylocation.type = 'transport';
-      this.mylocation.location_name = "Trolley location";
-      this.locationService.addLocation(this.mylocation)
-      .subscribe( data => {
-        if(data!= null){
-          this.newLocation = data;
-          this.addLocationToTrolley();
-        }else{
-          alert("Something went wrong!");
-        }    
-      });
+       this.addLocationToTrolley();
 
     }else{
       alert("Successfully trolley added!");
@@ -174,7 +161,7 @@ export class TrolleyAddComponent implements OnInit {
 
   addLocationToTrolley(){
 
-    var addLocationTransport = new AddLocationToTransportDTO(this.newTrolley.id, this.newLocation.id);
+    var addLocationTransport = new AddLocationToTransportDTO(this.newTrolley.id, this.selectedLocation.id);
     this.trolleyService.addLocation(addLocationTransport)
     .subscribe( data => {
       if(data!= null){

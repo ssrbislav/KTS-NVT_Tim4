@@ -3,31 +3,37 @@
   <div class="timetable">
     <h1 style="text-align: center;">Timetable</h1>
 
-    <div *ngFor = "let s of timetable.schedule">
-      <div >
-        <h3>{{s.station.location.location_name}}</h3>
-      </div>
-      <div>
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col" colspan="5">Time</th>     
-              </tr>
-            </thead>
-            <tbody>
+    <ng-container *ngIf = "show == 'exist'">
+      <div *ngFor = "let s of timetable.schedule">
+        <div >
+          <h3>{{s.station.location.location_name}}</h3>
+        </div>
+        <div>
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="5">Time</th>     
+                </tr>
+              </thead>
+              <tbody>
 
-            <ng-container *ngFor="let time of s.times; let i = index" >
-              <tr *ngIf="i % 7 === 0">
-                <td *ngFor="let x of [i,i+1,i+2,i+3,i+4,i+5,i+6]">
-                  {{s.times[x]}}
-                </td>
-              </tr>
-            </ng-container>
-           </tbody>    
-        </table>
+              <ng-container *ngFor="let time of s.times; let i = index" >
+                <tr *ngIf="i % 7 === 0">
+                  <td *ngFor="let x of [i,i+1,i+2,i+3,i+4,i+5,i+6]">
+                    {{s.times[x]}}
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>    
+          </table>
 
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf = "show == 'not'">
+      <h3>The timetable don't exist!</h3>
+    </ng-container>
 
     <mat-dialog-actions>
       <button class="cancelbtn" mat-button mat-dialog-close>Back</button> 

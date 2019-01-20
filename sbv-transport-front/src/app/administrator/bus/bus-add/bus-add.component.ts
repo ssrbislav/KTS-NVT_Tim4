@@ -10,7 +10,6 @@ import { LocationDTO } from 'src/app/models.dto/location.dto';
 import { MyLocation } from 'src/app/models/location.model';
 import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import {formatDate } from '@angular/common';
 import { TimetableDTO } from 'src/app/models.dto/timetable.dto';
 import { ScheduleDTO } from 'src/app/models.dto/schedule.dto';
 import { TimetableService } from 'src/app/services/timetable.service';
@@ -33,13 +32,12 @@ export class BusAddComponent implements OnInit {
   allLines: Line[];
   map: any;
   newBus: Bus= new Bus();
-  newLocation: MyLocation;
   productForm: FormGroup;
   timetable : TimetableDTO = new TimetableDTO();
   listSchedules: ScheduleDTO[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private busService: BusService, private locationService: LocationService,
+  private lineService: LineService, private busService: BusService,
   private timetableService: TimetableService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -164,34 +162,23 @@ export class BusAddComponent implements OnInit {
   addLocation(){
 
     if(this.selectedLocation.id != undefined){
-      this.mylocation.latitude = this.selectedLocation.latitude;
-      this.mylocation.longitude = this.selectedLocation.longitude
-      this.mylocation.address =this.selectedLocation.address;
-      this.mylocation.type = 'transport';
-      this.mylocation.location_name = "Bus location";
-      this.locationService.addLocation(this.mylocation)
-      .subscribe( data => {
-        if(data!= null){
-          this.newLocation = data;
-          this.addLocationToBus();
-        }else{
-          alert("Something went wrong!");
-        }    
-      });
-
+      this.addLocationToBus();
+       
     }else{
       this.addTimetable();
+      //this.dialogRef.close();
     }
 
   }
 
   addLocationToBus(){
 
-    var addLocationTransport = new AddLocationToTransportDTO(this.newBus.id, this.newLocation.id);
+    var addLocationTransport = new AddLocationToTransportDTO(this.newBus.id, this.selectedLocation.id);
     this.busService.addLocation(addLocationTransport)
     .subscribe( data => {
       if(data!= null){
         this.addTimetable();
+        //this.dialogRef.close();
     
       }else{
         alert("Something went wrong!");
@@ -202,57 +189,65 @@ export class BusAddComponent implements OnInit {
   }
 
   addTimetable(){
+    
+    if(this.productForm.value.time.length ==1 && this.productForm.value.time[0].point == 'function Date() { [native code] }'){
+      alert("Successfully bus created!");
+      this.dialogRef.close();
+    }else{
 
-    this.timetable.id_transport = this.newBus.id;
-    this.timetable.transportType = 'bus';
-    var firstTime = true;
+      this.timetable.id_transport = this.newBus.id;
+      this.timetable.transportType = 'bus';
+      var firstTime = true;
 
-    for (var i = 0; i < this.productForm.value.time.length; i++){
-      if(firstTime){
-        
-        var number = 0;
-        for (var item of Array.from(this.lineSelected.station_list.values())){ 
-
-          number = number + 5;
-          var schedule : ScheduleDTO = new ScheduleDTO();
-          schedule.dates = [];
-          schedule.station_id = item.id;
-
-          var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
-          datetime.setMinutes(datetime.getMinutes() + number);
-          datetime.setHours(datetime.getHours() -1);
-          var s = datetime.toTimeString();
-          var str = s.substring(0, 5);
-          schedule.dates.push(str);
-
-          this.listSchedules.push(schedule);
-
-        }
-        firstTime = false;
-        
-
-      }else{
-        var number = 0;
-        for (var m = 0; m < this.listSchedules.length; m++){
-
-          number = number + 5;
-          var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
-          datetime.setMinutes(datetime.getMinutes() + number);
-          datetime.setHours(datetime.getHours() -1);
-          var s = datetime.toTimeString();
-          var str = s.substring(0, 5);
+      for (var i = 0; i < this.productForm.value.time.length; i++){
+        if(firstTime){
           
-          this.listSchedules[m].dates.push(str);
-        }
-      }  
-    }
-    this.timetable.schedules = this.listSchedules;
-    this.timetableService.addTimetable(this.timetable)
-      .subscribe( data => {
-        alert("Successfully bus added!");
-        this.dialogRef.close();
-        
-      });
+          var number = -5;
+          for (var item of Array.from(this.lineSelected.station_list.values())){ 
+
+            number = number + 5;
+            var schedule : ScheduleDTO = new ScheduleDTO();
+            schedule.dates = [];
+            schedule.station_id = item.id;
+
+            var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
+            datetime.setMinutes(datetime.getMinutes() + number);
+            datetime.setHours(datetime.getHours() -1);
+            var s = datetime.toTimeString();
+            var str = s.substring(0, 5);
+            schedule.dates.push(str);
+
+            this.listSchedules.push(schedule);
+
+          }
+          firstTime = false;
+          
+        }else{
+          var number = -5;
+          for (var m = 0; m < this.listSchedules.length; m++){
+
+            number = number + 5;
+            var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
+            datetime.setMinutes(datetime.getMinutes() + number);
+            datetime.setHours(datetime.getHours() -1);
+            var s = datetime.toTimeString();
+            var str = s.substring(0, 5);
+            
+            this.listSchedules[m].dates.push(str);
+          }
+        }  
+      }
+      
+      this.timetable.schedules = this.listSchedules;
+      this.timetableService.addTimetable(this.timetable)
+        .subscribe( data => {
+          alert("Successfully bus added!");
+          this.dialogRef.close();
+          
+        });
+
+
+      }
 
   }
 
