@@ -1,9 +1,9 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchLineDTO;
 import com.sbvtransport.sbvtransport.dto.LineDTO;
 import com.sbvtransport.sbvtransport.model.Line;
-
 import java.util.List;
 
 public interface ILineService {
@@ -16,6 +16,7 @@ public interface ILineService {
   String addStation(AddFirstStationDTO addFirst);
   Line addListStations(List<AddFirstStationDTO> list);
   Line changeListStations(List<AddFirstStationDTO> list);
+  List<Line> filterSearch(FilterSearchLineDTO filterSearch);
 
 
 

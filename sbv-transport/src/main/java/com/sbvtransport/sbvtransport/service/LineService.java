@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchLineDTO;
 import com.sbvtransport.sbvtransport.dto.LineDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
@@ -68,7 +69,7 @@ public class LineService implements ILineService {
 		line.setZone(lineDTO.getZone());
 		line.setDeleted(false);
 		line.setFirst_station(null);
-		
+
 		return lineRepository.save(line);
 	}
 
@@ -133,7 +134,6 @@ public class LineService implements ILineService {
 		s.setLine(l);
 		stationRepository.save(s);
 		lineRepository.save(l);
-		
 
 		return "Station successfully added!";
 	}
@@ -165,36 +165,36 @@ public class LineService implements ILineService {
 
 	@Override
 	public Line addListStations(List<AddFirstStationDTO> list) {
-		
+
 		Line l = lineRepository.getOne(list.get(0).getId_line());
 		if (l == null || l.isDeleted()) {
 			return null;
 
 		}
 		l.setFirst_station(list.get(0).getId_station());
-		
+
 		List<Station> addStations = new ArrayList<>();
 		for (AddFirstStationDTO addFirstStationDTO : list) {
 			for (Station station : stationRepository.findAll()) {
-				if(addFirstStationDTO.getId_station() == station.getId()){
+				if (addFirstStationDTO.getId_station() == station.getId()) {
 					addStations.add(station);
 				}
-			}	
+			}
 		}
-		
+
 		l.setStation_list(addStations);
-		
+
 		for (Station station : addStations) {
 			station.setLine(l);
 			stationRepository.save(station);
 		}
-		
+
 		return lineRepository.save(l);
 	}
-	
+
 	@Override
-	public Line changeListStations(List<AddFirstStationDTO> list){
-		
+	public Line changeListStations(List<AddFirstStationDTO> list) {
+
 		Line l = lineRepository.getOne(list.get(0).getId_line());
 		if (l == null || l.isDeleted()) {
 			return null;
@@ -207,7 +207,72 @@ public class LineService implements ILineService {
 
 		}
 		return addListStations(list);
-		
+
+	}
+
+	@Override
+	public List<Line> filterSearch(FilterSearchLineDTO filterSearch) {
+
+		List<Line> allLines = findAll();
+		List<Line> zoneFilter = new ArrayList<>();
+		List<Line> typeFilter = new ArrayList<>();
+		List<Line> stationFilter = new ArrayList<>();
+		List<Line> finalList = new ArrayList<>();
+
+		// filter zone
+		if (filterSearch.getZone() != "") {
+			for (Line line : allLines) {
+				if (line.getZone().toString().equals(filterSearch.getZone())) {
+					zoneFilter.add(line);
+				}
+			}
+
+		} else {
+			zoneFilter = allLines;
+		}
+
+		// filter type transport
+		if (filterSearch.getType() != "") {
+			for (Line line : zoneFilter) {
+				if (line.getLine_type().toString().equals(filterSearch.getType())) {
+					typeFilter.add(line);
+				}
+			}
+
+		} else {
+			typeFilter = zoneFilter;
+		}
+		// filter station
+		if (filterSearch.getId_station() != null) {
+			for (Line line : typeFilter) {
+				if (!line.getStation_list().isEmpty()) {
+					for (Station s : line.getStation_list()) {
+						if (s.getId() == filterSearch.getId_station()) {
+							stationFilter.add(line);
+							break;
+						}
+
+					}
+				}
+
+			}
+
+		} else {
+			stationFilter = typeFilter;
+		}
+		//search by name
+		if (filterSearch.getSearch_text() != "") {
+			for (Line line : stationFilter) {
+				if (line.getName().contains(filterSearch.getSearch_text())) {
+					finalList.add(line);
+				}
+			}
+
+		} else {
+			finalList = stationFilter;
+		}
+
+		return finalList;
 	}
 
 }

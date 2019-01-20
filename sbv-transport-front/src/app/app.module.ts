@@ -54,6 +54,7 @@ import { TimetableService } from './services/timetable.service';
 import { BusSearchFilterComponent } from './administrator/bus/bus-search-filter/bus-search-filter.component';
 import { SubwaySearchFilterComponent } from './administrator/subway/subway-search-filter/subway-search-filter.component';
 import { TrolleySearchFilterComponent } from './administrator/trolley/trolley-search-filter/trolley-search-filter.component';
+import { LineSearchFilterComponent } from './administrator/line/line-search-filter/line-search-filter.component';
 
 
 const appRoutes: Routes = [
@@ -106,7 +107,8 @@ const appRoutes: Routes = [
     MyDialogTimetableComponent,
     BusSearchFilterComponent,
     SubwaySearchFilterComponent,
-    TrolleySearchFilterComponent
+    TrolleySearchFilterComponent,
+    LineSearchFilterComponent
   ],
   imports: [
     BrowserModule,

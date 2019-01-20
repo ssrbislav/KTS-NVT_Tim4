@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Line } from '../models/line.model';
 import { LineDTO } from '../models.dto/line.dto';
 import { AddStationToList } from '../models.dto/addStationToList.dto';
+import { FilterSearchLineDTO } from '../models.dto/filterSearchLine.dto';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -37,6 +38,11 @@ export class LineService{
 
   public updateLine(line: AddStationToList[]){
     return this.http.post<Line>(this.lineUrl + 'updateLine',line,httpOptions);                 
+                
+  }
+
+  public filterSearch(values: FilterSearchLineDTO){
+    return this.http.post<Line[]>(this.lineUrl + 'searchFilter',values);                 
                 
   }
 

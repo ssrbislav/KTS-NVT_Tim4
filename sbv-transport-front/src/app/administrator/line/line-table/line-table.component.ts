@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LineService } from 'src/app/services/line.service';
 import { Line } from 'src/app/models/line.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -19,6 +19,7 @@ export class LineTableComponent implements OnInit {
 
   lines: Line[];
   firstStation: Station;
+  @Input() lineSearch: any;
 
   constructor(private lineService: LineService, private stationService: StationService, public dialog: MatDialog) { }
 
@@ -40,6 +41,8 @@ export class LineTableComponent implements OnInit {
         if(data == true){
           alert("Line is deleted!");
           this.loadAllLines();
+          this.lineSearch.resetSearch(); 
+
         }else{
           alert("Something went wrong!");
         }
@@ -118,6 +121,7 @@ export class LineTableComponent implements OnInit {
     console.log("Dialog was closed")
     console.log(result)
     this.loadAllLines();
+    this.lineSearch.resetSearch(); 
   
     });
   
@@ -140,6 +144,10 @@ export class LineTableComponent implements OnInit {
     console.log(result)
 
     });
+  }
+
+  loadSearchFilter(filterBuses: Line[]){
+    this.lines= filterBuses;
   }
 
   

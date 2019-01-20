@@ -1,0 +1,42 @@
+<div id = "main">
+    <h2 style="text-align: center;">  Filter and search</h2>
+    <div id="div1">
+      <label for="line" style="padding-right: 20px;"><b>Zone</b></label>
+  
+      <select [(ngModel)]="filterSearch.zone" id="filter_zone" name="line" (change)= "loadFilterSearch()" required >
+        <option value = ""></option>
+        <option value = "first">first</option>
+        <option value = "second">second</option>
+      </select>
+  
+    </div>
+  
+    <div id="div2">
+      <label for="line" style="padding-right: 20px;"><b>Type</b></label>
+  
+      <select [(ngModel)]="filterSearch.type" id="filter_type" name="line" (change)= "loadFilterSearch()" required >
+        <option value = ""></option>
+        <option value = "bus">bus</option>
+        <option value = "subway">subway</option>
+        <option value = "trolley">trolley</option>
+      </select>
+    </div>
+  
+    <div id="div3">
+      <label for="station" style="padding-right: 5px;"><b>Station</b></label>
+  
+      <select [(ngModel)]="filterSearch.id_station" id="filter_id_station" name="line" (change)= "loadFilterSearch()" required >
+        <option [ngValue] = "null"></option>
+        <ng-container *ngFor="let station of stations">
+          <option [ngValue] = "station.id">{{station.location.location_name}}</option>
+        </ng-container>
+      </select>
+  
+    </div>
+  
+    <div id="div4">
+      <input type="text" id="search_line_name" placeholder="Enter name of line..." [(ngModel)]="filterSearch.search_text" 
+      (ngModelChange)= "loadFilterSearch()">
+  
+    </div>
+  </div>
