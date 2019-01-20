@@ -39,7 +39,7 @@ import { MyDialogFirstStationComponent } from './administrator/line/line-table/m
 import { MyDialogStationsComponent } from './administrator/line/line-table/my-dialog-stations/my-dialog-stations.component';
 import { StationAddComponent } from './administrator/station/station-add/station-add.component';
 import { LocationService } from './services/location.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LineAddComponent } from './administrator/line/line-add/line-add.component';
 import { BusAddComponent } from './administrator/bus/bus-add/bus-add.component';
 import { SubwayAddComponent } from './administrator/subway/subway-add/subway-add.component';
@@ -50,6 +50,7 @@ import { TrolleyEditComponent } from './administrator/trolley/trolley-edit/troll
 import { StationEditComponent } from './administrator/station/station-edit/station-edit.component';
 import { LineEditComponent } from './administrator/line/line-edit/line-edit.component';
 import { MyDialogTimetableComponent } from './administrator/my-dialog-timetable/my-dialog-timetable.component';
+import { TimetableService } from './services/timetable.service';
 
 
 const appRoutes: Routes = [
@@ -112,7 +113,8 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     MyDialogComponent,
@@ -133,7 +135,7 @@ const appRoutes: Routes = [
     MyDialogTimetableComponent
    ],
   providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService,
+    LocationService, TimetableService,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]

@@ -9,6 +9,11 @@ import { LocationService } from 'src/app/services/location.service';
 import { LocationDTO } from 'src/app/models.dto/location.dto';
 import { MyLocation } from 'src/app/models/location.model';
 import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import {formatDate } from '@angular/common';
+import { TimetableDTO } from 'src/app/models.dto/timetable.dto';
+import { ScheduleDTO } from 'src/app/models.dto/schedule.dto';
+import { TimetableService } from 'src/app/services/timetable.service';
 declare var ol: any; 
 
 @Component({
@@ -27,16 +32,25 @@ export class BusAddComponent implements OnInit {
   lines: Line[] = [];
   allLines: Line[];
   map: any;
-  newBus: Bus;
+  newBus: Bus= new Bus();
   newLocation: MyLocation;
+  productForm: FormGroup;
+  timetable : TimetableDTO = new TimetableDTO();
+  listSchedules: ScheduleDTO[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private busService: BusService, private locationService: LocationService) { }
+  private lineService: LineService, private busService: BusService, private locationService: LocationService,
+  private timetableService: TimetableService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.loadAlllines();
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadMap(false);
+
+    this.productForm = this.fb.group({
+      time: this.fb.array([this.fb.group({point:Date})])
+    });
+
   }
 
   loadAlllines(){
@@ -134,7 +148,6 @@ export class BusAddComponent implements OnInit {
     
   }
 
-
   addBus(){
     this.busService.addBus(this.bus)
     .subscribe( data => {
@@ -167,8 +180,7 @@ export class BusAddComponent implements OnInit {
       });
 
     }else{
-      alert("Successfully bus added!");
-      this.dialogRef.close();
+      this.addTimetable();
     }
 
   }
@@ -179,14 +191,75 @@ export class BusAddComponent implements OnInit {
     this.busService.addLocation(addLocationTransport)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully bus added!");
-        this.dialogRef.close();
+        this.addTimetable();
+    
       }else{
         alert("Something went wrong!");
       }
      
     });
 
+  }
+
+  addTimetable(){
+
+    this.timetable.id_transport = this.newBus.id;
+    this.timetable.transportType = 'bus';
+    var firstTime = true;
+
+    for (var i = 0; i < this.productForm.value.time.length; i++){
+      if(firstTime){
+        
+        var number = 0;
+        for (var item of Array.from(this.lineSelected.station_list.values())){ 
+
+          number = number + 5;
+          var schedule : ScheduleDTO = new ScheduleDTO();
+          schedule.dates = [];
+          schedule.station_id = item.id;
+
+          var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
+          datetime.setMinutes(datetime.getMinutes() + number);
+          var s = datetime.toLocaleTimeString();
+          var str = s.substring(0, s.length - 6);
+          schedule.dates.push(str);
+
+          this.listSchedules.push(schedule);
+
+        }
+        firstTime = false;
+        
+
+      }else{
+        var number = 0;
+        for (var m = 0; m < this.listSchedules.length; m++){
+
+          number = number + 5;
+          var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
+          datetime.setMinutes(datetime.getMinutes() + number);
+          var s = datetime.toLocaleTimeString();
+          var str = s.substring(0, s.length - 6);
+          
+          this.listSchedules[m].dates.push(str);
+        }
+      }  
+    }
+    this.timetable.schedules = this.listSchedules;
+    this.timetableService.addTimetable(this.timetable)
+      .subscribe( data => {
+        alert("Successfully bus added!");
+        this.dialogRef.close();
+        
+      });
+
+  }
+
+  get Times() {
+    return this.productForm.get('time') as FormArray;
+  }
+
+  addSellingPoint() {
+    this.Times.push(this.fb.group({point:Date}));
   }
 
 }

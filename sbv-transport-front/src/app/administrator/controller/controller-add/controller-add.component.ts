@@ -54,6 +54,8 @@ export class ControllerAddComponent implements OnInit {
       console.log("phone: " + phone);
       console.log("date: " + date);
 
+      alert(typeof this.dateInputRef.nativeElement.value);
+
 
       const newController = new Controller(email,username,pass1,firstName,lastName,address2,phone,date);
 
