@@ -220,8 +220,9 @@ export class BusAddComponent implements OnInit {
 
           var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
           datetime.setMinutes(datetime.getMinutes() + number);
-          var s = datetime.toLocaleTimeString();
-          var str = s.substring(0, s.length - 6);
+          datetime.setHours(datetime.getHours() -1);
+          var s = datetime.toTimeString();
+          var str = s.substring(0, 5);
           schedule.dates.push(str);
 
           this.listSchedules.push(schedule);
@@ -237,8 +238,9 @@ export class BusAddComponent implements OnInit {
           number = number + 5;
           var datetime = new Date('1970-01-01T' + this.productForm.value.time[i].point );
           datetime.setMinutes(datetime.getMinutes() + number);
-          var s = datetime.toLocaleTimeString();
-          var str = s.substring(0, s.length - 6);
+          datetime.setHours(datetime.getHours() -1);
+          var s = datetime.toTimeString();
+          var str = s.substring(0, 5);
           
           this.listSchedules[m].dates.push(str);
         }
