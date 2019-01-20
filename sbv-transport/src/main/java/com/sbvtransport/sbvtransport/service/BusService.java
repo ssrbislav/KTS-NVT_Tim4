@@ -173,65 +173,62 @@ public class BusService implements IBusService {
 
 	@Override
 	public List<Bus> searchFilter(FilterSearchDTO filterSearch) {
-		
+
 		List<Bus> allBuses = findAll();
 		List<Bus> lineFilter = new ArrayList<>();
 		List<Bus> lateFilter = new ArrayList<>();
 		List<Bus> currentLocationFilter = new ArrayList<>();
 		List<Bus> finalList = new ArrayList<>();
-		
-		//filter line 
-		if(filterSearch.getId_line() != null){
+
+		// filter line
+		if (filterSearch.getId_line() != null) {
 			for (Bus bus : allBuses) {
-				if(filterSearch.getId_line() == bus.getLine().getId()){
+				if (filterSearch.getId_line() == bus.getLine().getId()) {
 					lineFilter.add(bus);
 				}
 			}
-			
-		}else{
+
+		} else {
 			lineFilter = allBuses;
 		}
-		
+
 		// filter is late
-		if(filterSearch.isLate()){
+		if (filterSearch.isLate()) {
 			for (Bus bus : lineFilter) {
-				if(bus.isLate()){
+				if (bus.isLate()) {
 					lateFilter.add(bus);
 				}
 			}
-			
-		}else{
-			lateFilter = lineFilter;	
+
+		} else {
+			lateFilter = lineFilter;
 		}
-		
-		//filter current location
-		if(filterSearch.getId_location() != null){
-			for (Bus bus :lateFilter) {
-				if(bus.getLocation()!=null){
-					if(bus.getLocation().getId() == filterSearch.getId_location()){
+
+		// filter current location
+		if (filterSearch.getId_location() != null) {
+			for (Bus bus : lateFilter) {
+				if (bus.getLocation() != null) {
+					if (bus.getLocation().getId() == filterSearch.getId_location()) {
 						currentLocationFilter.add(bus);
 					}
 				}
-				
 			}
-			
-		}else{
+
+		} else {
 			currentLocationFilter = lateFilter;
 		}
-		//search by names
-		if(filterSearch.getText_search() != ""){
+		// search by names
+		if (filterSearch.getText_search() != "") {
 			for (Bus bus : currentLocationFilter) {
-				if(bus.getName().contains(filterSearch.getText_search())){
+				if (bus.getName().contains(filterSearch.getText_search())) {
 					finalList.add(bus);
 				}
 			}
-			
-		}else{
+
+		} else {
 			finalList = currentLocationFilter;
 		}
-		
-		
-		
+
 		return finalList;
 	}
 

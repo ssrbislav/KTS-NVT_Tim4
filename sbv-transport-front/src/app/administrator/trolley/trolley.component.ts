@@ -31,6 +31,13 @@ export class TrolleyComponent implements OnInit {
       });
   }
 
+  loadBecauseFilter(filterBuses:Trolley[]){
+
+    this.trolleys = filterBuses;
+    this.loadMap(true);
+
+  }
+
   loadMap(i:boolean){
     const markerSource = new ol.source.Vector();
     

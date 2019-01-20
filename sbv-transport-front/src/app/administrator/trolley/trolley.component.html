@@ -3,5 +3,6 @@
     <h1 style="text-align: center; display: inline-block; padding-left: 35%"> All Trolleys </h1><br><br>
     <p>On the map are trolleys that are driving:</p>
 </div>
-<div id="mapTrolley" class="map" style="width:100%;height:400px"></div>
+<div id="mapTrolley" class="map" style="width:100%;height:400px"></div><br>
+<app-trolley-search-filter [trolleyTable]="trolleyTable" (filter) = 'loadBecauseFilter($event)'></app-trolley-search-filter><br>
 <app-trolley-table #trolleyTable (deleted)='loadAllTrolleys($event)'></app-trolley-table>

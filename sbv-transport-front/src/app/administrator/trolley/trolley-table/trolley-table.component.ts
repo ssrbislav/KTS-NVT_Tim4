@@ -130,4 +130,8 @@ export class TrolleyTableComponent implements OnInit {
     
     }
 
+    loadSearchFilter(filterBuses: Trolley[]){
+      this.trolleys = filterBuses;
+    }
+
 }

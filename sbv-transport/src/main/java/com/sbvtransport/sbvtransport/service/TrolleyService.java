@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Trolley;
@@ -22,19 +23,19 @@ public class TrolleyService implements ITrolleyService {
 
 	@Autowired
 	TrolleyRepository trolleyRepository;
-	
+
 	@Autowired
 	LineRepository lineRepository;
-	
+
 	@Autowired
 	LocationRepository locationRepository;
 
 	@Override
 	public List<Trolley> findAll() {
-		List <Trolley> notDeleted = new ArrayList<>();
+		List<Trolley> notDeleted = new ArrayList<>();
 		List<Trolley> findAll = trolleyRepository.findAll();
 		for (Trolley trolley : findAll) {
-			if(!trolley.isDeleted()){
+			if (!trolley.isDeleted()) {
 				notDeleted.add(trolley);
 			}
 		}
@@ -53,15 +54,15 @@ public class TrolleyService implements ITrolleyService {
 
 		Line line = checkLine(trolley.getId_line());
 		if (line != null) {
-			if(trolley.getTime_arrive()< 5){
+			if (trolley.getTime_arrive() < 5) {
 				return null;
 			}
 			boolean late = checkIfLate(trolley.getTime_arrive());
 			String code = "";
-			Transport  newTrolley = new Trolley(code, line, late, trolley.getName(),trolley.getTime_arrive(),false);
-			code = line.getName() + "_"+ "trolley" + "_" + trolley.getName();
+			Transport newTrolley = new Trolley(code, line, late, trolley.getName(), trolley.getTime_arrive(), false);
+			code = line.getName() + "_" + "trolley" + "_" + trolley.getName();
 			((Trolley) newTrolley).setCode(code);
-			
+
 			return trolleyRepository.save(newTrolley);
 		}
 		return null;
@@ -103,49 +104,50 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public Line checkLine(Long lineId) {
-		
+
 		Line line = lineRepository.findById(lineId).get();
-		if( line != null){
-			if(!line.isDeleted()){
-				if(line.getLine_type() == TypeTransport.trolley){
+		if (line != null) {
+			if (!line.isDeleted()) {
+				if (line.getLine_type() == TypeTransport.trolley) {
 					return line;
 				}
-			}	
+			}
 		}
 		return null;
 	}
 
 	@Override
 	public Trolley addLocation(AddLocationDTO addLocation) {
-		
+
 		Location l = locationRepository.findById(addLocation.getId_location()).orElse(null);
-		if(l==null || l.isDeleted()){
+		if (l == null || l.isDeleted()) {
 			return null;
 		}
-		
+
 		Trolley t = getOne(addLocation.getId_transport());
-		if(t==null || t.isDeleted()){
+		if (t == null || t.isDeleted()) {
 			return null;
 		}
 		t.setLocation(l);
-		
+
 		return trolleyRepository.save(t);
 	}
 
 	@Override
 	public boolean checkIfLate(int time) {
-		if(time > 5){
+		if (time > 5) {
 			return true;
-		}else if (time == 5) {
+		} else if (time == 5) {
 			return false;
 		}
 		return true;
 	}
+
 	@Override
-	public void deleteBecauseLine(Long id_line){
+	public void deleteBecauseLine(Long id_line) {
 		List<Trolley> trolleys = findAll();
-		for (Trolley trolley :trolleys) {
-			if(trolley.getLine().getId() == id_line){
+		for (Trolley trolley : trolleys) {
+			if (trolley.getLine().getId() == id_line) {
 				trolley.setDeleted(true);
 				trolleyRepository.save(trolley);
 			}
@@ -154,7 +156,7 @@ public class TrolleyService implements ITrolleyService {
 
 	@Override
 	public Trolley change(ChangeTransportDTO trolley) {
-		
+
 		Optional<Trolley> updateTrolley = trolleyRepository.findById(trolley.getId_transport());
 
 		updateTrolley.get().setName(trolley.getName());
@@ -171,5 +173,65 @@ public class TrolleyService implements ITrolleyService {
 		return trolleyRepository.save(updateTrolley.get());
 	}
 
+	@Override
+	public List<Trolley> searchFilter(FilterSearchDTO filterSearch) {
+
+		List<Trolley> allTrolleys = findAll();
+		List<Trolley> lineFilter = new ArrayList<>();
+		List<Trolley> lateFilter = new ArrayList<>();
+		List<Trolley> currentLocationFilter = new ArrayList<>();
+		List<Trolley> finalList = new ArrayList<>();
+
+		// filter line
+		if (filterSearch.getId_line() != null) {
+			for (Trolley trolley : allTrolleys) {
+				if (filterSearch.getId_line() == trolley.getLine().getId()) {
+					lineFilter.add(trolley);
+				}
+			}
+
+		} else {
+			lineFilter = allTrolleys;
+		}
+
+		// filter is late
+		if (filterSearch.isLate()) {
+			for (Trolley trolley : lineFilter) {
+				if (trolley.isLate()) {
+					lateFilter.add(trolley);
+				}
+			}
+
+		} else {
+			lateFilter = lineFilter;
+		}
+
+		// filter current location
+		if (filterSearch.getId_location() != null) {
+			for (Trolley trolley : lateFilter) {
+				if (trolley.getLocation() != null) {
+					if (trolley.getLocation().getId() == filterSearch.getId_location()) {
+						currentLocationFilter.add(trolley);
+					}
+				}
+			}
+
+		} else {
+			currentLocationFilter = lateFilter;
+		}
+		// search by names
+		if (filterSearch.getText_search() != "") {
+			for (Trolley trolley : currentLocationFilter) {
+				if (trolley.getName().contains(filterSearch.getText_search())) {
+					finalList.add(trolley);
+				}
+			}
+
+		} else {
+			finalList = currentLocationFilter;
+		}
+
+		return finalList;
+	}
 
 }

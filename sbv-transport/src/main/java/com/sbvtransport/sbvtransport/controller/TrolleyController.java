@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchDTO;
 import com.sbvtransport.sbvtransport.dto.TrolleyDTO;
 import com.sbvtransport.sbvtransport.model.Trolley;
 import com.sbvtransport.sbvtransport.service.ITicketService;
@@ -83,6 +84,15 @@ public class TrolleyController {
 		Trolley updateTrolley = trolleyService.addLocation(trolley);
 
 		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
+	public ResponseEntity<List<Trolley>> filterSearch(@RequestBody FilterSearchDTO filterSearch) {
+
+		List<Trolley> list = trolleyService.searchFilter(filterSearch);
+
+		return new ResponseEntity<>(list, HttpStatus.OK);
 
 	}
 

@@ -4,6 +4,7 @@ import { Trolley } from '../models/trolley.model';
 import { TransportDTO } from '../models.dto/transport.dto';
 import { AddLocationToTransportDTO } from '../models.dto/addLocationToTransportDTO.dto';
 import { ChangeTransportDTO } from '../models.dto/changeTransport.dto';
+import { FilterSearchDTO } from '../models.dto/filterSearch.dto';
 
 
 const httpOptions = {
@@ -40,6 +41,11 @@ const httpOptions = {
 
     public updateTrolley(trolley: ChangeTransportDTO){
       return this.http.post<Trolley>(this.trolleyUrl + 'updateTrolley',trolley,httpOptions);                 
+                  
+    }
+
+    public filterSearch(values: FilterSearchDTO){
+      return this.http.post<Trolley[]>(this.trolleyUrl + 'searchFilter',values);                 
                   
     }
   
