@@ -49,7 +49,15 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.roles = this.tokenStorage.getAuthorities();
         this.dialogRef.close();
-        this.router.navigate(['user']);
+        this.roles.every(role => {
+          if(role === 'ROLE_ADMIN') {
+            this.router.navigate(['administrator']);
+          } else if(role == 'ROLE_CONTROLLER') {
+            this.router.navigate(['controller']);
+          } else {
+            this.router.navigate(['user']);
+          }
+        });
       },
       error => {
         console.log(error);
