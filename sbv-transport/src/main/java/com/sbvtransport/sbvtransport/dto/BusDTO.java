@@ -10,7 +10,7 @@ public class BusDTO {
 
 	}
 
-	public BusDTO(boolean late, String name, Long id_line,int time_arrive) {
+	public BusDTO(String name, Long id_line,int time_arrive) {
 		this.name = name;
 		this.id_line = id_line;
 		this.time_arrive = time_arrive;
