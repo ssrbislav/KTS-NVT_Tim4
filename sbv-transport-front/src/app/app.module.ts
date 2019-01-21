@@ -94,11 +94,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'signup',
-    component: RegistrationComponent,
-    canActivate: [RoleGuard],
-    data: {
-      expectedRole : ''
-    } 
+    component: RegistrationComponent, 
   },
   { 
     path: 'controller', 
