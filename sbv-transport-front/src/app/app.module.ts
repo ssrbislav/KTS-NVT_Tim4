@@ -68,7 +68,9 @@ const appRoutes: Routes = [
  
   { 
     path: 'mainPage', 
-    component: MainPageComponent },
+    component: MainPageComponent,
+   
+  },
   { 
     path: '',
     redirectTo: '/mainPage',
@@ -82,7 +84,8 @@ const appRoutes: Routes = [
       expectedRole : 'ROLE_ADMIN'
     }
   },
-  { path: 'user', 
+  { 
+    path: 'user', 
     component: UserComponent,
     canActivate: [RoleGuard],
     data: {
@@ -91,7 +94,11 @@ const appRoutes: Routes = [
   },
   {
     path: 'signup',
-    component: RegistrationComponent
+    component: RegistrationComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole : ''
+    } 
   },
   { 
     path: 'controller', 

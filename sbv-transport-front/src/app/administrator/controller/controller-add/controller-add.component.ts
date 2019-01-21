@@ -55,6 +55,8 @@ export class ControllerAddComponent implements OnInit {
       console.log("date: " + date);
 
       const newController = new Controller(email,username,pass1,firstName,lastName,address2,phone,date);
+      newController.roles = ['controller'];
+      alert(newController.roles);
 
       this.controllerService.addController(newController)
       .subscribe( data => {
