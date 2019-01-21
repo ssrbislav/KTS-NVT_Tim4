@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   }
 
   controllerView(){
-    this.showView = 'controller';
+    this.showView = 'controllerView';
   }
 
   userView(){
