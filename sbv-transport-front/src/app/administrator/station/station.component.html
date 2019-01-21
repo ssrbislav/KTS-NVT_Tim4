@@ -3,6 +3,6 @@
     <h1 style="text-align: center; display: inline-block; padding-left: 35%"> All Stations</h1><br><br><br>
 </div>
 
-<div id="map2" class="map" style="width:100%;height:400px"></div>
-
-<app-station-table #appTable (deleted)='loadAllStations($event)'></app-station-table>
+<div id="map2" class="map" style="width:100%;height:400px"></div><br>
+<app-station-search-filter [appTable]="appTable" (filter) = 'loadBecauseFilter($event)' #stationSearch></app-station-search-filter><br>
+<app-station-table #appTable (deleted)='loadAllStations($event)' [stationSearch]="stationSearch"></app-station-table>

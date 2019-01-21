@@ -1,0 +1,21 @@
+<div id = "main">
+    <h2 style="text-align: center;">  Filter and search</h2>
+    <div id="div1">
+      <label for="line" style="padding-right: 20px;"><b>Zone</b></label>
+  
+      <select [(ngModel)]="filterSearch.zone" id="filter_zone_station" name="line" (change)= "loadFilterSearch()" required >
+        <option value = ""></option>
+        <option value = "first">first</option>
+        <option value = "second">second</option>
+
+      </select>
+  
+    </div>
+  
+    <div id="div2">
+      <input type="text" id="search_station_name" placeholder="Enter location name of station..." [(ngModel)]="filterSearch.search_text" 
+        (ngModelChange)= "loadFilterSearch()">
+    </div>
+  
+  
+  </div>

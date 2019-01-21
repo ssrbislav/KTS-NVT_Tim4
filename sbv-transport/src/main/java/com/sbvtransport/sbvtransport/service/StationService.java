@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
 import com.sbvtransport.sbvtransport.dto.ChangeStationDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Location;
@@ -87,6 +88,39 @@ public class StationService implements IStationService {
 		changeStation.get().getLocation().setLocation_name(station.getLocation_name());
 		
 		return stationRepository.save(changeStation.get());
+	}
+
+	@Override
+	public List<Station> filterSearch(FilterSearchStationDTO filterSearch) {
+		
+		List<Station> allStations = findAll();
+		List<Station> zoneFilter = new ArrayList<>();
+		List<Station> finalList = new ArrayList<>();
+		
+		//filter zone
+		if(filterSearch.getZone() != ""){
+			for (Station station : allStations) {
+				if(station.getZone().toString().equals(filterSearch.getZone())){
+					zoneFilter.add(station);
+				}
+				
+			}
+			
+		}else{
+			zoneFilter = allStations;
+		}
+		//search by name
+		if(filterSearch.getSearch_text()!= ""){
+			for (Station station : zoneFilter) {
+				if(station.getLocation().getLocation_name().contains(filterSearch.getSearch_text())){
+					finalList.add(station);
+				}	
+			}
+			
+		}else{
+			finalList = zoneFilter;
+		}
+		return finalList;
 	}
 
 	

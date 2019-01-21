@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Station } from '../models/station.model';
 import { StationDTO } from '../models.dto/station.dto';
 import { changeStationDTO } from '../models.dto/changeStation.dto';
+import { FilterSearchStationDTO } from '../models.dto/filterSearchStation.dto';
 
 
 const httpOptions = {
@@ -39,6 +40,11 @@ export class StationService{
 
     public updateStation(station: changeStationDTO){
         return this.http.post<Station>(this.stationUrl + 'updateStation',station,httpOptions);                 
+                    
+      }
+
+    public filterSearch(values: FilterSearchStationDTO){
+        return this.http.post<Station[]>(this.stationUrl + 'searchFilter',values);                 
                     
       }
     

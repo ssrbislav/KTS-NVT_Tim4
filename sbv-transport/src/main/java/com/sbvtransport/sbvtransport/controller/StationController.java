@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.controller;
 
 import com.sbvtransport.sbvtransport.dto.ChangeStationDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchStationDTO;
 import com.sbvtransport.sbvtransport.dto.StationDTO;
 import com.sbvtransport.sbvtransport.model.Station;
 import com.sbvtransport.sbvtransport.service.IStationService;
@@ -63,6 +64,15 @@ public class StationController {
 		boolean delete = stationService.delete(id);
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
+	public ResponseEntity<List<Station>> filterSearch(@RequestBody FilterSearchStationDTO filterSearch) {
+		
+		List<Station> list = stationService.filterSearch(filterSearch);
+
+		return new ResponseEntity<>(list, HttpStatus.OK);
 
 	}
 

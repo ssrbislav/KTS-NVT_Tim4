@@ -4,8 +4,7 @@ import { StationAddComponent } from './station-add/station-add.component';
 import { StationTableComponent } from './station-table/station-table.component';
 import { Station } from 'src/app/models/station.model';
 import { StationService } from 'src/app/services/station.service';
-import { forEach } from '@angular/router/src/utils/collection';
-import { mapChildrenIntoArray } from '@angular/router/src/url_tree';
+
 declare var ol: any;
 
 @Component({
@@ -31,6 +30,13 @@ export class StationComponent implements OnInit {
         this.stations = data;
         this.loadMap(i);
       });
+  }
+  
+  loadBecauseFilter(filterBuses:Station[]){
+
+    this.stations = filterBuses;
+    this.loadMap(true);
+
   }
 
   addStation(){
