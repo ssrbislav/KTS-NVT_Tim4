@@ -77,14 +77,14 @@ const appRoutes: Routes = [
     component: AdministratorComponent,
     canActivate: [RoleGuard],
     data: {
-      expectedRole : 'admin'
+      expectedRole : 'ROLE_ADMIN'
     }
   },
   { path: 'user', 
     component: UserComponent,
     canActivate: [RoleGuard],
     data: {
-      expectedRole : 'user'
+      expectedRole : 'ROLE_PASSENGER'
     } 
   },
   {
@@ -96,7 +96,7 @@ const appRoutes: Routes = [
     component: ControllerAddComponent,
     canActivate: [RoleGuard],
     data: {
-      expectedRole : 'controller'
+      expectedRole : 'ROLE_CONTROLLER'
     }
   },
 ];

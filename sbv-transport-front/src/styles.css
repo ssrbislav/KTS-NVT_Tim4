@@ -1,1 +1,4 @@
 @import '@angular/material/prebuilt-themes/purple-green.css';
+body {
+    background-color: #37474f;
+}
