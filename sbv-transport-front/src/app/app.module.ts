@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './header/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
-import { RegistrationComponent } from './header/registration/registration.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from './mainPage/mainPage.component';
+import { MainPageComponent } from './unregisteredHome/mainPage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BusComponent } from './administrator/bus/bus.component';
 import { BusTableComponent } from './administrator/bus/bus-table/bus-table.component';
@@ -59,7 +59,8 @@ import { StationSearchFilterComponent } from './administrator/station/station-se
 import { ControllerSearchFilterComponent } from './administrator/controller/controller-search-filter/controller-search-filter.component';
 import { UserComponent } from './user/user.component';
 import { BusViewComponent } from './user/bus-view/bus-view.component';
-
+import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
+import { httpInterceptorProviders } from './auth/auth-interceptor';
 
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -151,7 +152,7 @@ const appRoutes: Routes = [
     LineEditComponent,
     MyDialogTimetableComponent
    ],
-  providers: [BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
+  providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],

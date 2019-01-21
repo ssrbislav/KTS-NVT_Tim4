@@ -1,6 +1,6 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import { LoginComponent } from '../header/login/login.component';
-import { RegistrationComponent } from '../header/registration/registration.component';
+import { LoginComponent } from '../login/login.component';
+import { RegistrationComponent } from '../registration/registration.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 
 @Component({

@@ -13,7 +13,7 @@ export class RoleGuardService implements CanActivate {
     constructor(public auth: AuthService, public router: Router, private tokenStorage: TokenStorageService) {}
 
     canActivate(route: ActivatedRouteSnapshot): boolean {
-/*
+
         const expectedRole = route.data.expectedRole;
         const token = this.tokenStorage.getToken();
 
@@ -23,7 +23,8 @@ export class RoleGuardService implements CanActivate {
         }
       
         const tokenPayload = decode(token);
-
+        
+/*
         if(sessionStorage.getItem(TOKEN_KEY)) {
             JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
                 if(authority.authority == 'ROLE_ADMIN') {

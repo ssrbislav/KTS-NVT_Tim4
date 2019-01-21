@@ -1,6 +1,7 @@
 import { Component,ViewChild} from '@angular/core';
-import { LoginComponent } from './header/login/login.component';
-import { RegistrationComponent } from './header/registration/registration.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { TokenStorageService } from './auth/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,28 @@ export class AppComponent {
 
   title = 'sbv-transport';
 
-  constructor() { }
+  private roles: string[];
+  private authority: string;
+
+  constructor(private tokenStorage: TokenStorageService) { }
+
+  ngOnInit() {
+    if(this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every(role => {
+        if(role === 'ROLE_ADMIN') {
+          this.authority = 'admin';
+          return false;
+        } else if(role == 'ROLE_CONTROLLER') {
+          this.authority = 'controller';
+          return false;
+        }
+        this.authority = 'user';
+        return true;
+      });
+    }
+    
+  }
 
 }
 
