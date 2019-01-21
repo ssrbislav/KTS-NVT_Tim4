@@ -52,6 +52,10 @@ public class SubwayController {
 
 		Subway addSubway = subwayService.create(subway);
 
+		if (addSubway == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(addSubway, HttpStatus.OK);
 
 	}
@@ -60,6 +64,10 @@ public class SubwayController {
 	public ResponseEntity<Subway> update(@RequestBody ChangeTransportDTO subway) {
 
 		Subway updateSubway = subwayService.change(subway);
+
+		if (updateSubway == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateSubway, HttpStatus.OK);
 
@@ -83,13 +91,17 @@ public class SubwayController {
 
 		Subway updateSubway = subwayService.addLocation(subway);
 
+		if (updateSubway == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(updateSubway, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
 	public ResponseEntity<List<Subway>> filterSearch(@RequestBody FilterSearchTransportDTO filterSearch) {
-		
+
 		List<Subway> list = subwayService.searchFilter(filterSearch);
 
 		return new ResponseEntity<>(list, HttpStatus.OK);

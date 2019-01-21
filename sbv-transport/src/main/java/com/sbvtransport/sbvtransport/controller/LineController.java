@@ -15,6 +15,7 @@ import com.sbvtransport.sbvtransport.dto.FilterSearchLineDTO;
 import com.sbvtransport.sbvtransport.dto.LineDTO;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.service.ILineService;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/line")
@@ -45,6 +46,10 @@ public class LineController {
 
 		Line newLine = lineService.create(line);
 
+		if (newLine == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(newLine, HttpStatus.OK);
 
 	}
@@ -53,6 +58,10 @@ public class LineController {
 	public ResponseEntity<Line> update(@RequestBody List<AddFirstStationDTO> line) {
 
 		Line updateLine = lineService.changeListStations(line);
+
+		if (updateLine == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 
@@ -66,28 +75,36 @@ public class LineController {
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/addStation", method = RequestMethod.POST)
 	public ResponseEntity<String> addStation(@RequestBody AddFirstStationDTO addStation) {
 
 		String updateLine = lineService.addStation(addStation);
 
+		if (updateLine == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/addListStation", method = RequestMethod.POST)
 	public ResponseEntity<Line> addListStation(@RequestBody List<AddFirstStationDTO> addStation) {
-		
+
 		Line updateLine = lineService.addListStations(addStation);
+
+		if (updateLine == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
 	public ResponseEntity<List<Line>> filterSearch(@RequestBody FilterSearchLineDTO filterSearch) {
-		
+
 		List<Line> list = lineService.filterSearch(filterSearch);
 
 		return new ResponseEntity<>(list, HttpStatus.OK);

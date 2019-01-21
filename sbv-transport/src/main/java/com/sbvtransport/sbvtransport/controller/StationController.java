@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/station")
@@ -45,6 +46,11 @@ public class StationController {
 
 		Station newStation = stationService.create(station);
 
+		if (newStation == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+		}
+
 		return new ResponseEntity<>(newStation, HttpStatus.OK);
 
 	}
@@ -53,6 +59,11 @@ public class StationController {
 	public ResponseEntity<Station> update(@RequestBody ChangeStationDTO station) {
 
 		Station updateStation = stationService.change(station);
+
+		if (updateStation == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+		}
 
 		return new ResponseEntity<>(updateStation, HttpStatus.OK);
 
@@ -66,15 +77,14 @@ public class StationController {
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
 	public ResponseEntity<List<Station>> filterSearch(@RequestBody FilterSearchStationDTO filterSearch) {
-		
+
 		List<Station> list = stationService.filterSearch(filterSearch);
 
 		return new ResponseEntity<>(list, HttpStatus.OK);
 
 	}
-
 
 }
