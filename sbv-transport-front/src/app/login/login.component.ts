@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AuthLoginInfo } from '../auth/login-info';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>, private authService: AuthService, private tokenStorage: TokenStorageService) {}
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>, private authService: AuthService, private tokenStorage: TokenStorageService,
+            private router: Router) {}
 
   ngOnInit() {
     if(this.tokenStorage.getToken()) {
@@ -46,7 +48,8 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.isLoginFailed = false;
         this.roles = this.tokenStorage.getAuthorities();
-        this.reloadPage();
+        this.dialogRef.close();
+        this.router.navigate(['user']);
       },
       error => {
         console.log(error);
