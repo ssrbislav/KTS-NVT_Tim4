@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +9,30 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  private roles: string[];
+
   @Output() featureSelected = new EventEmitter<string>();
 
   showView: string = 'notregister';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
+    if(this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+        this.roles.every(role => {
+          if(role === 'ROLE_ADMIN') {
+            this.router.navigate(['administrator']); 
+            return true;
+          } else if(role == 'ROLE_CONTROLLER') {
+            this.router.navigate(['controller']);
+            return true;
+          } else if(role == 'ROLE_PASSENGER'){
+            this.router.navigate(['user']);
+            return true;
+          }
+        });
+    }
   }
 
   
