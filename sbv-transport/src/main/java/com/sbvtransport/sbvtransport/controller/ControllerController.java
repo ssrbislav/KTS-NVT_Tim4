@@ -107,7 +107,7 @@ public class ControllerController {
 				signUpRequest.getDate_birth());
 
 		Role role = new Role();
-		role.setName(RoleName.ROLE_PASSENGER);
+		role.setName(RoleName.ROLE_CONTROLLER);
 
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);

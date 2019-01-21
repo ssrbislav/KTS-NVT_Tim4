@@ -51,11 +51,14 @@ export class LoginComponent implements OnInit {
         this.dialogRef.close();
         this.roles.every(role => {
           if(role === 'ROLE_ADMIN') {
-            this.router.navigate(['administrator']);
+            this.router.navigate(['administrator']); 
+            return true;
           } else if(role == 'ROLE_CONTROLLER') {
             this.router.navigate(['controller']);
+            return true;
           } else {
             this.router.navigate(['user']);
+            return true;
           }
         });
       },

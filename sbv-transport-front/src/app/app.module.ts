@@ -67,10 +67,7 @@ const appRoutes: Routes = [
   { 
     path: 'mainPage', 
     component: MainPageComponent,
-    canActivate: [RoleGuard],
-    data: {
-      expectedRole : ''
-    } 
+   
   },
   { 
     path: '',
