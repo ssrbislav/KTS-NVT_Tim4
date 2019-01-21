@@ -58,6 +58,7 @@ import { LineSearchFilterComponent } from './administrator/line/line-search-filt
 import { StationSearchFilterComponent } from './administrator/station/station-search-filter/station-search-filter.component';
 import { ControllerSearchFilterComponent } from './administrator/controller/controller-search-filter/controller-search-filter.component';
 import { UserComponent } from './user/user.component';
+import { BusViewComponent } from './user/bus-view/bus-view.component';
 
 
 const appRoutes: Routes = [
@@ -115,7 +116,8 @@ const appRoutes: Routes = [
     LineSearchFilterComponent,
     StationSearchFilterComponent,
     ControllerSearchFilterComponent,
-    UserComponent
+    UserComponent,
+    BusViewComponent
   ],
   imports: [
     BrowserModule,

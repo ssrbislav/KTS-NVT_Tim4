@@ -23,4 +23,8 @@ export class UserComponent implements OnInit {
     
   }
 
+  busView(){
+    this.showView = 'bus';
+  }
+
 }
