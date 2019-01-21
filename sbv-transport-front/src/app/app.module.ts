@@ -56,6 +56,7 @@ import { SubwaySearchFilterComponent } from './administrator/subway/subway-searc
 import { TrolleySearchFilterComponent } from './administrator/trolley/trolley-search-filter/trolley-search-filter.component';
 import { LineSearchFilterComponent } from './administrator/line/line-search-filter/line-search-filter.component';
 import { StationSearchFilterComponent } from './administrator/station/station-search-filter/station-search-filter.component';
+import { ControllerSearchFilterComponent } from './administrator/controller/controller-search-filter/controller-search-filter.component';
 
 
 const appRoutes: Routes = [
@@ -110,7 +111,8 @@ const appRoutes: Routes = [
     SubwaySearchFilterComponent,
     TrolleySearchFilterComponent,
     LineSearchFilterComponent,
-    StationSearchFilterComponent
+    StationSearchFilterComponent,
+    ControllerSearchFilterComponent
   ],
   imports: [
     BrowserModule,

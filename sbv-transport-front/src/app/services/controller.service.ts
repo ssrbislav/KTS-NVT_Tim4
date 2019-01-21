@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Controller } from '../models/controller.model';
 import {catchError} from 'rxjs/operators';
 import { throwError} from 'rxjs';
+import { FilterSearchControllerDTO } from '../models.dto/filterSearchController.dto';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,6 +33,11 @@ const httpOptions = {
         catchError(e => throwError(e))
       );                 
                       
+    }
+
+    public filterSearch(values: FilterSearchControllerDTO){
+      return this.http.post<Controller[]>(this.controllerUrl + 'searchFilter',values);                 
+                  
     }
 
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Controller } from 'src/app/models/controller.model';
 import { ControllerService } from 'src/app/services/controller.service';
 
@@ -10,6 +10,7 @@ import { ControllerService } from 'src/app/services/controller.service';
 export class ControllerTableComponent implements OnInit{
 
   controllers: Controller[];
+  @Input() controllerSearch: any;
 
   constructor(private controllerService: ControllerService) { }
 
@@ -31,10 +32,16 @@ export class ControllerTableComponent implements OnInit{
         if(data == true){
           alert("Controller is deleted!");
           this.loadAllControllers();
+          this.controllerSearch.resetSearch(); 
         }else{
           alert("Something went wrong!");
         }
       });
   }
+
+  loadSearchFilter(filterBuses: Controller[]){
+    this.controllers= filterBuses;
+  }
+
 
 }

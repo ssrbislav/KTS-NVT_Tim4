@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
 import com.sbvtransport.sbvtransport.model.Controller;
 import com.sbvtransport.sbvtransport.repository.ControllerRepository;
 
@@ -56,6 +58,60 @@ public class ControllerService implements IControllerService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<Controller> filterSearch(FilterSearchControllerDTO filterSearch) {
+		
+		List<Controller> allControllers = findAll();
+		List<Controller> finalControllers = new ArrayList<>();
+		
+		if(filterSearch.getType()!= ""){
+			if(filterSearch.getType().equals("username")){
+				for (Controller controller : allControllers) {
+					if(controller.getUsername().toLowerCase().contains(filterSearch.getText_search().toLowerCase())){
+						finalControllers.add(controller);
+					}
+				}
+				
+			}else if(filterSearch.getType().equals("email")){
+				for (Controller controller : allControllers) {
+					if(controller.getEmail().toLowerCase().contains(filterSearch.getText_search().toLowerCase())){
+						finalControllers.add(controller);
+					}
+				}
+				
+			}else if(filterSearch.getType().equals("fname")){
+				for (Controller controller : allControllers) {
+					if(controller.getFirst_name().toLowerCase().contains(filterSearch.getText_search().toLowerCase())){
+						finalControllers.add(controller);
+					}
+				}
+				
+			}else if(filterSearch.getType().equals("lname")){
+				for (Controller controller : allControllers) {
+					if(controller.getLast_name().toLowerCase().contains(filterSearch.getText_search().toLowerCase())){
+						finalControllers.add(controller);
+					}
+				}
+				
+			}else if(filterSearch.getType().equals("address")){
+				for (Controller controller : allControllers) {
+					if(controller.getAddress().toLowerCase().contains(filterSearch.getText_search().toLowerCase())){
+						finalControllers.add(controller);
+					}
+				}
+				
+			}
+			
+		}else{
+			finalControllers = allControllers;
+		}
+		
+		if(filterSearch.getText_search().equals("")){
+			finalControllers = allControllers;
+		}
+		return finalControllers;
 	}
 
 }

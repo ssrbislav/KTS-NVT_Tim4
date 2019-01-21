@@ -4,6 +4,7 @@ import { SubwayService } from 'src/app/services/subway.service';
 import { SubwayTableComponent } from './subway-table/subway-table.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { SubwayAddComponent } from './subway-add/subway-add.component';
+import { SubwaySearchFilterComponent } from './subway-search-filter/subway-search-filter.component';
 declare var ol: any;
 
 @Component({
@@ -16,6 +17,7 @@ export class SubwayComponent implements OnInit {
   map: any;
   subways: Subway[];
   @ViewChild("subwayTable") table: SubwayTableComponent;
+  @ViewChild("subwaySearch") search: SubwaySearchFilterComponent;
 
   constructor(private subwayService: SubwayService,public dialog: MatDialog) { }
 
@@ -120,6 +122,7 @@ export class SubwayComponent implements OnInit {
     console.log(result)
     this.table.loadAllSubways();
     this.loadAllSubways(true);
+    this.search.resetSearch();
   
   });
   }

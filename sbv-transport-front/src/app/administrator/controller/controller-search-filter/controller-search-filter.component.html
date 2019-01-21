@@ -1,0 +1,24 @@
+<div id = "main">
+    <h2 style="text-align: center;">  Filter and search</h2>
+    <div id="div1">
+      <label for="line" style="padding-right: 20px;"><b>Type of search</b></label>
+  
+      <select [(ngModel)]="filterSearch.type" id="filter_search_controller" name="line" required >
+        <option value = ""></option>
+        <option value = "username">username</option>
+        <option value = "email">email</option>
+        <option value = "fname">first name</option>
+        <option value = "lname">last name</option>
+        <option value = "address">address</option>
+
+      </select>
+  
+    </div>
+  
+    <div id="div2">
+      <input type="text" id="search_controller" placeholder="Enter..." [(ngModel)]="filterSearch.text_search" 
+        (ngModelChange)= "loadFilterSearch()">
+    </div>
+  
+  
+  </div>

@@ -2,6 +2,7 @@ import { Component, OnInit ,ViewChild} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { LineAddComponent } from './line-add/line-add.component';
 import { LineTableComponent } from './line-table/line-table.component';
+import { LineSearchFilterComponent } from './line-search-filter/line-search-filter.component';
 
 @Component({
   selector: 'app-line',
@@ -11,6 +12,7 @@ import { LineTableComponent } from './line-table/line-table.component';
 export class LineComponent implements OnInit {
 
   @ViewChild("lineTable") table: LineTableComponent;
+  @ViewChild("lineSearch") search: LineSearchFilterComponent;
 
   constructor(public dialog: MatDialog) { }
 
@@ -34,6 +36,7 @@ export class LineComponent implements OnInit {
     console.log("Dialog was closed")
     console.log(result)
     this.table.loadAllLines();
+    this.search.resetSearch();
   
 
     });

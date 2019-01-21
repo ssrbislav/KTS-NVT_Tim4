@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
 import com.sbvtransport.sbvtransport.dto.RegisterDTO;
 import com.sbvtransport.sbvtransport.enumeration.RoleName;
 import com.sbvtransport.sbvtransport.messages.ResponseMessage;
@@ -115,5 +116,14 @@ public class ControllerController {
 		userRepository.save(user);
 
 		return new ResponseEntity<>(new ResponseMessage("Controller registered successfully!"), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/searchFilter", method = RequestMethod.POST)
+	public ResponseEntity<List<Controller>> filterSearch(@RequestBody FilterSearchControllerDTO filterSearch) {
+		
+		List<Controller> list = controllerService.filterSearch(filterSearch);
+
+		return new ResponseEntity<>(list, HttpStatus.OK);
+
 	}
 }

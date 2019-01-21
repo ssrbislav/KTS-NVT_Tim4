@@ -263,7 +263,7 @@ public class LineService implements ILineService {
 		//search by name
 		if (filterSearch.getSearch_text() != "") {
 			for (Line line : stationFilter) {
-				if (line.getName().contains(filterSearch.getSearch_text())) {
+				if (line.getName().toLowerCase().contains(filterSearch.getSearch_text().toLowerCase())) {
 					finalList.add(line);
 				}
 			}

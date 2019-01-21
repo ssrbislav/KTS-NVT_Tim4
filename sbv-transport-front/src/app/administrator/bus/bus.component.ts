@@ -4,6 +4,7 @@ import { BusService } from 'src/app/services/bus.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { BusAddComponent } from './bus-add/bus-add.component';
 import { BusTableComponent } from './bus-table/bus-table.component';
+import { BusSearchFilterComponent } from './bus-search-filter/bus-search-filter.component';
 declare var ol: any;
 
 @Component({
@@ -16,6 +17,7 @@ export class BusComponent implements OnInit {
   map: any;
   buses: Bus[];
   @ViewChild("busTable") table: BusTableComponent;
+  @ViewChild("busSearch") search: BusSearchFilterComponent;
 
   constructor(private busService: BusService,public dialog: MatDialog) { }
 
@@ -120,6 +122,7 @@ export class BusComponent implements OnInit {
     console.log(result)
     this.table.loadAllBuses();
     this.loadAllBuses(true);
+    this.search.resetSearch();
   
   });
   }

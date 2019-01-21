@@ -222,7 +222,7 @@ public class TrolleyService implements ITrolleyService {
 		// search by names
 		if (filterSearch.getText_search() != "") {
 			for (Trolley trolley : currentLocationFilter) {
-				if (trolley.getName().contains(filterSearch.getText_search())) {
+				if (trolley.getName().toLowerCase().contains(filterSearch.getText_search().toLowerCase())) {
 					finalList.add(trolley);
 				}
 			}

@@ -220,7 +220,7 @@ public class BusService implements IBusService {
 		// search by names
 		if (filterSearch.getText_search() != "") {
 			for (Bus bus : currentLocationFilter) {
-				if (bus.getName().contains(filterSearch.getText_search())) {
+				if (bus.getName().toLowerCase().contains(filterSearch.getText_search().toLowerCase())) {
 					finalList.add(bus);
 				}
 			}

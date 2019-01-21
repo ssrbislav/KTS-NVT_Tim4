@@ -4,6 +4,7 @@ import { TrolleyService } from 'src/app/services/trolley.service';
 import { TrolleyTableComponent } from './trolley-table/trolley-table.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TrolleyAddComponent } from './trolley-add/trolley-add.component';
+import { TrolleySearchFilterComponent } from './trolley-search-filter/trolley-search-filter.component';
 declare var ol: any;
 
 @Component({
@@ -16,6 +17,7 @@ export class TrolleyComponent implements OnInit {
   map: any;
   trolleys: Trolley[];
   @ViewChild("trolleyTable") table: TrolleyTableComponent;
+  @ViewChild("trolleySearch") search: TrolleySearchFilterComponent;
 
   constructor(private trolleyService: TrolleyService,public dialog: MatDialog) { }
 
@@ -122,6 +124,7 @@ export class TrolleyComponent implements OnInit {
     console.log(result)
     this.table.loadAllTrolleys();
     this.loadAllTrolleys(true);
+    this.search.resetSearch();
   
   });
   }

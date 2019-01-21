@@ -112,7 +112,7 @@ public class StationService implements IStationService {
 		//search by name
 		if(filterSearch.getSearch_text()!= ""){
 			for (Station station : zoneFilter) {
-				if(station.getLocation().getLocation_name().contains(filterSearch.getSearch_text())){
+				if(station.getLocation().getLocation_name().toLowerCase().contains(filterSearch.getSearch_text().toLowerCase())){
 					finalList.add(station);
 				}	
 			}

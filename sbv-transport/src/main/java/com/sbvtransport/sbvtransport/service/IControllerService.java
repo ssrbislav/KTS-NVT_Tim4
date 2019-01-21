@@ -1,7 +1,7 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
-
+import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
 import com.sbvtransport.sbvtransport.model.Controller;
 
 public interface IControllerService {
@@ -10,5 +10,6 @@ public interface IControllerService {
   Controller create(Controller controller);
   Controller update(Controller controller);
   boolean delete (Long id);
+  List<Controller> filterSearch(FilterSearchControllerDTO filterSearch);
 
 }

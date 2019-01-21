@@ -4,6 +4,7 @@ import { StationAddComponent } from './station-add/station-add.component';
 import { StationTableComponent } from './station-table/station-table.component';
 import { Station } from 'src/app/models/station.model';
 import { StationService } from 'src/app/services/station.service';
+import { StationSearchFilterComponent } from './station-search-filter/station-search-filter.component';
 
 declare var ol: any;
 
@@ -15,6 +16,7 @@ declare var ol: any;
 export class StationComponent implements OnInit {
 
   @ViewChild("appTable") table: StationTableComponent;
+  @ViewChild("stationSearch") search: StationSearchFilterComponent;
   map: any;
   stations: Station[];
 
@@ -58,6 +60,7 @@ export class StationComponent implements OnInit {
     console.log(result)
     this.table.loadAllStations();
     this.loadAllStations(true);
+    this.search.resetSearch();
   
 
     });

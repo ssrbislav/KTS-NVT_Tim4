@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ControllerAddComponent } from './controller-add/controller-add.component';
 import { ControllerTableComponent } from './controller-table/controller-table.component';
+import { ControllerSearchFilterComponent } from './controller-search-filter/controller-search-filter.component';
 
 @Component({
   selector: 'app-controller',
@@ -11,7 +12,9 @@ import { ControllerTableComponent } from './controller-table/controller-table.co
 })
 export class ControllerComponent implements OnInit {
 
-  @ViewChild("appTable") table: ControllerTableComponent;
+  @ViewChild("controllerTable") table: ControllerTableComponent;
+  @ViewChild("controllerSearch") search: ControllerSearchFilterComponent;
+
 
   constructor(private router:Router,public dialog: MatDialog) { }
 
@@ -36,6 +39,7 @@ export class ControllerComponent implements OnInit {
     console.log("Dialog was closed")
     console.log(result)
     this.table.loadAllControllers();
+    this.search.resetSearch();
 
     });
 

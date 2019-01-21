@@ -222,7 +222,7 @@ public class SubwayService implements ISubwayService {
 		//search by names
 		if(filterSearch.getText_search() != ""){
 			for (Subway subway : currentLocationFilter) {
-				if(subway.getName().contains(filterSearch.getText_search())){
+				if(subway.getName().toLowerCase().contains(filterSearch.getText_search().toLowerCase())){
 					finalList.add(subway);
 				}
 			}
