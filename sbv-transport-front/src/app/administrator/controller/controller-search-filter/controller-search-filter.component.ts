@@ -20,7 +20,6 @@ export class ControllerSearchFilterComponent implements OnInit {
   }
 
   loadFilterSearch(){
-    alert(this.filterSearch.type)
     this.controllerService.filterSearch(this.filterSearch)
       .subscribe( data => {
         this.result = data;
