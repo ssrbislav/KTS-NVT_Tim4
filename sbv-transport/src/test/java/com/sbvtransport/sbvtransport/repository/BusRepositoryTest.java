@@ -30,14 +30,17 @@ public class BusRepositoryTest {
 	@Transactional
 	@Rollback(true)
 	public void testSaveBus(){
-//		Transport t = new Bus("nova_linija_bus_7ca",lineRepository.getOne(1L), false, "7ca");
-//		Bus busSaved = busRepository.save(t);
-//		assertEquals(t.getName(), busSaved.getName());
-//		assertEquals(t.getLine().getId(), busSaved.getLine().getId());
-//		assertEquals(t.getLine().getLine_type(), busSaved.getLine().getLine_type());
-//		assertEquals(t.getLine().getName(), busSaved.getLine().getName());
-//		assertEquals("nova_linija_bus_7ca", busSaved.getCode());
-//		assertNotNull(busSaved);
+		Transport t = new Bus("nova_linija_bus_7ca",lineRepository.getOne(1L), false, "7ca",5,false);
+		Bus busSaved = busRepository.save(t);
+		assertEquals(t.getName(), busSaved.getName());
+		assertEquals(t.getLine().getId(), busSaved.getLine().getId());
+		assertEquals(t.getLine().getLine_type(), busSaved.getLine().getLine_type());
+		assertEquals(t.getLine().getName(), busSaved.getLine().getName());
+		assertEquals("nova_linija_bus_7ca", busSaved.getCode());
+		assertEquals(t.getTime_arrive(), busSaved.getTime_arrive());
+		assertEquals(t.isDeleted(), busSaved.isDeleted());
+		assertEquals(t.isLate(), busSaved.isLate());
+		assertNotNull(busSaved);
 	}
 
 	//trying to save empty object
@@ -45,7 +48,7 @@ public class BusRepositoryTest {
 	public void testSaveBus2(){
 		busRepository.save(new Bus());
 	}
-
+	
 
 
 }

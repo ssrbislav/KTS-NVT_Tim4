@@ -30,14 +30,17 @@ public class TrolleyRepositoryTest {
 	@Transactional
 	@Rollback(true)
 	public void testSaveTrolley(){
-//		Transport t = new Trolley("nova_linija_trolley_12ca",lineRepository.getOne(3L), false, "12ca");
-//		Trolley trolleySaved = trolleyRepository.save(t);
-//		assertEquals(t.getName(), trolleySaved.getName());
-//		assertEquals(t.getLine().getId(), trolleySaved.getLine().getId());
-//		assertEquals(t.getLine().getLine_type(), trolleySaved.getLine().getLine_type());
-//		assertEquals(t.getLine().getName(), trolleySaved.getLine().getName());
-//		assertEquals("nova_linija_trolley_12ca", trolleySaved.getCode());
-//		assertNotNull(trolleySaved);
+		Transport t = new Trolley("nova_linija_trolley_12ca",lineRepository.getOne(3L), false, "12ca",5,false);
+		Trolley trolleySaved = trolleyRepository.save(t);
+		assertEquals(t.getName(), trolleySaved.getName());
+		assertEquals(t.getLine().getId(), trolleySaved.getLine().getId());
+		assertEquals(t.getLine().getLine_type(), trolleySaved.getLine().getLine_type());
+		assertEquals(t.getLine().getName(), trolleySaved.getLine().getName());
+		assertEquals("nova_linija_trolley_12ca", trolleySaved.getCode());
+		assertEquals(t.getTime_arrive(), trolleySaved.getTime_arrive());
+		assertEquals(t.isDeleted(), trolleySaved.isDeleted());
+		assertEquals(t.isLate(), trolleySaved.isLate());
+		assertNotNull(trolleySaved);
 	}
 
 	//trying to save empty object

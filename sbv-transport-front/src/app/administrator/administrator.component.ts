@@ -1,5 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrator',
@@ -11,7 +12,7 @@ export class AdministratorComponent implements OnInit {
   @ViewChild("header") header: HeaderComponent;
   showView: string = 'bus';
 
-  constructor() { 
+  constructor(private router: Router) { 
   }
 
   ngOnInit() {
@@ -21,6 +22,11 @@ export class AdministratorComponent implements OnInit {
   onNavigate(feature: string){
     console.log(feature);
     this.showView = feature;
+    if(feature == 'logout') {
+      window.sessionStorage.clear();
+      this.router.navigate(['mainPage']);
+      window.alert("User successfully Logged out!");
+    }
     
   }
 
