@@ -1,13 +1,13 @@
 package com.sbvtransport.sbvtransport.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Date;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -27,7 +27,7 @@ public class Timetable {
 
 	@Column(name = "schedule", unique = false, nullable = false)
 	@ElementCollection(targetClass = Schedule.class)
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, targetEntity = Schedule.class)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, targetEntity = Schedule.class, mappedBy = "id")
 	private Set<Schedule> schedule;
 	
 	@OneToOne(fetch = FetchType.LAZY)
@@ -59,7 +59,12 @@ public class Timetable {
 	}
 
 	public void setSchedule(Set<Schedule> schedule) {
-		this.schedule = schedule;
+		if (this.schedule != null) {
+			this.schedule.clear();
+		} else {
+			this.schedule = new HashSet<>();
+		}
+		this.schedule.addAll(schedule);
 	}
 	
 	@JsonIgnore
