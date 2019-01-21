@@ -31,5 +31,11 @@ export class UserComponent implements OnInit {
   busView(){
     this.showView = 'bus';
   }
+  subwayView() {
+    this.showView = 'subway';
+  }
+  trolleyView() {
+    this.showView = 'trolley';
+  }
 
 }

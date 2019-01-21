@@ -4,7 +4,7 @@
     <div class="row" style="padding: 120px">
         <div class="col-md-4">
             <div class="thumbnail">
-                <a (click) = busView() style="cursor: pointer;">
+                <a (click) = "busView()" style="cursor: pointer;">
                     <img src="assets/pictures/bus.jpg" alt="Lights" style="width:100%">
                     <div class="caption">
                         <h3 style="text-align: center">Bus</h3>
@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
-                <a style="cursor: pointer;">
+                <a (click) = "subwayView()" style="cursor: pointer;">
                     <img src="assets/pictures/subway.jpeg" alt="Nature" style="width:100%">
                     <div class="caption">
                         <h3 style="text-align: center">Subway</h3>
@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
-                <a style="cursor: pointer;">
+                <a (click) = "trolleyView()" style="cursor: pointer;">
                     <img src="assets/pictures/trolley.jpg" alt="Fjords" style="width:100%">
                     <div class="caption">
                         <h3 style="text-align: center">Trolley</h3>
@@ -36,3 +36,5 @@
  </div>
 
  <app-bus-view *ngIf = "showView == 'bus'"></app-bus-view>
+ <app-subway-view *ngIf = "showView == 'subway'"></app-subway-view>
+ <app-trolley-view *ngIf = "showView == 'trolley'"></app-trolley-view>

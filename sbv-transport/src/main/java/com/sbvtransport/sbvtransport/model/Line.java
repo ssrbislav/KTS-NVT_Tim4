@@ -48,7 +48,7 @@ public class Line implements Serializable {
 	@Column(name = "zone", unique = false, nullable = false)
 	private Zone zone;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "timetable", referencedColumnName = "id")
 	private Timetable timetable;
 	

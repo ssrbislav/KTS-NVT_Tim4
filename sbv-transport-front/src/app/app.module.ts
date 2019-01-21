@@ -61,6 +61,8 @@ import { UserComponent } from './user/user.component';
 import { BusViewComponent } from './user/bus-view/bus-view.component';
 import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { SubwayViewComponent } from './user/subway-view/subway-view.component';
+import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
 
 const appRoutes: Routes = [
  
@@ -152,7 +154,9 @@ const appRoutes: Routes = [
     StationSearchFilterComponent,
     ControllerSearchFilterComponent,
     UserComponent,
-    BusViewComponent
+    BusViewComponent,
+    SubwayViewComponent,
+    TrolleyViewComponent
   ],
   imports: [
     BrowserModule,
