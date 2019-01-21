@@ -70,7 +70,7 @@ const appRoutes: Routes = [
   },
   { path: 'administrator', component: AdministratorComponent},
   { path: 'user', component: UserComponent},
-  {path: 'addController', component: ControllerAddComponent},
+  { path: 'controller', component: ControllerAddComponent},
 ];
 @NgModule({
   declarations: [
