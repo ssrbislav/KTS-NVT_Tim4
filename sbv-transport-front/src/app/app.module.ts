@@ -63,15 +63,42 @@ import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 
 const appRoutes: Routes = [
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'mainPage', component: MainPageComponent },
-  { path: '',
+ 
+  { 
+    path: 'mainPage', 
+    component: MainPageComponent },
+  { 
+    path: '',
     redirectTo: '/mainPage',
     pathMatch: 'full'
   },
-  { path: 'administrator', component: AdministratorComponent},
-  { path: 'user', component: UserComponent},
-  { path: 'controller', component: ControllerAddComponent},
+  { 
+    path: 'administrator', 
+    component: AdministratorComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole : 'admin'
+    }
+  },
+  { path: 'user', 
+    component: UserComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole : 'user'
+    } 
+  },
+  {
+    path: 'signup',
+    component: RegistrationComponent
+  },
+  { 
+    path: 'controller', 
+    component: ControllerAddComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole : 'controller'
+    }
+  },
 ];
 @NgModule({
   declarations: [

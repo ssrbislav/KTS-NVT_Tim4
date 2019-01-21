@@ -19,22 +19,18 @@ export class RoleGuardService implements CanActivate {
 
         if(!token) {
             window.alert("Please Log in!");
-            this.router.navigate(['login']);
+            this.router.navigate(['mainPage']);
         }
-      
-        const tokenPayload = decode(token);
-        
-/*
+
         if(sessionStorage.getItem(TOKEN_KEY)) {
             JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
-                if(authority.authority == 'ROLE_ADMIN') {
-                    return true;
+                if(authority.authority !== 'ROLE_ADMIN') { 
+                    this.router.navigate(['mainPage']);
+                    return false;
                 }
             });
         }
-*/
-        return true; // treba FALSE
         
+        return true; // treba FALSE
     }
-
 }
