@@ -63,6 +63,7 @@ import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { SubwayViewComponent } from './user/subway-view/subway-view.component';
 import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
+import { ControllerViewComponent } from './controller-view/controller-view.component';
 
 const appRoutes: Routes = [
  
@@ -98,7 +99,7 @@ const appRoutes: Routes = [
   },
   { 
     path: 'controller', 
-    component: ControllerAddComponent,
+    component: ControllerViewComponent,
     canActivate: [RoleGuard],
     data: {
       expectedRole : 'ROLE_CONTROLLER'
@@ -152,7 +153,8 @@ const appRoutes: Routes = [
     UserComponent,
     BusViewComponent,
     SubwayViewComponent,
-    TrolleyViewComponent
+    TrolleyViewComponent,
+    ControllerViewComponent
   ],
   imports: [
     BrowserModule,

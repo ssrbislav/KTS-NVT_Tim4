@@ -55,7 +55,7 @@ public abstract class User {
 	@Column(name = "phone_number", unique = false, nullable = false)
 	protected String phone_number;
 
-	@Column(name = "date_birth", unique = false, nullable = false)
+	@Column(name = "date_birth", unique = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected Date date_birth;
 

@@ -41,13 +41,16 @@ button {
 }
 
 button:hover {
-  color: black;
+  background: rgb(150, 150, 150);
+  border: 2px solid black;
 }
 
 /* Extra styles for the cancel button */
 .cancelbtn {
   padding: 14px 20px;
-  background-color: #f44336;
+  background-color: #cecece;
+  border: 1px solid gray;
+  color: black;
 }
 
 /* Float cancel and signup buttons and add an equal width */

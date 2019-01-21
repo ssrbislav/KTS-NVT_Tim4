@@ -40,6 +40,10 @@ export class HeaderComponent implements OnInit {
     this.showView = 'administrator';
   }
 
+  controllerView(){
+    this.showView = 'controller';
+  }
+
   userView(){
     this.showView = 'user';
   }
