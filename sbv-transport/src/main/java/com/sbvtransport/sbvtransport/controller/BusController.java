@@ -51,6 +51,10 @@ public class BusController {
 	public ResponseEntity<Bus> create(@RequestBody BusDTO bus) {
 
 		Bus newBus = busService.create(bus);
+		
+		if(newBus == null){
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(newBus, HttpStatus.OK);
 
@@ -60,6 +64,10 @@ public class BusController {
 	public ResponseEntity<Bus> update(@RequestBody ChangeTransportDTO bus) {
 
 		Bus updateBus = busService.change(bus);
+		
+		if(updateBus == null){
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateBus, HttpStatus.OK);
 
@@ -81,6 +89,10 @@ public class BusController {
 	public ResponseEntity<Bus> addLocation(@RequestBody AddLocationDTO bus) {
 
 		Bus updateBus = busService.addLocation(bus);
+		
+		if(updateBus == null){
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateBus, HttpStatus.OK);
 

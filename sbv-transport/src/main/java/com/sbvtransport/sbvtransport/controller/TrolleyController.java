@@ -52,6 +52,10 @@ public class TrolleyController {
 
 		Trolley newTrolley = trolleyService.create(trolley);
 
+		if (newTrolley == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(newTrolley, HttpStatus.OK);
 
 	}
@@ -60,6 +64,10 @@ public class TrolleyController {
 	public ResponseEntity<Trolley> update(@RequestBody ChangeTransportDTO trolley) {
 
 		Trolley updateTrolley = trolleyService.change(trolley);
+
+		if (updateTrolley == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
 
@@ -82,6 +90,10 @@ public class TrolleyController {
 	public ResponseEntity<Trolley> addLocation(@RequestBody AddLocationDTO trolley) {
 
 		Trolley updateTrolley = trolleyService.addLocation(trolley);
+
+		if (updateTrolley == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);
 
