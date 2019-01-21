@@ -17,16 +17,21 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+  administratorView(){
+    this.showView = 'administrator';
+  }
+
+  userView(){
+    this.showView = 'user';
+  }
+
   clickButtonLogin() {
     this.featureSelected.emit('login');
 }
 
   clickButtonRegistration(){
     this.router.navigateByUrl('/registration');
-  }
-
-  administratorView(){
-    this.showView = 'administrator';
   }
 
   clickButtonBus(){
@@ -62,6 +67,16 @@ export class HeaderComponent implements OnInit {
 
   clickButtonReport(){
     this.featureSelected.emit('report');
+  }
+
+  clickButtonHome(){
+    this.featureSelected.emit('home');
+
+  }
+
+  clickButtonLogout(){
+    this.featureSelected.emit('logout');
+
   }
 
 

@@ -57,6 +57,7 @@ import { TrolleySearchFilterComponent } from './administrator/trolley/trolley-se
 import { LineSearchFilterComponent } from './administrator/line/line-search-filter/line-search-filter.component';
 import { StationSearchFilterComponent } from './administrator/station/station-search-filter/station-search-filter.component';
 import { ControllerSearchFilterComponent } from './administrator/controller/controller-search-filter/controller-search-filter.component';
+import { UserComponent } from './user/user.component';
 
 
 const appRoutes: Routes = [
@@ -67,6 +68,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'administrator', component: AdministratorComponent},
+  { path: 'user', component: UserComponent},
   {path: 'addController', component: ControllerAddComponent},
 ];
 @NgModule({
@@ -112,7 +114,8 @@ const appRoutes: Routes = [
     TrolleySearchFilterComponent,
     LineSearchFilterComponent,
     StationSearchFilterComponent,
-    ControllerSearchFilterComponent
+    ControllerSearchFilterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
