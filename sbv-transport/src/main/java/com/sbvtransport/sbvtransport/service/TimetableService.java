@@ -110,7 +110,7 @@ public class TimetableService implements ITimetableService {
 			return null;
 		}
 
-		setLineTimetable(transport, timetable);
+//		setLineTimetable(transport, timetable);
 		transport.setTimetable(timetable);
 		if (transport.getClass().equals(Bus.class)) {
 			busService.update((Bus) transport);
@@ -121,6 +121,7 @@ public class TimetableService implements ITimetableService {
 		} else {
 			return null;
 		}
+		updateGlobalTimetable(transport.getLine());
 		return timetableRepository.save(timetable);
 	}
 
@@ -181,7 +182,6 @@ public class TimetableService implements ITimetableService {
 		}
 		lineTimetable.setSchedule(schedules);
 		line.setTimetable(lineTimetable);
-		updateGlobalTimetable(line);
 		lineService.update(line);
 		timetableRepository.save(lineTimetable);
 	}
@@ -366,25 +366,33 @@ public class TimetableService implements ITimetableService {
 		if (line.getLine_type().equals(TypeTransport.bus)) {
 			for (Bus b : busService.findAll()) {
 				if (b.getLine().equals(line)) {
-					global.getSchedule().addAll(b.getTimetable().getSchedule());
+					if (b.getTimetable() != null) {
+						global.getSchedule().addAll(b.getTimetable().getSchedule());
+					}
 				}
 			}
 		} else if (line.getLine_type().equals(TypeTransport.subway)) {
 			for (Subway s : subwayService.findAll()) {
 				if (s.getLine().equals(line)) {
-					global.getSchedule().addAll(s.getTimetable().getSchedule());
+					if (s.getTimetable() != null) {
+						global.getSchedule().addAll(s.getTimetable().getSchedule());
+					}
 				}
 			}
 		} else if (line.getLine_type().equals(TypeTransport.trolley)) {
 			for (Trolley t : trolleyService.findAll()) {
 				if (t.getLine().equals(line)) {
-					global.getSchedule().addAll(t.getTimetable().getSchedule());
+					if (t.getTimetable() != null) {
+						global.getSchedule().addAll(t.getTimetable().getSchedule());
+					}
 				}
 			}
 		} else {
 			return;
 		}
-		delete(line.getTimetable().getId());
+		if (line.getTimetable() != null) {
+			delete(line.getTimetable().getId());
+		}
 		line.setTimetable(global);
 		lineService.update(line);
 		timetableRepository.save(global);
