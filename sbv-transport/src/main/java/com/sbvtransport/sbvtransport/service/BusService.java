@@ -201,12 +201,7 @@ public class BusService implements IBusService {
 			}
 
 		} else {
-			for(Bus bus: lineFilter){
-				if(!bus.isLate()){
-					lateFilter.add(bus);
-				}
-			}
-			
+			lateFilter = lineFilter;
 		}
 
 		// filter current location

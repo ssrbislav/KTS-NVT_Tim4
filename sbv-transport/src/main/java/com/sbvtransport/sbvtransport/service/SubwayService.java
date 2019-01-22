@@ -202,11 +202,7 @@ public class SubwayService implements ISubwayService {
 			}
 			
 		}else{
-			for (Subway subway : lineFilter) {
-				if(!subway.isLate()){
-					lateFilter.add(subway);
-				}
-			}	
+			lateFilter = lineFilter;	
 		}
 		
 		//filter current location
