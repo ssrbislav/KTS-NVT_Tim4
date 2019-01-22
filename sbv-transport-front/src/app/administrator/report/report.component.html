@@ -1,3 +1,108 @@
-<p>
-  report works!
-</p>
+<h1 style="text-align: center">Report</h1><br>
+
+<h3>Number of elements:</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Number</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Bus</th>
+      <td>{{size_bus}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Subway</th>
+      <td>{{size_subway}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Trolley</th>
+      <td>{{size_trolley}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Line</th>
+      <td>{{size_line}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Station</th>
+      <td>{{size_station}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Controller</th>
+      <td>{{size_controller}}</td>
+    </tr>
+</table>
+
+<br>
+
+<h3>Table of bus lines:</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Line</th>
+      <th scope="col">Number of buses</th>
+      <th scope="col">Number on time</th>
+      <th scope="col">Number late</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let bus of list_bus_table; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{bus.line.name}}</td>
+      <td>{{bus.numb_vehicles}}</td>
+      <td>{{bus.numb_on_time}}</td>
+      <td>{{bus.numb_late}}</td>
+    </tr>
+</table>
+
+<br>
+
+<h3>Table of subway lines:</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Line</th>
+      <th scope="col">Number of subways</th>
+      <th scope="col">Number on time</th>
+      <th scope="col">Number late</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let subway of list_subway_table; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{subway.line.name}}</td>
+      <td>{{subway.numb_vehicles}}</td>
+      <td>{{subway.numb_on_time}}</td>
+      <td>{{subway.numb_late}}</td>
+    </tr>
+</table>
+
+<br>
+
+<h3>Table of trolley lines:</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Line</th>
+      <th scope="col">Number of trolleys</th>
+      <th scope="col">Number on time</th>
+      <th scope="col">Number late</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let trolley of list_trolley_table; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{trolley.line.name}}</td>
+      <td>{{trolley.numb_vehicles}}</td>
+      <td>{{trolley.numb_on_time}}</td>
+      <td>{{trolley.numb_late}}</td>
+    </tr>
+</table>

@@ -186,7 +186,8 @@ const appRoutes: Routes = [
     TrolleyEditComponent,
     StationEditComponent,
     LineEditComponent,
-    MyDialogTimetableComponent
+    MyDialogTimetableComponent,
+    ControllerAddComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService,
