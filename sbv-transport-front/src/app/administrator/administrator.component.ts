@@ -25,7 +25,7 @@ export class AdministratorComponent implements OnInit {
     if(feature == 'logout') {
       window.sessionStorage.clear();
       this.router.navigate(['mainPage']);
-      window.alert("User successfully Logged out!");
+      window.alert("Successfully Logged out!");
     }
     
   }

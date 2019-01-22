@@ -203,7 +203,11 @@ public class TrolleyService implements ITrolleyService {
 			}
 
 		} else {
-			lateFilter = lineFilter;
+			for (Trolley trolley : lineFilter) {
+				if (!trolley.isLate()) {
+					lateFilter.add(trolley);
+				}
+			}
 		}
 
 		// filter current location
