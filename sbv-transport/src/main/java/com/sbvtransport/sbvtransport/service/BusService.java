@@ -163,6 +163,8 @@ public class BusService implements IBusService {
 		} else {
 			updateBus.get().setLate(false);
 		}
+		String newCode = updateBus.get().getLine().getName() + "_bus_" + bus.getName();
+		updateBus.get().setCode(newCode);
 		updateBus.get().setTime_arrive(bus.getTime_arrive());
 		updateBus.get().setTimetable(bus.getTimetable());
 		updateBus.get().setLocation(bus.getCurrent_location());

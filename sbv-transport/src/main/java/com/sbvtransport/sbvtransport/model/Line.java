@@ -83,6 +83,16 @@ public class Line implements Serializable {
 		this.first_station = first_station;
 	}
 
+	public Line(Long id, String name, List<Station> station_list, TypeTransport line_type, Zone zone) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.station_list = station_list;
+		this.line_type = line_type;
+		this.zone = zone;
+		
+	}
+
 	public String getName() {
 		return name;
 	}
