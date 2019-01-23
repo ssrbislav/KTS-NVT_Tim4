@@ -346,7 +346,7 @@ public class TimetableService implements ITimetableService {
 						schedule.getTimes().add(x);
 					}
 				}
-				addMins += transport.getTime_arrive();
+				addMins += 5;
 			}
 			scheduleService.scheduleRepository.save(schedule);
 			schedules.add(schedule);
