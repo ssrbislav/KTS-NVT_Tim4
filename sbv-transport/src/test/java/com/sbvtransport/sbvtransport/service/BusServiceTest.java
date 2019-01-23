@@ -1,9 +1,12 @@
 package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-
+import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.model.Location;
+import com.sbvtransport.sbvtransport.model.Schedule;
+import com.sbvtransport.sbvtransport.model.Timetable;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -135,11 +141,19 @@ public class BusServiceTest {
 	@Rollback(true)
 	public void updateTest() {
 
+		Set<Date> dates = new HashSet<>();
+		dates.add(new Date());
+		Schedule s = new Schedule();
+		s.setTimes(dates);
+		Set<Schedule> schedules = new HashSet<>();
+		schedules.add(s);
+		Timetable t = new Timetable("kod", schedules);
+
 		Bus bus = new Bus();
 		bus.setId(1L);
 		bus.setName("Novo ime");
 		bus.setLate(true);
-		bus.setTimetable(null);
+		bus.setTimetable(t);
 		bus.setCode("7ca_bus_Novo ime");
 		bus.setLine(lineService.getOne(1L));
 
@@ -155,8 +169,9 @@ public class BusServiceTest {
 		assertThat(dbBus.getLine().getName()).isEqualTo(bus.getLine().getName());
 		assertThat(dbBus.getLine().getFirst_station()).isEqualTo(bus.getLine().getFirst_station());
 		assertThat(dbBus.getLine().getStation_list()).isEqualTo(bus.getLine().getStation_list());
-		assertThat(dbBus.getLine().getTimetable()).isEqualTo(bus.getLine().getTimetable());
 		assertThat(dbBus.getLine().getZone()).isEqualTo(bus.getLine().getZone());
+
+		assertThat(dbBus.getTimetable().getCode()).isEqualTo("kod");
 
 	}
 
@@ -283,28 +298,49 @@ public class BusServiceTest {
 	@Transactional
 	@Rollback(true)
 	public void changeTest() {
+
+		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
+		Set<Date> dates = new HashSet<>();
+		dates.add(new Date());
+		Schedule s = new Schedule(dates);
+		Set<Schedule> schedules = new HashSet<>();
+		schedules.add(s);
+		Timetable t = new Timetable("kod", schedules);
+
 		// late is true
-		ChangeTransportDTO changeData = new ChangeTransportDTO(1L, "novo ime", 7, null, null);
+		ChangeTransportDTO changeData = new ChangeTransportDTO(1L, "novo ime", 7, l, t);
 		Bus changedBus = busService.change(changeData);
 		assertThat(changedBus).isNotNull();
 		assertThat(changedBus.getId()).isEqualTo(changeData.getId_transport());
 		assertThat(changedBus.getName()).isEqualTo(changeData.getName());
 		assertThat(changedBus.isLate()).isEqualTo(true);
 		assertThat(changedBus.getTime_arrive()).isEqualTo(changeData.getTime_arrive());
-		assertThat(changedBus.getTimetable()).isEqualTo(changeData.getTimetable());
-		assertThat(changedBus.getLocation()).isEqualTo(changeData.getCurrent_location());
+		assertThat(changedBus.getTimetable().getCode()).isEqualTo(changeData.getTimetable().getCode());
+		assertThat(changedBus.getLocation().getAddress()).isEqualTo(changeData.getCurrent_location().getAddress());
+		assertThat(changedBus.getLocation().getId()).isEqualTo(changeData.getCurrent_location().getId());
+		assertThat(changedBus.getLocation().getLatitude()).isEqualTo(changeData.getCurrent_location().getLatitude());
+		assertThat(changedBus.getLocation().getLocation_name())
+				.isEqualTo(changeData.getCurrent_location().getLocation_name());
+		assertThat(changedBus.getLocation().getLongitude()).isEqualTo(changeData.getCurrent_location().getLongitude());
+		assertThat(changedBus.getLocation().getType()).isEqualTo(changeData.getCurrent_location().getType());
 
 		// late is false
-		ChangeTransportDTO changeData2 = new ChangeTransportDTO(1L, "novo ime", 5, null, null);
+		ChangeTransportDTO changeData2 = new ChangeTransportDTO(1L, "novo ime", 5, l, t);
 		Bus changedBus2 = busService.change(changeData2);
 		assertThat(changedBus2).isNotNull();
 		assertThat(changedBus2.getId()).isEqualTo(changeData2.getId_transport());
 		assertThat(changedBus2.getName()).isEqualTo(changeData2.getName());
 		assertThat(changedBus2.isLate()).isEqualTo(false);
 		assertThat(changedBus2.getTime_arrive()).isEqualTo(changeData2.getTime_arrive());
-		assertThat(changedBus2.getTimetable()).isEqualTo(changeData2.getTimetable());
-		assertThat(changedBus2.getLocation()).isEqualTo(changeData2.getCurrent_location());
-		assertThat(changedBus2.getLocation()).isEqualTo(changeData2.getCurrent_location());
+		assertThat(changedBus2.getTimetable().getCode()).isEqualTo(changeData2.getTimetable().getCode());
+		assertThat(changedBus2.getLocation().getAddress()).isEqualTo(changeData2.getCurrent_location().getAddress());
+		assertThat(changedBus2.getLocation().getId()).isEqualTo(changeData2.getCurrent_location().getId());
+		assertThat(changedBus2.getLocation().getLatitude()).isEqualTo(changeData2.getCurrent_location().getLatitude());
+		assertThat(changedBus2.getLocation().getLocation_name())
+				.isEqualTo(changeData2.getCurrent_location().getLocation_name());
+		assertThat(changedBus2.getLocation().getLongitude())
+				.isEqualTo(changeData2.getCurrent_location().getLongitude());
+		assertThat(changedBus2.getLocation().getType()).isEqualTo(changeData2.getCurrent_location().getType());
 		assertThat(changedBus2.getCode()).isEqualTo("7ca_bus_novo ime");
 
 	}
@@ -312,7 +348,15 @@ public class BusServiceTest {
 	@Test(expected = NoSuchElementException.class)
 	public void changeTest2() {
 		// bus doesn't exist
-		ChangeTransportDTO changeData = new ChangeTransportDTO(45464646464L, "novo ime", 5, null, null);
+		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
+		Set<Date> dates = new HashSet<>();
+		dates.add(new Date());
+		Schedule s = new Schedule(dates);
+		Set<Schedule> schedules = new HashSet<>();
+		schedules.add(s);
+		Timetable t = new Timetable("kod", schedules);
+
+		ChangeTransportDTO changeData = new ChangeTransportDTO(45464646464L, "novo ime", 5, l, t);
 		busService.change(changeData);
 	}
 

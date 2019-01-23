@@ -42,6 +42,11 @@ public class BusController {
 	public ResponseEntity<Bus> getOne(@PathVariable Long id) {
 
 		Bus bus = busService.getOne(id);
+		
+		if(bus == null){
+			return new ResponseEntity<>(bus, HttpStatus.BAD_REQUEST);
+
+		}
 
 		return new ResponseEntity<>(bus, HttpStatus.OK);
 
@@ -63,13 +68,16 @@ public class BusController {
 
 	@RequestMapping(value = "/updateBus", method = RequestMethod.POST)
 	public ResponseEntity<Bus> update(@RequestBody ChangeTransportDTO bus) {
-
-		Bus updateBus = busService.change(bus);
 		
-		if(updateBus == null){
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		}
+		Bus updateBus = null;
+		try{
+			updateBus = busService.change(bus);
 
+		}catch (Exception e) {
+			return new ResponseEntity<>(updateBus, HttpStatus.BAD_REQUEST);
+
+		}
+	
 		return new ResponseEntity<>(updateBus, HttpStatus.OK);
 
 	}

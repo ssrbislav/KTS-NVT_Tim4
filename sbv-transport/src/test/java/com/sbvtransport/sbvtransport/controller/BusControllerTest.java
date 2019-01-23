@@ -8,6 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,10 +26,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import com.sbvtransport.sbvtransport.TestUtil;
+import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.BusDTO;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.model.Bus;
-import com.sbvtransport.sbvtransport.model.Line;
+import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
+import com.sbvtransport.sbvtransport.dto.FilterSearchTransportDTO;
+import com.sbvtransport.sbvtransport.model.Location;
+import com.sbvtransport.sbvtransport.model.Schedule;
+import com.sbvtransport.sbvtransport.model.Timetable;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -64,6 +70,7 @@ public class BusControllerTest {
 
 	}
 
+	// good value
 	@Test
 	public void getOneTest() throws Exception {
 		mockMvc.perform(get(URL_PREFIX + "/getBus/3")).andExpect(content().contentType(contentType))
@@ -81,68 +88,156 @@ public class BusControllerTest {
 				.andExpect(status().isOk());
 
 	}
-	//
-	// @Test
-	// @Transactional
-	// @Rollback(true)
-	// public void createTest() throws Exception {
-	//// BusDTO bus = new BusDTO(false, "67ca", 1L);
-	////
-	//// String json = TestUtil.json(bus);
-	//// this.mockMvc.perform(post(URL_PREFIX +
-	// "/addBus").contentType(contentType).content(json))
-	//// .andExpect(status().isOk());
-	//
-	// }
-	//
-	// @Test
-	// @Transactional
-	// @Rollback(true)
-	// public void updateTest() throws Exception {
-	//
-	// Bus bus = new Bus();
-	// bus.setId(1L);
-	// bus.setName("8ca");
-	// bus.setLate(true);
-	// bus.setLocation(null);
-	// bus.setTimetable(null);
-	// bus.setCode("nova_linija_bus_8ca");
-	// Line line = new Line("nova_linija", TypeTransport.bus);
-	// line.setId(1L);
-	// bus.setLine(line);
-	//
-	// // when changing update, change this, because we can turn object in
-	// // object into the json
-	//
-	// // String json = TestUtil.json(bus);
-	// // this.mockMvc.perform(post(URL_PREFIX + "/updateBus")
-	// // .contentType(contentType)
-	// // .content(json))
-	// // .andExpect(status().isOk());
-	// //
-	//
-	// }
-	//
-	// // test bus delete if bus exist,return:true
-	// @Test
-	// @Transactional
-	// @Rollback(true)
-	// public void deleteTest() throws Exception {
-	// this.mockMvc.perform(get(URL_PREFIX +
-	// "/deleteBus/1")).andExpect(status().isOk())
-	// .andExpect(content().contentType(contentType)).andExpect(content().string("true"));
-	//
-	// }
-	//
-	// // test bus delete if bus doesn't exist,return:false
-	// @Test
-	// @Transactional
-	// @Rollback(true)
-	// public void deleteTest2() throws Exception {
-	// this.mockMvc.perform(get(URL_PREFIX +
-	// "/deleteBus/10")).andExpect(status().isOk())
-	// .andExpect(content().contentType(contentType)).andExpect(content().string("false"));
-	//
-	// }
+
+	// bus with id-doesn't exist
+	@Test
+	public void getOneTest2() throws Exception {
+		mockMvc.perform(get(URL_PREFIX + "/getBus/204536362")).andExpect(status().isBadRequest());
+
+	}
+
+	// good values to create bus
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void createTest() throws Exception {
+		BusDTO bus = new BusDTO("Lasta", 1L, 5);
+		String json = TestUtil.json(bus);
+		this.mockMvc.perform(post(URL_PREFIX + "/addBus").contentType(contentType).content(json))
+				.andExpect(jsonPath("$.id").value(5L)).andExpect(jsonPath("$.name").value("Lasta"))
+				.andExpect(jsonPath("$.code").value("7ca_bus_Lasta")).andExpect(jsonPath("$.late").value(false))
+				.andExpect(jsonPath("$.time_arrive").value(5)).andExpect(jsonPath("$.line.id").value(1))
+				.andExpect(status().isOk());
+
+	}
+
+	// bad values to create bus(line doesn't exist)
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void createTest2() throws Exception {
+		BusDTO bus = new BusDTO("Lasta", 464643L, 5);
+		String json = TestUtil.json(bus);
+		this.mockMvc.perform(post(URL_PREFIX + "/addBus").contentType(contentType).content(json))
+				.andExpect(status().isBadRequest());
+
+	}
+
+	// change bus
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void updateTest() throws Exception {
+
+		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
+		Set<Date> dates = new HashSet<>();
+		dates.add(new Date());
+		Schedule s = new Schedule(dates);
+		Set<Schedule> schedules = new HashSet<>();
+		schedules.add(s);
+		Timetable t = new Timetable("kod", schedules);
+
+		ChangeTransportDTO change = new ChangeTransportDTO(1L, "Novo ime", 7, l, t);
+
+		String json = TestUtil.json(change);
+		this.mockMvc.perform(post(URL_PREFIX + "/updateBus").contentType(contentType).content(json))
+				.andExpect(jsonPath("$.id").value(1L)).andExpect(jsonPath("$.name").value("Novo ime"))
+				.andExpect(jsonPath("$.code").value("7ca_bus_Novo ime")).andExpect(jsonPath("$.late").value(true))
+				.andExpect(jsonPath("$.time_arrive").value(7)).andExpect(jsonPath("$.line.id").value(1))
+				.andExpect(status().isOk());
+
+	}
+
+	// update bus that doesn't exist
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void updateTest2() throws Exception {
+
+		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
+		Set<Date> dates = new HashSet<>();
+		dates.add(new Date());
+		Schedule s = new Schedule(dates);
+		Set<Schedule> schedules = new HashSet<>();
+		schedules.add(s);
+		Timetable t = new Timetable("kod", schedules);
+
+		ChangeTransportDTO change = new ChangeTransportDTO(145646453435465753L, "Novo ime", 7, l, t);
+
+		String json = TestUtil.json(change);
+		this.mockMvc.perform(post(URL_PREFIX + "/updateBus").contentType(contentType).content(json))
+				.andExpect(status().isBadRequest());
+
+	}
+
+	// test bus delete if bus exist,return:true
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void deleteTest() throws Exception {
+		this.mockMvc.perform(get(URL_PREFIX + "/deleteBus/1")).andExpect(status().isOk())
+				.andExpect(content().contentType(contentType)).andExpect(content().string("true"));
+
+	}
+
+	// test bus delete if bus doesn't exist,return:false
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void deleteTest2() throws Exception {
+		this.mockMvc.perform(get(URL_PREFIX + "/deleteBus/1046456343")).andExpect(status().isOk())
+				.andExpect(content().contentType(contentType)).andExpect(content().string("false"));
+
+	}
+
+	// add location to bus-good value
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void addLocationTest() throws Exception {
+
+		AddLocationDTO addlocation = new AddLocationDTO(4L, 2L);
+		String json = TestUtil.json(addlocation);
+		this.mockMvc.perform(post(URL_PREFIX + "/addLocation").contentType(contentType).content(json))
+				.andExpect(status().isOk());
+
+	}
+
+	// add location to bus-bad value(bus doesn't exist)
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void addLocationTest2() throws Exception {
+
+		AddLocationDTO addlocation = new AddLocationDTO(4454364363643L, 2L);
+		String json = TestUtil.json(addlocation);
+		this.mockMvc.perform(post(URL_PREFIX + "/addLocation").contentType(contentType).content(json))
+				.andExpect(status().isBadRequest());
+
+	}
+
+	// add location to bus-bad value(location doesn't exist)
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void addLocationTest3() throws Exception {
+
+		AddLocationDTO addlocation = new AddLocationDTO(1L, 345545353L);
+		String json = TestUtil.json(addlocation);
+		this.mockMvc.perform(post(URL_PREFIX + "/addLocation").contentType(contentType).content(json))
+				.andExpect(status().isBadRequest());
+
+	}
+
+	// search and filter
+	@Test
+	public void searchFilterTest() throws Exception {
+
+		FilterSearchTransportDTO searchFilter = new FilterSearchTransportDTO(1L, false, 1L, "");
+		String json = TestUtil.json(searchFilter);
+		this.mockMvc.perform(post(URL_PREFIX + "/searchFilter").contentType(contentType).content(json))
+				.andExpect(status().isOk());
+
+	}
 
 }
