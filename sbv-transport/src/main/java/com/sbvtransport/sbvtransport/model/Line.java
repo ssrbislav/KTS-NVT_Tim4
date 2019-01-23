@@ -50,7 +50,7 @@ public class Line implements Serializable {
 	private Zone zone;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "timetable", referencedColumnName = "id")
+	@JoinColumn(name = "timetable_line_id", referencedColumnName = "id")
 	private List<Timetable> timetable;
 	
 	@Column(name = "first_station", unique = false, nullable = true)

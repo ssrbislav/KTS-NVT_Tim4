@@ -32,8 +32,11 @@ public class Timetable {
 //	@JoinTable(name = "timetable_schedules", joinColumns = @JoinColumn(name = "timetable_id"), inverseJoinColumns = @JoinColumn(name = "schedule_id"))
 	private List<Schedule> schedule;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	private Line line;
+//	@OneToOne(fetch = FetchType.LAZY)
+//	private Line line;
+
+	@Column(name = "deleted", unique = false, nullable = false)
+	private boolean deleted;
 
 
 	public Timetable() {
@@ -69,13 +72,21 @@ public class Timetable {
 		this.schedule.addAll(schedule);
 	}
 	
-	@JsonIgnore
-	public Line getLine() {
-		return line;
+//	@JsonIgnore
+//	public Line getLine() {
+//		return line;
+//	}
+//	@JsonProperty
+//	public void setLine(Line line) {
+//		this.line = line;
+//	}
+
+	public boolean isDeleted() {
+		return deleted;
 	}
-	@JsonProperty
-	public void setLine(Line line) {
-		this.line = line;
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	

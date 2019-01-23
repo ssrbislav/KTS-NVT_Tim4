@@ -150,6 +150,14 @@ public class LineService implements ILineService {
 		l.addStation(s);
 		s.setLine(l);
 		stationRepository.save(s);
+//		if (l.getTimetable() != null && !l.getTimetable().isEmpty()) {
+//			for (Timetable t : l.getTimetable()) {
+//				for (Schedule sch : t.getSchedule()) {
+//					sch.setDeleted(true);
+//				}
+//				t.setDeleted(true);
+//			}
+//		}
 		lineRepository.save(l);
 
 		if (l.getLine_type().equals(TypeTransport.bus)) {
@@ -201,43 +209,6 @@ public class LineService implements ILineService {
 			return null;
 		}
 
-//		for (Timetable t : l.getTimetable()) {
-//			Schedule sch = new Schedule();
-//			sch.setDeleted(false);
-//			sch.setStation(s);
-//			sch.setTimes(new HashSet<>());
-//			if (!t.getSchedule().isEmpty()) {
-//				for (Date date : t.getSchedule().get(t.getSchedule().size() - 1).getTimes()) {
-//					Calendar cal = Calendar.getInstance();
-//					cal.setTime(date);
-//					long tm = cal.getTimeInMillis();
-//					Date x = new Date(tm + (5 * 60000));
-//					if (!sch.getTimes().contains(x)) {
-//						sch.getTimes().add(x);
-//					}
-//				}
-//			}
-//			scheduleService.scheduleRepository.save(sch);
-//
-//			if (l.getLine_type().equals(TypeTransport.bus)) {
-//				for (Bus bus : busService.findAll()) {
-//					bus.getTimetable().getSchedule().add(sch);
-//				}
-//			} else if (l.getLine_type().equals(TypeTransport.subway)) {
-//				for (Subway subway : subwayService.findAll()) {
-//					subway.getTimetable().getSchedule().add(sch);
-//				}
-//			} else if (l.getLine_type().equals(TypeTransport.trolley)) {
-//				for (Trolley trolley : trolleyService.findAll()) {
-//					trolley.getTimetable().getSchedule().add(sch);
-//				}
-//			} else {
-//				return null;
-//			}
-//			timetableService.update(t);
-//		}
-//		timetableService.updateGlobalTimetable(l);
-//		update(l);
 		return "Station successfully added!";
 	}
 
@@ -301,7 +272,7 @@ public class LineService implements ILineService {
 			schedules.add(schedule);
 		}
 		timetable.setSchedule(schedules);
-		timetable.setLine(line);
+//		timetable.setLine(line);
 
 //		setLineTimetable(transport, timetable);
 		Timetable t = timetableService.update(timetable);

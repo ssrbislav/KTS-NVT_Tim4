@@ -325,6 +325,13 @@ public class TimetableService implements ITimetableService {
 			return null;
 		}
 
+		if (transport.getTimetable() != null && !transport.getTimetable().getSchedule().isEmpty() && transport.getTimetable().getSchedule() != null) {
+      for (Schedule sch : transport.getTimetable().getSchedule()) {
+        sch.setDeleted(true);
+      }
+      transport.getTimetable().setDeleted(true);
+    }
+
 		line = transport.getLine();
 		int addMins = 5;
 
@@ -352,7 +359,8 @@ public class TimetableService implements ITimetableService {
 			schedules.add(schedule);
 		}
 		timetable.setSchedule(schedules);
-		timetable.setLine(line);
+//		timetable.setLine(line);
+		timetable.setDeleted(false);
 
 //		setLineTimetable(transport, timetable);
     Timetable t = timetableRepository.save(timetable);
