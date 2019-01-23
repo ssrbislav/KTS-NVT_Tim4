@@ -35,9 +35,22 @@
       </div>
   
       <div *ngIf= "show == 'timetable'">
-        <h1 style="text-align: center">Add timetable</h1>
-  
-      </div>
+          <h1 style="text-align: center">Add timetable</h1>
+    
+          <form [formGroup]="productForm">
+            <h3>Time for first station:</h3>
+            <div formArrayName="time">
+              <div *ngFor="let item of Times.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                <label>
+                Time: <input type="time" formControlName="point" />
+                </label>
+              </div>
+            </div>
+    
+            <button type="button" (click)="addSellingPoint()" style="width: 50%">Add Time</button>
+          </form>
+    
+        </div>
   
       <div class="clearfix">
           <mat-dialog-actions>

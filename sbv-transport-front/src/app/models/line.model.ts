@@ -7,6 +7,6 @@ export class Line {
     station_list: Set<Station>;
     line_type: TypeTransport;
     zone: Zone;
-    timetable: Timetable;
+    timetable: Timetable[];
     first_station: BigInteger;
 }

@@ -9,6 +9,9 @@ import { LineService } from 'src/app/services/line.service';
 import { TrolleyService } from 'src/app/services/trolley.service';
 import { LocationService } from 'src/app/services/location.service';
 import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { AltTimetableDTO } from 'src/app/models.dto/timetable.dto';
+import { TimetableService } from 'src/app/services/timetable.service';
 declare var ol: any; 
 
 @Component({
@@ -27,16 +30,24 @@ export class TrolleyAddComponent implements OnInit {
   lines: Line[] = [];
   allLines: Line[];
   map: any;
-  newTrolley: Trolley;
+  newTrolley: Trolley= new Trolley();
+  productForm: FormGroup;
+  timetable : AltTimetableDTO = new AltTimetableDTO();
+
   
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private trolleyService: TrolleyService) { }
+  private lineService: LineService, private trolleyService: TrolleyService,
+  private timetableService: TimetableService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.loadAlllines();
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadMap(false);
+
+    this.productForm = this.fb.group({
+      time: this.fb.array([this.fb.group({point:Date})])
+    });
   }
 
   loadAlllines(){
@@ -153,8 +164,7 @@ export class TrolleyAddComponent implements OnInit {
        this.addLocationToTrolley();
 
     }else{
-      alert("Successfully trolley added!");
-      this.dialogRef.close();
+      this.addTimetable();
     }
 
   }
@@ -165,8 +175,7 @@ export class TrolleyAddComponent implements OnInit {
     this.trolleyService.addLocation(addLocationTransport)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully trolley added!");
-        this.dialogRef.close();
+        this.addTimetable();
       }else{
         alert("Something went wrong!");
       }
@@ -174,4 +183,42 @@ export class TrolleyAddComponent implements OnInit {
     });
 
   }
+
+  addTimetable(){
+    
+    if(this.productForm.value.time.length ==1 && this.productForm.value.time[0].point == 'function Date() { [native code] }'){
+      alert("Successfully trolley created!");
+      this.dialogRef.close();
+    }else{
+
+      this.timetable.id_transport = this.newTrolley.id;
+      this.timetable.transportType = 'trolley';
+      this.timetable.timetable = [];
+      
+
+      for (var i = 0; i < this.productForm.value.time.length; i++){
+        this.timetable.timetable.push(this.productForm.value.time[i].point);
+     
+      }
+      
+      this.timetableService.addTimetable(this.timetable)
+        .subscribe( data => {
+          alert("Successfully trolley added!");
+          this.dialogRef.close();
+          
+        });
+
+
+      }
+
+  }
+
+  get Times() {
+    return this.productForm.get('time') as FormArray;
+  }
+
+  addSellingPoint() {
+    this.Times.push(this.fb.group({point:Date}));
+  }
+
 }

@@ -1,7 +1,7 @@
 import { ScheduleDTO } from './schedule.dto';
 
-export class TimetableDTO{
-    transportType : string; 
-	id_transport : BigInteger;
-	schedules: ScheduleDTO[];
+export class AltTimetableDTO{
+	transportType : string; // bus/subway/trolley
+	id_transport: BigInteger;
+	timetable: String[];
 }
