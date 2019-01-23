@@ -2,6 +2,7 @@ package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -145,7 +146,7 @@ public class BusServiceTest {
 		dates.add(new Date());
 		Schedule s = new Schedule();
 		s.setTimes(dates);
-		Set<Schedule> schedules = new HashSet<>();
+		List<Schedule> schedules = new ArrayList<>();
 		schedules.add(s);
 		Timetable t = new Timetable("kod", schedules);
 
@@ -303,7 +304,7 @@ public class BusServiceTest {
 		Set<Date> dates = new HashSet<>();
 		dates.add(new Date());
 		Schedule s = new Schedule(dates);
-		Set<Schedule> schedules = new HashSet<>();
+		List<Schedule> schedules = new ArrayList<>();
 		schedules.add(s);
 		Timetable t = new Timetable("kod", schedules);
 
@@ -352,7 +353,7 @@ public class BusServiceTest {
 		Set<Date> dates = new HashSet<>();
 		dates.add(new Date());
 		Schedule s = new Schedule(dates);
-		Set<Schedule> schedules = new HashSet<>();
+		List<Schedule> schedules = new ArrayList<>();
 		schedules.add(s);
 		Timetable t = new Timetable("kod", schedules);
 

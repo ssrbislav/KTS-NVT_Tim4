@@ -8,8 +8,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.junit.Test;
@@ -133,7 +135,7 @@ public class BusControllerTest {
 		Set<Date> dates = new HashSet<>();
 		dates.add(new Date());
 		Schedule s = new Schedule(dates);
-		Set<Schedule> schedules = new HashSet<>();
+		List<Schedule> schedules = new ArrayList<>();
 		schedules.add(s);
 		Timetable t = new Timetable("kod", schedules);
 
@@ -158,7 +160,7 @@ public class BusControllerTest {
 		Set<Date> dates = new HashSet<>();
 		dates.add(new Date());
 		Schedule s = new Schedule(dates);
-		Set<Schedule> schedules = new HashSet<>();
+		List<Schedule> schedules = new ArrayList<>();
 		schedules.add(s);
 		Timetable t = new Timetable("kod", schedules);
 
