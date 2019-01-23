@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -48,9 +49,9 @@ public class Line implements Serializable {
 	@Column(name = "zone", unique = false, nullable = false)
 	private Zone zone;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "timetable", referencedColumnName = "id")
-	private Timetable timetable;
+	private List<Timetable> timetable;
 	
 	@Column(name = "first_station", unique = false, nullable = true)
 	private Long first_station;
@@ -125,11 +126,11 @@ public class Line implements Serializable {
 		this.zone = zone;
 	}
 
-	public Timetable getTimetable() {
+	public List<Timetable> getTimetable() {
 		return timetable;
 	}
 
-	public void setTimetable(Timetable timetable) {
+	public void setTimetable(List<Timetable> timetable) {
 		this.timetable = timetable;
 	}
 

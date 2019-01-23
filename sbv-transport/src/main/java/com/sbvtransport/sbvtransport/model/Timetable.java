@@ -25,10 +25,12 @@ public class Timetable {
 	@Column(name = "code", unique = false, nullable = false)
 	private String code;
 
-	@Column(name = "schedule", unique = false, nullable = false)
+  @Column(name = "schedule", unique = false, nullable = false)
 	@ElementCollection(targetClass = Schedule.class)
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, targetEntity = Schedule.class, mappedBy = "id")
-	private Set<Schedule> schedule;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Schedule.class)
+	@JoinColumn(name = "timetable")
+//	@JoinTable(name = "timetable_schedules", joinColumns = @JoinColumn(name = "timetable_id"), inverseJoinColumns = @JoinColumn(name = "schedule_id"))
+	private List<Schedule> schedule;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Line line;
@@ -37,7 +39,7 @@ public class Timetable {
 	public Timetable() {
 	}
 
-	public Timetable(String code, Set<Schedule> schedule) {
+	public Timetable(String code, List<Schedule> schedule) {
 		this.code = code;
 		this.schedule = schedule;
 	}
@@ -54,15 +56,15 @@ public class Timetable {
 		this.code = code;
 	}
 
-	public Set<Schedule> getSchedule() {
+	public List<Schedule> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(Set<Schedule> schedule) {
+	public void setSchedule(List<Schedule> schedule) {
 		if (this.schedule != null) {
 			this.schedule.clear();
 		} else {
-			this.schedule = new HashSet<>();
+			this.schedule = new ArrayList<>();
 		}
 		this.schedule.addAll(schedule);
 	}
