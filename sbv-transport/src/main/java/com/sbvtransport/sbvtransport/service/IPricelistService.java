@@ -17,5 +17,6 @@ public interface IPricelistService {
   Pricelist create(Pricelist pricelist);
   Pricelist update(Pricelist pricelist);
   boolean delete (Long id);
+  
 
 }

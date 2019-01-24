@@ -20,10 +20,10 @@ public class Pricelist {
 	private Long id;
 
 	@Column(name = "valid_since", unique = false, nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date valid_since;
 	@Column(name = "valid_until", unique = false, nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date valid_until;
 
 	@Column(name = "active", unique = false, nullable = false)

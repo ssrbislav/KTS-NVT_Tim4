@@ -43,6 +43,10 @@ public class SubwayController {
 
 		Subway getSubway = subwayService.getOne(id);
 
+		if (getSubway == null) {
+			return new ResponseEntity<>(getSubway, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(getSubway, HttpStatus.OK);
 
 	}
@@ -62,10 +66,11 @@ public class SubwayController {
 
 	@RequestMapping(value = "/updateSubway", method = RequestMethod.POST)
 	public ResponseEntity<Subway> update(@RequestBody ChangeTransportDTO subway) {
+		Subway updateSubway = null;
+		try {
+			updateSubway = subwayService.change(subway);
 
-		Subway updateSubway = subwayService.change(subway);
-
-		if (updateSubway == null) {
+		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 

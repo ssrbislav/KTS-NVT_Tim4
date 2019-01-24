@@ -38,6 +38,13 @@ public class Trolley extends Transport implements Serializable {
 		this.id = id;
 		this.code = code;
 	}
+	
+
+	public Trolley(Line line, boolean late, String name, Location location, int time, String code) {
+		super(line, late, name, location, time);
+		
+		this.code = code;
+	}
 
 	public Long getId() {
 		return id;

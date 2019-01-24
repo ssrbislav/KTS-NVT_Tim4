@@ -12,6 +12,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.sbvtransport.sbvtransport.model.Bus;
 import com.sbvtransport.sbvtransport.model.Transport;
 import com.sbvtransport.sbvtransport.model.Trolley;
 
@@ -25,20 +27,32 @@ public class TrolleyRepositoryTest {
 	
 	@Autowired
 	private LineRepository lineRepository;
+	
+	@Autowired
+	private LocationRepository locationRepository;
 
 	@Test
 	@Transactional
 	@Rollback(true)
 	public void testSaveTrolley(){
-		Transport t = new Trolley("nova_linija_trolley_12ca",lineRepository.getOne(3L), false, "12ca",5,false);
+		Transport t = new Trolley(lineRepository.getOne(1L), false, "lasta", locationRepository.getOne(1L), 5,
+				"7ca_trolley_lasta");
 		Trolley trolleySaved = trolleyRepository.save(t);
 		assertEquals(t.getName(), trolleySaved.getName());
 		assertEquals(t.getLine().getId(), trolleySaved.getLine().getId());
 		assertEquals(t.getLine().getLine_type(), trolleySaved.getLine().getLine_type());
+		assertEquals(t.getLine().getName(),trolleySaved.getLine().getName());
+		assertEquals(t.getLine().getStation_list(), trolleySaved.getLine().getStation_list());
 		assertEquals(t.getLine().getName(), trolleySaved.getLine().getName());
-		assertEquals("nova_linija_trolley_12ca", trolleySaved.getCode());
+		assertEquals(t.getLine().getZone(), trolleySaved.getLine().getZone());
+		assertEquals(t.getLocation().getId(), trolleySaved.getLocation().getId());
+		assertEquals(t.getLocation().getAddress(), trolleySaved.getLocation().getAddress());
+		assertEquals(t.getLocation().getLatitude(), trolleySaved.getLocation().getLatitude());
+		assertEquals(t.getLocation().getLocation_name(), trolleySaved.getLocation().getLocation_name());
+		assertEquals(t.getLocation().getLongitude(), trolleySaved.getLocation().getLongitude());
+		assertEquals(t.getLocation().getType(), trolleySaved.getLocation().getType());
+		assertEquals("7ca_trolley_lasta", trolleySaved.getCode());
 		assertEquals(t.getTime_arrive(), trolleySaved.getTime_arrive());
-		assertEquals(t.isDeleted(), trolleySaved.isDeleted());
 		assertEquals(t.isLate(), trolleySaved.isLate());
 		assertNotNull(trolleySaved);
 	}

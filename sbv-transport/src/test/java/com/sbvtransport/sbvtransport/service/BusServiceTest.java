@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -217,6 +216,10 @@ public class BusServiceTest {
 		// line exist but it is not good type
 		Line dbLine2 = busService.checkLine(2L);
 		assertThat(dbLine2).isNull();
+
+		// line doesn't exist
+		Line dbLine3 = busService.checkLine(24353253453L);
+		assertThat(dbLine3).isNull();
 
 	}
 

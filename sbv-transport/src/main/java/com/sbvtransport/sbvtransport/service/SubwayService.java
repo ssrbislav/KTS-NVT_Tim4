@@ -165,6 +165,8 @@ public class SubwayService implements ISubwayService {
 		} else {
 			updateSubway.get().setLate(false);
 		}
+		String newCode = updateSubway.get().getLine().getName() + "_subway_" + subway.getName();
+		updateSubway.get().setCode(newCode);
 		updateSubway.get().setTime_arrive(subway.getTime_arrive());
 		updateSubway.get().setTimetable(subway.getTimetable());
 		updateSubway.get().setLocation(subway.getCurrent_location());

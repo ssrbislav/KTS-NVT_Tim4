@@ -105,7 +105,7 @@ public class TrolleyService implements ITrolleyService {
 	@Override
 	public Line checkLine(Long lineId) {
 
-		Line line = lineRepository.findById(lineId).get();
+		Line line = lineRepository.findById(lineId).orElse(null);
 		if (line != null) {
 			if (!line.isDeleted()) {
 				if (line.getLine_type() == TypeTransport.trolley) {
@@ -166,6 +166,8 @@ public class TrolleyService implements ITrolleyService {
 		} else {
 			updateTrolley.get().setLate(false);
 		}
+		String newCode = updateTrolley.get().getLine().getName() + "_trolley_" + trolley.getName();
+		updateTrolley.get().setCode(newCode);
 		updateTrolley.get().setTime_arrive(trolley.getTime_arrive());
 		updateTrolley.get().setTimetable(trolley.getTimetable());
 		updateTrolley.get().setLocation(trolley.getCurrent_location());

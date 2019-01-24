@@ -109,28 +109,6 @@ public class BusControllerJUnitTest {
 
 	}
 
-	// @Test
-	// public void createBusTest() {
-	//
-	// BusDTO bus = new BusDTO("Lasta", 1L, 5);
-	//
-	// ResponseEntity<Bus> responseEntity =
-	// restTemplate.postForEntity("/api/bus/addBus",bus, Bus.class);
-	//
-	// assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-	// assertNotNull(responseEntity.getBody());
-	// assertEquals("Lasta", responseEntity.getBody().getName());
-	// assertEquals("7ca_bus_Lasta", responseEntity.getBody().getCode());
-	// assertEquals(false, responseEntity.getBody().isLate());
-	// assertEquals(5, responseEntity.getBody().getTime_arrive());
-	// assertEquals("7ca", responseEntity.getBody().getLine().getName());
-	// assertEquals(TypeTransport.bus,
-	// responseEntity.getBody().getLine().getLine_type());
-	// assertEquals(Zone.first, responseEntity.getBody().getLine().getZone());
-	//
-	//
-	// }
-
 	// create bus with line that doesn't exist
 	@Test
 	public void createBusTest2() {
@@ -146,7 +124,12 @@ public class BusControllerJUnitTest {
 	
 //	@Test
 //	public void updateBusTest(){
+//		List<Station> stations = new ArrayList<>();
+//
+//		Bus changeBus = new Bus( new Line(1L, "7ca", stations, TypeTransport.bus, Zone.first), true, "novo ime", 2L, "7ca_bus_novo ime", 6,false);
 //		ChangeTransportDTO change = new ChangeTransportDTO(2L, "novo ime", 6, null,null);
+//		Mockito.when(busService.change(change)).thenReturn(changeBus);
+//		
 //		
 //		ResponseEntity<Bus> responseEntity = restTemplate.postForEntity("/api/bus/updateBus",change, Bus.class);
 //

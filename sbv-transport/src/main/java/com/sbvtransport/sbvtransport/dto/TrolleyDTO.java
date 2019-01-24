@@ -10,7 +10,7 @@ public class TrolleyDTO {
 
 	}
 
-	public TrolleyDTO(boolean late, String name, Long id_line,int time) {
+	public TrolleyDTO(String name, Long id_line,int time) {
 		super();
 		this.name = name;
 		this.id_line = id_line;

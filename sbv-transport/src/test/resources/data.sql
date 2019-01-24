@@ -11,14 +11,14 @@ insert into station(location,zone,deleted) values(3,0, false);
 
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 0,0, false, 1);
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 1,0, false,2);
-insert into line(name, line_type,zone,deleted,first_station) values('7ca', 2,0, false, 3);
+insert into line(name, line_type,zone,deleted,first_station) values('7ca', 2,0, false, 2);
 
 insert into line_project(id,station_id) values(1,1);
 insert into line_project(id,station_id) values(1,2);
 insert into line_project(id,station_id) values(1,3);
 insert into line_project(id,station_id) values(2,2);
 insert into line_project(id,station_id) values(2,3);
-insert into line_project(id,station_id) values(3,3);
+insert into line_project(id,station_id) values(3,2);
 
 
 insert into bus(code,line,late,name,time_arrive,deleted,location) values('7ca_bus_lasta',1,false,'lasta',5,false,2);
@@ -30,9 +30,11 @@ insert into subway(code,line,late,name,time_arrive,deleted,location) values('7ca
 insert into subway(code,line,late,name,time_arrive,deleted,location) values('7ca_subway_Zastava',2,false,'Zastava',5,false,2);
 insert into subway(code,line,late,name,time_arrive,deleted,location) values('7ca_subway_Zrenjanin putnik',2,true,'Zrenjanin putnik',6,false,3);
 
-insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_lasta',3,false,'lasta',5,false,3);
-insert into trolley(code,line,late,name,time_arrive,deleted) values('7ca_trolley_Dunav prevoz',3,true,'Dunav prevoz',7,false);
+insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_lasta',3,false,'lasta',5,false,2);
+insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_Dunav prevoz',3,true,'Dunav prevoz',7,false,2);
 insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_Sara',3,false,'Sara',5,false,3);
+insert into trolley(code,line,late,name,time_arrive,deleted) values('7ca_trolley_novi',3,false,'novi',5,false);
+
 
 
 
