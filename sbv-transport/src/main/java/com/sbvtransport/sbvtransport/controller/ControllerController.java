@@ -63,7 +63,7 @@ public class ControllerController {
 
 	
 	@RequestMapping(value = "/getController/{username}", method = RequestMethod.GET)
-	public ResponseEntity<Controller> getOne(@PathVariable String username) {
+	public ResponseEntity<Controller> getController(@PathVariable String username) {
 		Controller controller = controllerService.loadUserByUsername(username);
 		
 		if(controller == null) 

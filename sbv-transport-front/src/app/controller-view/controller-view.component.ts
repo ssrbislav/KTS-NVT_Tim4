@@ -18,7 +18,9 @@ export class ControllerViewComponent implements OnInit {
   showView: string = 'home';
 
   constructor(private controllerService: ControllerService, private router: Router, private token: TokenStorageService) { 
-    //this.currentController = JSON.parse(controllerService.getController(token.getUsername()));
+    this.controllerService.getController(token.getUsername()).subscribe((response) => {
+      this.currentController = response;
+    })
   }
 
   ngOnInit() {
@@ -31,6 +33,9 @@ export class ControllerViewComponent implements OnInit {
       window.sessionStorage.clear();
       this.router.navigate(['mainPage']);
       window.alert("Successfully Logged out!");
+    }
+    if(feature == 'profil') {
+      alert(this.currentController.address);
     }
   }
 

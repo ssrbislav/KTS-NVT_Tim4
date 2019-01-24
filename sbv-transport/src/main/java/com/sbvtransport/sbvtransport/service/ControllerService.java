@@ -35,11 +35,10 @@ public class ControllerService implements IControllerService {
 		return controllerRepository.findById(id).orElse(null);
 	}
 	
-	public Controller loadUserByUsername(String username) throws UsernameNotFoundException {
+	public Controller loadUserByUsername(String username) {
 		
-		Controller controller = controllerRepository.findByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found -> username : " + username));
-		
+		Controller controller = controllerRepository.findByUsername(username);
+				
 		return controller;
 	}
 
