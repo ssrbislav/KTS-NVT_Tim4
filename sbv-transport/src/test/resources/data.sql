@@ -29,6 +29,7 @@ insert into bus(code,line,late,name,time_arrive,deleted) values('7ca_bus_novi',1
 insert into subway(code,line,late,name,time_arrive,deleted,location) values('7ca_subway_Nis_expres',2,false,'Nis_expres',5,false,2);
 insert into subway(code,line,late,name,time_arrive,deleted,location) values('7ca_subway_Zastava',2,false,'Zastava',5,false,2);
 insert into subway(code,line,late,name,time_arrive,deleted,location) values('7ca_subway_Zrenjanin putnik',2,true,'Zrenjanin putnik',6,false,3);
+insert into subway(code,line,late,name,time_arrive,deleted) values('7ca_subway_novi',2,false,'novi',5,false);
 
 insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_lasta',3,false,'lasta',5,false,2);
 insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_Dunav prevoz',3,true,'Dunav prevoz',7,false,2);

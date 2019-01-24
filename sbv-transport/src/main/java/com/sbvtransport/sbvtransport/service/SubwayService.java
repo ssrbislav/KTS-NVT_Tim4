@@ -105,7 +105,7 @@ public class SubwayService implements ISubwayService {
 	@Override
 	public Line checkLine(Long lineId) {
 		
-		Line line = lineRepository.findById(lineId).get();
+		Line line = lineRepository.findById(lineId).orElse(null);
 		if( line != null){
 			if(!line.isDeleted()){
 				if(line.getLine_type() == TypeTransport.subway){

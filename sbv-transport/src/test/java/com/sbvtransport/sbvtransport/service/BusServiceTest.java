@@ -327,6 +327,8 @@ public class BusServiceTest {
 				.isEqualTo(changeData.getCurrent_location().getLocation_name());
 		assertThat(changedBus.getLocation().getLongitude()).isEqualTo(changeData.getCurrent_location().getLongitude());
 		assertThat(changedBus.getLocation().getType()).isEqualTo(changeData.getCurrent_location().getType());
+		assertThat(changedBus.getCode()).isEqualTo("7ca_bus_novo ime");
+
 
 		// late is false
 		ChangeTransportDTO changeData2 = new ChangeTransportDTO(1L, "novo ime", 5, l, t);
