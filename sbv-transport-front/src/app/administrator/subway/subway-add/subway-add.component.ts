@@ -190,7 +190,7 @@ export class SubwayAddComponent implements OnInit {
   addTimetable(){
     
     if(this.productForm.value.time.length ==1 && this.productForm.value.time[0].point == 'function Date() { [native code] }'){
-      alert("Successfully bus created!");
+      alert("Successfully subway created!");
       this.dialogRef.close();
     }else{
 
@@ -206,7 +206,7 @@ export class SubwayAddComponent implements OnInit {
       
       this.timetableService.addTimetable(this.timetable)
         .subscribe( data => {
-          alert("Successfully bus added!");
+          alert("Successfully subway added!");
           this.dialogRef.close();
           
         });

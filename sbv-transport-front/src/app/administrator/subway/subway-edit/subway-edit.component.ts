@@ -7,6 +7,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { LineService } from 'src/app/services/line.service';
 import { SubwayService } from 'src/app/services/subway.service';
 import { LocationService } from 'src/app/services/location.service';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { AltTimetableDTO } from 'src/app/models.dto/timetable.dto';
+import { TimetableService } from 'src/app/services/timetable.service';
 declare var ol: any; 
 
 @Component({
@@ -24,14 +27,22 @@ export class SubwayEditComponent implements OnInit {
   newSubway: Subway;
   newLocation: MyLocation;
   changeSubway: ChangeTransportDTO = new ChangeTransportDTO();
+  productForm: FormGroup;
+  timetable : AltTimetableDTO = new AltTimetableDTO();
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private subwayService: SubwayService, private locationService: LocationService) { }
+  private lineService: LineService, private subwayService: SubwayService, private locationService: LocationService,
+  private timetableService: TimetableService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.subway = this.data.subway;
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadMap(false);
+
+    this.productForm = this.fb.group({
+      time: this.fb.array([this.fb.group({point:Date})])
+    });
   }
 
 
@@ -116,12 +127,11 @@ export class SubwayEditComponent implements OnInit {
     this.changeSubway.current_location = this.subway.location;
     this.changeSubway.name = this.subway.name;
     this.changeSubway.time_arrive = this.subway.time_arrive;
-    this.changeSubway.timetable = null;
+    this.changeSubway.timetable = this.subway.timetable;
     this.subwayService.updateSubway(this.changeSubway)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully subway updated!");
-        this.dialogRef.close();
+        this.editTimetable();
         
       }else{
         alert("Something went wrong!");
@@ -129,5 +139,43 @@ export class SubwayEditComponent implements OnInit {
      
     });
   }
+
+  editTimetable(){
+    
+    if(this.productForm.value.time.length ==1 && this.productForm.value.time[0].point == 'function Date() { [native code] }'){
+      alert("Successfully subway updated!");
+      this.dialogRef.close();
+    }else{
+
+      this.timetable.id_transport = this.subway.id;
+      this.timetable.transportType = 'subway';
+      this.timetable.timetable = [];
+      
+
+      for (var i = 0; i < this.productForm.value.time.length; i++){
+        this.timetable.timetable.push(this.productForm.value.time[i].point);
+     
+      }
+      
+      this.timetableService.addTimetable(this.timetable)
+        .subscribe( data => {
+          alert("Successfully subway updated!");
+          this.dialogRef.close();
+          
+        });
+
+
+      }
+
+  }
+
+  get Times() {
+    return this.productForm.get('time') as FormArray;
+  }
+
+  addSellingPoint() {
+    this.Times.push(this.fb.group({point:Date}));
+  }
+
 
 }

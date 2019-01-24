@@ -11,7 +11,6 @@ import { MyLocation } from 'src/app/models/location.model';
 import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { AltTimetableDTO } from 'src/app/models.dto/timetable.dto';
-import { ScheduleDTO } from 'src/app/models.dto/schedule.dto';
 import { TimetableService } from 'src/app/services/timetable.service';
 declare var ol: any; 
 

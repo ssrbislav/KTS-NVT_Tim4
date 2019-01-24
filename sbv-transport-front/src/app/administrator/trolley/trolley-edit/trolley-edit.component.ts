@@ -7,6 +7,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { LineService } from 'src/app/services/line.service';
 import { TrolleyService } from 'src/app/services/trolley.service';
 import { LocationService } from 'src/app/services/location.service';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { AltTimetableDTO } from 'src/app/models.dto/timetable.dto';
+import { TimetableService } from 'src/app/services/timetable.service';
 declare var ol: any; 
 
 @Component({
@@ -24,14 +27,22 @@ export class TrolleyEditComponent implements OnInit {
   newTrolley: Trolley;
   newLocation: MyLocation;
   changeTrolley: ChangeTransportDTO = new ChangeTransportDTO();
+  productForm: FormGroup;
+  timetable : AltTimetableDTO = new AltTimetableDTO();
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
-  private lineService: LineService, private trolleyService: TrolleyService, private locationService: LocationService) { }
+  private lineService: LineService, private trolleyService: TrolleyService, private locationService: LocationService,
+  private timetableService: TimetableService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.trolley = this.data.trolley;
     this.dialogRef.updateSize('80%', '80%'); 
     this.loadMap(false);
+
+    this.productForm = this.fb.group({
+      time: this.fb.array([this.fb.group({point:Date})])
+    });
   }
 
 
@@ -120,14 +131,50 @@ export class TrolleyEditComponent implements OnInit {
     this.trolleyService.updateTrolley(this.changeTrolley)
     .subscribe( data => {
       if(data!= null){
-        alert("Successfully trolley updated!");
-        this.dialogRef.close();
+        this.editTimetable();
         
       }else{
         alert("Something went wrong!");
       }
      
     });
+  }
+
+  editTimetable(){
+    
+    if(this.productForm.value.time.length ==1 && this.productForm.value.time[0].point == 'function Date() { [native code] }'){
+      alert("Successfully trolley updated!");
+      this.dialogRef.close();
+    }else{
+
+      this.timetable.id_transport = this.trolley.id;
+      this.timetable.transportType = 'trolley';
+      this.timetable.timetable = [];
+      
+
+      for (var i = 0; i < this.productForm.value.time.length; i++){
+        this.timetable.timetable.push(this.productForm.value.time[i].point);
+     
+      }
+      
+      this.timetableService.addTimetable(this.timetable)
+        .subscribe( data => {
+          alert("Successfully trolley updated!");
+          this.dialogRef.close();
+          
+        });
+
+
+      }
+
+  }
+
+  get Times() {
+    return this.productForm.get('time') as FormArray;
+  }
+
+  addSellingPoint() {
+    this.Times.push(this.fb.group({point:Date}));
   }
 
 
