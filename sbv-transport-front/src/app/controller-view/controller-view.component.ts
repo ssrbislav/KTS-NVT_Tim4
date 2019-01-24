@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
+import { ControllerService } from '../services/controller.service';
+import { Controller } from '../models/controller.model';
+import { Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-controller-view',
@@ -8,12 +12,26 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class ControllerViewComponent implements OnInit {
 
-  @ViewChild("header") header: HeaderComponent;
+  currentController: Controller;
 
-  constructor() { }
+  @ViewChild("header") header: HeaderComponent;
+  showView: string = 'home';
+
+  constructor(private controllerService: ControllerService, private router: Router, private token: TokenStorageService) { 
+    //this.currentController = JSON.parse(controllerService.getController(token.getUsername()));
+  }
 
   ngOnInit() {
     this.header.controllerView();
+  }
+
+  onNavigate(feature: string){
+    this.showView = feature;
+    if(feature == 'logout') {
+      window.sessionStorage.clear();
+      this.router.navigate(['mainPage']);
+      window.alert("Successfully Logged out!");
+    }
   }
 
 }

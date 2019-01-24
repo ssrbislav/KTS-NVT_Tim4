@@ -3,7 +3,9 @@ package com.sbvtransport.sbvtransport.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
@@ -26,6 +28,19 @@ public class ControllerService implements IControllerService {
 			}
 		}
 		return notDeleted;
+	}
+	
+	@Override
+	public Controller getOne(Long id) {
+		return controllerRepository.findById(id).orElse(null);
+	}
+	
+	public Controller loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		Controller controller = controllerRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found -> username : " + username));
+		
+		return controller;
 	}
 
 	@Override

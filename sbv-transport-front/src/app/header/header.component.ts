@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit {
   }
 
   clickButtonProfil(){
-    this.featureSelected.emit('administrator');
+    this.featureSelected.emit('profil');
   }
   
   clickButtonLine(){

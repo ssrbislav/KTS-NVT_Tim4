@@ -3,11 +3,12 @@ package com.sbvtransport.sbvtransport.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
 import com.sbvtransport.sbvtransport.dto.RegisterDTO;
 import com.sbvtransport.sbvtransport.enumeration.RoleName;
@@ -59,16 +61,17 @@ public class ControllerController {
 		return new ResponseEntity<>(controllers, HttpStatus.OK);
 	}
 
-	/*
-	 * @RequestMapping(value = "/addController", method = RequestMethod.POST) public
-	 * ResponseEntity<Controller> create(@RequestBody Controller controller) {
-	 * 
-	 * Controller newController = controllerService.create(controller);
-	 * 
-	 * return new ResponseEntity<>(newController, HttpStatus.OK);
-	 * 
-	 * }
-	 */
+	
+	@RequestMapping(value = "/getController/{username}", method = RequestMethod.GET)
+	public ResponseEntity<Controller> getOne(@PathVariable String username) {
+		Controller controller = controllerService.loadUserByUsername(username);
+		
+		if(controller == null) 
+			return new ResponseEntity<Controller>(controller, HttpStatus.BAD_REQUEST);
+		
+		return new ResponseEntity<Controller>(controller, HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value = "/updateController", method = RequestMethod.POST)
 	public ResponseEntity<Controller> update(@RequestBody Controller controller) {

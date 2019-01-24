@@ -20,6 +20,10 @@ const httpOptions = {
     public getControllers() {
         return this.http.get<Controller[]>(this.controllerUrl);
       }
+
+    public getController(username: string) {
+      return this.http.get<Controller>(`${this.controllerUrl + 'getController'}/${username}`);
+    }
       
     public deleteController(id: BigInteger){
       const url = `${this.controllerUrl + 'deleteController'}/${id}`;
