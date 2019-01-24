@@ -13,12 +13,13 @@ import org.junit.runners.Suite;
 		BusControllerTest.class, SubwayControllerTest.class, TrolleyControllerTest.class,
 		BusRepositoryTest.class, SubwayRepositoryTest.class, TrolleyRepositoryTest.class, BusServiceJUnitTest.class,
 		BusServiceTest.class, SubwayServiceJUnitTest.class, SubwayServiceTest.class, TrolleyServiceJUnitTest.class,
-		TrolleyServiceTest.class,
+		TrolleyServiceTest.class,AdminRepositoryTest.class,
 		// V
 		LineControllerTest.class, LocationControllerTest.class, StationControllerTest.class,
 		LocationRepositoryTest.class, LocationRepositoryTest.class, StationRepositoryTest.class,
 		LineServiceTest.class, LocationServiceTest.class, StationServiceTest.class,
-		LocationServiceJUnitTest.class})
+		LocationServiceJUnitTest.class
+		})
 public class SbvTransportApplicationTests {
 
 	@Test

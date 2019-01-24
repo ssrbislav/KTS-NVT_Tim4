@@ -30,12 +30,6 @@ public class AdminRepositoryTest {
 	@Transactional
 	@Rollback(true)
 	public void testIfAdminExists() {
-		
-		//DA LI DA DODAM
-		//ROLE U SETER METODE KOD KORISNIKA
-		// PA DA SE I KOD TESTOVA ODMAH MOZE
-		//PROVERITI DA LI SU ODGOVARAJUCE ROLE PODESENE NA 
-		//ODGOVARAJUCE KORISNIKE
 
 		Administrator admin = new Administrator();
 		admin.setUsername("admin2");
