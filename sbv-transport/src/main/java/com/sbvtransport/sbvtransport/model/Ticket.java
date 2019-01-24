@@ -38,7 +38,7 @@ public class Ticket implements Serializable {
 	private Zone zone;
 
 	@Column(name = "date", unique = false, nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 
 	@Column(name = "ticket_type", unique = false, nullable = false)
@@ -65,7 +65,7 @@ public class Ticket implements Serializable {
 	private String code_transport;
 
 	@Column(name = "date_purchase", unique = false, nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date_purchase;
 
 	@ManyToOne(optional = false)

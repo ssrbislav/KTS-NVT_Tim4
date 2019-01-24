@@ -1,5 +1,7 @@
 package com.sbvtransport.sbvtransport.controller;
 
+import com.sbvtransport.sbvtransport.dto.ReportResultTicketDTO;
+import com.sbvtransport.sbvtransport.dto.ReportTicketDTO;
 import com.sbvtransport.sbvtransport.model.Pricelist;
 import com.sbvtransport.sbvtransport.service.IPricelistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +51,15 @@ public class PricelistController {
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(value = "/reportTicket", method = RequestMethod.POST)
+	public ResponseEntity<List<ReportResultTicketDTO>> report(@RequestBody ReportTicketDTO ticketReport) {
+
+		List<ReportResultTicketDTO> report = pricelistService.reportTicket(ticketReport);
+
+		return new ResponseEntity<>(report, HttpStatus.OK);
+
+	}
+
 
 }

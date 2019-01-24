@@ -17,7 +17,7 @@ public class TicketDTO {
 	private DemographicTicketType demographic_type;
 	private String code_transport;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 
 	public TicketDTO() {
