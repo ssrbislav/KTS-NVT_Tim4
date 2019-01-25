@@ -1,10 +1,10 @@
 package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +102,7 @@ public class ControllerServiceTest {
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
 
 		assertThat(savedController).isNotNull();
-		assertThat(savedController.getId()).isEqualTo(newController.getId());
+		assertThat(savedController.getId()).isEqualTo(4L);
 		assertThat(savedController.getAddress()).isEqualTo(newController.getAddress());
 		assertThat(fmt.format(savedController.getDate_birth())).isEqualTo(fmt.format(newController.getDate_birth()));
 		assertThat(savedController.getEmail()).isEqualTo(newController.getEmail());
@@ -152,13 +152,14 @@ public class ControllerServiceTest {
 
 	}
 
-	@Test(expected = NoSuchElementException.class)
+	@Test
 	public void updateTest2() {
 		// update controller that doesn't exist
 
 		Controller updateController = new Controller(324532532L, "izmenjen@gmail.com", "izmenjen", "izmenjenasifra",
 				"izmenjeno ime", "izmenjeno prezime", "adresa", "3543265443", new Date());
-		controllerService.update(updateController);
+		Controller controller = controllerService.update(updateController);
+		assertNull(controller);
 	}
 
 	@Test

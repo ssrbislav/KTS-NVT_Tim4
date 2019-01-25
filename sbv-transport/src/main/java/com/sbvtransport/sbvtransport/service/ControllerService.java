@@ -2,12 +2,8 @@ package com.sbvtransport.sbvtransport.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
 import com.sbvtransport.sbvtransport.model.Controller;
 import com.sbvtransport.sbvtransport.repository.ControllerRepository;
@@ -51,17 +47,23 @@ public class ControllerService implements IControllerService {
 	@Override
 	public Controller update(Controller controller) {
 
-		Optional<Controller> updateController = controllerRepository.findById(controller.getId());
-		updateController.get().setAddress(controller.getAddress());
-		updateController.get().setEmail(controller.getEmail());
-		updateController.get().setPhone_number(controller.getPhone_number());
-		updateController.get().setFirst_name(controller.getFirst_name());
-		updateController.get().setLast_name(controller.getLast_name());
-		updateController.get().setUsername(controller.getUsername());
-		updateController.get().setPassword(controller.getPassword());
-		updateController.get().setDate_birth(controller.getDate_birth());
+		Controller updateController = controllerRepository.findById(controller.getId()).orElse(null);
+		if(updateController != null){
+			updateController.setAddress(controller.getAddress());
+			updateController.setEmail(controller.getEmail());
+			updateController.setPhone_number(controller.getPhone_number());
+			updateController.setFirst_name(controller.getFirst_name());
+			updateController.setLast_name(controller.getLast_name());
+			updateController.setUsername(controller.getUsername());
+			updateController.setPassword(controller.getPassword());
+			updateController.setDate_birth(controller.getDate_birth());
 
-		return controllerRepository.save(updateController.get());
+			return controllerRepository.save(updateController);
+			
+		}
+		
+		return null;
+		
 	}
 
 	@Override

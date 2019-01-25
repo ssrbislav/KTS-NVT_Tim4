@@ -65,7 +65,7 @@ public class TrolleyServiceTest {
 		assertThat(findTrolley.getLine().getLine_type()).isEqualTo(TypeTransport.trolley);
 		assertThat(findTrolley.getLine().getName()).isEqualTo("7ca");
 		assertThat(findTrolley.getLine().getZone()).isEqualTo(Zone.first);
-		assertThat(findTrolley.getLine().getFirst_station()).isEqualTo(2L);
+		assertThat(findTrolley.getLine().getFirst_station()).isEqualTo(3L);
 		assertThat(findTrolley.getLine().isDeleted()).isEqualTo(false);
 		assertThat(findTrolley.getLine().getStation_list().get(0).getId()).isEqualTo(2L);
 		assertThat(findTrolley.getLine().getStation_list().get(0).getZone()).isEqualTo(Zone.first);

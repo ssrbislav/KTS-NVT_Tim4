@@ -67,7 +67,7 @@ public class TrolleyControllerTest {
 				.andExpect(jsonPath("$.[*].line.name").value(hasItem("7ca")))
 				.andExpect(jsonPath("$.[*].line.line_type").value(hasItem("trolley")))
 				.andExpect(jsonPath("$.[*].line.zone").value(hasItem("first")))
-				.andExpect(jsonPath("$.[*].line.first_station").value(hasItem(2)))
+				.andExpect(jsonPath("$.[*].line.first_station").value(hasItem(3)))
 				.andExpect(jsonPath("$.[*].location.location_name").value(hasItem("Banatic")))
 				.andExpect(jsonPath("$.[*].name").value(hasItem("lasta")));
 
@@ -80,7 +80,7 @@ public class TrolleyControllerTest {
 				.andExpect(jsonPath("$.id").value(3L)).andExpect(jsonPath("$.code").value("7ca_trolley_Sara"))
 				.andExpect(jsonPath("$.late").value(false)).andExpect(jsonPath("$.line.id").value(3))
 				.andExpect(jsonPath("$.line.name").value("7ca")).andExpect(jsonPath("$.line.zone").value("first"))
-				.andExpect(jsonPath("$.line.first_station").value(2))
+				.andExpect(jsonPath("$.line.first_station").value(3))
 				.andExpect(jsonPath("$.location.location_name").value("Podbara"))
 				.andExpect(jsonPath("$.location.address")
 						.value("1, Filipa Visnjica, Подбара, Novi Sad, Novi Sad City, South Backa District, Vojvodina, 21101, Serbia"))
@@ -107,7 +107,7 @@ public class TrolleyControllerTest {
 		TrolleyDTO trolley = new TrolleyDTO("Lasta", 3L, 5);
 		String json = TestUtil.json(trolley);
 		this.mockMvc.perform(post(URL_PREFIX + "/addTrolley").contentType(contentType).content(json))
-				.andExpect(jsonPath("$.id").value(5L)).andExpect(jsonPath("$.name").value("Lasta"))
+				.andExpect(jsonPath("$.name").value("Lasta"))
 				.andExpect(jsonPath("$.code").value("7ca_trolley_Lasta")).andExpect(jsonPath("$.late").value(false))
 				.andExpect(jsonPath("$.time_arrive").value(5)).andExpect(jsonPath("$.line.id").value(3))
 				.andExpect(status().isOk());

@@ -35,6 +35,19 @@ public class Controller extends User implements Serializable {
 		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
 		this.id = id;
 	}
+	
+	public Controller(String email, String username, String password,
+			String first_name, String last_name, String address, String phone_number, Date date_birth, boolean deleted) {
+		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
+		this.deleted = deleted;
+	}
+	
+	public Controller(Long id,String email, String username, String password,
+			String first_name, String last_name, String address, String phone_number, Date date_birth,boolean deleted) {
+		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
+		this.id = id;
+		this.deleted =deleted;
+	}
 
 	public Controller(Long id) {
 		super();
@@ -48,7 +61,10 @@ public class Controller extends User implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public boolean isDeleted() {
 		return deleted;

@@ -77,6 +77,11 @@ public class ControllerController {
 	public ResponseEntity<Controller> update(@RequestBody Controller controller) {
 
 		Controller updateController = controllerService.update(controller);
+		
+		if(updateController == null){
+			return new ResponseEntity<>(updateController, HttpStatus.BAD_REQUEST);
+
+		}
 
 		return new ResponseEntity<>(updateController, HttpStatus.OK);
 
