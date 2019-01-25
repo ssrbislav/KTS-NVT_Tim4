@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignUpInfo } from '../auth/signup-info';
 import { AuthService } from '../auth/auth.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-registration',
@@ -14,14 +15,25 @@ export class RegistrationComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
+  passwordRepeat: string;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<any>, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {}
 
   cancelClicked(){
 
     this.router.navigateByUrl('/');
+  }
+
+  checkSame(pass: string) {
+    this.passwordRepeat = pass;
+    if (this.passwordRepeat !== this.signUpInfo.password) {
+      this.errorMessage = "Passwords do not match!"
+    }
+    else {
+      this.errorMessage = "";
+    }
   }
 
   onSubmit() {

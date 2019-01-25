@@ -10,7 +10,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 })
 export class MainPageComponent implements OnInit {
 
-  @ViewChild("registration") registration: RegistrationComponent;
+  //@ViewChild("registration") registration: RegistrationComponent;
 
   constructor(public dialog: MatDialog){
 
@@ -26,7 +26,24 @@ export class MainPageComponent implements OnInit {
     console.log(feature);
     if(feature == 'login'){
       this.showLogin();
+    } else if (feature == 'signup') {
+      this.showRegistration();
     }
+  }
+
+  showRegistration() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 2,
+      title: "Bojana"
+      };
+
+    const dialogRef = this.dialog.open(RegistrationComponent, dialogConfig);
+
   }
 
   showLogin(){

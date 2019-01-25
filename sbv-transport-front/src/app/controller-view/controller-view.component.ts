@@ -34,9 +34,6 @@ export class ControllerViewComponent implements OnInit {
       this.router.navigate(['mainPage']);
       window.alert("Successfully Logged out!");
     }
-    if(feature == 'profil') {
-      alert(this.currentController.address);
-    }
   }
 
 }
