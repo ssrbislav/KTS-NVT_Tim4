@@ -11,7 +11,7 @@ insert into station(location,zone,deleted) values(3,0, false);
 
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 0,0, false, 1);
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 1,0, false, 2);
-insert into line(name, line_type,zone,deleted,first_station) values('7ca', 2,0, true, 3);
+insert into line(name, line_type,zone,deleted,first_station) values('7ca', 2,0, false, 3);
 
 insert into line_project(id,station_id) values(1,1);
 insert into line_project(id,station_id) values(1,2);

@@ -116,7 +116,7 @@ public class TrolleyServiceTest {
 		assertThat(dbTrolley.getLine().getLine_type()).isEqualTo(TypeTransport.trolley);
 		assertThat(dbTrolley.getLine().getName()).isEqualTo("7ca");
 		assertThat(dbTrolley.getLine().getZone()).isEqualTo(Zone.first);
-		assertThat(dbTrolley.getLine().getFirst_station()).isEqualTo(2L);
+		assertThat(dbTrolley.getLine().getFirst_station()).isEqualTo(3L);
 		assertThat(dbTrolley.getLine().isDeleted()).isEqualTo(false);
 
 		// create a trolley with a line that isn't a correct type
@@ -208,7 +208,7 @@ public class TrolleyServiceTest {
 		assertThat(dbLine.getLine_type()).isEqualTo(TypeTransport.trolley);
 		assertThat(dbLine.getName()).isEqualTo("7ca");
 		assertThat(dbLine.getZone()).isEqualTo(Zone.first);
-		assertThat(dbLine.getFirst_station()).isEqualTo(2L);
+		assertThat(dbLine.getFirst_station()).isEqualTo(3L);
 		assertThat(dbLine.isDeleted()).isEqualTo(false);
 		assertThat(dbLine.getStation_list().get(0).getId()).isEqualTo(2L);
 		assertThat(dbLine.getStation_list().get(0).getZone()).isEqualTo(Zone.first);

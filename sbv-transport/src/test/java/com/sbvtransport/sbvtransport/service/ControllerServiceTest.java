@@ -102,7 +102,6 @@ public class ControllerServiceTest {
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
 
 		assertThat(savedController).isNotNull();
-		assertThat(savedController.getId()).isEqualTo(4L);
 		assertThat(savedController.getAddress()).isEqualTo(newController.getAddress());
 		assertThat(fmt.format(savedController.getDate_birth())).isEqualTo(fmt.format(newController.getDate_birth()));
 		assertThat(savedController.getEmail()).isEqualTo(newController.getEmail());
