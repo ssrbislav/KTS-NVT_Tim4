@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
   errorMessage = '';
   passwordRepeat: string;
 
-  constructor( private router: Router, private authService: AuthService) { }
+  constructor( public dialogRef: MatDialogRef<any>, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {}
 

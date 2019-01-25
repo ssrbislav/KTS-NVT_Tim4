@@ -1,11 +1,6 @@
-<div *ngIf="isSignedUp; else signupForm">
-    Your registration is successful. Please login!
-  </div>
-
   <mat-dialog-actions>
-  <ng-template #signupForm>
-    <div class="row col-sm-6" style="max-width:350px;">
-      <h3>Please enter your info below</h3>
+
+    
       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
           <div class="form-group">
               <label for="email">Email</label>
@@ -87,7 +82,6 @@
           <button class="cancelbtn btn" (click)="cancelClicked()">Cancel</button>
         </div>
       </form>
-    </div>
-  </ng-template>
+
 </mat-dialog-actions>
 
