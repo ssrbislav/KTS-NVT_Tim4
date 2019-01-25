@@ -201,7 +201,7 @@ public class PricelistService implements IPricelistService {
 				}
 				
 			}else if(pricelist.getValid_since().after(report.getStart_date())){
-				if(report.getStart_date().before(pricelist.getValid_until()) || 
+				if(report.getFinished_date().after(pricelist.getValid_since()) || 
 						fmt.format(report.getStart_date()).equals(fmt.format(pricelist.getValid_until())) ){
 					begin = pricelist.getValid_since();
 					if(pricelist.getValid_until().before(report.getFinished_date())){

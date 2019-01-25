@@ -64,6 +64,7 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { SubwayViewComponent } from './user/subway-view/subway-view.component';
 import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
 import { ControllerViewComponent } from './controller-view/controller-view.component';
+import { PricelistService } from './services/pricelist.service';
 
 const appRoutes: Routes = [
  
@@ -190,7 +191,7 @@ const appRoutes: Routes = [
     ControllerAddComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService, TimetableService,
+    LocationService, TimetableService, PricelistService,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]

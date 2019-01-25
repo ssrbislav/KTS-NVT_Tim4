@@ -10,6 +10,9 @@ import { Line } from 'src/app/models/line.model';
 import { Bus } from 'src/app/models/bus.model';
 import { Subway } from 'src/app/models/subway.model';
 import { Trolley } from 'src/app/models/trolley.model';
+import { ReportTicketDTO } from 'src/app/models.dto/reportTicket.dto';
+import { ReportResultTicketDTO } from 'src/app/models.dto/reportResultTicket.dto';
+import { PricelistService } from 'src/app/services/pricelist.service';
 
 @Component({
   selector: 'app-report',
@@ -31,9 +34,12 @@ export class ReportComponent implements OnInit {
   list_buses: Bus[] = [];
   list_subways: Subway[] = [];
   list_trolleys: Trolley[] = [];
+  reportTicket: ReportTicketDTO = new ReportTicketDTO(null,null);
+  finalReportTicket: ReportResultTicketDTO[] = [];
 
   constructor(private busService: BusService, private subwayService:SubwayService, private trolleyService: TrolleyService,
-    private lineService: LineService, private stationService: StationService, private controllerService: ControllerService) { }
+    private lineService: LineService, private stationService: StationService, private controllerService: ControllerService,
+    private pricelistService: PricelistService) { }
 
   ngOnInit() {
     this.loadAllBuses();
@@ -167,6 +173,21 @@ export class ReportComponent implements OnInit {
     })
 
     this.list_trolley_table.push(lineReport);
+
+  }
+
+  searchTickets(){
+    if(this.reportTicket.start_date == null){
+      alert("Please pick start date!");
+    }else if(this.reportTicket.finished_date == null){
+      alert("Please pick finish date");
+    }else{
+      this.pricelistService.reportTicket(this.reportTicket)
+    .subscribe( data => {
+      this.finalReportTicket = data;    
+    });
+
+    }
 
   }
 
