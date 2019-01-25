@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
 
   clickButtonRegistration(){
     //this.featureSelected.emit('registration');
-    this.router.navigateByUrl('/signup');
+    this.featureSelected.emit('signup');
   }
 
   clickButtonBus(){

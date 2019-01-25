@@ -42,9 +42,6 @@ export class ControllerComponent implements OnInit {
     this.search.resetSearch();
 
     });
-
-    
-
   }
 
 }

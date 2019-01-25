@@ -1,9 +1,6 @@
-<div *ngIf="isSignedUp; else signupForm">
-    Your registration is successful. Please login!
-  </div>
-  
-  <ng-template #signupForm>
-    <div class="row col-sm-6" style="max-width:350px;">
+  <mat-dialog-content>
+
+      <h3>Please enter your info below</h3>
       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
           <div class="form-group">
               <label for="email">Email</label>
@@ -26,6 +23,18 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" [(ngModel)]="signUpInfo.password" #password="ngModel"
                   required minlength="6" />
+                <div>
+                  <div>{{errorMessage}}</div>
+                </div>
+                <div *ngIf="f.submitted && password.invalid">
+                  <div *ngIf="password.errors.required">Password is required</div>
+                  <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Confirm Password</label>
+                <input type="password" class="form-control" name="password2" [ngModel]="signUpInfo.passwordRepeat" #password="ngModel"
+                  required minlength="6" (ngModelChange)="checkSame($event)"/>
                 <div *ngIf="f.submitted && password.invalid">
                   <div *ngIf="password.errors.required">Password is required</div>
                   <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
@@ -62,7 +71,7 @@
         </div>
         <div class="form-group">
             <label for="date_birth">Date of birth</label>
-            <input type="text" class="form-control" name="date_birth" [(ngModel)]="signUpInfo.date_birth" #date_birth="ngModel"/>  
+            <input type="date" class="form-control" name="date_birth" [(ngModel)]="signUpInfo.date_birth" #date_birth="ngModel"/>  
         </div>
         
         <div class="form-group">
@@ -70,8 +79,9 @@
           <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
             Signup failed!<br/>{{errorMessage}}
           </div>
-          <button class="cancelbtn btn" (click)="cancelClicked()">Cancel</button>
+          <button class="cancelbtn btn" (click)="cancelClicked()" type="button">Cancel</button>
         </div>
       </form>
-    </div>
-  </ng-template>
+
+</mat-dialog-content>
+

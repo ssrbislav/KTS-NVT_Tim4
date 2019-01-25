@@ -45,16 +45,6 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div.logIn{
-	border-radius: 20px;
-    background-color: #f2f2f2; 
-    padding: 20px;
-    box-sizing: border-box;
-    width: 100%;
-    color: black;
-    
-    	
-}
 
 button {
     background-color: #4CAF50;
@@ -68,18 +58,15 @@ button {
   }
   
   button:hover {
-    opacity:1;
+    
+    color: black;
   }
   
   /* Extra styles for the cancel button */
   .cancelbtn {
-    padding: 14px 20px;
+    padding: 1px;
     background-color: #f44336;
   }
   
-  /* Float cancel and signup buttons and add an equal width */
-  .cancelbtn, .signupbtn {
-    float: left;
-    width: 45%;
-  }
+  
 

@@ -44,7 +44,7 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
-
+/*
 div.addStation{
 	border-radius: 20px;
     background-color: #f2f2f2; 
@@ -55,7 +55,7 @@ div.addStation{
     
     	
 }
-
+*/
 button {
     background-color: #4CAF50;
     color: white;
@@ -69,6 +69,8 @@ button {
   
   button:hover {
     opacity:1;
+    color: black;
+    font-weight: bold;
   }
   
   /* Extra styles for the cancel button */
@@ -79,7 +81,7 @@ button {
   
   /* Float cancel and signup buttons and add an equal width */
   .cancelbtn, .signupbtn {
-    float: left;
+    margin : 0 auto;
     width: 45%;
   }
   
