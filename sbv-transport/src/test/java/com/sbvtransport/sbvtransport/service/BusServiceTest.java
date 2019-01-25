@@ -31,6 +31,7 @@ import com.sbvtransport.sbvtransport.model.Timetable;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
+@Rollback(value=true)
 public class BusServiceTest {
 
 	@Autowired
@@ -89,7 +90,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void createTest() {
 		BusDTO bus = new BusDTO("lasta2", 1L, 5);
 
@@ -138,7 +139,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest() {
 
 		Set<Date> dates = new HashSet<>();
@@ -177,7 +178,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest() {
 
 		boolean successful = busService.delete(2L);
@@ -244,7 +245,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest() {
 		// location doesn't exist
 		AddLocationDTO newLocation = new AddLocationDTO(1L, 63456362L);
@@ -283,7 +284,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteBecauseLineTest() {
 
 		busService.deleteBecauseLine(1L);
@@ -300,7 +301,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void changeTest() {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");

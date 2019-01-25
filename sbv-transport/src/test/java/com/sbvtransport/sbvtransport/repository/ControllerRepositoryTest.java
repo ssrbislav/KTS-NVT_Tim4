@@ -21,6 +21,7 @@ import com.sbvtransport.sbvtransport.model.Controller;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class ControllerRepositoryTest {
 
 	@Autowired
@@ -28,7 +29,7 @@ public class ControllerRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void testIfControllerExists() {
 
 		Controller controller = new Controller();

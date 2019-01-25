@@ -39,6 +39,7 @@ import com.sbvtransport.sbvtransport.model.Timetable;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class TrolleyControllerTest {
 
 	private static final String URL_PREFIX = "/api/trolley";
@@ -101,7 +102,7 @@ public class TrolleyControllerTest {
 	// good values to create trolley
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void createTest() throws Exception {
 		TrolleyDTO trolley = new TrolleyDTO("Lasta", 3L, 5);
 		String json = TestUtil.json(trolley);
@@ -116,7 +117,7 @@ public class TrolleyControllerTest {
 	// bad values to create trolley(line doesn't exist)
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void createTest2() throws Exception {
 		TrolleyDTO trolley = new TrolleyDTO("Lasta", 464643L, 5);
 		String json = TestUtil.json(trolley);
@@ -128,7 +129,7 @@ public class TrolleyControllerTest {
 	// change trolley
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest() throws Exception {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
@@ -153,7 +154,7 @@ public class TrolleyControllerTest {
 	// update trolley that doesn't exist
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest2() throws Exception {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
@@ -175,7 +176,7 @@ public class TrolleyControllerTest {
 	// test trolley delete if trolley exist,return:true
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest() throws Exception {
 		this.mockMvc.perform(get(URL_PREFIX + "/deleteTrolley/1")).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(content().string("true"));
@@ -185,7 +186,7 @@ public class TrolleyControllerTest {
 	// test trolley delete if trolley doesn't exist,return:false
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest2() throws Exception {
 		this.mockMvc.perform(get(URL_PREFIX + "/deleteTrolley/1046456343")).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(content().string("false"));
@@ -195,7 +196,7 @@ public class TrolleyControllerTest {
 	// add location to trolley-good value
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest() throws Exception {
 
 		AddLocationDTO addlocation = new AddLocationDTO(4L, 2L);
@@ -208,7 +209,7 @@ public class TrolleyControllerTest {
 	// add location to trolley-bad value(bus doesn't exist)
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest2() throws Exception {
 
 		AddLocationDTO addlocation = new AddLocationDTO(4454364363643L, 2L);
@@ -221,7 +222,7 @@ public class TrolleyControllerTest {
 	// add location to trolley-bad value(location doesn't exist)
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest3() throws Exception {
 
 		AddLocationDTO addlocation = new AddLocationDTO(1L, 345545353L);

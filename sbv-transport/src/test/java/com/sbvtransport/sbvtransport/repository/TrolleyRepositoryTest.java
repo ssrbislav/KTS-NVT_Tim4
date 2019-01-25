@@ -18,6 +18,7 @@ import com.sbvtransport.sbvtransport.model.Trolley;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class TrolleyRepositoryTest {
 	
 	@Autowired
@@ -31,7 +32,7 @@ public class TrolleyRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void testSaveTrolley(){
 		Transport t = new Trolley(lineRepository.getOne(1L), false, "lasta", locationRepository.getOne(1L), 5,
 				"7ca_trolley_lasta");

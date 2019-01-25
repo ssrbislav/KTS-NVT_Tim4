@@ -32,6 +32,7 @@ import com.sbvtransport.sbvtransport.model.Trolley;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
+@Rollback(value=true)
 public class TrolleyServiceTest {
 
 	@Autowired
@@ -90,7 +91,7 @@ public class TrolleyServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void createTest() {
 
 		TrolleyDTO trolley = new TrolleyDTO("lasta2", 3L, 5);
@@ -143,7 +144,7 @@ public class TrolleyServiceTest {
 	// the angular
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest() {
 
 		Set<Date> dates = new HashSet<>();
@@ -182,7 +183,7 @@ public class TrolleyServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest() {
 
 		boolean successful = trolleyService.delete(2L);
@@ -248,7 +249,7 @@ public class TrolleyServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest() {
 		// location doesn't exist
 		AddLocationDTO newLocation = new AddLocationDTO(1L, 63456362L);
@@ -287,7 +288,7 @@ public class TrolleyServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteBecauseLineTest() {
 
 		trolleyService.deleteBecauseLine(3L);
@@ -304,7 +305,7 @@ public class TrolleyServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void changeTest() {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");

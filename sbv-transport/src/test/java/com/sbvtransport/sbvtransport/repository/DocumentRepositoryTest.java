@@ -22,6 +22,7 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class DocumentRepositoryTest {
 
 	@Autowired
@@ -40,7 +41,7 @@ public class DocumentRepositoryTest {
 	
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void testIfDocumentExists() {
 
 		Document document = new Document();
