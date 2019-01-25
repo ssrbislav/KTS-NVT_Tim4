@@ -1,6 +1,6 @@
-  <mat-dialog-actions>
+  <mat-dialog-content>
 
-    
+      <h3>Please enter your info below</h3>
       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
           <div class="form-group">
               <label for="email">Email</label>
@@ -79,9 +79,9 @@
           <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
             Signup failed!<br/>{{errorMessage}}
           </div>
-          <button class="cancelbtn btn" (click)="cancelClicked()">Cancel</button>
+          <button class="cancelbtn btn" (click)="cancelClicked()" type="button">Cancel</button>
         </div>
       </form>
 
-</mat-dialog-actions>
+</mat-dialog-content>
 
