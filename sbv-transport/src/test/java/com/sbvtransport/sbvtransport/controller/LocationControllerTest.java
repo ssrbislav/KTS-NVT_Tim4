@@ -47,10 +47,10 @@ public class LocationControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(2)))
-                .andExpect(jsonPath("$.[*].location_name").value(hasItem("stanica2")))
-                .andExpect(jsonPath("$.[*].address").value(hasItem("Vojvode Supljikca 51")))
-                .andExpect(jsonPath("$.[*].latitude").value(hasItem(31.40)))
-                .andExpect(jsonPath("$.[*].longitude").value(hasItem(30.50)))
+                .andExpect(jsonPath("$.[*].location_name").value(hasItem("Banatic")))
+                .andExpect(jsonPath("$.[*].address").value(hasItem("150, Rumenacka, Банатић, Novi Sad, Novi Sad City, South Backa District, Vojvodina, 21138, Serbia")))
+                .andExpect(jsonPath("$.[*].latitude").value(hasItem(45.2652)))
+                .andExpect(jsonPath("$.[*].longitude").value(hasItem(19.8159)))
                 .andExpect(jsonPath("$.[*].type").value(hasItem("station")));
     }
 
@@ -59,10 +59,10 @@ public class LocationControllerTest {
         mockMvc.perform(get(URL_PREFIX + "/getLocation/2")).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.location_name").value("stanica2"))
-                .andExpect(jsonPath("$.address").value("Vojvode Supljikca 51"))
-                .andExpect(jsonPath("$.latitude").value(31.40))
-                .andExpect(jsonPath("$.longitude").value(30.50))
+                .andExpect(jsonPath("$.location_name").value("Banatic"))
+                .andExpect(jsonPath("$.address").value("150, Rumenacka, Банатић, Novi Sad, Novi Sad City, South Backa District, Vojvodina, 21138, Serbia"))
+                .andExpect(jsonPath("$.latitude").value(45.2652))
+                .andExpect(jsonPath("$.longitude").value(19.8159))
                 .andExpect(jsonPath("$.type").value("station"));
     }
 
@@ -73,7 +73,8 @@ public class LocationControllerTest {
         LocationDTO locationDTO = new LocationDTO("Stanica2", "Vojvode Supljikca 99", 32.40f, 34.02f, "Station");
         String json = TestUtil.json(locationDTO);
         this.mockMvc.perform(post(URL_PREFIX + "/addLocation").contentType(contentType).content(json))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType));
     }
 
     @Test
