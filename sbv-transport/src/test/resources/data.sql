@@ -36,6 +36,12 @@ insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7c
 insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_Sara',3,false,'Sara',5,false,3);
 insert into trolley(code,line,late,name,time_arrive,deleted) values('7ca_trolley_novi',3,false,'novi',5,false);
 
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bokaa@gmail.com','bokaKontroler','lozinka','Bojana','Corilic','Balzakova 28','0897346576','1995-03-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bane@gmail.com','baneKontroler','lozinka2','Bane','Corilic','Balzakova 28','456436463','1985-05-30');
+
+insert into controller(id,deleted)values(1,false);
+insert into controller(id,deleted)values(2,false);
+
 
 
 

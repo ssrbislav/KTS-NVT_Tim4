@@ -29,6 +29,12 @@ public class Controller extends User implements Serializable {
 			String first_name, String last_name, String address, String phone_number, Date date_birth) {
 		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
 	}
+	
+	public Controller(Long id,String email, String username, String password,
+			String first_name, String last_name, String address, String phone_number, Date date_birth) {
+		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
+		this.id = id;
+	}
 
 	public Controller(Long id) {
 		super();

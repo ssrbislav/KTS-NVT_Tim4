@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
 		BusControllerTest.class, SubwayControllerTest.class, TrolleyControllerTest.class,
 		BusRepositoryTest.class, SubwayRepositoryTest.class, TrolleyRepositoryTest.class, BusServiceJUnitTest.class,
 		BusServiceTest.class, SubwayServiceJUnitTest.class, SubwayServiceTest.class, TrolleyServiceJUnitTest.class,
-		TrolleyServiceTest.class,AdminRepositoryTest.class,
+		TrolleyServiceTest.class,AdminRepositoryTest.class,ControllerRepositoryTest.class, ControllerServiceTest.class,
 		// V
 		LineControllerTest.class, LocationControllerTest.class, StationControllerTest.class,
 		LocationRepositoryTest.class, LocationRepositoryTest.class, StationRepositoryTest.class,

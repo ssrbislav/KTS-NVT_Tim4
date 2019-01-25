@@ -79,6 +79,8 @@ public abstract class User {
 		this.phone_number = phone_number;
 		this.date_birth = date_birth;
 	}
+	
+	
 
 	public Long getId() {
 		return id;

@@ -59,6 +59,8 @@ public class ControllerService implements IControllerService {
 		updateController.get().setLast_name(controller.getLast_name());
 		updateController.get().setUsername(controller.getUsername());
 		updateController.get().setPassword(controller.getPassword());
+		updateController.get().setDate_birth(controller.getDate_birth());
+
 		return controllerRepository.save(updateController.get());
 	}
 
