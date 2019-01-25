@@ -1,7 +1,12 @@
 package com.sbvtransport.sbvtransport.controller;
 
 import com.sbvtransport.sbvtransport.TestUtil;
+import com.sbvtransport.sbvtransport.dto.AddFirstStationDTO;
 import com.sbvtransport.sbvtransport.dto.LineDTO;
+import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import com.sbvtransport.sbvtransport.enumeration.Zone;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,10 +69,44 @@ public class LineControllerTest {
     @Transactional
     @Rollback(true)
     public void createTest() throws Exception {
-//        LineDTO lineDTO = new LineDTO("bus", "9");
-//        String json = TestUtil.json(lineDTO);
-//        this.mockMvc.perform(post(URL_PREFIX + "/addLine").contentType(contentType).content(json))
-//                .andExpect(status().isOk());
+        LineDTO lineDTO = new LineDTO("bus", "9", Zone.first);
+        String json = TestUtil.json(lineDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addLine").contentType(contentType).content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(4L))
+                .andExpect(jsonPath("$.name").value(lineDTO.getName()))
+                .andExpect(jsonPath("$.station_list").isEmpty())
+                .andExpect(jsonPath("$.line_type").value(TypeTransport.valueOf(lineDTO.getLine_type())))
+                .andExpect(jsonPath("$.zone").value(lineDTO.getZone()))
+                .andExpect(jsonPath("$.timetable").isEmpty())
+                .andExpect(jsonPath("$.first_station").value(null))
+                .andExpect(jsonPath("$.deleted").value(false));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void updateStations() throws Exception {
+        List<AddFirstStationDTO> addFirstStationDTOList = new ArrayList<>();
+        AddFirstStationDTO dto1 = new AddFirstStationDTO();
+        dto1.setId_line(1L);
+        dto1.setId_station(1L);
+        AddFirstStationDTO dto2 = new AddFirstStationDTO();
+        dto2.setId_line(1L);
+        dto2.setId_station(2L);
+        addFirstStationDTOList.add(dto1);
+        addFirstStationDTOList.add(dto2);
+//        AddFirstStationDTO dto3 = new AddFirstStationDTO();
+//        dto3.setId_line(2L);
+//        dto3.setId_station(3L);
+        String json = TestUtil.json(addFirstStationDTOList);
+        this.mockMvc.perform(post(URL_PREFIX + "/updateLine").contentType(contentType).content(json))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(contentType))
+            .andExpect(jsonPath("$.station_list.[*].id").value(hasItem(dto1.getId_station())))
+            .andExpect(jsonPath("$.station_list.[*].id").value(hasItem(dto2.getId_station())))
+            .andExpect(jsonPath("$.id").value(dto1.getId_line()))
+            .andExpect(jsonPath("$.id").value(dto2.getId_line()));
     }
 
     @Test
@@ -83,9 +122,171 @@ public class LineControllerTest {
     @Transactional
     @Rollback(true)
     public void deleteTest2() throws Exception {
-        this.mockMvc.perform(get(URL_PREFIX + "/deleteLine/10")).andExpect(status().isOk())
+        this.mockMvc.perform(get(URL_PREFIX + "/deleteLine/10")).andExpect(status().isBadRequest())
                 .andExpect(content().contentType(contentType))
                 .andExpect(content().string("false"));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStationTest_OK() throws Exception {
+        AddFirstStationDTO dto = new AddFirstStationDTO();
+        dto.setId_line(1L);
+        dto.setId_station(1L);
+        String json = TestUtil.json(dto);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(contentType))
+            .andExpect(content().string("Station successfully added!"));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStationTest_BadLine() throws Exception {
+        AddFirstStationDTO dto = new AddFirstStationDTO();
+        dto.setId_line(10L);
+        dto.setId_station(1L);
+        String json = TestUtil.json(dto);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(contentType))
+            .andExpect(content().string(""));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStationTest_BadStation() throws Exception {
+        AddFirstStationDTO dto = new AddFirstStationDTO();
+        dto.setId_line(1L);
+        dto.setId_station(10L);
+        String json = TestUtil.json(dto);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(contentType))
+            .andExpect(content().string(""));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStations_OK() throws Exception {
+        List<AddFirstStationDTO> addFirstStationDTOList = new ArrayList<>();
+        AddFirstStationDTO dto1 = new AddFirstStationDTO();
+        dto1.setId_line(1L);
+        dto1.setId_station(1L);
+        AddFirstStationDTO dto2 = new AddFirstStationDTO();
+        dto2.setId_line(1L);
+        dto2.setId_station(2L);
+        addFirstStationDTOList.add(dto1);
+        addFirstStationDTOList.add(dto2);
+//        AddFirstStationDTO dto3 = new AddFirstStationDTO();
+//        dto3.setId_line(2L);
+//        dto3.setId_station(3L);
+        String json = TestUtil.json(addFirstStationDTOList);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(contentType))
+            .andExpect(jsonPath("$.station_list.[*].id").value(hasItem(dto1.getId_station())))
+            .andExpect(jsonPath("$.station_list.[*].id").value(hasItem(dto2.getId_station())))
+            .andExpect(jsonPath("$.id").value(dto1.getId_line()))
+            .andExpect(jsonPath("$.id").value(dto2.getId_line()));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStations_DeletedLine() throws Exception {
+        List<AddFirstStationDTO> addFirstStationDTOList = new ArrayList<>();
+        AddFirstStationDTO dto1 = new AddFirstStationDTO();
+        dto1.setId_line(3L);
+        dto1.setId_station(1L);
+        AddFirstStationDTO dto2 = new AddFirstStationDTO();
+        dto2.setId_line(3L);
+        dto2.setId_station(2L);
+        addFirstStationDTOList.add(dto1);
+        addFirstStationDTOList.add(dto2);
+//        AddFirstStationDTO dto3 = new AddFirstStationDTO();
+//        dto3.setId_line(2L);
+//        dto3.setId_station(3L);
+        String json = TestUtil.json(addFirstStationDTOList);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(contentType))
+            .andExpect(content().string(""));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStations_NoLine() throws Exception {
+        List<AddFirstStationDTO> addFirstStationDTOList = new ArrayList<>();
+        AddFirstStationDTO dto1 = new AddFirstStationDTO();
+        dto1.setId_line(30L);
+        dto1.setId_station(1L);
+        AddFirstStationDTO dto2 = new AddFirstStationDTO();
+        dto2.setId_line(30L);
+        dto2.setId_station(2L);
+        addFirstStationDTOList.add(dto1);
+        addFirstStationDTOList.add(dto2);
+//        AddFirstStationDTO dto3 = new AddFirstStationDTO();
+//        dto3.setId_line(2L);
+//        dto3.setId_station(3L);
+        String json = TestUtil.json(addFirstStationDTOList);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentType(contentType))
+            .andExpect(content().string(""));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStations_NoStations() throws Exception {
+        List<AddFirstStationDTO> addFirstStationDTOList = new ArrayList<>();
+        AddFirstStationDTO dto1 = new AddFirstStationDTO();
+        dto1.setId_line(1L);
+        dto1.setId_station(10L);
+        AddFirstStationDTO dto2 = new AddFirstStationDTO();
+        dto2.setId_line(1L);
+        dto2.setId_station(20L);
+        addFirstStationDTOList.add(dto1);
+        addFirstStationDTOList.add(dto2);
+//        AddFirstStationDTO dto3 = new AddFirstStationDTO();
+//        dto3.setId_line(2L);
+//        dto3.setId_station(3L);
+        String json = TestUtil.json(addFirstStationDTOList);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(contentType))
+            .andExpect(jsonPath("$.id").value(dto1.getId_line()))
+            .andExpect(jsonPath("$.id").value(dto2.getId_line()));
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void addStations_DifferentLines() throws Exception {
+        List<AddFirstStationDTO> addFirstStationDTOList = new ArrayList<>();
+        AddFirstStationDTO dto1 = new AddFirstStationDTO();
+        dto1.setId_line(1L);
+        dto1.setId_station(1L);
+        AddFirstStationDTO dto2 = new AddFirstStationDTO();
+        dto2.setId_line(2L);
+        dto2.setId_station(2L);
+        addFirstStationDTOList.add(dto1);
+        addFirstStationDTOList.add(dto2);
+//        AddFirstStationDTO dto3 = new AddFirstStationDTO();
+//        dto3.setId_line(2L);
+//        dto3.setId_station(3L);
+        String json = TestUtil.json(addFirstStationDTOList);
+        this.mockMvc.perform(post(URL_PREFIX + "/addStation").contentType(contentType).content(json))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(contentType))
+            .andExpect(jsonPath("$.station_list.[*].id").value(hasItem(dto1.getId_station())))
+            .andExpect(jsonPath("$.id").value(dto1.getId_line()));
     }
 
 }
