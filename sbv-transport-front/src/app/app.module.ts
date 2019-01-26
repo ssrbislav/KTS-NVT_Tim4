@@ -69,6 +69,7 @@ import { TicketCheckComponent } from './controller-view/ticket-check/ticket-chec
 import { PricelistComponent } from './controller-view/pricelist/pricelist.component';
 import { DocumentComponent } from './administrator/document/document.component';
 import { DocumentService } from './services/document.service';
+import { BuyTicketComponent } from './user/buy-ticket/buy-ticket.component';
 
 const appRoutes: Routes = [
  
@@ -162,7 +163,8 @@ const appRoutes: Routes = [
     ControllerViewComponent,
     TicketCheckComponent,
     PricelistComponent,
-    DocumentComponent
+    DocumentComponent,
+    BuyTicketComponent
   ],
   imports: [
     BrowserModule,
