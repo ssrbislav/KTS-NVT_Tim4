@@ -8,8 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -33,6 +36,7 @@ import com.sbvtransport.sbvtransport.model.Trolley;
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
 @Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TrolleyServiceTest {
 
 	@Autowired
@@ -42,7 +46,7 @@ public class TrolleyServiceTest {
 	private ILineService lineService;
 
 	@Test
-	public void findAllTest() {
+	public void afindAllTest() {
 		List<Trolley> trolleys = trolleyService.findAll();
 		assertThat(trolleys).hasSize(4);
 
@@ -375,7 +379,7 @@ public class TrolleyServiceTest {
 	}
 	
 	@Test
-	public void searchFilterTest() {
+	public void asearchFilterTest() {
 		// filter only line
 		FilterSearchTransportDTO filterSearch = new FilterSearchTransportDTO(3L, false, null, "");
 		List<Trolley> listTrolley = trolleyService.searchFilter(filterSearch);

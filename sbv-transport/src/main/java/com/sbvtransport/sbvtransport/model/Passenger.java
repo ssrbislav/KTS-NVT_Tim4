@@ -37,7 +37,6 @@ public class Passenger extends User implements Serializable {
 	private boolean active;
 
 	@Column(name = "userType", nullable = false)
-	@Enumerated(value = EnumType.STRING)
 	private UserType userType;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passenger", cascade = CascadeType.ALL)
@@ -60,6 +59,12 @@ public class Passenger extends User implements Serializable {
 		this.active = active;
 		this.document_validated = document_validated;
 		this.userType = UserType.standard;
+	}
+	
+
+	public Passenger(Long id) {
+		super();
+		this.id = id;
 	}
 
 	public boolean isActive() {

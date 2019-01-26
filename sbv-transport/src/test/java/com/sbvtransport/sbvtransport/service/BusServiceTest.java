@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -32,6 +34,7 @@ import com.sbvtransport.sbvtransport.model.Timetable;
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
 @Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BusServiceTest {
 
 	@Autowired
@@ -41,7 +44,7 @@ public class BusServiceTest {
 	private ILineService lineService;
 
 	@Test
-	public void findAllTest() {
+	public void afindAllTest() {
 		List<Bus> buses = busService.findAll();
 		assertThat(buses).hasSize(4);
 
@@ -368,7 +371,7 @@ public class BusServiceTest {
 	}
 
 	@Test
-	public void searchFilterTest() {
+	public void asearchFilterTest() {
 		// filter only line
 		FilterSearchTransportDTO filterSearch = new FilterSearchTransportDTO(1L, false, null, "");
 		List<Bus> listBus = busService.searchFilter(filterSearch);

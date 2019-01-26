@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.DocumentDTO;
@@ -45,11 +44,18 @@ public class DocumentService implements IDocumentService {
 	@Override
 	public Document update(DocumentDTO document) {
 
-		Optional<Document> updateDoc = documentRepository.findById(document.getId());
-		updateDoc.get().setImageLocation(document.getImageLocation());
-		updateDoc.get().setDateOfUpload(document.getDateOfUpload());
+		Document updateDoc = getOne(document.getId());
+		if(updateDoc == null){
+			return null;
+		}
+		Passenger p = passengerRepository.findById(document.getIdPassenger()).orElse(null);
+		if(p == null){
+			return null;
+		}
+		updateDoc.setImageLocation(document.getImageLocation());
+		updateDoc.setDateOfUpload(document.getDateOfUpload());
 
-		return documentRepository.save(updateDoc.get());
+		return documentRepository.save(updateDoc);
 	}
 
 	@Override

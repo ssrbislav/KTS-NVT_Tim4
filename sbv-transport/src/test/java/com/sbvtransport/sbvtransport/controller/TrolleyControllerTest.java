@@ -14,8 +14,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -40,6 +43,7 @@ import com.sbvtransport.sbvtransport.model.Timetable;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TrolleyControllerTest {
 
 	private static final String URL_PREFIX = "/api/trolley";
@@ -58,7 +62,7 @@ public class TrolleyControllerTest {
 	}
 
 	@Test
-	public void getAll() throws Exception {
+	public void agetAll() throws Exception {
 		mockMvc.perform(get(URL_PREFIX)).andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize(4))).andExpect(jsonPath("$.[*].id").value(hasItem(1)))
 				.andExpect(jsonPath("$.[*].code").value(hasItem("7ca_trolley_lasta")))
@@ -103,7 +107,7 @@ public class TrolleyControllerTest {
 	@Test
 	@Transactional
 	@Rollback(value=true)
-	public void createTest() throws Exception {
+	public void wcreateTest() throws Exception {
 		TrolleyDTO trolley = new TrolleyDTO("Lasta", 3L, 5);
 		String json = TestUtil.json(trolley);
 		this.mockMvc.perform(post(URL_PREFIX + "/addTrolley").contentType(contentType).content(json))
@@ -118,7 +122,7 @@ public class TrolleyControllerTest {
 	@Test
 	@Transactional
 	@Rollback(value=true)
-	public void createTest2() throws Exception {
+	public void wcreateTest2() throws Exception {
 		TrolleyDTO trolley = new TrolleyDTO("Lasta", 464643L, 5);
 		String json = TestUtil.json(trolley);
 		this.mockMvc.perform(post(URL_PREFIX + "/addTrolley").contentType(contentType).content(json))
@@ -234,7 +238,7 @@ public class TrolleyControllerTest {
 
 	// search and filter
 	@Test
-	public void searchFilterTest() throws Exception {
+	public void asearchFilterTest() throws Exception {
 
 		FilterSearchTransportDTO searchFilter = new FilterSearchTransportDTO(1L, false, 1L, "");
 		String json = TestUtil.json(searchFilter);

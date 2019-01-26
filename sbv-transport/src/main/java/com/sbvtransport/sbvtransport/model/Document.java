@@ -40,6 +40,14 @@ public class Document {
 		this.passenger = passenger;
 	}
 
+	public Document(Long id, Date date_of_upload, String image_location, Passenger passenger) {
+		super();
+		this.id = id;
+		this.date_of_upload = date_of_upload;
+		this.image_location = image_location;
+		this.passenger = passenger;
+	}
+
 	@JsonIgnore
 	public Passenger getPassenger() {
 		return passenger;
@@ -68,5 +76,11 @@ public class Document {
 	public Long getId() {
 		return id;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 
 }
