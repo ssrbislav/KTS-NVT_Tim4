@@ -37,7 +37,7 @@ public class DocumentService implements IDocumentService {
 		if(p == null){
 			return null;
 		}
-		Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p);
+		Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p,"need approve");
 		return documentRepository.save(d);
 	}
 
@@ -54,6 +54,7 @@ public class DocumentService implements IDocumentService {
 		}
 		updateDoc.setImage_location(document.getImageLocation());
 		updateDoc.setDate_of_upload(document.getDateOfUpload());
+		updateDoc.setApproved("need approve");
 
 		return documentRepository.save(updateDoc);
 	}
@@ -68,6 +69,19 @@ public class DocumentService implements IDocumentService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Document changeApproved(Document document) {
+		
+		Document findDocument = getOne(document.getId());
+		if(findDocument == null){
+			return null;
+		}
+		
+		findDocument.setApproved(document.getApproved());
+		
+		return documentRepository.save(findDocument);
 	}
 
 }

@@ -67,6 +67,8 @@ import { ControllerViewComponent } from './controller-view/controller-view.compo
 import { PricelistService } from './services/pricelist.service';
 import { TicketCheckComponent } from './controller-view/ticket-check/ticket-check.component';
 import { PricelistComponent } from './controller-view/pricelist/pricelist.component';
+import { DocumentComponent } from './administrator/document/document.component';
+import { DocumentService } from './services/document.service';
 
 const appRoutes: Routes = [
  
@@ -159,7 +161,8 @@ const appRoutes: Routes = [
     TrolleyViewComponent,
     ControllerViewComponent,
     TicketCheckComponent,
-    PricelistComponent
+    PricelistComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,
@@ -196,7 +199,7 @@ const appRoutes: Routes = [
     TicketCheckComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService, TimetableService, PricelistService,
+    LocationService, TimetableService, PricelistService, DocumentService,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]

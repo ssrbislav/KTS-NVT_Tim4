@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.DocumentDTO;
 import com.sbvtransport.sbvtransport.model.Document;
 import com.sbvtransport.sbvtransport.service.DocumentService;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/document")
@@ -33,8 +34,8 @@ public class DocumentController {
 	public ResponseEntity<Document> getOne(@PathVariable Long id) {
 
 		Document doc = documentService.getOne(id);
-		
-		if(doc == null){
+
+		if (doc == null) {
 			return new ResponseEntity<Document>(doc, HttpStatus.NOT_FOUND);
 
 		}
@@ -46,8 +47,8 @@ public class DocumentController {
 	public ResponseEntity<Document> create(@RequestBody DocumentDTO doc) {
 
 		Document newDoc = documentService.create(doc);
-		
-		if(newDoc == null){
+
+		if (newDoc == null) {
 			return new ResponseEntity<Document>(newDoc, HttpStatus.BAD_REQUEST);
 
 		}
@@ -59,8 +60,20 @@ public class DocumentController {
 	public ResponseEntity<Document> update(@RequestBody DocumentDTO doc) {
 
 		Document updateDoc = documentService.update(doc);
-		
-		if(updateDoc == null){
+
+		if (updateDoc == null) {
+			return new ResponseEntity<>(updateDoc, HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(updateDoc, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/changeApproved", method = RequestMethod.POST)
+	public ResponseEntity<Document> changeApproved(@RequestBody Document doc) {
+
+		Document updateDoc = documentService.changeApproved(doc);
+
+		if (updateDoc == null) {
 			return new ResponseEntity<>(updateDoc, HttpStatus.BAD_REQUEST);
 		}
 

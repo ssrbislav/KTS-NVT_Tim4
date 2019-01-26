@@ -46,8 +46,8 @@ public class DocumentServiceJUnitTest {
 		String sDate1 = "2018/03/30";
 		Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(sDate1);
 
-		Document d1 = new Document(1L, date1, "lokacija", p1);
-		Document d2 = new Document(2L, date1, "lokacija2", p2);
+		Document d1 = new Document(1L, date1, "lokacija", p1,"need approve");
+		Document d2 = new Document(2L, date1, "lokacija2", p2,"need approve");
 
 		List<Document> documents = new ArrayList<>();
 		documents.add(d1);

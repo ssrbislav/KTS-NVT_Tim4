@@ -25,6 +25,9 @@ public class Document {
 
 	@Column(name = "image_location", nullable = false)
 	private String image_location;
+	
+	@Column(name = "approved", nullable = false) //declined,approved, need approve
+	private String approved;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passenger passenger;
@@ -33,19 +36,21 @@ public class Document {
 		super();
 	}
 
-	public Document(Date dateOfUpload, String imageLocation, Passenger passenger) {
+	public Document(Date dateOfUpload, String imageLocation, Passenger passenger,String approved) {
 		super();
 		this.date_of_upload = dateOfUpload;
 		this.image_location = imageLocation;
 		this.passenger = passenger;
+		this.approved = approved;
 	}
 
-	public Document(Long id, Date date_of_upload, String image_location, Passenger passenger) {
+	public Document(Long id, Date date_of_upload, String image_location, Passenger passenger,String approved) {
 		super();
 		this.id = id;
 		this.date_of_upload = date_of_upload;
 		this.image_location = image_location;
 		this.passenger = passenger;
+		this.approved = approved;
 	}
 
 	@JsonIgnore
@@ -80,6 +85,16 @@ public class Document {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public String getApproved() {
+		return approved;
+	}
+
+	public void setApproved(String approved) {
+		this.approved = approved;
+	}
+
+	
 	
 	
 

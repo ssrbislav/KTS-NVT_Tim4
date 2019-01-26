@@ -105,5 +105,10 @@ export class HeaderComponent implements OnInit {
     this.featureSelected.emit('pricelist');
   }
 
+  clickButtonDocument(){
+    this.featureSelected.emit('document');
+
+  }
+
 
 }
