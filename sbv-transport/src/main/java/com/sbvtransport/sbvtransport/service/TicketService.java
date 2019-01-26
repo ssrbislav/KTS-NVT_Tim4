@@ -145,8 +145,11 @@ public class TicketService implements ITicketService {
 		} else {
 			find = false;
 		}
-
-		t.setDemographic_type(ticket.getDemographic_type());
+    if (passenger.isDocument_validated() && passenger.getDocument() != null) {
+      t.setDemographic_type(ticket.getDemographic_type());
+    } else {
+      t.setDemographic_type(DemographicTicketType.standard);
+    }
 
 		for (TypeTransport typeOfTransport : TypeTransport.values()) {
 			if (ticket.getType_transport() != typeOfTransport) {
@@ -178,22 +181,6 @@ public class TicketService implements ITicketService {
 		t.setBlock(false);
 		t.setExpired(false);
 
-		if (ticket.getType_transport().equals(TypeTransport.bus)) {
-			boolean exist = busService.codeExist(ticket.getCode_transport());
-			if (!(exist)) {
-				return "That bus doesn't exist!";
-			}
-		} else if (ticket.getType_transport().equals(TypeTransport.subway)) {
-			boolean exist = subwayService.codeExist(ticket.getCode_transport());
-			if (!(exist)) {
-				return "That subway doesn't exist!";
-			}
-		} else {
-			boolean exist = trolleyService.codeExist(ticket.getCode_transport());
-			if (!(exist)) {
-				return "That trolley doesn't exist!";
-			}
-		}
 		t.setCode_transport(ticket.getCode_transport());
 
 		t.setCost(pricelistService.calculatePrice(ticket.getType_transport(), ticket.getDemographic_type(),
