@@ -60,6 +60,7 @@ export class BusViewComponent implements OnInit {
     this.lineService.getLines()
       .subscribe( data => {
         this.lines = data;
+        this.loadBusLines();
       });
   }
 
@@ -96,7 +97,7 @@ export class BusViewComponent implements OnInit {
   }
 
   buyTicket() {
-    
+
   }
 
 }

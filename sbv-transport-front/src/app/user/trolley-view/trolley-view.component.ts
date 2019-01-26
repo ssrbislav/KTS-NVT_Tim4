@@ -60,6 +60,7 @@ export class TrolleyViewComponent implements OnInit {
     this.lineService.getLines()
       .subscribe( data => {
         this.lines = data;
+        this.loadTrolleyLines();
       });
   }
 

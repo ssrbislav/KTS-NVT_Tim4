@@ -60,6 +60,7 @@ export class SubwayViewComponent implements OnInit {
     this.lineService.getLines()
       .subscribe( data => {
         this.lines = data;
+        this.loadSubwayLines();
       });
   }
 
