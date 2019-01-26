@@ -10,9 +10,7 @@ export class TicketCheckComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>) { }
 
-  ngOnInit() {
-    //this.dialogRef.updateSize('80%', '80%'); 
-  }
+  ngOnInit() { }
 
   ticketCheck(): boolean {
     return true;

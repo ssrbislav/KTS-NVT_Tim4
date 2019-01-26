@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -9,8 +9,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
   styleUrls: ['./mainPage.component.css']
 })
 export class MainPageComponent implements OnInit {
-
-  //@ViewChild("registration") registration: RegistrationComponent;
 
   constructor(public dialog: MatDialog){
 

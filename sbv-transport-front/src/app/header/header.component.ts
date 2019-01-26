@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
 }
 
   clickButtonRegistration(){
-    //this.featureSelected.emit('registration');
     this.featureSelected.emit('signup');
   }
 
@@ -100,6 +99,10 @@ export class HeaderComponent implements OnInit {
   clickButtonLogout(){
     this.featureSelected.emit('logout');
 
+  }
+
+  clickButtonPricelist() {
+    this.featureSelected.emit('pricelist');
   }
 
 

@@ -19,7 +19,7 @@ export class ControllerViewComponent implements OnInit {
   currentController: Controller;
 
   @ViewChild("header") header: HeaderComponent;
-  showView: string = 'home';
+  showView: string = 'pricelist';
 
   constructor(private controllerService: ControllerService, public dialog: MatDialog, private router: Router, private token: TokenStorageService) { 
     
@@ -38,6 +38,9 @@ export class ControllerViewComponent implements OnInit {
       window.sessionStorage.clear();
       this.router.navigate(['mainPage']);
       window.alert("Successfully Logged out!");
+    }
+    if(feature == 'pricelist') {
+      //
     }
   }
 

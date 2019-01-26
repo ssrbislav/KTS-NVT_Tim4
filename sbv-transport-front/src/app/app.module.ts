@@ -66,6 +66,7 @@ import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component
 import { ControllerViewComponent } from './controller-view/controller-view.component';
 import { PricelistService } from './services/pricelist.service';
 import { TicketCheckComponent } from './controller-view/ticket-check/ticket-check.component';
+import { PricelistComponent } from './controller-view/pricelist/pricelist.component';
 
 const appRoutes: Routes = [
  
@@ -157,7 +158,8 @@ const appRoutes: Routes = [
     SubwayViewComponent,
     TrolleyViewComponent,
     ControllerViewComponent,
-    TicketCheckComponent
+    TicketCheckComponent,
+    PricelistComponent
   ],
   imports: [
     BrowserModule,

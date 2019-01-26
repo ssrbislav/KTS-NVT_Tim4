@@ -2,15 +2,15 @@
 <mat-dialog-content>
   <form>
       <label>Ticket number</label><br>
-      <input type="text" name="ticket" required/>
+      <input type="text" name="ticket">
   </form>
-  <button class="checkbtn" type="button" mat-button (click) = "checkTicket()" >CHECK</button>
+  <button class="checkbtn" type="button" mat-button (click) = "ticketCheck()" >CHECK</button>
   <button class="cancelbtn" type="button" mat-dialog-close mat-button >Cancel</button>
     
 </mat-dialog-content>
-<div *ngIf="ticketCheck() == 'true'" class="success">
+<!-- <div *ngIf="ticketCheck()" class="success">
     Ticket checked successfully!
 </div>
-<div *ngIf="ticketCheck() == 'false'" class="failed">
+<div *ngIf="!ticketCheck()" class="failed">
     Ticket not valid!
-</div>
+</div> -->

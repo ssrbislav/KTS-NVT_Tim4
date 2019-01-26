@@ -6,7 +6,6 @@ input[type=text], input[type=password], input[type=email], input[type = number],
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
-  display: inline-block;
   border: none;
   background: #f1f1f1; 
   float: left;
