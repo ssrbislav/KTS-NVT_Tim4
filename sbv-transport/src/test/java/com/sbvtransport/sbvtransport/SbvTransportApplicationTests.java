@@ -17,10 +17,10 @@ import org.junit.runners.Suite;
 		ControllerServiceJUnitTest.class, ControllerControllerTest.class, DocumentServiceTest.class, DocumentServiceJUnitTest.class,
 		DocumentControllerTest.class,
 		// V
-//		LineControllerTest.class, LocationControllerTest.class, StationControllerTest.class,
-//		LocationRepositoryTest.class, LocationRepositoryTest.class, StationRepositoryTest.class,
-//		LineServiceTest.class, LocationServiceTest.class, StationServiceTest.class,
-//		LocationServiceJUnitTest.class
+		LineControllerTest.class, LocationControllerTest.class, StationControllerTest.class,
+		LocationRepositoryTest.class, LocationRepositoryTest.class, StationRepositoryTest.class,
+		LineServiceTest.class, LocationServiceTest.class, StationServiceTest.class,
+		LocationServiceJUnitTest.class
 		})
 public class SbvTransportApplicationTests {
 
