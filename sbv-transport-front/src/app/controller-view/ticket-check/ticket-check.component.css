@@ -1,0 +1,43 @@
+input[type=text] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: horizontal;
+}
+
+button {
+    color: white;
+    margin: 8px 0;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  button:hover {
+    opacity:1;
+    color: black;
+    font-weight: bold;
+  }
+
+
+.cancelbtn {
+    background-color: #f44336;
+
+}
+
+.checkbtn {
+    background-color: #4CAF50;
+    height: 90px;
+}
+
+.failed {
+    background-color: #f44336;
+    color: white;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+}
