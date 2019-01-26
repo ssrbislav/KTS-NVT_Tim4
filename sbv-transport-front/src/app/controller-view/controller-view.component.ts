@@ -14,7 +14,9 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 })
 export class ControllerViewComponent implements OnInit {
 
-  currentController: Controller;
+  @Output() featureSelected = new EventEmitter<string>();
+
+  currentController: Controller = new Controller();
 
   @ViewChild("header") header: HeaderComponent;
   showView: string = 'pricelist';
@@ -27,7 +29,7 @@ export class ControllerViewComponent implements OnInit {
     this.header.controllerView();
     this.controllerService.getController(this.token.getUsername()).subscribe((response) => {
       this.currentController = response;
-    })
+    });
   }
 
   onNavigate(feature: string){

@@ -1,6 +1,4 @@
-*{
-    color:black;
-  }
+
 input[type=text]{
     width: 100%;
     padding: 12px;
@@ -10,6 +8,7 @@ input[type=text]{
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    color: black;
 }
 
 input[type=password] {
@@ -21,6 +20,7 @@ input[type=password] {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    color: black;
 }
 
 input[type=email] {
@@ -32,6 +32,7 @@ input[type=email] {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    color: black;
 }
 
 input[type=submit] {
@@ -45,6 +46,10 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: #45a049;
+}
+
+input[type=date] {
+    color: black;
 }
 
 button {
@@ -74,5 +79,10 @@ button {
   .cancelbtn, .signupbtn {
     margin: 0 auto;
     width: 45%;
+  }
+
+  .nomatch {
+      color: red;
+      font-weight: bold;
   }
   
