@@ -54,7 +54,15 @@ export class ControllerAddComponent implements OnInit {
       console.log("phone: " + phone);
       console.log("date: " + date);
 
-      const newController = new Controller(email,username,pass1,firstName,lastName,address2,phone,date);
+      const newController = new Controller();
+      newController.username = username;
+      newController.email = email;
+      newController.password = pass1;
+      newController.first_name = firstName;
+      newController.last_name = lastName;
+      newController.address = address2;
+      newController.phone_number = phone;
+      newController.date_birth = date;
       newController.roles = ['controller'];
       alert(newController.roles);
 

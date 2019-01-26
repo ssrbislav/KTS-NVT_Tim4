@@ -20,7 +20,7 @@ public class Document {
 	private Long id;
 
 	@Column(name = "date_of_upload", nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date_of_upload;
 
 	@Column(name = "image_location", nullable = false)

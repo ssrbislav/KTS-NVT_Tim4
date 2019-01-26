@@ -39,13 +39,16 @@ insert into user(email, username, password, first_name, last_name, address, phon
 insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bane@gmail.com','baneKontroler','lozinka2','Bane','Corilic','Balzakova 28','456436463','1985-05-30');
 
 insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik@gmail.com','putnik','lozinka','Bane','Corilic','Balzakova 28','453534532','1985-05-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik2@gmail.com','putnik2','lozinka2','ime','prezime','Balzakova 28','462747242','1985-05-30');
 
 insert into controller(id,deleted)values(1,false);
 insert into controller(id,deleted)values(2,false);
 
 insert into passenger(id,active,user_type,validate_document)values(3,true,1,false);
+insert into passenger(id,active,user_type,validate_document)values(4,true,1,false);
 
-insert into document(date_of_upload,image_location,passenger_id)values('05.01.2019.','lokacija',3)
+insert into document(date_of_upload,image_location,passenger_id)values('2019-01-10','lokacija',3);
+insert into document(date_of_upload,image_location,passenger_id)values('2018-05-30','lokacija',4);
 
 
 

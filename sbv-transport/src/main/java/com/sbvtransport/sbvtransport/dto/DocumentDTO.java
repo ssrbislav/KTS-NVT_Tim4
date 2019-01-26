@@ -8,7 +8,7 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 public class DocumentDTO {
 
 	private Long id;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dateOfUpload;
 	private String imageLocation;
 	private Long idPassenger;

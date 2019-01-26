@@ -28,13 +28,16 @@ public class DocumentService implements IDocumentService {
 	@Override
 	public Document getOne(Long id) {
 
-		return documentRepository.getOne(id);
+		return documentRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public Document create(DocumentDTO document) {
 
-		Passenger p = passengerRepository.getOne(document.getIdPassenger());
+		Passenger p = passengerRepository.findById(document.getIdPassenger()).orElse(null);
+		if(p == null){
+			return null;
+		}
 		Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p);
 		return documentRepository.save(d);
 	}

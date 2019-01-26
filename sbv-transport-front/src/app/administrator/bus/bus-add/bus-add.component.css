@@ -1,4 +1,6 @@
-
+*{
+  color:black;
+}
 input[type=text],input[type=password], select,input[type=number], input[type=time] {
     width: 100%;
     padding: 12px;
