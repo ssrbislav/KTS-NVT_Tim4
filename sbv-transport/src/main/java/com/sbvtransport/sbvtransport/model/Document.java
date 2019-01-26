@@ -57,20 +57,20 @@ public class Document {
 		this.passenger = passenger;
 	}
 
-	public Date getDateOfUpload() {
+	public Date getDate_of_upload() {
 		return date_of_upload;
 	}
 
-	public void setDateOfUpload(Date dateOfUpload) {
-		this.date_of_upload = dateOfUpload;
+	public void setDate_of_upload(Date date_of_upload) {
+		this.date_of_upload = date_of_upload;
 	}
 
-	public String getImageLocation() {
+	public String getImage_location() {
 		return image_location;
 	}
 
-	public void setImageLocation(String imageLocation) {
-		this.image_location = imageLocation;
+	public void setImage_location(String image_location) {
+		this.image_location = image_location;
 	}
 
 	public Long getId() {

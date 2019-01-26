@@ -67,8 +67,8 @@ public class DocumentServiceJUnitTest {
 		List<Document> documents = documentService.findAll();
 		assertThat(documents.size()).isEqualTo(2);
 		assertThat(documents.get(0).getId()).isEqualTo(1L);
-		assertThat(fmt.format(documents.get(0).getDateOfUpload())).isEqualTo("2018/03/30");
-		assertThat(documents.get(0).getImageLocation()).isEqualTo("lokacija");
+		assertThat(fmt.format(documents.get(0).getDate_of_upload())).isEqualTo("2018/03/30");
+		assertThat(documents.get(0).getImage_location()).isEqualTo("lokacija");
 		assertThat(documents.get(0).getPassenger().getId()).isEqualTo(1L);
 
 	}
@@ -82,8 +82,8 @@ public class DocumentServiceJUnitTest {
 
 		assertNotNull(d);
 		assertThat(d.getId()).isEqualTo(1L);
-		assertThat(fmt.format(d.getDateOfUpload())).isEqualTo("2018/03/30");
-		assertThat(d.getImageLocation()).isEqualTo("lokacija");
+		assertThat(fmt.format(d.getDate_of_upload())).isEqualTo("2018/03/30");
+		assertThat(d.getImage_location()).isEqualTo("lokacija");
 		assertThat(d.getPassenger().getId()).isEqualTo(1L);
 	}
 

@@ -49,11 +49,11 @@ public class DocumentService implements IDocumentService {
 			return null;
 		}
 		Passenger p = passengerRepository.findById(document.getIdPassenger()).orElse(null);
-		if(p == null){
+		if(p == null ||!( p.getId().equals(updateDoc.getPassenger().getId()))){
 			return null;
 		}
-		updateDoc.setImageLocation(document.getImageLocation());
-		updateDoc.setDateOfUpload(document.getDateOfUpload());
+		updateDoc.setImage_location(document.getImageLocation());
+		updateDoc.setDate_of_upload(document.getDateOfUpload());
 
 		return documentRepository.save(updateDoc);
 	}

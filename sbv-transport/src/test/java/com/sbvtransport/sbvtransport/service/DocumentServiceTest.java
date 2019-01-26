@@ -46,8 +46,8 @@ public class DocumentServiceTest {
 
 		assertNotNull(d);
 		assertThat(d.getId()).isEqualTo(1L);
-		assertThat(fmt.format(d.getDateOfUpload())).isEqualTo("2019-01-10");
-		assertThat(d.getImageLocation()).isEqualTo("lokacija");
+		assertThat(fmt.format(d.getDate_of_upload())).isEqualTo("2019-01-10");
+		assertThat(d.getImage_location()).isEqualTo("lokacija");
 		assertThat(d.getPassenger().getId()).isEqualTo(3L);
 	}
 
@@ -72,8 +72,8 @@ public class DocumentServiceTest {
 		Document savedDocument = documentService.create(newDocument);
 
 		assertNotNull(savedDocument);
-		assertThat(fmt.format(savedDocument.getDateOfUpload())).isEqualTo(fmt.format(newDocument.getDateOfUpload()));
-		assertThat(savedDocument.getImageLocation()).isEqualTo(newDocument.getImageLocation());
+		assertThat(fmt.format(savedDocument.getDate_of_upload())).isEqualTo(fmt.format(newDocument.getDateOfUpload()));
+		assertThat(savedDocument.getImage_location()).isEqualTo(newDocument.getImageLocation());
 		assertThat(savedDocument.getPassenger().getId()).isEqualTo(newDocument.getIdPassenger());
 
 	}
@@ -104,8 +104,8 @@ public class DocumentServiceTest {
 
 		assertNotNull(savedDocument);
 		assertThat(savedDocument.getId()).isEqualTo(updateDocument.getId());
-		assertThat(fmt.format(savedDocument.getDateOfUpload())).isEqualTo(fmt.format(updateDocument.getDateOfUpload()));
-		assertThat(savedDocument.getImageLocation()).isEqualTo(updateDocument.getImageLocation());
+		assertThat(fmt.format(savedDocument.getDate_of_upload())).isEqualTo(fmt.format(updateDocument.getDateOfUpload()));
+		assertThat(savedDocument.getImage_location()).isEqualTo(updateDocument.getImageLocation());
 		assertThat(savedDocument.getPassenger().getId()).isEqualTo(updateDocument.getIdPassenger());
 
 	}

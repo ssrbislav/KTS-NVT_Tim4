@@ -33,6 +33,11 @@ public class DocumentController {
 	public ResponseEntity<Document> getOne(@PathVariable Long id) {
 
 		Document doc = documentService.getOne(id);
+		
+		if(doc == null){
+			return new ResponseEntity<Document>(doc, HttpStatus.NOT_FOUND);
+
+		}
 
 		return new ResponseEntity<Document>(doc, HttpStatus.OK);
 	}
@@ -41,6 +46,11 @@ public class DocumentController {
 	public ResponseEntity<Document> create(@RequestBody DocumentDTO doc) {
 
 		Document newDoc = documentService.create(doc);
+		
+		if(newDoc == null){
+			return new ResponseEntity<Document>(newDoc, HttpStatus.BAD_REQUEST);
+
+		}
 
 		return new ResponseEntity<Document>(newDoc, HttpStatus.OK);
 	}
@@ -49,6 +59,10 @@ public class DocumentController {
 	public ResponseEntity<Document> update(@RequestBody DocumentDTO doc) {
 
 		Document updateDoc = documentService.update(doc);
+		
+		if(updateDoc == null){
+			return new ResponseEntity<>(updateDoc, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateDoc, HttpStatus.OK);
 	}
