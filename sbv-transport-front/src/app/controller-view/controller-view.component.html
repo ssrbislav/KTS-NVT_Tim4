@@ -1,4 +1,6 @@
 <app-header #header (featureSelected)= "onNavigate($event)"></app-header>
 <div class="container">
-  <h2>Welcome, {{currentController.first_name}}</h2>>
+  <h2>Welcome, {{currentController.first_name}}</h2>
+  <button class="btn check" (click) = "checkTicket()">Cekiraj kartu</button>
+  <hr>
 </div>

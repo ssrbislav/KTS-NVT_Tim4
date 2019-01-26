@@ -65,6 +65,7 @@ import { SubwayViewComponent } from './user/subway-view/subway-view.component';
 import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
 import { ControllerViewComponent } from './controller-view/controller-view.component';
 import { PricelistService } from './services/pricelist.service';
+import { TicketCheckComponent } from './controller-view/ticket-check/ticket-check.component';
 
 const appRoutes: Routes = [
  
@@ -155,7 +156,8 @@ const appRoutes: Routes = [
     BusViewComponent,
     SubwayViewComponent,
     TrolleyViewComponent,
-    ControllerViewComponent
+    ControllerViewComponent,
+    TicketCheckComponent
   ],
   imports: [
     BrowserModule,
@@ -188,7 +190,8 @@ const appRoutes: Routes = [
     StationEditComponent,
     LineEditComponent,
     MyDialogTimetableComponent,
-    ControllerAddComponent
+    ControllerAddComponent,
+    TicketCheckComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService, PricelistService,

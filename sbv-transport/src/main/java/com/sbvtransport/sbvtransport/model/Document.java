@@ -19,12 +19,12 @@ public class Document {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 
-	@Column(name = "dateOfUploud", nullable = false)
+	@Column(name = "date_of_upload", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
-	private Date dateOfUpload;
+	private Date date_of_upload;
 
-	@Column(name = "imageLocation", nullable = false)
-	private String imageLocation;
+	@Column(name = "image_location", nullable = false)
+	private String image_location;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passenger passenger;
@@ -35,8 +35,8 @@ public class Document {
 
 	public Document(Date dateOfUpload, String imageLocation, Passenger passenger) {
 		super();
-		this.dateOfUpload = dateOfUpload;
-		this.imageLocation = imageLocation;
+		this.date_of_upload = dateOfUpload;
+		this.image_location = imageLocation;
 		this.passenger = passenger;
 	}
 
@@ -50,19 +50,19 @@ public class Document {
 	}
 
 	public Date getDateOfUpload() {
-		return dateOfUpload;
+		return date_of_upload;
 	}
 
 	public void setDateOfUpload(Date dateOfUpload) {
-		this.dateOfUpload = dateOfUpload;
+		this.date_of_upload = dateOfUpload;
 	}
 
 	public String getImageLocation() {
-		return imageLocation;
+		return image_location;
 	}
 
 	public void setImageLocation(String imageLocation) {
-		this.imageLocation = imageLocation;
+		this.image_location = imageLocation;
 	}
 
 	public Long getId() {

@@ -1,0 +1,10 @@
+.check {
+    background-color: #45a049;
+    width: 10%;
+    height: 50px;
+    opacity: 0.9;
+}
+
+.check:hover {
+    opacity: 1;
+}

@@ -20,7 +20,6 @@ insert into line_project(id,station_id) values(2,2);
 insert into line_project(id,station_id) values(2,3);
 insert into line_project(id,station_id) values(3,2);
 
-
 insert into bus(code,line,late,name,time_arrive,deleted,location) values('7ca_bus_lasta',1,false,'lasta',5,false,2);
 insert into bus(code,line,late,name,time_arrive,deleted,location) values('7ca_bus_sara',1,true,'sara',6,false,1);
 insert into bus(code,line,late,name,time_arrive,deleted,location) values('7ca_bus_Nis_expres',1,false,'Nis_expres',5,false,2);
@@ -39,10 +38,14 @@ insert into trolley(code,line,late,name,time_arrive,deleted) values('7ca_trolley
 insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bokaa@gmail.com','bokaKontroler','lozinka','Bojana','Corilic','Balzakova 28','0897346576','1995-03-30');
 insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bane@gmail.com','baneKontroler','lozinka2','Bane','Corilic','Balzakova 28','456436463','1985-05-30');
 
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik@gmail.com','putnik','lozinka','Bane','Corilic','Balzakova 28','453534532','1985-05-30');
+
 insert into controller(id,deleted)values(1,false);
 insert into controller(id,deleted)values(2,false);
 
+insert into passenger(id,active,user_type,validate_document)values(3,true,1,false);
 
+insert into document(date_of_upload,image_location,passenger_id)values('05.01.2019.','lokacija',3)
 
 
 
