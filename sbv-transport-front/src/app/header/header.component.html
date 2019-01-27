@@ -40,11 +40,16 @@
             <ul class="nav navbar-nav navbar-left" *ngIf = "(showView) == 'user'">
                 <ul class="nav navbar-nav">
                     <li><a (click)="clickButtonHome()" style="cursor: pointer;">Home</a></li>
+                    <li><a (click) = "clickButtonBus()"  style="cursor: pointer;">Bus</a></li>
+                    <li><a (click) = "clickButtonSubway()"  style="cursor: pointer;">Subway</a></li>
+                    <li><a (click) = "clickButtonTrolley()"  style="cursor: pointer;">Trolley</a></li>
+                    <li><a (click) = "clickButtonTicket()"  style="cursor: pointer;">Buy a Ticket</a></li>
                 </ul>
             </ul>
 
             <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'user'">
-                <li><a (click) = "clickButtonProfil()"  style="cursor: pointer;">Profil</a></li>
+                <li><a (click) = "clickButtonTickets()"  style="cursor: pointer;">Your Tickets</a></li>
+                <li><a (click) = "clickButtonProfile()"  style="cursor: pointer;">Profil</a></li>
                 <li><a (click) = "clickButtonLogout()" style="cursor: pointer;">Logout</a></li>
             </ul>
         </div>
