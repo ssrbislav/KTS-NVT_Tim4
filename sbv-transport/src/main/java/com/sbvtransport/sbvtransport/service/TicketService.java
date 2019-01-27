@@ -46,7 +46,7 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public Ticket getOne(Long id) {
-		return ticketRepository.getOne(id);
+		return ticketRepository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -218,7 +218,7 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public List<Ticket> findByUserID(Long id) {
-		Passenger passenger = passengerRepository.getOne(id);
+		Passenger passenger = passengerRepository.findById(id).orElse(null);
 		if (passenger == null || passenger.getTickets().isEmpty() || passenger.getTickets() == null) {
 			return null;
 		}
@@ -227,7 +227,7 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public Ticket activate(Long id) {
-		Ticket ticket = ticketRepository.getOne(id);
+		Ticket ticket = getOne(id);
 		if (ticket == null) {
 			return null;
 		}
