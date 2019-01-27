@@ -70,6 +70,10 @@ import { PricelistComponent } from './controller-view/pricelist/pricelist.compon
 import { DocumentComponent } from './administrator/document/document.component';
 import { DocumentService } from './services/document.service';
 import { BuyTicketComponent } from './user/buy-ticket/buy-ticket.component';
+import { TicketService } from './services/ticket.service';
+import { PassengerService } from './services/passenger.service';
+import { TicketViewComponent } from './user/ticket-view/ticket-view.component';
+import { ProfileViewComponent } from './user/profile-view/profile-view.component';
 
 const appRoutes: Routes = [
  
@@ -164,7 +168,9 @@ const appRoutes: Routes = [
     TicketCheckComponent,
     PricelistComponent,
     DocumentComponent,
-    BuyTicketComponent
+    BuyTicketComponent,
+    TicketViewComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,
@@ -201,7 +207,7 @@ const appRoutes: Routes = [
     TicketCheckComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService, TimetableService, PricelistService, DocumentService,
+    LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]
