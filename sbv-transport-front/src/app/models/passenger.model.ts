@@ -20,3 +20,7 @@ export class Passenger {
     document_validated: boolean;
     tickets: Ticket[];
 }
+
+enum UserType{
+    standard, student, senior
+}

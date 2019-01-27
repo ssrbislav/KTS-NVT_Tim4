@@ -16,3 +16,19 @@ export class Ticket {
     date_purchase: Date;
     passenger: Passenger;
 }
+
+enum TypeTransport {
+    bus,subway,trolley
+}
+
+enum TicketType{
+    oneUse,daily,monthly,year
+}
+
+enum DemographicTicketType{
+    student,standard,senior
+}
+
+enum Zone{
+    first,second
+}

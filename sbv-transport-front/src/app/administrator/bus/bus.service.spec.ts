@@ -38,7 +38,7 @@ describe('BusService', () => {
         expect(this.lastConnection.request.url).toMatch(/api\/bus$/, 'url invalid');
     });
     
-    it('getStudents() should return some students', fakeAsync(() => {
+    it('getBuses() should return some buses', fakeAsync(() => {
         let buses: Bus[];
         let line:Line = new Line();
         let myLocation: MyLocation = new MyLocation();
@@ -70,7 +70,7 @@ describe('BusService', () => {
              }])
           })));
         tick();
-        expect(buses.length).toEqual(2, 'should contain given amount of students');
+        expect(buses.length).toEqual(2, 'should contain given amount of buses');
         //expect(buses[0].id).toEqual(1);
         expect(buses[0].code).toEqual('neki kod');
         expect(buses[0].name).toEqual('Lasta');

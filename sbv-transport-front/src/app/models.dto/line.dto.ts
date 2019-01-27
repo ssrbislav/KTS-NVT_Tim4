@@ -3,3 +3,7 @@ export class LineDTO{
 	name : string;
 	zone : Zone;
 }
+
+enum Zone{
+    first,second
+}
