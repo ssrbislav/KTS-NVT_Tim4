@@ -10,6 +10,7 @@ import { FilterSearchLineDTO } from 'src/app/models.dto/filterSearchLine.dto';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Timetable } from 'src/app/models/timetable.model';
 import { Schedule } from 'src/app/models/schedule.model';
+import { BuyTicketDTO } from 'src/app/models.dto/buyTicket.dto';
 
 @Component({
   selector: 'app-bus-view',
@@ -23,14 +24,15 @@ export class BusViewComponent implements OnInit {
   lineSelected: Line = new Line();
   lineGot: Line;
   lines: Line[] = [];
-  allLines: Line[];
+  allLines: Line[] = [];
   timetables: Timetable[];
-  result: Timetable[];
+  result: Timetable[] = [];
   map: any;
   schedule: Set<Schedule>;
   times: Set<Date>;
   @Input() timeTable: any;
   @Output() filter = new EventEmitter<Timetable[]>();
+  @Output() buyTicketDTO = new BuyTicketDTO();
   productForm: FormGroup;
   filterSearch: Line;
   id: BigInteger;
@@ -59,8 +61,14 @@ export class BusViewComponent implements OnInit {
   loadLines(){
     this.lineService.getLines()
       .subscribe( data => {
-        this.lines = data;
-        this.loadBusLines();
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].line_type.toString() == "bus") {
+            this.lines.push(data[i]);
+            console.log(data[i]);
+          }
+        }
+        // this.lines = data;
+        // this.loadBusLines();
       });
   }
 
@@ -97,7 +105,7 @@ export class BusViewComponent implements OnInit {
   }
 
   buyTicket() {
-
+    
   }
 
 }

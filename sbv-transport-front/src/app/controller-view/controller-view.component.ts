@@ -14,8 +14,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 })
 export class ControllerViewComponent implements OnInit {
 
-  @Output() featureSelected = new EventEmitter<string>();
-
   currentController: Controller = new Controller();
 
   @ViewChild("header") header: HeaderComponent;

@@ -17,7 +17,7 @@ const httpOptions = {
 
     constructor(private http:HttpClient) {}
 
-    private subwayUrl = 'http://localhost:8080/api/subway/';
+    subwayUrl = 'http://localhost:8080/api/subway/';
 
     public getSubways() {
         return this.http.get<Subway[]>(this.subwayUrl);

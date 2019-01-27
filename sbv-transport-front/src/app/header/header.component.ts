@@ -78,6 +78,18 @@ export class HeaderComponent implements OnInit {
   clickButtonProfil(){
     this.featureSelected.emit('profil');
   }
+
+  clickButtonProfile(){
+    this.featureSelected.emit('profileView');
+  }
+
+  clickButtonTicket(){
+    this.featureSelected.emit('buyTicket');
+  }
+
+  clickButtonTickets(){
+    this.featureSelected.emit('ticketView');
+  }
   
   clickButtonLine(){
     this.featureSelected.emit('line');
@@ -103,6 +115,11 @@ export class HeaderComponent implements OnInit {
 
   clickButtonPricelist() {
     this.featureSelected.emit('pricelist');
+  }
+
+  clickButtonDocument(){
+    this.featureSelected.emit('document');
+
   }
 
 

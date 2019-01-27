@@ -67,6 +67,15 @@ import { ControllerViewComponent } from './controller-view/controller-view.compo
 import { PricelistService } from './services/pricelist.service';
 import { TicketCheckComponent } from './controller-view/ticket-check/ticket-check.component';
 import { PricelistComponent } from './controller-view/pricelist/pricelist.component';
+import { DocumentComponent } from './administrator/document/document.component';
+import { DocumentService } from './services/document.service';
+import { LineTimetableComponent } from './administrator/line/line-table/line-timetable/line-timetable.component';
+import { BuyTicketComponent } from './user/buy-ticket/buy-ticket.component';
+import { TicketService } from './services/ticket.service';
+import { PassengerService } from './services/passenger.service';
+import { TicketViewComponent } from './user/ticket-view/ticket-view.component';
+import { ProfileViewComponent } from './user/profile-view/profile-view.component';
+import { HttpModule } from '@angular/http';
 
 const appRoutes: Routes = [
  
@@ -159,7 +168,13 @@ const appRoutes: Routes = [
     TrolleyViewComponent,
     ControllerViewComponent,
     TicketCheckComponent,
-    PricelistComponent
+    PricelistComponent,
+    DocumentComponent,
+    BuyTicketComponent,
+    TicketViewComponent,
+    ProfileViewComponent,
+    DocumentComponent,
+    LineTimetableComponent
   ],
   imports: [
     BrowserModule,
@@ -173,7 +188,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   entryComponents: [
     MyDialogComponent,
@@ -193,10 +209,11 @@ const appRoutes: Routes = [
     LineEditComponent,
     MyDialogTimetableComponent,
     ControllerAddComponent,
-    TicketCheckComponent
+    TicketCheckComponent,
+    LineTimetableComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService, TimetableService, PricelistService,
+    LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService, HttpClientModule,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]

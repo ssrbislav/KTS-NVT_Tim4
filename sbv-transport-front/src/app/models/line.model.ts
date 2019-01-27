@@ -10,3 +10,11 @@ export class Line {
     timetable: Timetable[];
     first_station: BigInteger;
 }
+
+enum TypeTransport {
+    bus,subway,trolley
+}
+
+enum Zone{
+    first,second
+}

@@ -9,6 +9,7 @@ import { MyDialogStationsComponent } from './my-dialog-stations/my-dialog-statio
 import { LineEditComponent } from '../line-edit/line-edit.component';
 import { Timetable } from 'src/app/models/timetable.model';
 import { MyDialogTimetableComponent } from '../../my-dialog-timetable/my-dialog-timetable.component';
+import { LineTimetableComponent } from './line-timetable/line-timetable.component';
 
 @Component({
   selector: 'app-line-table',
@@ -127,17 +128,18 @@ export class LineTableComponent implements OnInit {
   
   }
 
-  openModalTimetable(timetable: Timetable){
+  openModalTimetable(timetable: Timetable[], firstStation:BigInteger){
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.data = {
       id: 1,
-      timetable: timetable
+      timetables: timetable,
+      firstStation: firstStation
       };
 
-    const dialogRef = this.dialog.open(MyDialogTimetableComponent, dialogConfig);
+    const dialogRef = this.dialog.open(LineTimetableComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
     console.log("Dialog was closed")

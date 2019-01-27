@@ -5,8 +5,11 @@ import static org.junit.Assert.assertNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,13 +25,14 @@ import com.sbvtransport.sbvtransport.model.Controller;
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
 @Rollback(value = true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ControllerServiceTest {
 
 	@Autowired
 	private ControllerService controllerService;
 
 	@Test
-	public void findAllTest() {
+	public void afindAllTest() {
 		List<Controller> allControllers = controllerService.findAll();
 		assertThat(allControllers).hasSize(2);
 	}
@@ -180,7 +184,7 @@ public class ControllerServiceTest {
 	}
 
 	@Test
-	public void filterSearchTest() {
+	public void afilterSearchTest() {
 		// filter and search by username
 		FilterSearchControllerDTO filterSearch = new FilterSearchControllerDTO("username", "b");
 		List<Controller> all = controllerService.filterSearch(filterSearch);

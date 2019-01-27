@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.controller;
 
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -9,9 +10,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.nio.charset.Charset;
 import java.util.Date;
 import javax.annotation.PostConstruct;
-import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -31,6 +33,7 @@ import com.sbvtransport.sbvtransport.model.Controller;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Rollback(value = true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ControllerControllerTest {
 
 	private static final String URL_PREFIX = "/api/controller";
@@ -48,12 +51,11 @@ public class ControllerControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
-	@Before
 	@Test
 	@Rollback(value = true)
-	public void getAllTest() throws Exception {
+	public void agetAllTest() throws Exception {
 		mockMvc.perform(get(URL_PREFIX)).andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$.[*].id").value(hasItem(1)))
+				.andExpect(jsonPath("$", hasSize(2))).andExpect(jsonPath("$.[*].id").value(hasItem(1)))
 				.andExpect(jsonPath("$.[*].email").value(hasItem("bokaa@gmail.com")))
 				.andExpect(jsonPath("$.[*].username").value(hasItem("bokaKontroler")))
 				.andExpect(jsonPath("$.[*].date_birth").value(hasItem("1995-03-30")))
@@ -99,6 +101,7 @@ public class ControllerControllerTest {
 				.andExpect(status().isOk());
 
 	}
+
 	// update controller , wrong id
 	@Test
 	@Transactional
@@ -137,7 +140,7 @@ public class ControllerControllerTest {
 	@Test
 	@Transactional
 	@Rollback(value = true)
-	public void registerTest() throws Exception {
+	public void wregisterTest() throws Exception {
 		RegisterDTO controller = new RegisterDTO();
 		controller.setUsername("controller");
 		controller.setEmail("email@gmail.com");
@@ -157,7 +160,7 @@ public class ControllerControllerTest {
 	@Test
 	@Transactional
 	@Rollback(value = true)
-	public void registerTest2() throws Exception {
+	public void wregisterTest2() throws Exception {
 		RegisterDTO controller = new RegisterDTO();
 		controller.setUsername("bokaKontroler");
 		controller.setEmail("email@gmail.com");
@@ -177,7 +180,7 @@ public class ControllerControllerTest {
 	@Test
 	@Transactional
 	@Rollback(value = true)
-	public void registerTest3() throws Exception {
+	public void wregisterTest3() throws Exception {
 		RegisterDTO controller = new RegisterDTO();
 		controller.setUsername("novi");
 		controller.setEmail("bokaa@gmail.com");

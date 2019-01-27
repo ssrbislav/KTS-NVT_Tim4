@@ -64,6 +64,10 @@ export class MainPageComponent implements OnInit {
     });
 
   }
+
+  clickPicture(){
+    alert("Please login/register so you can see more information!");
+  }
   
  
 

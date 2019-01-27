@@ -29,10 +29,22 @@ public class TicketController {
 		return new ResponseEntity<>(tickets, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/addTicket", method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody TicketDTO ticket) {
+	@RequestMapping(value = "/getTickets/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Ticket>> getByUserID(@PathVariable Long id) {
 
-		String newTicket = ticketService.create(ticket);
+		List<Ticket> tickets = ticketService.findByUserID(id);
+
+		return new ResponseEntity<>(tickets, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/addTicket", method = RequestMethod.POST)
+	public ResponseEntity<Ticket> create(@RequestBody TicketDTO ticket) {
+
+		Ticket newTicket = ticketService.create(ticket);
+
+		if(newTicket == null){
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(newTicket, HttpStatus.OK);
 
@@ -53,6 +65,15 @@ public class TicketController {
 		boolean delete = ticketService.delete(id);
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/activate/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Ticket> activate(@PathVariable Long id) {
+
+		Ticket ticket = ticketService.activate(id);
+
+		return new ResponseEntity<>(ticket, HttpStatus.OK);
 
 	}
 

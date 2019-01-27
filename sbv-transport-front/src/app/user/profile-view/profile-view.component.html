@@ -1,0 +1,36 @@
+<div class="profil">
+  <div class="row">
+    
+    <h1 style="text-align: center">Profil</h1>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" [value] = "passenger.password" [disabled]="true" #inputEl1>
+
+    <div *ngIf = "show == 'change'">
+      <label for="password">Repeat Password</label>
+      <input type="password" name="password" [value] = "passRepeat" #inputEl2>
+    </div>
+
+    <label for="first_name">First name</label>
+    <input type="text" name="first_name" [value]= "passenger.first_name" [disabled]="true" #inputEl3>
+
+    <label for="last_name">Last name</label>
+    <input type="text" name="last_name" [value] = "passenger.last_name" [disabled]="true" #inputEl4>
+
+    <label for="address">Address</label>
+    <input type="text" name="address" [value]= "passenger.address" [disabled]="true" #inputEl5>
+
+    <label for="phone_number">Phone number</label>
+    <input type="text" name="phone_number" [value] = "passenger.phone_number" [disabled]="true" #inputEl6>
+
+    <div class="clearfix" *ngIf = "show == 'change'">
+        <button class="cancelbtn" (click) = "cancelClicked()">Cancel</button>
+        <button class="signupbtn" (click) = "saveClicked()">Save</button>
+    </div>
+    
+    <button *ngIf = "show == 'profil'" (click) = "clickChange()">Change</button>
+    
+
+  
+  </div>
+</div>

@@ -31,3 +31,33 @@ insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7c
 insert into trolley(code,line,late,name,time_arrive,deleted) values('7ca_trolley_Dunav prevoz',3,true,'Dunav prevoz',7,false);
 insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_Sara',3,false,'Sara',5,false,3);
 
+-- ne valja, nesto nije dobro jer ne moze da se uloguj sa ovim podacima kao da ne vidi role?
+insert into role(name) values('ROLE_PASSENGER');
+insert into role(name) values('ROLE_CONTROLLER');
+
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bokaa@gmail.com','bokaKontroler','lozinka','Bojana','Corilic','Balzakova 28','0897346576','1995-03-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('bane@gmail.com','baneKontroler','lozinka2','Bane','Corilic','Balzakova 28','456436463','1985-05-30');
+
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik@gmail.com','putnik','lozinka','Bane','Corilic','Balzakova 28','453534532','1985-05-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik2@gmail.com','putnik2','lozinka2','ime2','prezime2','Balzakova 28','462747242','1985-05-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik3@gmail.com','putnik3','lozinka3','ime3','prezime3','Balzakova 28','462747242','1985-05-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik4@gmail.com','putnik4','lozinka4','ime4','prezime4','Balzakova 28','46256464642','1985-05-30');
+
+insert into user_roles(user_id,role_id) values(1,2);
+insert into user_roles(user_id,role_id) values(2,2);
+insert into user_roles(user_id,role_id) values(3,3);
+insert into user_roles(user_id,role_id) values(4,3);
+insert into user_roles(user_id,role_id) values(5,3);
+insert into user_roles(user_id,role_id) values(6,3);
+
+insert into controller(id,deleted)values(1,false);
+insert into controller(id,deleted)values(2,false);
+
+insert into passenger(id,active,user_type,validate_document)values(3,true,1,false);
+insert into passenger(id,active,user_type,validate_document)values(4,true,1,false);
+insert into passenger(id,active,user_type,validate_document)values(5,true,1,false);
+insert into passenger(id,active,user_type,validate_document)values(6,true,1,false);
+
+insert into document(date_of_upload,image_location,passenger_id,approved)values('2019-01-10','lokacija',4,'need approve');
+insert into document(date_of_upload,image_location,passenger_id,approved)values('2018-05-30','lokacija',5,'need approve');
+

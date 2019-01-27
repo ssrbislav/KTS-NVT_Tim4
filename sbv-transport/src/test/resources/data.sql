@@ -40,15 +40,19 @@ insert into user(email, username, password, first_name, last_name, address, phon
 
 insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik@gmail.com','putnik','lozinka','Bane','Corilic','Balzakova 28','453534532','1985-05-30');
 insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik2@gmail.com','putnik2','lozinka2','ime','prezime','Balzakova 28','462747242','1985-05-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik3@gmail.com','putnik3','lozinka3','ime','prezime','Balzakova 28','462747242','1985-05-30');
+insert into user(email, username, password, first_name, last_name, address, phone_number, date_birth)values('putnik4@gmail.com','putnik4','lozinka4','ime','prezime','Balzakova 28','46256464642','1985-05-30');
 
 insert into controller(id,deleted)values(1,false);
 insert into controller(id,deleted)values(2,false);
 
 insert into passenger(id,active,user_type,validate_document)values(3,true,1,false);
 insert into passenger(id,active,user_type,validate_document)values(4,true,1,false);
+insert into passenger(id,active,user_type,validate_document)values(5,true,1,false);
+insert into passenger(id,active,user_type,validate_document)values(6,true,1,false);
 
-insert into document(date_of_upload,image_location,passenger_id)values('2019-01-10','lokacija',3);
-insert into document(date_of_upload,image_location,passenger_id)values('2018-05-30','lokacija',4);
+insert into document(id,date_of_upload,image_location,passenger_id,approved)values(1,'2019-01-10','lokacija',3,'need approve');
+insert into document(id,date_of_upload,image_location,passenger_id,approved)values(2,'2018-05-30','lokacija',4,'need approve');
 
 
 
