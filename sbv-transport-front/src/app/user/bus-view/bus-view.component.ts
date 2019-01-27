@@ -23,9 +23,9 @@ export class BusViewComponent implements OnInit {
   lineSelected: Line = new Line();
   lineGot: Line;
   lines: Line[] = [];
-  allLines: Line[];
+  allLines: Line[] = [];
   timetables: Timetable[];
-  result: Timetable[];
+  result: Timetable[] = [];
   map: any;
   schedule: Set<Schedule>;
   times: Set<Date>;

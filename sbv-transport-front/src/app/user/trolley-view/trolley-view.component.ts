@@ -23,9 +23,9 @@ export class TrolleyViewComponent implements OnInit {
   lineSelected: Line = new Line();
   lineGot: Line;
   lines: Line[] = [];
-  allLines: Line[];
-  timetables: Timetable[];
-  result: Timetable[];
+  allLines: Line[] = [];
+  timetables: Timetable[] = [];
+  result: Timetable[] = [];
   map: any;
   schedule: Set<Schedule>;
   times: Set<Date>;

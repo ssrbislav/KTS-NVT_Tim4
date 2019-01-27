@@ -69,6 +69,7 @@ import { TicketCheckComponent } from './controller-view/ticket-check/ticket-chec
 import { PricelistComponent } from './controller-view/pricelist/pricelist.component';
 import { DocumentComponent } from './administrator/document/document.component';
 import { DocumentService } from './services/document.service';
+import { LineTimetableComponent } from './administrator/line/line-table/line-timetable/line-timetable.component';
 
 const appRoutes: Routes = [
  
@@ -162,7 +163,8 @@ const appRoutes: Routes = [
     ControllerViewComponent,
     TicketCheckComponent,
     PricelistComponent,
-    DocumentComponent
+    DocumentComponent,
+    LineTimetableComponent
   ],
   imports: [
     BrowserModule,
@@ -196,7 +198,8 @@ const appRoutes: Routes = [
     LineEditComponent,
     MyDialogTimetableComponent,
     ControllerAddComponent,
-    TicketCheckComponent
+    TicketCheckComponent,
+    LineTimetableComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService, PricelistService, DocumentService,

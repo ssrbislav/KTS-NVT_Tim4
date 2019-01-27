@@ -45,6 +45,7 @@ export class RegistrationComponent implements OnInit {
         window.alert("User successfully registered!");
         this.isSignUpFailed = false;
         this.isSignedUp = true;
+        this.dialogRef.close();
       },
       error => {
         console.log(error);

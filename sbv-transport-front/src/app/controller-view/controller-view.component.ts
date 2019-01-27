@@ -14,7 +14,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 })
 export class ControllerViewComponent implements OnInit {
 
-  currentController: Controller;
+  currentController: Controller = new Controller();
 
   @ViewChild("header") header: HeaderComponent;
   showView: string = 'pricelist';
