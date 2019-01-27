@@ -7,7 +7,7 @@ export class DocumentService{
 
     constructor(private http:HttpClient) {}
 
-    private documentUrl = 'http://localhost:8080/api/document/';
+    documentUrl = 'http://localhost:8080/api/document/';
 
     public getDocuments() {
       return this.http.get<MyDocument[]>(this.documentUrl);
