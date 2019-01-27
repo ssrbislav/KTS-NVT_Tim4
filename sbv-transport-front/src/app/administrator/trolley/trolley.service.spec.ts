@@ -1,6 +1,4 @@
 import { TestBed, inject } from "@angular/core/testing";
-import { BusService } from 'src/app/services/bus.service';
-import { Bus } from 'src/app/models/bus.model';
 import { Line } from 'src/app/models/line.model';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TransportDTO } from 'src/app/models.dto/transport.dto';
@@ -10,48 +8,48 @@ import { HttpResponse } from '@angular/common/http';
 import { ChangeTransportDTO } from 'src/app/models.dto/changeTransport.dto';
 import { Timetable } from 'src/app/models/timetable.model';
 import { FilterSearchTransportDTO } from 'src/app/models.dto/filterSearchTransport.dto';
+import { TrolleyService } from 'src/app/services/trolley.service';
+import { Trolley } from 'src/app/models/trolley.model';
 
 
-describe('BusService', () => {
+describe('TrolleyService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [BusService]
+            providers: [TrolleyService]
         });
     });
 
-    it('getBus() should get all buses', inject([HttpTestingController, BusService], (
+    it('getTrolleys() should get all trolleys', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
-        let b: Bus = new Bus();
-        b.code = 'kod';
-        b.deleted = false;
-        b.late = false;
-        b.line = new Line();
-        b.location = null;
-        b.name = 'Lasta';
-        b.time_arrive = 5;
-        b.timetable = null;
-        let dummyBuses: Bus[] = [];
-        dummyBuses.push(b);
+        dataService: TrolleyService) => {
+        let s: Trolley = new Trolley();
+        s.code = 'kod';
+        s.late = false;
+        s.line = new Line();
+        s.location = null;
+        s.name = 'Lasta';
+        s.time_arrive = 5;
+        s.timetable = null;
+        let dummyTrolleys: Trolley[] = [];
+        dummyTrolleys.push(s);
 
-        dataService.getBuses().subscribe(data => {
-            expect(data).toEqual(dummyBuses);
+        dataService.getTrolley().subscribe(data => {
+            expect(data).toEqual(dummyTrolleys);
             expect(data.length).toEqual(1);
             expect(data[0].code).toEqual('kod');
-            expect(data[0].deleted).toEqual(false);
             expect(data[0].late).toEqual(false);
             expect(data[0].name).toEqual('Lasta');
             expect(data[0].time_arrive).toEqual(5);
 
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl);
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl);
 
         expect(mockReq.cancelled).toBeFalsy();
         expect(mockReq.request.responseType).toEqual('json');
 
-        mockReq.flush(dummyBuses);
+        mockReq.flush(dummyTrolleys);
 
         httpMock.verify();
     }
@@ -59,15 +57,14 @@ describe('BusService', () => {
     );
 
 
-    it('DeleteBus() should get true', inject([HttpTestingController, BusService], (
+    it('DeleteTrolley() should get true', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(1);
-        let b: Bus = new Bus();
+        let b: Trolley = new Trolley();
         b.id =  i;
         b.code = 'kod';
-        b.deleted = false;
         b.late = false;
         b.line = new Line();
         b.location = null;
@@ -75,12 +72,12 @@ describe('BusService', () => {
         b.time_arrive = 5;
         b.timetable = null;
 
-        dataService.deleteBus(i).subscribe(data => {
+        dataService.deleteTrolley(i).subscribe(data => {
             expect(data).toEqual(true);
 
         });
 
-        const url = `${dataService.busUrl+ 'deleteBus'}/${i}`;
+        const url = `${dataService.trolleyUrl+ 'deleteTrolley'}/${i}`;
         const mockReq = httpMock.expectOne(url);
 
         expect(mockReq.cancelled).toBeFalsy();
@@ -94,18 +91,18 @@ describe('BusService', () => {
     )
     );
 
-    it('DeleteBus() should get false-does not exist', inject([HttpTestingController, BusService], (
+    it('DeleteTrolley() should get false-does not exist', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(3);
 
-        dataService.deleteBus(i).subscribe(data => {
+        dataService.deleteTrolley(i).subscribe(data => {
             expect(data).toEqual(false);
 
         });
 
-        const url = `${dataService.busUrl+ 'deleteBus'}/${i}`;
+        const url = `${dataService.trolleyUrl+ 'deleteTrolley'}/${i}`;
         const mockReq = httpMock.expectOne(url);
 
         expect(mockReq.cancelled).toBeFalsy();
@@ -119,74 +116,72 @@ describe('BusService', () => {
     )
     );
 
-    it('AddBus() should get created bus', inject([HttpTestingController, BusService], (
+    it('AddTrolley() should get created trolley', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(1);
 
-        let newBus: TransportDTO = new TransportDTO();
-        newBus.id_line = i;
-        newBus.name = 'Novi bus';
-        newBus.time_arrive = 5;
+        let newTrolley: TransportDTO = new TransportDTO();
+        newTrolley.id_line = i;
+        newTrolley.name = 'Novi';
+        newTrolley.time_arrive = 5;
 
         let line: Line = new Line();
         line.name = '7ca';
         line.id = i;
 
-        let resultBus: Bus = new Bus();
-        resultBus.id =  i;
-        resultBus.code = 'kod';
-        resultBus.deleted = false;
-        resultBus.late = false;
-        resultBus.line = line;
-        resultBus.location = null;
-        resultBus.name = 'Novi bus';
-        resultBus.time_arrive = 5;
-        resultBus.timetable = null;
+        let resultTrolley: Trolley = new Trolley();
+        resultTrolley.id =  i;
+        resultTrolley.code = 'kod';
+        resultTrolley.late = false;
+        resultTrolley.line = line;
+        resultTrolley.location = null;
+        resultTrolley.name = 'Novi';
+        resultTrolley.time_arrive = 5;
+        resultTrolley.timetable = null;
 
 
-        dataService.addBus(newBus).subscribe(data => {
-            expect(data).toEqual(resultBus);
+        dataService.addTrolley(newTrolley).subscribe(data => {
+            expect(data).toEqual(resultTrolley);
             expect(data.code).toEqual('kod');
-            expect(data.deleted).toEqual(false);
             expect(data.late).toEqual(false);
-            expect(data.name).toEqual('Novi bus');
+            expect(data.name).toEqual('Novi');
             expect(data.time_arrive).toEqual(5);
             expect(data.line.id).toEqual(i);
             expect(data.line.name).toEqual('7ca');
 
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl + "addBus");
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl + "addTrolley");
 
         expect(mockReq.cancelled).toBeFalsy();
 
         expect(mockReq.request.responseType).toEqual('json');
-        mockReq.flush(resultBus);
+        mockReq.flush(resultTrolley);
 
         httpMock.verify();
     }
     )
     );
 
-    it('AddBus() line wrong-return null', inject([HttpTestingController, BusService], (
+    it('AddTrolley() line wrong-return null', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(45645);
 
-        let newBus: TransportDTO = new TransportDTO();
-        newBus.id_line = i;
-        newBus.name = 'Novi bus';
-        newBus.time_arrive = 5;
+        let newTrolley: TransportDTO = new TransportDTO();
+        newTrolley.id_line = i;
+        newTrolley.name = 'Novi';
+        newTrolley.time_arrive = 5;
 
-        dataService.addBus(newBus).subscribe(data => {
+        dataService.addTrolley(newTrolley).subscribe(data => {
             expect(data).toEqual(null);
 
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl + "addBus");
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl + "addTrolley");
 
         expect(mockReq.cancelled).toBeFalsy();
 
@@ -198,15 +193,15 @@ describe('BusService', () => {
     )
     );
 
-    it('AddLocation() to bus :return updated bus', inject([HttpTestingController, BusService], (
+    it('AddLocation() to trolley :return updated trolley', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(1);
         let i2 : BigInteger = Uint8Array.of(2);
 
         let addLocation: AddLocationToTransportDTO = new AddLocationToTransportDTO(i,i2);
-        let b: Bus = new Bus();
+        let b: Trolley = new Trolley();
         b.location = new MyLocation();
         b.location.id = i2;
         b.location.address =  'Stari grad';
@@ -228,7 +223,7 @@ describe('BusService', () => {
 
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl + "addLocation");
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl + "addLocation");
 
         expect(mockReq.cancelled).toBeFalsy();
 
@@ -240,9 +235,9 @@ describe('BusService', () => {
     )
     );
 
-    it('updateBus() :return updated bus', inject([HttpTestingController, BusService], (
+    it('updateTrolley() :return updated trolley', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(1);
         let i2 : BigInteger = Uint8Array.of(2);
@@ -263,7 +258,7 @@ describe('BusService', () => {
         changeTransport.time_arrive = 7;
         changeTransport.timetable = new Timetable();
 
-        let b: Bus = new Bus();
+        let b: Trolley = new Trolley();
         b.id = i;
         b.location = location;
         b.name = 'Izmenjeno ime';
@@ -271,7 +266,7 @@ describe('BusService', () => {
         b.late = true;
         b.timetable = changeTransport.timetable;
 
-        dataService.updateBus(changeTransport).subscribe(data => {
+        dataService.updateTrolley(changeTransport).subscribe(data => {
             expect(data).toEqual(b);
             expect(data.id).toEqual(changeTransport.id_transport);
             expect(data.name).toEqual(changeTransport.name);
@@ -287,7 +282,7 @@ describe('BusService', () => {
 
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl + "updateBus");
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl + "updateTrolley");
 
         expect(mockReq.cancelled).toBeFalsy();
 
@@ -299,9 +294,9 @@ describe('BusService', () => {
     )
     );
 
-    it('updateBus()- wrong id :return null', inject([HttpTestingController, BusService], (
+    it('updateTrolley()- wrong id :return null', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(1465363634);
         let i2 : BigInteger = Uint8Array.of(2);
@@ -322,12 +317,12 @@ describe('BusService', () => {
         changeTransport.time_arrive = 7;
         changeTransport.timetable = new Timetable();
 
-        dataService.updateBus(changeTransport).subscribe(data => {
+        dataService.updateTrolley(changeTransport).subscribe(data => {
             expect(data).toEqual(null);
 
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl + "updateBus");
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl + "updateTrolley");
 
         expect(mockReq.cancelled).toBeFalsy();
 
@@ -339,18 +334,17 @@ describe('BusService', () => {
     )
     );
 
-    it('filterSearch()- return List<Bus>', inject([HttpTestingController, BusService], (
+    it('filterSearch()- return List<Trolley>', inject([HttpTestingController, TrolleyService], (
         httpMock: HttpTestingController,
-        dataService: BusService) => {
+        dataService: TrolleyService) => {
 
         let i : BigInteger = Uint8Array.of(1);
         let i2 : BigInteger = Uint8Array.of(2);
         
         let filterSearch: FilterSearchTransportDTO = new FilterSearchTransportDTO(i,true,i2,'la');
 
-        let b: Bus = new Bus();
+        let b: Trolley = new Trolley();
         b.code = 'kod';
-        b.deleted = false;
         b.late = true;
         b.line = new Line();
         b.line.id = i;
@@ -358,36 +352,34 @@ describe('BusService', () => {
         b.location.id = i2;
         b.name = 'Lasta';
 
-        let b2: Bus = new Bus();
+        let b2: Trolley = new Trolley();
         b2.code = 'kod';
-        b2.deleted = false;
         b2.late = true;
         b2.line = new Line();
         b2.line.id = i;
         b2.location = new MyLocation();
         b2.location.id = i2;
         b2.name = 'Lala';
-        let dummyBuses: Bus[] = [];
-        dummyBuses.push(b);
-        dummyBuses.push(b2);
+        let dummyTrolleys: Trolley[] = [];
+        dummyTrolleys.push(b);
+        dummyTrolleys.push(b2);
 
         dataService.filterSearch(filterSearch).subscribe(data => {
-            expect(data).toEqual(dummyBuses);
+            expect(data).toEqual(dummyTrolleys);
             expect(data.length).toEqual(2);
             expect(data[0].code).toEqual('kod');
-            expect(data[0].deleted).toEqual(false);
             expect(data[0].late).toEqual(true);
             expect(data[0].name).toEqual('Lasta');
             expect(data[0].line.id).toEqual(i);
             expect(data[0].location.id).toEqual(i2);
         });
 
-        const mockReq = httpMock.expectOne(dataService.busUrl + "searchFilter");
+        const mockReq = httpMock.expectOne(dataService.trolleyUrl + "searchFilter");
 
         expect(mockReq.cancelled).toBeFalsy();
 
         expect(mockReq.request.responseType).toEqual('json');
-        mockReq.flush(dummyBuses);
+        mockReq.flush(dummyTrolleys);
 
         httpMock.verify();
     }

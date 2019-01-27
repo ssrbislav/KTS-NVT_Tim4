@@ -27,7 +27,7 @@ export class ControllerViewComponent implements OnInit {
     this.header.controllerView();
     this.controllerService.getController(this.token.getUsername()).subscribe((response) => {
       this.currentController = response;
-    })
+    });
   }
 
   onNavigate(feature: string){
