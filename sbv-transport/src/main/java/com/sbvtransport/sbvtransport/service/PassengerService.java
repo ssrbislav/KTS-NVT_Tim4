@@ -106,7 +106,7 @@ public class PassengerService implements IPassengerService {
 	@Override
 	public Passenger getOne(Long id) {
 
-		return passengerRepository.getOne(id);
+		return passengerRepository.findById(id).orElse(null);
 	}
 
 	@Override

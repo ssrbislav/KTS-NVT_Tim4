@@ -43,12 +43,24 @@ public class PassengerController {
 	}
 */
 
+	@RequestMapping(value = "/getPassengerByID/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Passenger> getPassenger(@PathVariable Long id) {
+		Passenger passenger = passengerService.getOne(id);
+
+		if(passenger == null) {
+			return new ResponseEntity<Passenger>(passenger, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<Passenger>(passenger, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/getPassenger/{username}", method = RequestMethod.GET)
 	public ResponseEntity<Passenger> getPassenger(@PathVariable String username) {
 		Passenger passenger = passengerService.loadUserByUsername(username);
 
-		if(passenger == null)
-			return new ResponseEntity<Passenger>(passenger, HttpStatus.BAD_REQUEST);
+		if(passenger == null) {
+			return new ResponseEntity<Passenger>(passenger, HttpStatus.NOT_FOUND);
+		}
 
 		return new ResponseEntity<Passenger>(passenger, HttpStatus.OK);
 	}
@@ -57,15 +69,22 @@ public class PassengerController {
 	public ResponseEntity<Passenger> update(@RequestBody Passenger passenger, @PathVariable Long id) {
 
 		Passenger updatePassenger = passengerService.update(passenger, id);
+		if (updatePassenger == null) {
+			return new ResponseEntity<>(updatePassenger, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updatePassenger, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/deletePassenger/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deletePassenger/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = passengerService.delete(id);
+
+		if (!delete) {
+			return new ResponseEntity<>(delete, HttpStatus.NOT_FOUND);
+		}
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
@@ -75,6 +94,10 @@ public class PassengerController {
 	public ResponseEntity<String> changeActive(@RequestBody PassengerChangeBooleanDTO user) {
 
 		String changeActive = passengerService.changeActive(user);
+
+		if (!changeActive.equals("Successfully!")) {
+			return new ResponseEntity<>(changeActive, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(changeActive, HttpStatus.OK);
 
