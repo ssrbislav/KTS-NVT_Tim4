@@ -29,7 +29,7 @@ public class PricelistService implements IPricelistService {
 
 	@Override
 	public Pricelist getOne(Long id) {
-		return pricelistRepository.getOne(id);
+		return pricelistRepository.findById(id).orElse(null);
 	}
 
 	@Override
