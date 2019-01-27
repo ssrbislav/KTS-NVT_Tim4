@@ -28,6 +28,13 @@ public class PassengerService implements IPassengerService {
 		return passengerRepository.findAll();
 	}
 
+	public Passenger loadUserByUsername(String username) {
+
+		Passenger passenger = passengerRepository.findByUsername(username);
+
+		return passenger;
+	}
+
 	@Override
 	public Passenger create(PassengerDTO passenger) {
 
@@ -47,15 +54,16 @@ public class PassengerService implements IPassengerService {
 	}
 
 	@Override
-	public Passenger update(Passenger passenger) {
+	public Passenger update(Passenger passenger, Long id) {
 
-		for (Passenger pass : findAll()) {
-			if (passenger.getUsername().equals(pass.getUsername()) || passenger.getEmail().equals(pass.getEmail())) {
-				return null;
-			}
-		}
+//		for (Passenger pass : findAll()) {
+//			if (passenger.getUsername().equals(pass.getUsername()) || passenger.getEmail().equals(pass.getEmail())) {
+//				return null;
+//			}
+//		}
 
-		Optional<Passenger> updatePassenger = passengerRepository.findById(passenger.getId());
+		System.out.println(id);
+		Optional<Passenger> updatePassenger = passengerRepository.findById(id);
 		updatePassenger.get().setActive(passenger.isActive());
 		updatePassenger.get().setAddress(passenger.getAddress());
 		updatePassenger.get().setDocument(passenger.getDocument());
@@ -67,8 +75,9 @@ public class PassengerService implements IPassengerService {
 		updatePassenger.get().setPassword(passenger.getPassword());
 		updatePassenger.get().setDocument_validated(passenger.isDocument_validated());
 		updatePassenger.get().setTickets(passenger.getTickets());
-
-		return passengerRepository.save(updatePassenger.get());
+		updatePassenger.get().setId(id);
+		passengerRepository.save(updatePassenger.get());
+		return updatePassenger.get();
 	}
 
 	@Override

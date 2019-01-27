@@ -10,10 +10,11 @@ public interface IPassengerService {
 
   List<Passenger> findAll();
   Passenger create(PassengerDTO passenger);
-  Passenger update(Passenger passenger);
+  Passenger update(Passenger passenger, Long id);
   boolean delete (Long id);
   Passenger logIn(UserDTO user);
   Passenger getOne(Long id);
   String changeActive(PassengerChangeBooleanDTO change);
 
+  Passenger loadUserByUsername(String username);
 }

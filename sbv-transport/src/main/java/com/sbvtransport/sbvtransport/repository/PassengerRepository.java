@@ -5,4 +5,6 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 
 public interface PassengerRepository extends JpaRepository<Passenger,Long> {
 
+  Passenger findByUsername(String username);
+
 }

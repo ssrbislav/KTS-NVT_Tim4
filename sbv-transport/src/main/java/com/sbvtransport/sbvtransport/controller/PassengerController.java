@@ -30,6 +30,8 @@ public class PassengerController {
 
 		return new ResponseEntity<>(passengers, HttpStatus.OK);
 	}
+
+
 /*
 	@RequestMapping(value = "/addPassenger", method = RequestMethod.POST)
 	public ResponseEntity<Passenger> create(@RequestBody PassengerDTO passenger) {
@@ -40,10 +42,21 @@ public class PassengerController {
 
 	}
 */
-	@RequestMapping(value = "/updatePassenger", method = RequestMethod.POST)
-	public ResponseEntity<Passenger> update(@RequestBody Passenger passenger) {
 
-		Passenger updatePassenger = passengerService.update(passenger);
+	@RequestMapping(value = "/getPassenger/{username}", method = RequestMethod.GET)
+	public ResponseEntity<Passenger> getPassenger(@PathVariable String username) {
+		Passenger passenger = passengerService.loadUserByUsername(username);
+
+		if(passenger == null)
+			return new ResponseEntity<Passenger>(passenger, HttpStatus.BAD_REQUEST);
+
+		return new ResponseEntity<Passenger>(passenger, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/updatePassenger/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Passenger> update(@RequestBody Passenger passenger, @PathVariable Long id) {
+
+		Passenger updatePassenger = passengerService.update(passenger, id);
 
 		return new ResponseEntity<>(updatePassenger, HttpStatus.OK);
 
