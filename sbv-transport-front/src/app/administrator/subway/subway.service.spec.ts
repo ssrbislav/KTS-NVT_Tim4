@@ -1,10 +1,4 @@
-import { TestBed, getTestBed, inject } from "@angular/core/testing";
-import { BaseRequestOptions, ConnectionBackend, Http, RequestOptions } from '@angular/http';
-import { Response, ResponseOptions, RequestMethod } from '@angular/http';
-import { async, fakeAsync, tick } from '@angular/core/testing';
-import { MockBackend } from '@angular/http/testing';
-import { BusService } from 'src/app/services/bus.service';
-import { Bus } from 'src/app/models/bus.model';
+import { TestBed, inject } from "@angular/core/testing";
 import { Line } from 'src/app/models/line.model';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TransportDTO } from 'src/app/models.dto/transport.dto';
