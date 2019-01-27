@@ -37,5 +37,14 @@ export class UserComponent implements OnInit {
   trolleyView() {
     this.showView = 'trolley';
   }
+  buyTicket() {
+    this.showView = 'buyTicket';
+  }
+  ticketView() {
+    this.showView = 'ticketView';
+  }
+  profileView() {
+    this.showView = 'profileView';
+  }
 
 }
