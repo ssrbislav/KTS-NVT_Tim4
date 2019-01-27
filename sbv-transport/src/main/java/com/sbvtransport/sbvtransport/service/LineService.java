@@ -121,14 +121,14 @@ public class LineService implements ILineService {
 	@Override
 	public String addStation(AddFirstStationDTO addStation) {
 
-		Line l = lineRepository.getOne(addStation.getId_line());
+		Line l = lineRepository.findById(addStation.getId_line()).orElse(null);
 		if (l == null || l.isDeleted()) {
-			return null;
+			return "";
 
 		}
 		Station s = stationRepository.findById(addStation.getId_station()).orElse(null);
 		if (s == null || s.isDeleted()) {
-			return null;
+			return "";
 		}
 
 		if (l.getStation_list().size() == 0) {
@@ -162,51 +162,58 @@ public class LineService implements ILineService {
 
 		if (l.getLine_type().equals(TypeTransport.bus)) {
 			for (Bus bus : busService.findAll()) {
-				if (bus.getLine().equals(l)) {
-					AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
-					altTimetableDTO.setId_transport(bus.getId());
-					altTimetableDTO.setTransportType("bus");
-					altTimetableDTO.setTimetable(new ArrayList<>());
-					for (Schedule schedule : bus.getTimetable().getSchedule()) {
-						if (schedule.getStation().getId().equals(l.getFirst_station())) {
-							altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+				if (bus.getTimetable() != null && bus.getTimetable().getSchedule() != null && !bus.getTimetable().getSchedule().isEmpty()) {
+					if (bus.getLine().equals(l)) {
+						AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
+						altTimetableDTO.setId_transport(bus.getId());
+						altTimetableDTO.setTransportType("bus");
+						altTimetableDTO.setTimetable(new ArrayList<>());
+						for (Schedule schedule : bus.getTimetable().getSchedule()) {
+							if (schedule.getStation().getId().equals(l.getFirst_station())) {
+								altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+							}
 						}
+						timetableService.create(altTimetableDTO);
 					}
-					timetableService.create(altTimetableDTO);
 				}
 			}
 		} else if (l.getLine_type().equals(TypeTransport.subway)) {
 			for (Subway subway : subwayService.findAll()) {
 				if (subway.getLine().equals(l)) {
-					AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
-					altTimetableDTO.setId_transport(subway.getId());
-					altTimetableDTO.setTransportType("subway");
-					altTimetableDTO.setTimetable(new ArrayList<>());
-					for (Schedule schedule : subway.getTimetable().getSchedule()) {
-						if (schedule.getStation().getId().equals(l.getFirst_station())) {
-							altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+					if (subway.getTimetable() != null && subway.getTimetable().getSchedule() != null && !subway.getTimetable().getSchedule().isEmpty()) {
+						AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
+						altTimetableDTO.setId_transport(subway.getId());
+						altTimetableDTO.setTransportType("subway");
+						altTimetableDTO.setTimetable(new ArrayList<>());
+						for (Schedule schedule : subway.getTimetable().getSchedule()) {
+							if (schedule.getStation().getId().equals(l.getFirst_station())) {
+								altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+							}
 						}
+						timetableService.create(altTimetableDTO);
 					}
-					timetableService.create(altTimetableDTO);
 				}
 			}
 		} else if (l.getLine_type().equals(TypeTransport.trolley)) {
 			for (Trolley trolley : trolleyService.findAll()) {
 				if (trolley.getLine().equals(l)) {
-					AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
-					altTimetableDTO.setId_transport(trolley.getId());
-					altTimetableDTO.setTransportType("trolley");
-					altTimetableDTO.setTimetable(new ArrayList<>());
-					for (Schedule schedule : trolley.getTimetable().getSchedule()) {
-						if (schedule.getStation().getId().equals(l.getFirst_station())) {
-							altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+					if (trolley.getTimetable() != null && trolley.getTimetable().getSchedule() != null && !trolley.getTimetable().getSchedule().isEmpty()) {
+						AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
+						altTimetableDTO.setId_transport(trolley.getId());
+						altTimetableDTO.setTransportType("trolley");
+						altTimetableDTO.setTimetable(new ArrayList<>());
+
+						for (Schedule schedule : trolley.getTimetable().getSchedule()) {
+							if (schedule.getStation().getId().equals(l.getFirst_station())) {
+								altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+							}
 						}
+						timetableService.create(altTimetableDTO);
 					}
-					timetableService.create(altTimetableDTO);
 				}
 			}
 		} else {
-			return null;
+			return "";
 		}
 
 		return "Station successfully added!";
@@ -323,12 +330,71 @@ public class LineService implements ILineService {
 				}
 			}
 		}
+		if (addStations.isEmpty()) {
+			return null;
+		}
 
 		l.setStation_list(addStations);
 
 		for (Station station : addStations) {
 			station.setLine(l);
 			stationRepository.save(station);
+		}
+
+		if (l.getLine_type().equals(TypeTransport.bus)) {
+			for (Bus bus : busService.findAll()) {
+				if (bus.getTimetable() != null && bus.getTimetable().getSchedule() != null && !bus.getTimetable().getSchedule().isEmpty()) {
+					if (bus.getLine().equals(l)) {
+						AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
+						altTimetableDTO.setId_transport(bus.getId());
+						altTimetableDTO.setTransportType("bus");
+						altTimetableDTO.setTimetable(new ArrayList<>());
+						for (Schedule schedule : bus.getTimetable().getSchedule()) {
+							if (schedule.getStation().getId().equals(l.getFirst_station())) {
+								altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+							}
+						}
+						timetableService.create(altTimetableDTO);
+					}
+				}
+			}
+		} else if (l.getLine_type().equals(TypeTransport.subway)) {
+			for (Subway subway : subwayService.findAll()) {
+				if (subway.getLine().equals(l)) {
+					if (subway.getTimetable() != null && subway.getTimetable().getSchedule() != null && !subway.getTimetable().getSchedule().isEmpty()) {
+						AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
+						altTimetableDTO.setId_transport(subway.getId());
+						altTimetableDTO.setTransportType("subway");
+						altTimetableDTO.setTimetable(new ArrayList<>());
+						for (Schedule schedule : subway.getTimetable().getSchedule()) {
+							if (schedule.getStation().getId().equals(l.getFirst_station())) {
+								altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+							}
+						}
+						timetableService.create(altTimetableDTO);
+					}
+				}
+			}
+		} else if (l.getLine_type().equals(TypeTransport.trolley)) {
+			for (Trolley trolley : trolleyService.findAll()) {
+				if (trolley.getLine().equals(l)) {
+					if (trolley.getTimetable() != null && trolley.getTimetable().getSchedule() != null && !trolley.getTimetable().getSchedule().isEmpty()) {
+						AltTimetableDTO altTimetableDTO = new AltTimetableDTO();
+						altTimetableDTO.setId_transport(trolley.getId());
+						altTimetableDTO.setTransportType("trolley");
+						altTimetableDTO.setTimetable(new ArrayList<>());
+
+						for (Schedule schedule : trolley.getTimetable().getSchedule()) {
+							if (schedule.getStation().getId().equals(l.getFirst_station())) {
+								altTimetableDTO.getTimetable().addAll(schedule.getTimes());
+							}
+						}
+						timetableService.create(altTimetableDTO);
+					}
+				}
+			}
+		} else {
+			return null;
 		}
 
 		return lineRepository.save(l);

@@ -67,10 +67,13 @@ public class LineController {
 
 	}
 
-	@RequestMapping(value = "/deleteLine/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteLine/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = lineService.delete(id);
+		if (!delete) {
+			return new ResponseEntity<>(delete, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
@@ -81,8 +84,8 @@ public class LineController {
 
 		String updateLine = lineService.addStation(addStation);
 
-		if (updateLine == null) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		if (updateLine.equals("")) {
+			return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);

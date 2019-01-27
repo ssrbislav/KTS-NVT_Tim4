@@ -12,6 +12,7 @@ insert into station(location,zone,deleted) values(3,0, false);
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 0,0, false, 1);
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 1,0, false, 2);
 insert into line(name, line_type,zone,deleted,first_station) values('7ca', 2,0, false, 3);
+insert into line(name, line_type,zone,deleted,first_station) values('7ca', 2,0, true, 3);
 
 insert into line_project(id,station_id) values(1,1);
 insert into line_project(id,station_id) values(1,2);
@@ -19,6 +20,7 @@ insert into line_project(id,station_id) values(1,3);
 insert into line_project(id,station_id) values(2,2);
 insert into line_project(id,station_id) values(2,3);
 insert into line_project(id,station_id) values(3,2);
+insert into line_project(id,station_id) values(3,3);
 
 insert into bus(code,line,late,name,time_arrive,deleted,location) values('7ca_bus_lasta',1,false,'lasta',5,false,2);
 insert into bus(code,line,late,name,time_arrive,deleted,location) values('7ca_bus_sara',1,true,'sara',6,false,1);
