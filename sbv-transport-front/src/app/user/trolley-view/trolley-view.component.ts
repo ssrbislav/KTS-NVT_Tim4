@@ -59,8 +59,13 @@ export class TrolleyViewComponent implements OnInit {
   loadLines(){
     this.lineService.getLines()
       .subscribe( data => {
-        this.lines = data;
-        this.loadTrolleyLines();
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].line_type.toString() == "trolley") {
+            this.lines.push(data[i]);
+          }
+        }
+        // this.lines = data;
+        // this.loadTrolleyLines();
       });
   }
 
