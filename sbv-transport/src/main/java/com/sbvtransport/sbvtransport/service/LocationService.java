@@ -44,7 +44,7 @@ public class LocationService implements ILocationService {
 		location.setLatitude(locationDTO.getLatitude());
 		location.setAddress(locationDTO.getAddress());
 		location.setDeleted(false);
-		locationRepository.save(location);
+//		locationRepository.save(location);
 		return locationRepository.save(location);
 	}
 

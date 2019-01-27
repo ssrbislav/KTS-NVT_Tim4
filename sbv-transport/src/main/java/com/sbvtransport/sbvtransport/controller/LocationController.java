@@ -33,6 +33,9 @@ public class LocationController {
 	public ResponseEntity<Location> getOne(@PathVariable Long id) {
 
 		Location location = locationService.getOne(id);
+		if (location == null) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
 
 		return new ResponseEntity<>(location, HttpStatus.OK);
 
@@ -42,6 +45,9 @@ public class LocationController {
 	public ResponseEntity<Location> create(@RequestBody LocationDTO location) {
 
 		Location newLocation = locationService.create(location);
+		if (newLocation == null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(newLocation, HttpStatus.OK);
 
@@ -60,6 +66,10 @@ public class LocationController {
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = locationService.delete(id);
+
+		if (!delete) {
+			return new ResponseEntity<>(delete, HttpStatus.NOT_FOUND);
+		}
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
