@@ -46,6 +46,10 @@ public class TimetableController {
 
 		Timetable newTimetable = timetableService.create(timetableDTO);
 
+		if (newTimetable == null) {
+			return new ResponseEntity<>(newTimetable, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
 
 	}
@@ -54,6 +58,10 @@ public class TimetableController {
 	public ResponseEntity<Timetable> create(@RequestBody AltTimetableDTO timetableDTO) {
 
 		Timetable newTimetable = timetableService.create(timetableDTO);
+
+		if(newTimetable == null) {
+			return new ResponseEntity<>(newTimetable, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
 
@@ -64,14 +72,22 @@ public class TimetableController {
 
 		Timetable updateTimetable = timetableService.update(timetable);
 
+		if (updateTimetable == null) {
+			return new ResponseEntity<>(updateTimetable, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(updateTimetable, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/deleteTimetable/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteTimetable/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = timetableService.delete(id);
+
+		if (!delete) {
+			return new ResponseEntity<>(delete, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 

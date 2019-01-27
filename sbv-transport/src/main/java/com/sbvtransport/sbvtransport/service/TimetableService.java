@@ -50,7 +50,7 @@ public class TimetableService implements ITimetableService {
 
 	@Override
 	public Timetable getOne(Long id) {
-		return timetableRepository.getOne(id);
+		return timetableRepository.findById(id).orElse(null);
 	}
 
 	@Override

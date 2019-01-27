@@ -68,6 +68,11 @@ INSERT INTO ticket (id, active, block, code_transport, cost, date, date_purchase
 INSERT INTO ticket (id, active, block, code_transport, cost, date, date_purchase, demographic_type, expired, ticket_type, time_expired, type_transport, zone, passenger) VALUES (2, true, false, 'kec_bus_devetka', 3118.5, '2019-02-02 00:00:00', '2019-01-27 04:47:46', 1, false, 2, '2019-03-02 00:00:00', 0, 1, 4);
 INSERT INTO ticket (id, active, block, code_transport, cost, date, date_purchase, demographic_type, expired, ticket_type, time_expired, type_transport, zone, passenger) VALUES (3, true, false, 'kec_bus_devetka', 64.35, '2019-01-27 00:00:00', '2019-01-27 07:12:04', 1, false, 0, '2020-01-27 00:00:00', 0, 0, 4);
 
+INSERT INTO timetable (id, code, deleted, timetable_line_id) VALUES (15, 'kec_bus_devetka', false, 1);
+INSERT INTO timetable (id, code, deleted, timetable_line_id) VALUES (16, 'kec_bus_desetka', false, 1);
+INSERT INTO timetable (id, code, deleted, timetable_line_id) VALUES (17, 'dvojka_bus_buscin', false, 2);
+INSERT INTO timetable (id, code, deleted, timetable_line_id) VALUES (18, 'dvojka_bus_lolo', false, 2);
+
 -- insert into location(location_name, address, latitude, longitude, type,deleted) values('stanica1', 'Vojvode Supljikca 50', 30.40, 30.20, 'station', false);
 -- insert into location(location_name, address, latitude, longitude, type,deleted) values('stanica2', 'Vojvode Supljikca 51', 31.40, 30.50, 'station',false);
 -- insert into location(location_name, address, latitude, longitude, type,deleted) values('stanica3', 'Vojvode Supljikca 52', 39.40, 35.20, 'station',false);
