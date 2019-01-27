@@ -75,6 +75,7 @@ import { TicketService } from './services/ticket.service';
 import { PassengerService } from './services/passenger.service';
 import { TicketViewComponent } from './user/ticket-view/ticket-view.component';
 import { ProfileViewComponent } from './user/profile-view/profile-view.component';
+import { HttpModule } from '@angular/http';
 
 const appRoutes: Routes = [
  
@@ -187,7 +188,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   entryComponents: [
     MyDialogComponent,
@@ -211,7 +213,7 @@ const appRoutes: Routes = [
     LineTimetableComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService,
+    LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService, HttpClientModule,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]

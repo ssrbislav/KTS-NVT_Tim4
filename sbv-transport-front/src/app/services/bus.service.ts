@@ -16,7 +16,7 @@ export class BusService{
 
   constructor(private http:HttpClient) {}
 
-  private busUrl = 'http://localhost:8080/api/bus/';
+   busUrl = 'http://localhost:8080/api/bus/';
 
   public getBuses() {
       return this.http.get<Bus[]>(this.busUrl);
