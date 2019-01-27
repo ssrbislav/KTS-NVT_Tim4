@@ -15,7 +15,7 @@ const httpOptions = {
 
     constructor(private http:HttpClient) {}
 
-    private controllerUrl = 'http://localhost:8080/api/controller/';
+    controllerUrl = 'http://localhost:8080/api/controller/';
 
     public getControllers() {
         return this.http.get<Controller[]>(this.controllerUrl);
@@ -32,7 +32,7 @@ const httpOptions = {
     }
 
     public addController(controller: Controller){
-      return this.http.post(this.controllerUrl + 'addController',controller)
+      return this.http.post<Controller>(this.controllerUrl + 'addController',controller)
       .pipe(
         catchError(e => throwError(e))
       );                 
