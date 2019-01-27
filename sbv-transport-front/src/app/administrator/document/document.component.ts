@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentService } from 'src/app/services/document.service';
 import { MyDocument } from 'src/app/models/document.model';
+import { Passenger } from 'src/app/models/passenger.model';
+import { PassengerService } from 'src/app/services/passenger.service';
 
 @Component({
   selector: 'app-document',
@@ -10,8 +12,9 @@ import { MyDocument } from 'src/app/models/document.model';
 export class DocumentComponent implements OnInit {
 
   documents: MyDocument[] = [];
+  passengers: Passenger[]= [];
 
-  constructor(private documentService: DocumentService) { }
+  constructor(private documentService: DocumentService, private passengerService: PassengerService) { }
 
   ngOnInit() {
     this.loadDocuments();
@@ -21,6 +24,14 @@ export class DocumentComponent implements OnInit {
     this.documentService.getDocuments()
     .subscribe(data =>{
       this.documents = data;
+      this.loadPassenger();
+    })
+  }
+
+  loadPassenger(){
+    this.passengerService.getPassengers()
+    .subscribe(data =>{
+      this.passengers = data;
     })
   }
 

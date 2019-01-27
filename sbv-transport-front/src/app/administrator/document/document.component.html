@@ -21,3 +21,34 @@
       </ng-container>
     </tr>
 </table>
+<br><br><br>
+<h1 style="text-align: center"> Approved documents</h1><br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date of upload</th>
+      <th scope="col">Document</th>
+      <th scope="col">Passenger email</th>
+      <th scope="col">Passenger username</th>
+      <th scope="col">Passenger first name</th>
+      <th scope="col">Passenger last name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let p of passengers; let i = index">
+      <ng-container *ngIf = "p.document !=  null">
+        <ng-container *ngIf ="p.document.approved == 'approved'">  
+          <th scope="row">{{i + 1}}</th>
+          <td>{{p.document.date_of_upload}}</td>
+          <td>{{p.document.image_location}}</td>
+          <td>{{p.email}}</td>
+          <td>{{p.username}}</td>
+          <td>{{p.first_name}}</td>
+          <td>{{p.last_name}}</td>
+          <td> <img src ="assets/pictures/checked.png" alt="Line"></td>
+        </ng-container>
+      </ng-container>
+    </tr>
+</table>

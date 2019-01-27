@@ -171,7 +171,7 @@ const appRoutes: Routes = [
     DocumentComponent,
     BuyTicketComponent,
     TicketViewComponent,
-    ProfileViewComponent
+    ProfileViewComponent,
     DocumentComponent,
     LineTimetableComponent
   ],
