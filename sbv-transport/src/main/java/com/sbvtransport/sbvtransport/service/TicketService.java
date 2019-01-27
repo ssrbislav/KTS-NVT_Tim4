@@ -1,5 +1,8 @@
 package com.sbvtransport.sbvtransport.service;
 
+import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import com.sbvtransport.sbvtransport.enumeration.Zone;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,9 +14,7 @@ import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.TicketDTO;
 import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
 import com.sbvtransport.sbvtransport.enumeration.TicketType;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.enumeration.UserType;
-import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Passenger;
 import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.PassengerRepository;
@@ -54,35 +55,39 @@ public class TicketService implements ITicketService {
 	}
 
 	@Override
-	public String create(TicketDTO ticket) {
+	public Ticket create(TicketDTO ticket) {
 
-		Passenger passenger = null;
+		Passenger passenger;
 
 		if (passengerRepository.findAll().contains(passengerRepository.getOne(ticket.getIdPassenger()))) {
-
 			passenger = passengerRepository.getOne(ticket.getIdPassenger());
-			if (!(passenger.isActive()))
-				return "Passenger with that id is not active!";
+			if (!(passenger.isActive())) {
+        return null;
+      }
+		} else {
+			return null;
+		}
 
-		} else
-			return "Passenger with that id doesn't exist!";
+    Ticket t = new Ticket();
+    Date d = new Date();
 
-		if (ticket.getDemographic_type().equals(DemographicTicketType.senior))
-			if (passenger.getUserType() != UserType.senior)
-				return "This passenger can't buy tickets for seniors!";
-			else if (!passenger.isDocument_validated()) {
-				return "You do not have valid document!";
-			}
+    t.setDemographic_type(DemographicTicketType.valueOf(ticket.getDemographic_type()));
+    t.setType_transport(TypeTransport.valueOf(ticket.getType_transport()));
+    t.setZone(Zone.valueOf(ticket.getZone()));
+    t.setTicket_type(TicketType.valueOf(ticket.getTicket_type()));
+    if (t.getDemographic_type().equals(DemographicTicketType.senior)) {
+      if (!passenger.getUserType().equals(UserType.senior) || !passenger.isDocument_validated()) {
+        return null;
+      }
+    }
 
-		if (ticket.getDemographic_type().equals(DemographicTicketType.student))
-			if (passenger.getUserType() != UserType.student)
-				return "This passenger can't buy ticket for students!";
-			else if (!passenger.isDocument_validated()) {
-				return "You do not have valid document!";
-			}
+    if (t.getDemographic_type().equals(DemographicTicketType.student)) {
+      if (!passenger.getUserType().equals(UserType.student) || !passenger.isDocument_validated()) {
+        return null;
+      }
+    }
 
-		Ticket t = new Ticket();
-		Date d = new Date();
+
 		System.out.println(d);
 
 		t.setDate_purchase(d);
@@ -92,84 +97,15 @@ public class TicketService implements ITicketService {
 		if (ticket.getDate().before(d)) {
 			boolean check = checkDate(ticket.getDate(), d);
 			if (!(check)) {
-				return "Date is not good!";
+				return null;
 			}
 		}
-		// izmeni nije dobro
-		boolean find = false;
-		System.out.println(ticket.getTicket_type());
-		for (TicketType typeOfTicket : TicketType.values()) {
-			System.out.println(typeOfTicket);
-			if (ticket.getTicket_type() == typeOfTicket) {
-				find = true;
-				break;
-			}
 
-		}
 
-		if (!find) {
-			return "Ticket type is not correct!";
 
-		} else {
-			find = false;
-		}
-
-		t.setTicket_type(ticket.getTicket_type());
-		// izmeni nije dobro
-		for (Zone typeOfZone : Zone.values()) {
-			if (ticket.getZone() == typeOfZone) {
-				find = true;
-				break;
-			}
-
-		}
-
-		if (!find) {
-			return "Zone is not correct!";
-		} else {
-			find = false;
-		}
-
-		t.setZone(ticket.getZone());
-		// izmeni nije dobro
-		for (DemographicTicketType typeOfTicketDemographic : DemographicTicketType.values()) {
-			if (ticket.getDemographic_type() == typeOfTicketDemographic) {
-				find = true;
-				break;
-			}
-
-		}
-
-		if (!find) {
-			return "Demographic type is not correct!";
-		} else {
-			find = false;
-		}
-    if (passenger.isDocument_validated() && passenger.getDocument() != null) {
-      t.setDemographic_type(ticket.getDemographic_type());
-    } else {
-      t.setDemographic_type(DemographicTicketType.standard);
-    }
-
-		for (TypeTransport typeOfTransport : TypeTransport.values()) {
-			if (ticket.getType_transport() != typeOfTransport) {
-				find = true;
-				break;
-			}
-
-		}
-
-		if (!find) {
-			return "Transport is not correct!";
-		} else {
-			find = false;
-		}
-
-		t.setType_transport(ticket.getType_transport());
-
-		if (ticket.getTicket_type().equals(TicketType.oneUse)) {
+		if (t.getTicket_type().equals(TicketType.oneUse)) {
 			t.setActive(false);
-		} else if (ticket.getTicket_type().equals(TicketType.daily)) {
+		} else if (t.getTicket_type().equals(TicketType.daily)) {
 			boolean check = checkDate(d, ticket.getDate());
 			if (check)
 				t.setActive(true);
@@ -183,22 +119,20 @@ public class TicketService implements ITicketService {
 
 		t.setCode_transport(ticket.getCode_transport());
 
-		t.setCost(pricelistService.calculatePrice(ticket.getType_transport(), ticket.getDemographic_type(),
-				ticket.getTicket_type(), ticket.getZone()));
+		t.setCost(pricelistService.calculatePrice(t.getType_transport(), t.getDemographic_type(),
+				t.getTicket_type(), t.getZone()));
 
-		if (ticket.getTicket_type().equals(TicketType.daily)) {
+		if (t.getTicket_type().equals(TicketType.daily)) {
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 1));
-		} else if (ticket.getTicket_type().equals(TicketType.monthly)) {
+		} else if (t.getTicket_type().equals(TicketType.monthly)) {
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 2));
-		} else if (ticket.getTicket_type().equals(TicketType.year)) {
+		} else if (t.getTicket_type().equals(TicketType.year)) {
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 3));
 		} else {
 			t.setTime_expired(calculateExpiredDate(ticket.getDate(), 3));
 		}
 
-		ticketRepository.save(t);
-
-		return "Your ticket has been successfully created";
+		return ticketRepository.save(t);
 	}
 
 	@Override
@@ -280,6 +214,25 @@ public class TicketService implements ITicketService {
 			}
 		}
 
+	}
+
+	@Override
+	public List<Ticket> findByUserID(Long id) {
+		Passenger passenger = passengerRepository.getOne(id);
+		if (passenger == null || passenger.getTickets().isEmpty() || passenger.getTickets() == null) {
+			return null;
+		}
+		return passenger.getTickets();
+	}
+
+	@Override
+	public Ticket activate(Long id) {
+		Ticket ticket = ticketRepository.getOne(id);
+		if (ticket == null) {
+			return null;
+		}
+		ticket.setActive(true);
+		return update(ticket);
 	}
 
 }

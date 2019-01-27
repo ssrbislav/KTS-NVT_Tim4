@@ -9,11 +9,14 @@ public interface ITicketService {
 
   Ticket getOne(Long id);
   List<Ticket> findAll();
-  String create(TicketDTO ticket);
+  Ticket create(TicketDTO ticket);
   Date calculateExpiredDate(Date date, int option);
   boolean checkDate(Date purchase, Date date);
   Ticket update(Ticket ticket);
   boolean delete(Long id);
   void changeBecauseTransport(String code);
 
+  List<Ticket> findByUserID(Long id);
+
+  Ticket activate(Long id);
 }
