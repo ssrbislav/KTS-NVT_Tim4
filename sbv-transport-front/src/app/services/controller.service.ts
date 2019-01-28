@@ -52,4 +52,8 @@ const httpOptions = {
       return this.http.get<boolean>(`${this.controllerUrl + 'blockTicket'}/${id}`);
     }
 
+    public unblockTicket(id: BigInteger) {
+      return this.http.get<boolean>(`${this.controllerUrl + 'unblockTicket'}/${id}`);
+    }
+
   }

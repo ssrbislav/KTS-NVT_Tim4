@@ -18,6 +18,11 @@ export class TicketService{
   public getTickets() {
       return this.http.get<Ticket[]>(this.ticketUrl);
     }
+
+    public getOne(id: BigInteger) {
+      const url = `${this.ticketUrl + 'getTicket'}/${id}`;
+      return this.http.get<Ticket>(url)
+    }
       
   public deleteTicket(id: BigInteger){
     const url = `${this.ticketUrl + 'deleteTicket'}/${id}`;

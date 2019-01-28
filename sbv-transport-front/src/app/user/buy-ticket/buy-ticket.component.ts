@@ -38,6 +38,8 @@ export class BuyTicketComponent implements OnInit {
             // console.log(ticketData);
             if(ticketData!= null){
               this.ticket = ticketData;
+              alert("Ticket successfully bought!");
+              this.reloadPage();
             }else{
               alert("Something went wrong!");
             }

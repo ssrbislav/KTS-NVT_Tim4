@@ -11,6 +11,7 @@ import { ControllerService } from 'src/app/services/controller.service';
 export class TicketsComponent implements OnInit {
 
   tickets: Ticket[];
+  ticket: Ticket;
 
   constructor(private ticketService: TicketService, private controllerService: ControllerService) { }
 
@@ -25,15 +26,38 @@ export class TicketsComponent implements OnInit {
       });
   }
 
+  
+
   blockTicket(id: BigInteger) {
+    this.ticketService.getOne(id).subscribe(
+      data => {
+        this.ticket = data;
+      });
+
+    if(this.ticket.block) {
+      alert("Ticket already blocked!");
+      return;
+    }
+
     this.controllerService.blockTicket(id).subscribe(
       data => {
         if(data == true) {
           alert("Ticket Blocked!");
           this.loadAllTickets();
+        } else {
+          alert("Something went wrong!");
         }
-        alert("Something went wrong!");
     });
+  }
+
+  unblockItcket(id: BigInteger) {
+    this.controllerService.unblockTicket(id).subscribe(
+      data => {
+        if(data == true) {
+          alert("Ticket successfully unblocked!");
+          this.loadAllTickets();
+        }
+      });
   }
   
 

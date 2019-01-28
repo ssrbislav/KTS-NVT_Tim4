@@ -23,7 +23,7 @@ public class ControllerService implements IControllerService {
 	ControllerRepository controllerRepository;
 	
 	@Autowired
-	TicketRepository ticketRepository;
+	TicketService ticketService;
 	
 	@Autowired
 	PassengerRepository passengerRepository;
@@ -148,10 +148,10 @@ public class ControllerService implements IControllerService {
 	
 	@Override
 	public boolean blockTicket(Long id) {
-		Ticket ticket = ticketRepository.getOne(id);
+		Ticket ticket = ticketService.getOne(id);
 		if(ticket != null) {
 			ticket.setBlock(true);
-			ticketRepository.save(ticket);
+			ticketService.update(ticket);
 			return true;
 		}
 		return false;
@@ -160,7 +160,7 @@ public class ControllerService implements IControllerService {
 	@Override
 	public boolean checkTicket(Long id) {
 		
-		Ticket ticket = ticketRepository.getOne(id);
+		Ticket ticket = ticketService.getOne(id);
 		if(ticket != null) {
 			
 			Passenger passenger = passengerRepository.getOne(ticket.getPassenger().getId());

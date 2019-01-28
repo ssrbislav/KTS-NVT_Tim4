@@ -17,7 +17,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor = "let ticket of tickets; let i = index">
+    <tr *ngFor = "let ticket of tickets; let i = index" 
+    [ngStyle]="{'background-color': ticket.block ? 'red' : ''}">
       <th scope="row">{{i + 1}}</th>
       <td>{{ticket.code_transport}}</td>
       <td>{{ticket.type_transport}}</td>

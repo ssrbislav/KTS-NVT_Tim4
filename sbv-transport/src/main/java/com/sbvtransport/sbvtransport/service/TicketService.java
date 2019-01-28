@@ -231,11 +231,12 @@ public class TicketService implements ITicketService {
 		if (ticket == null) {
 			return null;
 		}
-		if(ticket.isBlock()) {
-			return null;
+		if(!ticket.isBlock()) {
+			ticket.setActive(true);
+			return update(ticket);
 		}
-		ticket.setActive(true);
-		return update(ticket);
+		return null;
+		
 	}
 
 }
