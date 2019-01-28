@@ -15,7 +15,7 @@ const httpOptions = {
 
     constructor(private http:HttpClient) {}
 
-    private passengerUrl = 'http://localhost:8080/api/passenger/';
+    passengerUrl = 'http://localhost:8080/api/passenger/';
 
     public getPassengers() {
         return this.http.get<Passenger[]>(this.passengerUrl);
@@ -32,7 +32,7 @@ const httpOptions = {
     }
 
     public addPassenger(passenger: Passenger){
-      return this.http.post(this.passengerUrl + 'addPassenger',passenger)
+      return this.http.post<Passenger>(this.passengerUrl + 'addPassenger',passenger)
       .pipe(
         catchError(e => throwError(e))
       );                 
