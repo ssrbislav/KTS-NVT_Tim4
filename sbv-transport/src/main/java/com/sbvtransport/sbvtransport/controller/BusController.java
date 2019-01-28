@@ -53,7 +53,6 @@ public class BusController {
 
 	}
 
-	//@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/addBus", method = RequestMethod.POST)
 	public ResponseEntity<Bus> create(@RequestBody BusDTO bus) {
 

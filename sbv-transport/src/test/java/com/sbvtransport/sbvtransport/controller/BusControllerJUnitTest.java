@@ -3,8 +3,10 @@ package com.sbvtransport.sbvtransport.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import com.sbvtransport.sbvtransport.dto.BusDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
@@ -40,6 +43,8 @@ public class BusControllerJUnitTest {
 
 	@Before
 	public void setUp() {
+		
+		
 		List<Bus> buses = new ArrayList<>();
 		buses.add(new Bus(new Line("8ca", TypeTransport.bus, Zone.first, 1L), false, "ime", 1L, "neki_kod", 5, false));
 		buses.add(new Bus(new Line("8ca", TypeTransport.bus, Zone.first, 1L), true, "ime2", 2L, "neki_kod2", 6, false));
@@ -109,6 +114,7 @@ public class BusControllerJUnitTest {
 	}
 
 	// create bus with line that doesn't exist
+	
 	@Test
 	public void createBusTest2() {
 		

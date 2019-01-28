@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Line } from '../models/line.model';
 import { MyLocation } from '../models/location.model';
 import { LocationDTO } from '../models.dto/location.dto';
 
@@ -14,7 +13,7 @@ export class LocationService{
 
 constructor(private http:HttpClient) {}
 
-private locationUrl = 'http://localhost:8080/api/location/';
+locationUrl = 'http://localhost:8080/api/location/';
 
 public getLocations() {
     return this.http.get<MyLocation[]>(this.locationUrl);
