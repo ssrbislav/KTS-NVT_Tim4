@@ -2,9 +2,9 @@
 <mat-dialog-content>
   <form>
       <label>Ticket number</label><br>
-      <input type="text" name="ticket">
+      <input type="text" name="ticket" [(ngModel)]="ticketCode">
   </form>
-  <button class="checkbtn" type="button" mat-button (click) = "ticketCheck()" >CHECK</button>
+  <button class="checkbtn" type="button" mat-button (click) = "ticketCheck(ticketCode)" >CHECK</button>
   <button class="cancelbtn" type="button" mat-dialog-close mat-button >Cancel</button>
     
 </mat-dialog-content>
