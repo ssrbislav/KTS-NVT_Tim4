@@ -51,7 +51,7 @@ export class TicketsComponent implements OnInit {
   }
 
   unblockTicket(id: BigInteger) {
-
+/*
     this.ticketService.getOne(id).subscribe(
       data => {
         this.ticket = data;
@@ -61,6 +61,7 @@ export class TicketsComponent implements OnInit {
       alert("Ticket is not blocked!");
       return;
     }
+    */
 
     this.controllerService.unblockTicket(id).subscribe(
       data => {

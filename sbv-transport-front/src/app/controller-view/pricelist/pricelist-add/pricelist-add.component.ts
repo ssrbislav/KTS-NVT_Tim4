@@ -24,13 +24,6 @@ export class PricelistAddComponent implements OnInit {
 
   addPricelist(){
 
-    this.pricelistService.getPriclists().subscribe(
-      data => {
-        if(data != null) {
-          alert("Pricelist already exists, just update it!");
-          return;
-        } else {
-
           this.pricelist.deleted = false;
           this.pricelist.active = true;
 
@@ -49,9 +42,6 @@ export class PricelistAddComponent implements OnInit {
               else
                 alert("Something went wrong!"); 
           });
-        }
-      }
-    );
   }
 
 }
