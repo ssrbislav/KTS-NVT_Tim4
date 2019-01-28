@@ -1,27 +1,27 @@
 # KTS-NVT_Tim4 - Sbv Transport
 Predmetni projekat iz KTS i NVT (Konstrukcija i testiranje softvera i Napredne web tehnologije)
 
-# Članovi tima:
+## Članovi tima:
 1. Srbislav Stojić SW83-2016
 2. Vladimir Gajčin SW49-2014
 3. Bojana Ćorilić SW39-2014
 
-# Projektni zadatak
+## Projektni zadatak
 -Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
 
-# Korišćene tehnologije:
+## Korišćene tehnologije:
 1. Java + Spring Boot 
 2. REST servisi
 3. MySql baza podataka
 4. Angular 7
 5. Bootstrap
 
-# Urađeni testovi:
+## Urađeni testovi:
 1. Unit i integracioni svih service/repository/controller u Spring Boot aplikaciji
 2. Angular testovi service u Angular aplikaciji
 3. Selenium testovi (e2e)
 
-# Uputstvo za pokretanje projekta
+## Uputstvo za pokretanje projekta
 1. Clone/Download projekat sa github-a sa 			https://github.com/ssrbislav/KTS-NVT_Tim4
 2. Aplikacija sbv-transport:
   U Eclipse-u importujte projekat:
@@ -45,7 +45,7 @@ Da bi se aplikacija pokrenula potrebno je skinuti MySql bazu podataka sa sajta: 
    - nakon kompajliranja, ode se na Chrome pretraživač i ukuca http://localhost:4200  
 4. Aplikacije treba da su pokrenute u isto vreme( prvo Spring Boot pa Angular)
 
-# DODATNO
+## DODATNO
 -U projektu postoji samo jedan admin koji se sam generiše pri pokretanju projekta(username: admin, password:admin)
 
 
