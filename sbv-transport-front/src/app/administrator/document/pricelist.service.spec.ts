@@ -1,7 +1,5 @@
 import { TestBed, inject } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { LocationService } from 'src/app/services/location.service';
-import { MyLocation } from 'src/app/models/location.model';
 import { PricelistService } from 'src/app/services/pricelist.service';
 import { ReportTicketDTO } from 'src/app/models.dto/reportTicket.dto';
 import { ReportResultTicketDTO } from 'src/app/models.dto/reportResultTicket.dto';
