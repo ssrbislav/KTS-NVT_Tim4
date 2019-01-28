@@ -7,7 +7,7 @@ Predmetni projekat iz KTS i NVT (Konstrukcija i testiranje softvera i Napredne w
 3. Bojana Ćorilić SW39-2014
 
 #Projektni zadatak
-Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
+-Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
 
 #Korišćene tehnologije:
 1. Java + Spring Boot 
@@ -33,7 +33,7 @@ Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
   - desni klik -> Run as -> Maven build (u goals 	ukucajte package)
    Pokretanje projekta:
   - desni klik -> Run as -> Spring Boot App
-  U fajlu aplication.properties se nalaze podesavanja za aplikaciju:
+  -U fajlu aplication.properties se nalaze podesavanja za aplikaciju:
   - spring.datasource.url = jdbc:mysql://localhost:3306/sbvtransport?useSSL=false&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
   - spring.datasource.username=root
   - spring.datasource.password=root
@@ -46,7 +46,7 @@ Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
 4. Aplikacije treba da su pokrenute u isto vreme( prvo Spring Boot pa Angular)
 
 #DODATNO
-U projektu postoji samo jedan admin koji se sam generiše pri pokretanju projekta(username: admin, password:admin)
+-U projektu postoji samo jedan admin koji se sam generiše pri pokretanju projekta(username: admin, password:admin)
 
 
 
