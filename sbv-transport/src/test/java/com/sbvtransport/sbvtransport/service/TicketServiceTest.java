@@ -129,8 +129,8 @@ public class TicketServiceTest {
 	@Transactional
 	@Rollback(true)
 	public void findByUserIDTest_OK() {
-		List<Ticket> tickets = ticketService.findByUserID(3L);
-		Passenger passenger = passengerService.getOne(3L);
+		List<Ticket> tickets = ticketService.findByUserID(4L);
+		Passenger passenger = passengerService.getOne(4L);
 		assertEquals(tickets, passenger.getTickets());
 	}
 
