@@ -60,7 +60,7 @@ import { ControllerSearchFilterComponent } from './administrator/controller/cont
 import { UserComponent } from './user/user.component';
 import { BusViewComponent } from './user/bus-view/bus-view.component';
 import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
-import { httpInterceptorProviders, AuthInterceptor } from './auth/auth-interceptor';
+import { httpInterceptorProviders, AuthInterceptor  } from './auth/auth-interceptor';
 import { SubwayViewComponent } from './user/subway-view/subway-view.component';
 import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
 import { ControllerViewComponent } from './controller-view/controller-view.component';
@@ -78,6 +78,11 @@ import { ProfileViewComponent } from './user/profile-view/profile-view.component
 import { HttpModule } from '@angular/http';
 import { TicketsComponent } from './controller-view/tickets/tickets.component';
 import { PricelistAddComponent } from './controller-view/pricelist/pricelist-add/pricelist-add.component';
+import { DocumentViewComponent } from './user/profile-view/document-view/document-view.component';
+import { DetailsUploadComponent } from './user/profile-view/document-view/details-upload/details-upload.component';
+import { FormUploadComponent } from './user/profile-view/document-view/form-upload/form-upload.component';
+import { ListUploadComponent } from './user/profile-view/document-view/list-upload/list-upload.component';
+
 
 const appRoutes: Routes = [
  
@@ -179,6 +184,12 @@ const appRoutes: Routes = [
     LineTimetableComponent,
     TicketsComponent,
     PricelistAddComponent,
+    DocumentViewComponent,
+    DetailsUploadComponent,
+    FormUploadComponent,
+    ListUploadComponent
+
+  
   ],
   imports: [
     BrowserModule,
@@ -217,8 +228,7 @@ const appRoutes: Routes = [
     LineTimetableComponent,
     PricelistAddComponent
    ],
-  providers: [
-    RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
+  providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService, HttpClientModule,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
@@ -226,8 +236,7 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
-  ],
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
