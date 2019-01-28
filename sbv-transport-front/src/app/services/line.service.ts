@@ -15,7 +15,7 @@ export class LineService{
 
   constructor(private http:HttpClient) {}
 
-  private lineUrl = 'http://localhost:8080/api/line/';
+  lineUrl = 'http://localhost:8080/api/line/';
 
   public getLines() {
       return this.http.get<Line[]>(this.lineUrl);
