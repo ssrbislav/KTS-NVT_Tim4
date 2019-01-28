@@ -17,7 +17,7 @@ export class ControllerViewComponent implements OnInit {
   currentController: Controller = new Controller();
 
   @ViewChild("header") header: HeaderComponent;
-  showView: string = 'pricelist';
+  showView: string = 'tickets';
 
   constructor(private controllerService: ControllerService, public dialog: MatDialog, private router: Router, private token: TokenStorageService) { 
     
@@ -37,23 +37,27 @@ export class ControllerViewComponent implements OnInit {
       this.router.navigate(['mainPage']);
       window.alert("Successfully Logged out!");
     }
-    if(feature == 'pricelist') {
-      //
-    }
   }
 
   checkTicket() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-    added: false
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      added: false
     };
 
     const dialogRef = this.dialog.open(TicketCheckComponent, dialogConfig);
-
     
+  }
+
+  ticketsView() {
+    this.showView = 'tickets';
+  }
+
+  pricelistView() {
+    this.showView = 'pricelist';
   }
 
 }

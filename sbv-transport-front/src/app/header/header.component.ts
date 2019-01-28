@@ -122,5 +122,9 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  clickButtonTicketView() {
+    
+  }
+
 
 }

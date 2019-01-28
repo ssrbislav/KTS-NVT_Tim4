@@ -76,6 +76,7 @@ import { PassengerService } from './services/passenger.service';
 import { TicketViewComponent } from './user/ticket-view/ticket-view.component';
 import { ProfileViewComponent } from './user/profile-view/profile-view.component';
 import { HttpModule } from '@angular/http';
+import { TicketsComponent } from './controller-view/tickets/tickets.component';
 
 const appRoutes: Routes = [
  
@@ -174,7 +175,8 @@ const appRoutes: Routes = [
     TicketViewComponent,
     ProfileViewComponent,
     DocumentComponent,
-    LineTimetableComponent
+    LineTimetableComponent,
+    TicketsComponent
   ],
   imports: [
     BrowserModule,

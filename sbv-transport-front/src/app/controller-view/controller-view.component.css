@@ -3,8 +3,10 @@
     width: 10%;
     height: 50px;
     opacity: 0.9;
+    color: white;
 }
 
 .check:hover {
     opacity: 1;
+    color: black;
 }
