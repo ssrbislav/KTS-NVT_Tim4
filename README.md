@@ -46,7 +46,7 @@ Da bi se aplikacija pokrenula potrebno je skinuti MySql bazu podataka sa sajta: 
 4. Aplikacije treba da su pokrenute u isto vreme( prvo Spring Boot pa Angular)
 
 ## DODATNO
--U projektu postoji samo jedan admin koji se sam generiše pri pokretanju projekta(username: admin, password:admin)
+- U projektu postoji samo jedan admin koji se sam generiše pri pokretanju projekta(username: admin, password:admin)
 
 
 
