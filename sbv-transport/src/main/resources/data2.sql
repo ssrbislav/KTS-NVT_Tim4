@@ -32,6 +32,7 @@ insert into trolley(code,line,late,name,time_arrive,deleted) values('7ca_trolley
 insert into trolley(code,line,late,name,time_arrive,deleted,location) values('7ca_trolley_Sara',3,false,'Sara',5,false,3);
 
 -- ne valja, nesto nije dobro jer ne moze da se uloguj sa ovim podacima kao da ne vidi role?
+/*
 insert into role(name) values('ROLE_PASSENGER');
 insert into role(name) values('ROLE_CONTROLLER');
 
@@ -60,4 +61,4 @@ insert into passenger(id,active,user_type,validate_document)values(6,true,1,fals
 
 insert into document(date_of_upload,image_location,passenger_id,approved)values('2019-01-10','lokacija',4,'need approve');
 insert into document(date_of_upload,image_location,passenger_id,approved)values('2018-05-30','lokacija',5,'need approve');
-
+*/
