@@ -42,7 +42,7 @@ export class TicketsComponent implements OnInit {
     this.controllerService.blockTicket(id).subscribe(
       data => {
         if(data == true) {
-          alert("Ticket Blocked!");
+          alert("Ticket successfully blocked!");
           this.loadAllTickets();
         } else {
           alert("Something went wrong!");
