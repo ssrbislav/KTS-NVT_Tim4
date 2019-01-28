@@ -77,6 +77,7 @@ import { TicketViewComponent } from './user/ticket-view/ticket-view.component';
 import { ProfileViewComponent } from './user/profile-view/profile-view.component';
 import { HttpModule } from '@angular/http';
 import { TicketsComponent } from './controller-view/tickets/tickets.component';
+import { PricelistAddComponent } from './controller-view/pricelist/pricelist-add/pricelist-add.component';
 
 const appRoutes: Routes = [
  
@@ -176,7 +177,8 @@ const appRoutes: Routes = [
     ProfileViewComponent,
     DocumentComponent,
     LineTimetableComponent,
-    TicketsComponent
+    TicketsComponent,
+    PricelistAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -212,7 +214,8 @@ const appRoutes: Routes = [
     MyDialogTimetableComponent,
     ControllerAddComponent,
     TicketCheckComponent,
-    LineTimetableComponent
+    LineTimetableComponent,
+    PricelistAddComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService, HttpClientModule,
