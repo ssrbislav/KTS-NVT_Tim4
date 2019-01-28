@@ -5,8 +5,10 @@ import com.sbvtransport.sbvtransport.dto.LineDTO;
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
 import com.sbvtransport.sbvtransport.model.Line;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -26,13 +28,15 @@ import static org.springframework.test.util.AssertionErrors.fail;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LineServiceTest {
 
     @Autowired
     private ILineService lineService;
 
     @Test
-    public void findAllTest() {
+    public void aafindAllTest() {
         List<Line> lines = lineService.findAll();
         assertThat(lines).hasSize(3);
     }
@@ -43,7 +47,7 @@ public class LineServiceTest {
 
         assertThat(line).isNotNull();
         assertThat(line.getId()).isEqualTo(3L);
-        assertThat(line.getName()).isEqualTo("nova_linija3");
+        assertThat(line.getName()).isEqualTo("7ca");
         assertThat(line.getLine_type()).isEqualTo(TypeTransport.trolley);
     }
 
@@ -74,7 +78,7 @@ public class LineServiceTest {
         assertThat(dbSizeBefore).isEqualTo(lineService.findAll().size() + 1);
         try {
             Line loc = lineService.getOne(3L);
-            assertThat(loc).isNull();
+            assertThat(loc.isDeleted()).isTrue();
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(EntityNotFoundException.class);
         }
