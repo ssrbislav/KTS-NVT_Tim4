@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68521292-012e-40f4-9be0-7edb206e0722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/RegisterPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserProfilePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTicketsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbv-transport-e2e.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/sbv-transport-e2e.ipr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserBuyTicketTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sbv-transport-e2e.iws" beforeDir="false" afterPath="$PROJECT_DIR$/sbv-transport-e2e.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/UserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/UserPageTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../sbv-transport/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sbv-transport/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../sbv-transport/src/test/resources/application-test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sbv-transport/src/test/resources/application-test.properties" afterDir="false" />
     </list>
@@ -35,46 +30,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/RegisterPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="141" column="34" selection-start-line="141" selection-start-column="28" selection-end-line="141" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#657#658#0" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-                <element signature="e#1779#1780#0" expanded="true" />
-                <element signature="e#1801#1802#0" expanded="true" />
-                <element signature="e#1542#1543#0" expanded="true" />
-                <element signature="e#1567#1568#0" expanded="true" />
-                <element signature="e#1726#1727#0" expanded="true" />
-                <element signature="e#1751#1752#0" expanded="true" />
-                <element signature="e#1911#1912#0" expanded="true" />
-                <element signature="e#1937#1938#0" expanded="true" />
-                <element signature="e#2064#2065#0" expanded="true" />
-                <element signature="e#2091#2092#0" expanded="true" />
-                <element signature="e#2221#2222#0" expanded="true" />
-                <element signature="e#2247#2248#0" expanded="true" />
-                <element signature="e#2371#2372#0" expanded="true" />
-                <element signature="e#2395#2396#0" expanded="true" />
-                <element signature="e#2516#2517#0" expanded="true" />
-                <element signature="e#2545#2546#0" expanded="true" />
-                <element signature="e#2684#2685#0" expanded="true" />
-                <element signature="e#2711#2712#0" expanded="true" />
-                <element signature="e#1337#1338#0" expanded="true" />
-                <element signature="e#1365#1366#0" expanded="true" />
-                <element signature="e#1406#1407#0" expanded="true" />
-                <element signature="e#1435#1436#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="202" column="20" selection-start-line="202" selection-start-column="20" selection-end-line="202" selection-end-column="20" />
+            <state relative-caret-position="429">
+              <caret line="64" column="40" lean-forward="true" selection-start-line="64" selection-start-column="40" selection-end-line="66" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,32 +42,88 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/LoginPage.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+            <state relative-caret-position="-92">
+              <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#632#633#0" expanded="true" />
-                <element signature="e#668#669#0" expanded="true" />
-                <element signature="e#693#694#0" expanded="true" />
-                <element signature="e#718#719#0" expanded="true" />
-                <element signature="e#839#840#0" expanded="true" />
-                <element signature="e#864#865#0" expanded="true" />
-                <element signature="e#988#989#0" expanded="true" />
-                <element signature="e#1016#1017#0" expanded="true" />
-                <element signature="e#1057#1058#0" expanded="true" />
-                <element signature="e#1086#1087#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="29" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#364#365#0" expanded="true" />
+                <element signature="e#394#395#0" expanded="true" />
+                <element signature="e#1287#1288#0" expanded="true" />
+                <element signature="e#1307#1308#0" expanded="true" />
+                <element signature="e#1342#1343#0" expanded="true" />
+                <element signature="e#1365#1366#0" expanded="true" />
+                <element signature="e#1401#1402#0" expanded="true" />
+                <element signature="e#1425#1426#0" expanded="true" />
+                <element signature="e#1464#1465#0" expanded="true" />
+                <element signature="e#1491#1492#0" expanded="true" />
+                <element signature="e#1531#1532#0" expanded="true" />
+                <element signature="e#1559#1560#0" expanded="true" />
+                <element signature="e#1595#1596#0" expanded="true" />
+                <element signature="e#1619#1620#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-634">
+              <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#634#635#0" expanded="true" />
+                <element signature="e#664#665#0" expanded="true" />
+                <element signature="e#1317#1318#0" expanded="true" />
+                <element signature="e#1347#1348#0" expanded="true" />
+                <element signature="e#1484#1485#0" expanded="true" />
+                <element signature="e#1505#1506#0" expanded="true" />
+                <element signature="e#1612#1613#0" expanded="true" />
+                <element signature="e#1639#1640#0" expanded="true" />
+                <element signature="e#1768#1769#0" expanded="true" />
+                <element signature="e#1793#1794#0" expanded="true" />
+                <element signature="e#1910#1911#0" expanded="true" />
+                <element signature="e#1931#1932#0" expanded="true" />
+                <element signature="e#2033#2034#0" expanded="true" />
+                <element signature="e#2055#2056#0" expanded="true" />
+                <element signature="e#2446#2447#0" expanded="true" />
+                <element signature="e#2472#2473#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserBuyTicketTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2034">
-              <caret line="97" column="20" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+            <state relative-caret-position="378">
+              <caret line="80" column="94" selection-start-line="80" selection-start-column="94" selection-end-line="80" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -134,17 +149,19 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/SbvTransportE2EApplication.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/SbvTransportE2EApplicationTests.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserProfilePage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTicketsPage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/LoginPage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/RegisterPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserBuyTicketTest.java" />
       </list>
     </option>
   </component>
@@ -169,6 +186,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,24 +290,33 @@
               <item name="tests" type="462c0819:PsiDirectoryNode" />
               <item name="general" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sbv-transport-e2e" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sbv-transport-e2e" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="e2e" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548684890091" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548704263121" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/college" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RunDashboard">
@@ -303,7 +331,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.LoginTest.cancelTest">
+  <component name="RunManager" selected="JUnit.UserBuyTicketTest">
     <configuration name="LoginTest.cancelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sbv-transport-e2e" />
       <extension name="coverage">
@@ -316,20 +344,6 @@
       <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.general.LoginTest" />
       <option name="METHOD_NAME" value="cancelTest" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RegisterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sbv-transport-e2e" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.sbvtransport.e2e.tests.general.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.sbvtransport.e2e.tests.general" />
-      <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.general.RegisterTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -350,33 +364,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RegisterTest.registerTest_User_PasswordMismatch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserBuyTicketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sbv-transport-e2e" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.sbvtransport.e2e.tests.general.*" />
+          <option name="PATTERN" value="com.sbvtransport.e2e.tests.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.sbvtransport.e2e.tests.general" />
-      <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.general.RegisterTest" />
-      <option name="METHOD_NAME" value="registerTest_User_PasswordMismatch" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.sbvtransport.e2e.tests.user" />
+      <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.user.UserBuyTicketTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RegisterTest.registerTest_User_ShortPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserPageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sbv-transport-e2e" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.sbvtransport.e2e.tests.general.*" />
+          <option name="PATTERN" value="com.sbvtransport.e2e.tests.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.sbvtransport.e2e.tests.general" />
-      <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.general.RegisterTest" />
-      <option name="METHOD_NAME" value="registerTest_User_ShortPassword" />
+      <option name="PACKAGE_NAME" value="com.sbvtransport.e2e.tests.user" />
+      <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.user.UserPageTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserPageTest.clickTicketsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sbv-transport-e2e" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sbvtransport.e2e.tests.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sbvtransport.e2e.tests.user" />
+      <option name="MAIN_CLASS_NAME" value="com.sbvtransport.e2e.tests.user.UserPageTest" />
+      <option name="METHOD_NAME" value="clickTicketsTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -384,11 +410,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserBuyTicketTest" />
+        <item itemvalue="JUnit.UserPageTest" />
+        <item itemvalue="JUnit.UserPageTest.clickTicketsTest" />
         <item itemvalue="JUnit.LoginTest.cancelTest" />
         <item itemvalue="JUnit.RegisterTest.cancelTest" />
-        <item itemvalue="JUnit.RegisterTest.registerTest_User_ShortPassword" />
-        <item itemvalue="JUnit.RegisterTest.registerTest_User_PasswordMismatch" />
-        <item itemvalue="JUnit.RegisterTest" />
       </list>
     </recent_temporary>
   </component>
@@ -405,49 +431,50 @@
       <workItem from="1548380347120" duration="1055000" />
       <workItem from="1548381781875" duration="169000" />
       <workItem from="1548668973938" duration="14371000" />
+      <workItem from="1548690276332" duration="6549000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RegisterTest_registerTest_User_ExistingCredentials - 2019.01.28 at 14h 50m 47s.xml">
-      <configuration name="RegisterTest.registerTest_User_ExistingCredentials" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 23m 34s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest_registerTest_User_ExistingCredentials - 2019.01.28 at 14h 51m 34s.xml">
-      <configuration name="RegisterTest.registerTest_User_ExistingCredentials" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 24m 45s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest - 2019.01.28 at 14h 54m 00s.xml">
-      <configuration name="RegisterTest" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 25m 29s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest - 2019.01.28 at 14h 59m 56s.xml">
-      <configuration name="RegisterTest" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 26m 17s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest - 2019.01.28 at 15h 02m 15s.xml">
-      <configuration name="RegisterTest" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 27m 42s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest - 2019.01.28 at 15h 03m 42s.xml">
-      <configuration name="RegisterTest" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 29m 57s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest_registerTest_User_PasswordMismatch - 2019.01.28 at 15h 09m 07s.xml">
-      <configuration name="RegisterTest.registerTest_User_PasswordMismatch" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 31m 31s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest_registerTest_User_ShortPassword - 2019.01.28 at 15h 11m 29s.xml">
-      <configuration name="RegisterTest.registerTest_User_ShortPassword" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 33m 04s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RegisterTest_cancelTest - 2019.01.28 at 15h 13m 39s.xml">
-      <configuration name="RegisterTest.cancelTest" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 35m 01s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LoginTest_cancelTest - 2019.01.28 at 15h 14m 41s.xml">
-      <configuration name="LoginTest.cancelTest" configurationId="JUnit" />
+    <history-entry file="UserBuyTicketTest - 2019.01.28 at 20h 35m 51s.xml">
+      <configuration name="UserBuyTicketTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15595000" />
+    <option name="totallyTimeSpent" value="22144000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25611246" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2591687" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -455,10 +482,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32987553" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32987553" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39937758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -470,6 +496,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Messages" order="14" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -516,54 +543,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/UserPageTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserProfilePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
@@ -583,74 +563,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/RegisterPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="2668">
+          <caret line="141" column="34" selection-start-line="141" selection-start-column="28" selection-end-line="141" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2521#2522#0" expanded="true" />
+            <element signature="e#2545#2546#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/LoginPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+        <state relative-caret-position="466">
+          <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#668#669#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#718#719#0" expanded="true" />
-            <element signature="e#839#840#0" expanded="true" />
-            <element signature="e#864#865#0" expanded="true" />
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1016#1017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTrolleyPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#696#697#0" expanded="true" />
+            <element signature="e#949#950#0" expanded="true" />
+            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1004#1005#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+            <element signature="e#1063#1064#0" expanded="true" />
+            <element signature="e#1090#1091#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1280#1281#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserSubwayPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#665#666#0" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
+            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#971#972#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
+            <element signature="e#1062#1063#0" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#1279#1280#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBusPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="719">
+          <caret line="56" column="3" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="56" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#372#373#0" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#943#944#0" expanded="true" />
+            <element signature="e#966#967#0" expanded="true" />
+            <element signature="e#998#999#0" expanded="true" />
+            <element signature="e#1018#1019#0" expanded="true" />
             <element signature="e#1057#1058#0" expanded="true" />
-            <element signature="e#1086#1087#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1122#1123#0" expanded="true" />
+            <element signature="e#1148#1149#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/general/RegisterPage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="141" column="34" selection-start-line="141" selection-start-column="28" selection-end-line="141" selection-end-column="34" />
+        <state relative-caret-position="121">
+          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="29" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#657#658#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#1779#1780#0" expanded="true" />
-            <element signature="e#1801#1802#0" expanded="true" />
-            <element signature="e#1542#1543#0" expanded="true" />
-            <element signature="e#1567#1568#0" expanded="true" />
-            <element signature="e#1726#1727#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1911#1912#0" expanded="true" />
-            <element signature="e#1937#1938#0" expanded="true" />
-            <element signature="e#2064#2065#0" expanded="true" />
-            <element signature="e#2091#2092#0" expanded="true" />
-            <element signature="e#2221#2222#0" expanded="true" />
-            <element signature="e#2247#2248#0" expanded="true" />
-            <element signature="e#2371#2372#0" expanded="true" />
-            <element signature="e#2395#2396#0" expanded="true" />
-            <element signature="e#2516#2517#0" expanded="true" />
-            <element signature="e#2545#2546#0" expanded="true" />
-            <element signature="e#2684#2685#0" expanded="true" />
-            <element signature="e#2711#2712#0" expanded="true" />
-            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
+            <element signature="e#1287#1288#0" expanded="true" />
+            <element signature="e#1307#1308#0" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
             <element signature="e#1365#1366#0" expanded="true" />
-            <element signature="e#1406#1407#0" expanded="true" />
-            <element signature="e#1435#1436#0" expanded="true" />
+            <element signature="e#1401#1402#0" expanded="true" />
+            <element signature="e#1425#1426#0" expanded="true" />
+            <element signature="e#1464#1465#0" expanded="true" />
+            <element signature="e#1491#1492#0" expanded="true" />
+            <element signature="e#1531#1532#0" expanded="true" />
+            <element signature="e#1559#1560#0" expanded="true" />
+            <element signature="e#1595#1596#0" expanded="true" />
+            <element signature="e#1619#1620#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="202" column="20" selection-start-line="202" selection-start-column="20" selection-end-line="202" selection-end-column="20" />
+        <state relative-caret-position="-634">
+          <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -659,8 +681,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2034">
-          <caret line="97" column="20" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+        <state relative-caret-position="-92">
+          <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="64" column="40" lean-forward="true" selection-start-line="64" selection-start-column="40" selection-end-line="66" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserBuyTicketPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#634#635#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
+            <element signature="e#1317#1318#0" expanded="true" />
+            <element signature="e#1347#1348#0" expanded="true" />
+            <element signature="e#1484#1485#0" expanded="true" />
+            <element signature="e#1505#1506#0" expanded="true" />
+            <element signature="e#1612#1613#0" expanded="true" />
+            <element signature="e#1639#1640#0" expanded="true" />
+            <element signature="e#1768#1769#0" expanded="true" />
+            <element signature="e#1793#1794#0" expanded="true" />
+            <element signature="e#1910#1911#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#2033#2034#0" expanded="true" />
+            <element signature="e#2055#2056#0" expanded="true" />
+            <element signature="e#2446#2447#0" expanded="true" />
+            <element signature="e#2472#2473#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserBuyTicketTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="80" column="94" selection-start-line="80" selection-start-column="94" selection-end-line="80" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
