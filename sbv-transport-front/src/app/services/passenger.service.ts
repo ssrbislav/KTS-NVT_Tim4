@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Passenger } from '../models/passenger.model';
 import {catchError} from 'rxjs/operators';
-import { throwError} from 'rxjs';
+import { throwError, Observable} from 'rxjs';
 // import { FilterSearchPassengerDTO } from '../models.dto/filterSearchPassenger.dto';
 
 const httpOptions = {
@@ -52,5 +52,24 @@ const httpOptions = {
     //   return this.http.post<Passenger[]>(this.passengerUrl + 'searchFilter',values);                 
                   
     // }
+
+    pushFileToStorage(file: File, id: BigInteger): Observable<HttpEvent<{}>> {
+      let formdata: FormData = new FormData();
+   
+      formdata.append('file', file);
+      const url = `${this.passengerUrl + 'handleFileUpload'}/${id}`;
+   
+      const req = new HttpRequest('POST', url, formdata, {
+        reportProgress: true,
+        responseType: 'text'
+      });
+   
+      return this.http.request(req);
+    }
+   
+    getFiles(location: String): Observable<string> {
+      const url = `${this.passengerUrl + 'getallfiles'}/${location}`;
+      return this.http.get<string>(url);
+    }
 
   }

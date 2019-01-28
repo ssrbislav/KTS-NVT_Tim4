@@ -18,4 +18,10 @@ export class DocumentService{
                     
       }
 
+
+    public getOneDocument(id: BigInteger){
+      
+      return this.http.get<MyDocument>(`${this.documentUrl + 'getDocument'}/${id}`);
+    }
+
 }

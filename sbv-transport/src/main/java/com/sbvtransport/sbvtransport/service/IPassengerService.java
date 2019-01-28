@@ -1,6 +1,9 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.Resource;
 import com.sbvtransport.sbvtransport.dto.PassengerChangeBooleanDTO;
 import com.sbvtransport.sbvtransport.dto.PassengerDTO;
 import com.sbvtransport.sbvtransport.dto.UserDTO;
@@ -17,4 +20,9 @@ public interface IPassengerService {
   String changeActive(PassengerChangeBooleanDTO change);
 
   Passenger loadUserByUsername(String username);
+  
+  void store(MultipartFile file,Long id);
+  Resource loadFile(String filename);
+  void deleteAll();
+  void init();
 }
