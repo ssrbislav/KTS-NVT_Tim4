@@ -37,8 +37,10 @@ export class PricelistAddComponent implements OnInit {
 
           this.pricelistService.addPricelist(this.pricelist).subscribe(
             data => {
-              if(data != null) 
+              if(data != null) {
                 alert("Pricelist created!");
+                this.close();
+              }
               else
                 alert("Something went wrong!"); 
           });
