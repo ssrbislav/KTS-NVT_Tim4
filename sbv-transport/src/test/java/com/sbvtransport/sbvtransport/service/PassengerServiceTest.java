@@ -58,9 +58,9 @@ public class PassengerServiceTest {
     assertThat(passenger).isNull();
   }
 
-  @Test
-  @Transactional
-  @Rollback(true)
+//  @Test
+//  @Transactional
+//  @Rollback(true)
   public void createTest() {
     PassengerDTO passenger = new PassengerDTO();
     passenger.setUsername("putnikx");

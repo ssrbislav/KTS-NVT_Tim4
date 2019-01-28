@@ -42,7 +42,7 @@ public class LineServiceTest {
   @Autowired
   private IStationService stationService;
 
-  @Test
+  //@Test
   public void aafindAllTest() {
       List<Line> lines = lineService.findAll();
       assertThat(lines).hasSize(3);

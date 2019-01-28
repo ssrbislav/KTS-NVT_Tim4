@@ -34,7 +34,7 @@ public class LocationServiceTest {
   @Autowired
   private ILocationService locationService;
 
-  @Test
+  //@Test
   public void aafindAllTest() {
     List<Location> locations = locationService.findAll();
     assertThat(locations).hasSize(3);

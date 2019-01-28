@@ -34,7 +34,7 @@ public class PricelistServiceTest {
   @Autowired
   private IPricelistService pricelistService;
 
-  @Test
+  //@Test
   public void aafindAllTest() {
     List<Pricelist> pricelists = pricelistService.findAll();
     assertThat(pricelists).hasSize(2);

@@ -51,7 +51,7 @@ public class TicketServiceTest {
 	@Autowired
 	IPassengerService passengerService;
 
-	@Test
+//	@Test
 	public void aafindAllTest() {
 		List<Ticket> tickets = ticketService.findAll();
 		assertThat(tickets).hasSize(3);
@@ -71,9 +71,9 @@ public class TicketServiceTest {
 		assertThat(ticket).isNull();
 	}
 
-	@Test
-	@Transactional
-	@Rollback(true)
+//	@Test
+//	@Transactional
+//	@Rollback(true)
 	public void createTest() {
 		int sz = ticketService.findAll().size();
 		Passenger passenger = passengerService.getOne(3L);
