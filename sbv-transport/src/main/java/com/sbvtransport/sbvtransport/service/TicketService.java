@@ -227,12 +227,15 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public Ticket activate(Long id) {
+		Date nowDate = new Date();
+		
 		Ticket ticket = getOne(id);
 		if (ticket == null) {
 			return null;
 		}
 		if(!ticket.isBlock()) {
 			ticket.setActive(true);
+			ticket.setDate(nowDate);
 			return update(ticket);
 		}
 		return null;
