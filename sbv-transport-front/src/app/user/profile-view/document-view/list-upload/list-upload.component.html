@@ -1,0 +1,15 @@
+<button class="button btn-info" *ngIf='showFile'
+	(click)='showFiles(false)'>Hide Images</button>
+ 
+<button class="button btn-info" *ngIf='!showFile'
+	(click)='showFiles(true)'>Show Images</button>
+ 
+<div [hidden]="!showFile">
+	
+	<app-details-upload [fileUpload]='file'></app-details-upload>
+		
+</div>
+<!-- 
+<div *ngIf= "showPicture">
+    <img src={{student.ImagePath}} class="rounded" alt="Grokonez-About Image" width="250px" height="auto">
+</div> -->

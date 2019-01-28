@@ -8,6 +8,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UserTicketsPage {
 
+  private WebDriver driver;
 
+
+  private WebElement id;
+  private WebElement activate;
 
 }
