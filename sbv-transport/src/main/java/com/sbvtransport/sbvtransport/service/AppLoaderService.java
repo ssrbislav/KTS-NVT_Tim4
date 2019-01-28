@@ -18,12 +18,9 @@ import com.sbvtransport.sbvtransport.repository.AdministratorRepository;
 public class AppLoaderService implements ApplicationRunner {
 
 	private AdministratorRepository adminRepository;
-	
-	private IPassengerService passengerService;
 
-	public AppLoaderService(AdministratorRepository adminRepository, PassengerService passengerService) {
+	public AppLoaderService(AdministratorRepository adminRepository) {
 		this.adminRepository = adminRepository;
-		this.passengerService = passengerService;
 	}
 
 	@Override
