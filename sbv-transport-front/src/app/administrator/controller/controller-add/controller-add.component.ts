@@ -79,7 +79,7 @@ export class ControllerAddComponent implements OnInit {
       newController.phone_number = phone;
       newController.date_birth = date;
       newController.roles = ['controller'];
-      alert(newController.roles);
+      //alert(newController.roles);
 
       this.controllerService.addController(newController)
       .subscribe( data => {
