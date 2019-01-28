@@ -30,6 +30,6 @@
       <td>{{ticket.active}}</td>
       <td>{{ticket.expired}}</td>
       <td>{{ticket.cost}}</td>
-      <td> <img (click) ="activate(ticket.id)" src ="assets/pictures/checked.png" alt="Activate" style="cursor: pointer;"></td>
+      <td> <img *ngIf = "ticket.active === false" (click) ="activate(ticket.id)" src ="assets/pictures/checked.png" alt="Activate" style="cursor: pointer;"></td>
     </tr>
 </table>
