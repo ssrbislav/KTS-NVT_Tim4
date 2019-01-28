@@ -11,7 +11,6 @@ import { ChangeTransportDTO } from 'src/app/models.dto/changeTransport.dto';
 import { Timetable } from 'src/app/models/timetable.model';
 import { FilterSearchTransportDTO } from 'src/app/models.dto/filterSearchTransport.dto';
 
-
 describe('BusService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({

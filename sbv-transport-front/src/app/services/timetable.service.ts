@@ -13,7 +13,7 @@ export class TimetableService{
 
     constructor(private http:HttpClient) {}
 
-    private timetableUrl = 'http://localhost:8080/api/timetable/';
+    timetableUrl = 'http://localhost:8080/api/timetable/';
 
     public addTimetable(timetable:AltTimetableDTO){
         return this.http.post<Timetable>(this.timetableUrl + 'addAltTimetable',timetable,httpOptions);                 
