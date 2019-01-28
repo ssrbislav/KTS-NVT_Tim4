@@ -8,7 +8,7 @@ export class PricelistService{
 
     constructor(private http:HttpClient) {}
 
-    private pricelistUrl = 'http://localhost:8080/api/pricelist/';
+    pricelistUrl = 'http://localhost:8080/api/pricelist/';
 
     public reportTicket(pricelist: ReportTicketDTO){
         return this.http.post<ReportResultTicketDTO[]>(this.pricelistUrl + 'reportTicket',pricelist);                 
