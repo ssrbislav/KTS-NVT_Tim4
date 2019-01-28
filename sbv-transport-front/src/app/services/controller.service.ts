@@ -44,4 +44,8 @@ const httpOptions = {
                   
     }
 
+    public checkTicket(id: BigInteger) {
+      return this.http.get<boolean>(`${this.controllerUrl + 'checkTicket'}/${id}`);
+    }
+
   }
