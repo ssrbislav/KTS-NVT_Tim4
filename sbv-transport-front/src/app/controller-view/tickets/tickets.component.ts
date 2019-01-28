@@ -50,12 +50,25 @@ export class TicketsComponent implements OnInit {
     });
   }
 
-  unblockItcket(id: BigInteger) {
+  unblockTicket(id: BigInteger) {
+
+    this.ticketService.getOne(id).subscribe(
+      data => {
+        this.ticket = data;
+      });
+
+    if(!this.ticket.block) {
+      alert("Ticket is not blocked!");
+      return;
+    }
+
     this.controllerService.unblockTicket(id).subscribe(
       data => {
         if(data == true) {
           alert("Ticket successfully unblocked!");
           this.loadAllTickets();
+        } else {
+          alert("Something went wrong!");
         }
       });
   }

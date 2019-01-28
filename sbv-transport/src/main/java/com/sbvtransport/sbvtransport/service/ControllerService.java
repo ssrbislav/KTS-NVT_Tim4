@@ -151,10 +151,23 @@ public class ControllerService implements IControllerService {
 		Ticket ticket = ticketService.getOne(id);
 		if(ticket != null) {
 			ticket.setBlock(true);
+			ticket.setActive(false);
 			ticketService.update(ticket);
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean unblockTicket(Long id) {
+		Ticket ticket = ticketService.getOne(id);
+		if(ticket != null) {
+			ticket.setBlock(false);
+			ticketService.update(ticket);
+			return true;
+		}
+		return false;
+		
 	}
 
 	@Override

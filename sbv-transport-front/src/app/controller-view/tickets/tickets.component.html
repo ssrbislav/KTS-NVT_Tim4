@@ -10,6 +10,8 @@
         <th scope="col">Expired</th>
         <th scope="col">Ticket Type</th>
         <th scope="col">Zone</th>
+        <th scope="col">Block Ticket</th>
+        <th scope="col">Unblock Ticket</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +24,9 @@
         <td>{{ticket.date_purchase}}</td>
         <td>{{ticket.demographic_type}}</td>
         <td>{{ticket.expired}}</td>
+        <td>{{ticket.ticket_type}}</td>
         <td>{{ticket.zone}}</td>
-        <td> <img (click) ="blockTicket(ticket.id)" src ="assets/pictures/delete.png" alt="Delete" style="cursor: pointer;"></td>
+        <td> <img (click) ="blockTicket(ticket.id)" src ="assets/pictures/delete.png" alt="Block" style="cursor: pointer;"></td>
+        <td> <img (click) ="unblockTicket(ticket.id)" src ="assets/pictures/checked.png" alt="Unblock" style="cursor: pointer;"></td>
       </tr>
   </table>

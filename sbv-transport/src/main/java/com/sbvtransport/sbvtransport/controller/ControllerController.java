@@ -158,4 +158,12 @@ public class ControllerController {
 		return new ResponseEntity<>(blocked, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/unblockTicket/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> unblockTicket(@PathVariable Long id) {
+		
+		boolean unblocked = controllerService.unblockTicket(id);
+		
+		return new ResponseEntity<>(unblocked, HttpStatus.OK);
+	}
+	
 }

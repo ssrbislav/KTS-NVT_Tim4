@@ -15,4 +15,5 @@ public interface IControllerService {
   List<Controller> filterSearch(FilterSearchControllerDTO filterSearch);
   boolean checkTicket(Long id);
   public boolean blockTicket(Long id);
+  public boolean unblockTicket(Long id);
 }
