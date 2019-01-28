@@ -67,12 +67,30 @@ public class StationServiceTest {
     @Test
     @Transactional
     @Rollback(true)
-    public void createTest() {
-        //StationDTO stationDTO = new StationDTO(1L, 1L);
+    public void createTest_OK() {
+        StationDTO stationDTO = new StationDTO(1L, "first");
         int dbSizeBefore = stationService.findAll().size();
-        //String success = stationService.create(stationDTO);
-       // assertThat(success).isEqualTo("The station has been successfully created.");
+        Station station = stationService.create(stationDTO);
+        assertThat(station.getZone().toString()).isEqualTo(stationDTO.getZone());
+        assertThat(station.getLocation().getId()).isEqualTo(stationDTO.getLocation_id());
         assertThat(dbSizeBefore).isEqualTo(stationService.findAll().size() - 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Transactional
+    @Rollback(true)
+    public void createTest_BadZone() {
+        StationDTO stationDTO = new StationDTO(1L, "x");
+        Station station = stationService.create(stationDTO);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void createTest_BadLocation() {
+        StationDTO stationDTO = new StationDTO(111L, "second");
+        Station station = stationService.create(stationDTO);
+        assertThat(station).isNull();
     }
 
     @Test
