@@ -25,7 +25,9 @@ import org.junit.runners.Suite;
 		PricelistRepositoryTest.class, ScheduleRepositoryTest.class, StationRepositoryTest.class,
 		TicketRepositoryTest.class, TimetableRepositoryTest.class,
 
-		LineServiceTest.class, LocationServiceTest.class, StationServiceTest.class,
+		LineServiceTest.class, LocationServiceTest.class, PassengerServiceTest.class,
+		PricelistServiceTest.class, StationServiceTest.class, TicketServiceTest.class,
+		TimetableServiceTest.class,
 
 		LocationServiceJUnitTest.class
 		})
