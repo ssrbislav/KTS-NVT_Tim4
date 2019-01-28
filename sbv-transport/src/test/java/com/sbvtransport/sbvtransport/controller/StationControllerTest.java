@@ -47,8 +47,7 @@ public class StationControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(2)))
-                .andExpect(jsonPath("$.[*].location.id").value(hasItem(2)))
-                .andExpect(jsonPath("$.[*].line.id").value(hasItem(1)));
+                .andExpect(jsonPath("$.[*].location.id").value(hasItem(2)));
     }
 
     @Test
@@ -56,8 +55,7 @@ public class StationControllerTest {
         mockMvc.perform(get(URL_PREFIX + "/getStation/1")).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.location.id").value(1L))
-                .andExpect(jsonPath("$.line.id").value(1L));
+                .andExpect(jsonPath("$.location.id").value(1L));
     }
 
     @Test
