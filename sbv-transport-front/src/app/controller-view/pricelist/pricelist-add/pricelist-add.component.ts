@@ -10,6 +10,7 @@ import { PricelistService } from 'src/app/services/pricelist.service';
 })
 export class PricelistAddComponent implements OnInit {
 
+  errorMessage = '';
   pricelist: Pricelist = new Pricelist();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,
@@ -44,6 +45,6 @@ export class PricelistAddComponent implements OnInit {
               else
                 alert("Something went wrong!"); 
           });
-  }
+        }
 
 }
