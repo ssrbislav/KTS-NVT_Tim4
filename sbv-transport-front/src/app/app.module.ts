@@ -11,7 +11,7 @@ import { AdministratorComponent } from './administrator/administrator.component'
 import { BusComponent } from './administrator/bus/bus.component';
 import { BusTableComponent } from './administrator/bus/bus-table/bus-table.component';
 import { BusService } from './services/bus.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SubwayComponent } from './administrator/subway/subway.component';
 import { SubwayTableComponent } from './administrator/subway/subway-table/subway-table.component';
 import { SubwayService } from './services/subway.service';
@@ -60,7 +60,7 @@ import { ControllerSearchFilterComponent } from './administrator/controller/cont
 import { UserComponent } from './user/user.component';
 import { BusViewComponent } from './user/bus-view/bus-view.component';
 import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
-import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { httpInterceptorProviders, AuthInterceptor } from './auth/auth-interceptor';
 import { SubwayViewComponent } from './user/subway-view/subway-view.component';
 import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
 import { ControllerViewComponent } from './controller-view/controller-view.component';
@@ -217,10 +217,17 @@ const appRoutes: Routes = [
     LineTimetableComponent,
     PricelistAddComponent
    ],
-  providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
+  providers: [
+    RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
     LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService, HttpClientModule,
     { provide: MatDialogRef, useValue: {} },
-    { provide: MAT_DIALOG_DATA, useValue: [] },],
+    { provide: MAT_DIALOG_DATA, useValue: [] },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
