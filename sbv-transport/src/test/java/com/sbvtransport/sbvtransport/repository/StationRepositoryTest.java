@@ -1,6 +1,7 @@
 package com.sbvtransport.sbvtransport.repository;
 
 import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
+import com.sbvtransport.sbvtransport.enumeration.Zone;
 import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Station;
@@ -37,24 +38,37 @@ public class StationRepositoryTest {
     @Test
     @Transactional
     @Rollback(true)
-    public void saveLineTest() {
-        Line line = new Line("9", TypeTransport.bus);
-//        Location l1 = new Location("Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
-//        Station s1 = new Station(l1, line);
-//        List<Station> stations = new ArrayList<>();
-//        stations.add(s1);
-//        line.setStation_list(stations);
-//
-//        locationRepository.save(l1);
-//        lineRepository.save(line);
-//        Station savedStation = stationRepository.save(s1);
-//        assertNotNull(savedStation);
-//        assertEquals(s1.getLine(), savedStation.getLine());
-//        assertEquals(s1.getLocation(), savedStation.getLocation());
+    public void saveStationTest() {
+        Line line = new Line();
+        line.setFirst_station(1L);
+        line.setLine_type(TypeTransport.bus);
+        line.setDeleted(false);
+        line.setName("linija");
+        line.setTimetable(new ArrayList<>());
+        line.setZone(Zone.second);
+        Location l1 = new Location("Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
+        Station s1 = new Station();
+        s1.setDeleted(false);
+        s1.setLine(line);
+        s1.setLocation(l1);
+        s1.setZone(Zone.first);
+        List<Station> stations = new ArrayList<>();
+        stations.add(s1);
+        line.setStation_list(stations);
+
+        locationRepository.save(l1);
+        lineRepository.save(line);
+        Station savedStation = stationRepository.save(s1);
+        assertNotNull(savedStation);
+        assertEquals(s1.getLine(), savedStation.getLine());
+        assertEquals(s1.getLocation(), savedStation.getLocation());
+        assertEquals(s1.getZone(), savedStation.getZone());
+        assertEquals(s1.isDeleted(), savedStation.isDeleted());
+        assertEquals(s1.getLine(), savedStation.getLine());
     }
 
     @Test(expected = DataIntegrityViolationException.class)
-    public void saveLineTest2() {
+    public void saveStationTest2() {
         stationRepository.save(new Station());
     }
 
