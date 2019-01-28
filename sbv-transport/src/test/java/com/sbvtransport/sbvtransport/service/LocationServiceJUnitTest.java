@@ -10,12 +10,15 @@ import java.util.Optional;
 
 import com.sbvtransport.sbvtransport.repository.StationRepository;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,6 +28,8 @@ import javax.persistence.EntityNotFoundException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LocationServiceJUnitTest {
 
     @Autowired
@@ -54,9 +59,9 @@ public class LocationServiceJUnitTest {
     }
 
     @Test
-    public void findAllTest() {
+    public void aaafindAllTest() {
         List<Location> locations = locationService.findAll();
-        assertThat(locations).hasSize(2);
+        assertThat(locations).hasSize(3);
         assertNotNull(locations);
         assertThat(locations.get(0).getLocation_name()).isEqualTo("Stanica1");
         assertThat(locations.get(0).getAddress()).isEqualTo("Vojvode Supljikca 50");
