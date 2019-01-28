@@ -1,7 +1,94 @@
 <mat-dialog-content>
   <form>
       <h1 style="text-align: center">Populate Pricelist</h1>
-  </form>
-  <button class="checkbtn" type="button" mat-button >Add pricelist</button>
-  <button class="cancelbtn" type="button" mat-dialog-close mat-button >Cancel</button>
+      
+      <label for="id"><b>ID</b></label>
+      ><input type="text" placeholder="Enter Pricelist id" name="id" [(ngModel)]="pricelist.id" 
+      [ngModelOptions]="{standalone: true}" required />
+      
+      <label for="valid_since"><b>Valid since</b></label>
+      <input type="date" placeholder="Enter Valid Since Date" name="valid_since" [(ngModel)]="pricelist.valid_since" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="valid_until"><b>Valid until</b></label>
+      <input type="date" placeholder="Enter Valid From Date" name="valid_until" [(ngModel)]="pricelist.valid_until" 
+      [ngModelOptions]="{standalone: true}" required />
+      
+      <label for="active"><b>Active</b></label>
+      <input type="text" placeholder="Enter 1 (Must be that way)" name="active" [(ngModel)]="pricelist.active" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="senior_discount_percentage"><b>Senior discount percentage</b></label>
+      <input type="text" placeholder="Enter Senior discount percentage" name="senior_discount_percentage" [(ngModel)]="pricelist.senior_discount_percentage" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="student_discount_percentage"><b>Student discount percentage</b></label>
+      <input type="text" placeholder="Enter Student discount percentage" name="student_discount_percentage" [(ngModel)]="pricelist.student_discount_percentage" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="standard_discount_percentage"><b>Standard discount percentage</b></label>
+      <input type="text" placeholder="Enter Standard discount percentage" name="standard_discount_percentage" [(ngModel)]="pricelist.standard_discount_percentage" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="double_zone_premium_percentage"><b>Double zone premium percentage</b></label>
+      <input type="text" placeholder="Enter Double zone premium percentage" name="double_zone_premium_percentage" [(ngModel)]="pricelist.double_zone_premium_percentage" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="bus_one_use_price"><b>Bus ticket (oneUse price)</b></label>
+      <input type="text" placeholder="Enter Bus ticket one use price" name="bus_one_use_price" [(ngModel)]="pricelist.bus_one_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="bus_daily_use_price"><b>Bus ticket (daily price)</b></label>
+      <input type="text" placeholder="Enter Bus ticket daily price" name="bus_daily_use_price" [(ngModel)]="pricelist.bus_daily_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="bus_monthly_use_price"><b>Subway ticket (monthly price)</b></label>
+      <input type="text" placeholder="Enter Bus ticket monthly price" name="bus_monthly_use_price" [(ngModel)]="pricelist.bus_monthly_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="bus_yearly_use_price"><b>Bus ticket (yearly price)</b></label>
+      <input type="text" placeholder="Enter Bus ticket yearly price" name="bus_yearly_use_price" [(ngModel)]="pricelist.bus_yearly_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="subway_one_use_price"><b>Subway ticket (oneUse price)</b></label>
+      <input type="text" placeholder="Enter Subway ticket one use price" name="subway_one_use_price" [(ngModel)]="pricelist.subway_one_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="subway_daily_use_price"><b>Subway ticket (daily price)</b></label>
+      <input type="text" placeholder="Enter Subway ticket dailt price" name="subway_daily_use_price" [(ngModel)]="pricelist.subway_daily_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="subway_monthly_use_price"><b>Subway ticket (monthly price)</b></label>
+      <input type="text" placeholder="Enter Subway ticket monthly price" name="subway_monthly_use_price" [(ngModel)]="pricelist.subway_monthly_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="subway_yearly_use_price"><b>Subway ticket (yearly price)</b></label>
+      <input type="text" placeholder="Enter Subway ticket yearly price" name="subway_yearly_use_price" [(ngModel)]="pricelist.subway_yearly_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="trolley_one_use_price"><b>Trolley ticket (oneUse price)</b></label>
+      <input type="text" placeholder="Enter Trolley ticket one use price" name="trolley_one_use_price" [(ngModel)]="pricelist.trolley_one_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="trolley_daily_use_price"><b>Trolley ticket (daily price)</b></label>
+      <input type="text" placeholder="Enter Trolley ticket daily price" name="trolley_daily_use_price" [(ngModel)]="pricelist.trolley_daily_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+      
+      <label for="trolley_monthly_use_price"><b>Trolley ticket (monthly price)</b></label>
+      <input type="text" placeholder="Enter Trolley ticket monthly price" name="trolley_monthly_use_price" [(ngModel)]="pricelist.trolley_monthly_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="trolley_yearly_use_price"><b>Trolley ticket (yearly price)</b></label>
+      <input type="text" placeholder="Enter Trolley ticket yearly price" name="trolley_yearly_use_price" [(ngModel)]="pricelist.trolley_yearly_use_price" 
+      [ngModelOptions]="{standalone: true}" required />
+
+      <label for="deleted"><b>Deleted</b></label>
+      <input type="text" placeholder="Enter 0 (Must be that way)" name="deleted" [(ngModel)]="pricelist.deleted" 
+      [ngModelOptions]="{standalone: true}" required />
+
+    </form>
+
+    <button class="checkbtn" type="button" mat-button (click) = "addPricelist()">Add pricelist</button>
+    <button class="cancelbtn" type="button" mat-dialog-close mat-button (click) = "cancel()">Cancel</button>
+
 </mat-dialog-content>

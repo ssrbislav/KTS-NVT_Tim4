@@ -78,6 +78,7 @@ import { ProfileViewComponent } from './user/profile-view/profile-view.component
 import { HttpModule } from '@angular/http';
 import { TicketsComponent } from './controller-view/tickets/tickets.component';
 import { PricelistAddComponent } from './controller-view/pricelist/pricelist-add/pricelist-add.component';
+import { PricelistUpdateComponent } from './controller-view/pricelist/pricelist-update/pricelist-update.component';
 
 const appRoutes: Routes = [
  
@@ -179,6 +180,7 @@ const appRoutes: Routes = [
     LineTimetableComponent,
     TicketsComponent,
     PricelistAddComponent,
+    PricelistUpdateComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,4 +18,20 @@ export class PricelistAddComponent implements OnInit {
   ngOnInit() {
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
+  addPricelist(){
+    this.pricelistService.addPricelist(this.pricelist).subscribe(
+      data => {
+        if(data != null) {
+          alert("Pricelist created!");
+        } else{
+          alert("Something went wrong!");
+        }
+      }
+    )
+  }
+
 }
