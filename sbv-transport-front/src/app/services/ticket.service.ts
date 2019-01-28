@@ -13,7 +13,7 @@ export class TicketService{
 
   constructor(private http:HttpClient) {}
 
-  private ticketUrl = 'http://localhost:8080/api/ticket/';
+  ticketUrl = 'http://localhost:8080/api/ticket/';
 
   public getTickets() {
       return this.http.get<Ticket[]>(this.ticketUrl);
