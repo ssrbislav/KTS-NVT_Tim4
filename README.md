@@ -7,7 +7,7 @@ Predmetni projekat iz KTS i NVT (Konstrukcija i testiranje softvera i Napredne w
 3. Bojana Ćorilić SW39-2014
 
 ## Projektni zadatak
--Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
+- Realizovati aplikaciju za digitalizaciju gradskog saobraćaja.
 
 ## Korišćene tehnologije:
 1. Java + Spring Boot 
