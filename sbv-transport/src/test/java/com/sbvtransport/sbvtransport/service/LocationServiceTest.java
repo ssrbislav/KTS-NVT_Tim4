@@ -4,8 +4,10 @@ package com.sbvtransport.sbvtransport.service;
 import com.sbvtransport.sbvtransport.dto.LocationDTO;
 import com.sbvtransport.sbvtransport.model.Location;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -25,13 +27,15 @@ import static org.springframework.test.util.AssertionErrors.fail;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LocationServiceTest {
 
     @Autowired
     private ILocationService locationService;
 
     @Test
-    public void findAllTest() {
+    public void aafindAllTest() {
         List<Location> locations = locationService.findAll();
         assertThat(locations).hasSize(3);
     }
@@ -42,10 +46,10 @@ public class LocationServiceTest {
 
         assertThat(location).isNotNull();
         assertThat(location.getId()).isEqualTo(3L);
-        assertThat(location.getLocation_name()).isEqualTo("stanica3");
-        assertThat(location.getAddress()).isEqualTo("Vojvode Supljikca 52");
-        assertThat(location.getLatitude()).isEqualTo(39.40f);
-        assertThat(location.getLongitude()).isEqualTo(35.20f);
+        assertThat(location.getLocation_name()).isEqualTo("Podbara");
+        assertThat(location.getAddress()).isEqualTo("1, Filipa Visnjica, Подбара, Novi Sad, Novi Sad City, South Backa District, Vojvodina, 21101, Serbia");
+        assertThat(location.getLatitude()).isEqualTo(45.2618f);
+        assertThat(location.getLongitude()).isEqualTo(19.8516f);
         assertThat(location.getType()).isEqualTo("station");
     }
 
