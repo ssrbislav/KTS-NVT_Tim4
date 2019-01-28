@@ -42,8 +42,17 @@ public class UserPageTest {
   }
 
   @Test
-  public void logout() {
-
+  public void logout() throws InterruptedException {
+    WebElement logOut = browser.findElement(By.xpath("/html/body/app-root/app-user/app-header/nav/div/div[2]/ul[2]/li[3]/a"));
+    logOut.click();
+    new WebDriverWait(browser, 50).until(ExpectedConditions.alertIsPresent());
+    Thread.sleep(5000);
+    assertThat(browser.switchTo().alert().getText()).isEqualTo("User successfully Logged out!");
+    browser.switchTo().alert().accept();
+    Thread.sleep(5000);
+    new WebDriverWait(browser, 15).until(ExpectedConditions.urlContains("mainPage"));
+    assertThat(browser.getCurrentUrl()).isEqualTo("http://localhost:4200/mainPage");
+    browser.close();
   }
 
   @Test
