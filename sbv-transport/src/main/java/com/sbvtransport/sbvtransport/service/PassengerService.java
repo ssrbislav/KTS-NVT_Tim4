@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +38,9 @@ public class PassengerService implements IPassengerService {
 	
 	@Autowired
 	DocumentService documentService;
+	
+	@Autowired
+	PasswordEncoder encoder;
 	
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	private final Path rootLocation = Paths.get("upload-dir");
@@ -92,7 +96,7 @@ public class PassengerService implements IPassengerService {
 		updatePassenger.get().setFirst_name(passenger.getFirst_name());
 		updatePassenger.get().setLast_name(passenger.getLast_name());
 		updatePassenger.get().setUsername(passenger.getUsername());
-		updatePassenger.get().setPassword(passenger.getPassword());
+		updatePassenger.get().setPassword(encoder.encode(passenger.getPassword()));
 		updatePassenger.get().setDocument_validated(passenger.isDocument_validated());
 		updatePassenger.get().setTickets(passenger.getTickets());
 		updatePassenger.get().setId(id);

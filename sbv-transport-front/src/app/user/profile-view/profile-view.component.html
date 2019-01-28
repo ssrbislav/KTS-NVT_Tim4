@@ -4,24 +4,24 @@
     <h1 style="text-align: center">Profil info</h1>
 
     <label for="password">Password</label>
-    <input type="password" name="password" [value] = "passenger.password" [disabled]="true" #inputEl1>
+    <input type="password" name="password" [(ngModel)] = "passenger.password" [disabled]="true" #inputEl1>
 
     <div *ngIf = "show == 'change'">
       <label for="password">Repeat Password</label>
-      <input type="password" name="password" [value] = "passRepeat" #inputEl2>
+      <input type="password" name="password" [(ngModel)] = "passRepeat" >
     </div>
 
     <label for="first_name">First name</label>
-    <input type="text" name="first_name" [value]= "passenger.first_name" [disabled]="true" #inputEl3>
+    <input type="text" name="first_name" [(ngModel)]= "passenger.first_name" [disabled]="true" #inputEl3>
 
     <label for="last_name">Last name</label>
-    <input type="text" name="last_name" [value] = "passenger.last_name" [disabled]="true" #inputEl4>
+    <input type="text" name="last_name" [(ngModel)] = "passenger.last_name" [disabled]="true" #inputEl4>
 
     <label for="address">Address</label>
-    <input type="text" name="address" [value]= "passenger.address" [disabled]="true" #inputEl5>
+    <input type="text" name="address" [(ngModel)]= "passenger.address" [disabled]="true" #inputEl5>
 
     <label for="phone_number">Phone number</label>
-    <input type="text" name="phone_number" [value] = "passenger.phone_number" [disabled]="true" #inputEl6>
+    <input type="text" name="phone_number" [(ngModel)] = "passenger.phone_number" [disabled]="true" #inputEl6>
 
     <div class="clearfix" *ngIf = "show == 'change'">
         <button class="cancelbtn" (click) = "cancelClicked()">Cancel</button>

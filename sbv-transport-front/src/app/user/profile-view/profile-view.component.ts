@@ -21,6 +21,8 @@ export class ProfileViewComponent implements OnInit {
   @ViewChild('inputEl4') public inputEl4: ElementRef;
   @ViewChild('inputEl5') public inputEl5: ElementRef;
   @ViewChild('inputEl6') public inputEl6: ElementRef;
+  @ViewChild('repeat') public repeat: ElementRef;
+
 
   document: string = 'not';
   doc: MyDocument;
@@ -39,7 +41,7 @@ export class ProfileViewComponent implements OnInit {
         this.passenger = data;
         this.passenger.id = data.id;
         this.checkDocument(true);
-        this.saveClicked();
+        //this.saveClicked();
 
       });
   }
@@ -74,41 +76,26 @@ export class ProfileViewComponent implements OnInit {
   }
 
   saveClicked(){
-    // BAD MODEL.
-    let username = this.tokenStorage.getUsername();
-    this.passengerService.getPassenger(username).subscribe(
-      data => {
-        this.passenger = data;
-        this.passenger.id = data.id;
-        console.log(data);
-        console.log(this.passenger);
-        this.passenger.password = this.inputEl1.nativeElement.value;
-        this.passRepeat = this.inputEl2.nativeElement.value;
-        this.passenger.address = this.inputEl5.nativeElement.value;
-        this.passenger.first_name = this.inputEl3.nativeElement.value;
-        this.passenger.last_name = this.inputEl4.nativeElement.value;
-        this.passenger.phone_number = this.inputEl6.nativeElement.value;
-        if(this.passenger.password == this.passRepeat){
-          console.log(this.passenger);
-          this.passengerService.updatePassenger(this.passenger, this.passenger.id)
-          .subscribe( upData => {
-            this.passenger = upData;
-            console.log(upData);
-            alert("Successfully profil change!");
-            this.inputEl1.nativeElement.disabled = true;
-            // this.inputEl2.nativeElement.disabled = true;
-            this.inputEl3.nativeElement.disabled = true;
-            this.inputEl4.nativeElement.disabled = true;
-            this.inputEl5.nativeElement.disabled = true;
-            this.inputEl6.nativeElement.disabled = true;
-            this.show = 'profil';
 
-          });
-        }else{
-          alert("Passwords didn't match!");
-        }
+    if(this.passenger.password == this.passRepeat){
+      console.log(this.passenger);
+      this.passengerService.updatePassenger(this.passenger, this.passenger.id)
+      .subscribe( upData => {
+        this.passenger = upData;
+        console.log(upData);
+        alert("Successfully profil change!");
+        this.inputEl1.nativeElement.disabled = true;
+        // this.inputEl2.nativeElement.disabled = true;
+        this.inputEl3.nativeElement.disabled = true;
+        this.inputEl4.nativeElement.disabled = true;
+        this.inputEl5.nativeElement.disabled = true;
+        this.inputEl6.nativeElement.disabled = true;
+        this.show = 'profil';
 
       });
+    }else{
+      alert("Passwords didn't match!");
+    }
   };
 
 }
