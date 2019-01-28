@@ -13,7 +13,7 @@ const httpOptions = {
 
     constructor(private http:HttpClient) {}
 
-    private administratorUrl = 'http://localhost:8080/api/administrator/';
+    administratorUrl = 'http://localhost:8080/api/administrator/';
 
     public updateAdministrator(administrator: Administrator){
         return this.http.post<Administrator>(this.administratorUrl + 'updateAdministrator',administrator);

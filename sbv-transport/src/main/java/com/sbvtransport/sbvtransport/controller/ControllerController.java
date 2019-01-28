@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -148,4 +149,13 @@ public class ControllerController {
 		
 		return new ResponseEntity<>(checked, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/blockTicket/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> blockTicket(@PathVariable Long id) {
+		
+		boolean blocked = controllerService.blockTicket(id);
+		
+		return new ResponseEntity<>(blocked, HttpStatus.OK);
+	}
+	
 }

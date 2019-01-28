@@ -231,6 +231,9 @@ public class TicketService implements ITicketService {
 		if (ticket == null) {
 			return null;
 		}
+		if(ticket.isBlock()) {
+			return null;
+		}
 		ticket.setActive(true);
 		return update(ticket);
 	}

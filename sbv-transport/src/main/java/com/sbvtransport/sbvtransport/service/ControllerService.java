@@ -145,6 +145,17 @@ public class ControllerService implements IControllerService {
 		}
 		return finalControllers;
 	}
+	
+	@Override
+	public boolean blockTicket(Long id) {
+		Ticket ticket = ticketRepository.getOne(id);
+		if(ticket != null) {
+			ticket.setBlock(true);
+			ticketRepository.save(ticket);
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean checkTicket(Long id) {

@@ -1,20 +1,24 @@
-<div id = "main">
+<h1 style="text-align: center;color: white;">Trolleys</h1>
+<div id="glavni">
+  <div id="mapTT" style="width: 60%;height:500px"></div>
+
+  <div id="main">
     <div id="div1">
       <label for="line" style="padding-right: 20px;"><b>Line</b></label>
-  
-      <select [(ngModel)]="filterSearch" id="filter_id_line" name="line" (change)= "loadFilterSearch()" required >
-        <option [ngValue] = "null"></option>
+
+      <select [(ngModel)]="filterSearch" id="filter_id_line" name="line" (change)="loadFilterSearch()" required>
+        <option [ngValue]="null"></option>
         <ng-container *ngFor="let line of lines">
-          <ng-container *ngIf = "line.line_type == 'bus'">
-            <option [ngValue] = "line">{{line.name}}</option>
+          <ng-container *ngIf="line.line_type == 'trolley'">
+            <option [ngValue]="line">{{line.name}}</option>
           </ng-container>
         </ng-container>
       </select>
-  
-      <button type="button" class="btn btn-primary btn-lg" (click) = "buyTicket()">Buy a Ticket</button>
-  
+
+      <button type="button" class="btn btn-primary btn-lg" (click)="buyTicket()">Buy a Ticket</button>
+
     </div>
-  
+
     <!-- <table class="table table-hover">
       <thead>
         <tr>
@@ -31,29 +35,30 @@
         </tr>
       </tbody>
     </table> -->
-  
+
     <ng-container>
-          <div>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" colspan="5">First station arrivals</th>     
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor = "let timetable of timetables; let i = index">
-                    <ng-container *ngFor="let time of timetable.schedule[0].times; let i = index" >
-                      <tr *ngIf="i % 7 === 0">
-                        <td *ngFor="let x of [i,i+1,i+2,i+3,i+4,i+5,i+6]">
-                          {{timetable.schedule[0].times[x]&nbsp;}}&nbsp;
-                        </td>
-                      </tr>
-                    </ng-container>
-                </tr>   
-              </tbody> 
-            </table>
-          </div>
-        
+      <div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" colspan="5">First station arrivals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let timetable of timetables; let i = index">
+              <ng-container *ngFor="let time of timetable.schedule[0].times; let i = index">
+            <tr *ngIf="i % 7 === 0">
+              <td *ngFor="let x of [i,i+1,i+2,i+3,i+4,i+5,i+6]">
+                {{timetable.schedule[0].times[x]&nbsp;}}&nbsp;
+              </td>
+            </tr>
     </ng-container>
-  
+    </tr>
+    </tbody>
+    </table>
   </div>
+
+  </ng-container>
+
+</div>
+</div>
