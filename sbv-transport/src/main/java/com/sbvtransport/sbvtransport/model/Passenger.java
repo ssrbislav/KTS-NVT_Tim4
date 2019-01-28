@@ -56,7 +56,7 @@ public class Passenger extends User implements Serializable {
 	public Passenger(boolean active, boolean document_validated, String email, String username, String password,
 			String first_name, String last_name, String address, String phone_number, Date date_birth) {
 		super(email, username, password, first_name, last_name, address, phone_number, date_birth);
-		this.active = active;
+		this.active = true;
 		this.document_validated = document_validated;
 		this.userType = UserType.standard;
 	}
@@ -65,6 +65,7 @@ public class Passenger extends User implements Serializable {
 	public Passenger(Long id) {
 		super();
 		this.id = id;
+		this.active = true;
 	}
 
 	public boolean isActive() {
