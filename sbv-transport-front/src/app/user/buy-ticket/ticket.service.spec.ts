@@ -1,15 +1,6 @@
 import { TestBed, inject } from "@angular/core/testing";
-import { Line } from 'src/app/models/line.model';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TransportDTO } from 'src/app/models.dto/transport.dto';
-import { AddLocationToTransportDTO } from 'src/app/models.dto/addLocationToTransportDTO.dto';
-import { MyLocation } from 'src/app/models/location.model';
 import { HttpResponse } from '@angular/common/http';
-import { ChangeTransportDTO } from 'src/app/models.dto/changeTransport.dto';
-import { Timetable } from 'src/app/models/timetable.model';
-import { FilterSearchTransportDTO } from 'src/app/models.dto/filterSearchTransport.dto';
-import { SubwayService } from 'src/app/services/subway.service';
-import { Subway } from 'src/app/models/subway.model';
 import { TicketService } from 'src/app/services/ticket.service';
 import { Ticket } from 'src/app/models/ticket.model';
 import { Passenger } from 'src/app/models/passenger.model';
