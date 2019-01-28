@@ -1,0 +1,39 @@
+input[type=text],input[type=password], select,input[type=number], input[type=time], input[type=date] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    color: black;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: black;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    border: none;
+}
+
+.checkbtn {
+    background-color: #45a049;
+}
+
+.cancelbtn {
+    background-color: rgb(158, 49, 49);
+}

@@ -3,7 +3,7 @@
       <h1 style="text-align: center">Populate Pricelist</h1>
       
       <label for="id"><b>ID</b></label>
-      ><input type="text" placeholder="Enter Pricelist id" name="id" [(ngModel)]="pricelist.id" 
+      <input type="text" placeholder="Enter Pricelist id" name="id" [(ngModel)]="pricelist.id" 
       [ngModelOptions]="{standalone: true}" required />
       
       <label for="valid_since"><b>Valid since</b></label>
@@ -12,10 +12,6 @@
 
       <label for="valid_until"><b>Valid until</b></label>
       <input type="date" placeholder="Enter Valid From Date" name="valid_until" [(ngModel)]="pricelist.valid_until" 
-      [ngModelOptions]="{standalone: true}" required />
-      
-      <label for="active"><b>Active</b></label>
-      <input type="text" placeholder="Enter 1 (Must be that way)" name="active" [(ngModel)]="pricelist.active" 
       [ngModelOptions]="{standalone: true}" required />
 
       <label for="senior_discount_percentage"><b>Senior discount percentage</b></label>
@@ -82,13 +78,9 @@
       <input type="text" placeholder="Enter Trolley ticket yearly price" name="trolley_yearly_use_price" [(ngModel)]="pricelist.trolley_yearly_use_price" 
       [ngModelOptions]="{standalone: true}" required />
 
-      <label for="deleted"><b>Deleted</b></label>
-      <input type="text" placeholder="Enter 0 (Must be that way)" name="deleted" [(ngModel)]="pricelist.deleted" 
-      [ngModelOptions]="{standalone: true}" required />
-
     </form>
-
-    <button class="checkbtn" type="button" mat-button (click) = "addPricelist()">Add pricelist</button>
-    <button class="cancelbtn" type="button" mat-dialog-close mat-button (click) = "cancel()">Cancel</button>
-
 </mat-dialog-content>
+<div>
+    <button class="checkbtn" type="button"  (click) = "addPricelist()">Add pricelist</button>
+    <button class="cancelbtn" type="button" mat-dialog-close  (click) = "cancel()">Cancel</button>
+  </div>

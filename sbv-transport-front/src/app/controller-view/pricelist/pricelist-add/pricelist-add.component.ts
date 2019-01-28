@@ -23,15 +23,35 @@ export class PricelistAddComponent implements OnInit {
   }
 
   addPricelist(){
-    this.pricelistService.addPricelist(this.pricelist).subscribe(
+
+    this.pricelistService.getPriclists().subscribe(
       data => {
         if(data != null) {
-          alert("Pricelist created!");
-        } else{
-          alert("Something went wrong!");
+          alert("Pricelist already exists, just update it!");
+          return;
+        } else {
+
+          this.pricelist.deleted = false;
+          this.pricelist.active = true;
+
+          if(this.pricelist.senior_discount_percentage > 100 || this.pricelist.senior_discount_percentage < 0 ||
+            this.pricelist.student_discount_percentage > 100 || this.pricelist.student_discount_percentage < 0 ||
+            this.pricelist.standard_discount_percentage > 100 || this.pricelist.standard_discount_percentage < 0 ||
+            this.pricelist.double_zone_premium_percentage < 100) {
+              alert("Data not correct!");
+              return;
+          } 
+
+          this.pricelistService.addPricelist(this.pricelist).subscribe(
+            data => {
+              if(data != null) 
+                alert("Pricelist created!");
+              else
+                alert("Something went wrong!"); 
+          });
         }
       }
-    )
+    );
   }
 
 }
