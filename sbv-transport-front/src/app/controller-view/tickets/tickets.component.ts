@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from 'src/app/services/ticket.service';
 import { Ticket } from 'src/app/models/ticket.model';
+import { ControllerService } from 'src/app/services/controller.service';
 
 @Component({
   selector: 'app-tickets',
@@ -11,7 +12,7 @@ export class TicketsComponent implements OnInit {
 
   tickets: Ticket[];
 
-  constructor(private ticketService: TicketService) { }
+  constructor(private ticketService: TicketService, private controllerService: ControllerService) { }
 
   ngOnInit() {
     this.loadAllTickets();
@@ -24,6 +25,16 @@ export class TicketsComponent implements OnInit {
       });
   }
 
+  blockTicket(id: BigInteger) {
+    this.controllerService.blockTicket(id).subscribe(
+      data => {
+        if(data == true) {
+          alert("Ticket Blocked!");
+          this.loadAllTickets();
+        }
+        alert("Something went wrong!");
+    });
+  }
   
 
 }
