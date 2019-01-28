@@ -122,8 +122,8 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  clickButtonTicketView() {
-    
+  clickButtonTicketViewController() {
+    this.featureSelected.emit('tickets')
   }
 
 

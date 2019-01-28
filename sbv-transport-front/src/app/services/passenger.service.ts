@@ -19,7 +19,11 @@ const httpOptions = {
 
     public getPassengers() {
         return this.http.get<Passenger[]>(this.passengerUrl);
-      }
+    }
+
+    public getPassengerById(id: BigInteger) {
+      return this.http.get<Passenger>(`${this.passengerUrl + 'getPassengerByID'}/${id}`);
+    }
 
     public getPassenger(username: string) {
       return this.http.get<Passenger>(`${this.passengerUrl + 'getPassenger'}/${username}`);
