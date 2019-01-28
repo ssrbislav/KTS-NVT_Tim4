@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="68521292-012e-40f4-9be0-7edb206e0722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/sbv-transport-e2e.iws" beforeDir="false" afterPath="$PROJECT_DIR$/sbv-transport-e2e.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserProfilePage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTicketsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserTicketsPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/SbvTransportE2EApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/SbvTransportE2EApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sbv-transport/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sbv-transport/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sbv-transport/src/test/resources/application-test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sbv-transport/src/test/resources/application-test.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,7 +24,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="194" column="84" lean-forward="true" selection-start-line="194" selection-start-column="84" selection-end-line="194" selection-end-column="84" />
+              <caret line="194" column="84" selection-start-line="194" selection-start-column="84" selection-end-line="194" selection-end-column="84" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -42,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="470">
-              <caret line="39" column="80" lean-forward="true" selection-start-line="39" selection-start-column="80" selection-end-line="39" selection-end-column="80" />
+              <caret line="39" column="80" selection-start-line="39" selection-start-column="80" selection-end-line="39" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-132">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#364#365#0" expanded="true" />
@@ -79,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+            <state relative-caret-position="470">
+              <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserBuyTicketTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
-              <caret line="83" column="80" lean-forward="true" selection-start-line="83" selection-start-column="80" selection-end-line="83" selection-end-column="80" />
+              <caret line="83" column="80" selection-start-line="83" selection-start-column="80" selection-end-line="83" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -330,7 +324,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548706698946" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548708849270" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/college" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -450,7 +444,7 @@
       <workItem from="1548380347120" duration="1055000" />
       <workItem from="1548381781875" duration="169000" />
       <workItem from="1548668973938" duration="14371000" />
-      <workItem from="1548690276332" duration="9291000" />
+      <workItem from="1548690276332" duration="9495000" />
     </task>
     <servers />
   </component>
@@ -487,7 +481,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24886000" />
+    <option name="totallyTimeSpent" value="25090000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -503,7 +497,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32987553" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32987553" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39937758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -693,7 +687,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sbvtransport/e2e/pages/user/UserPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-132">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#364#365#0" expanded="true" />
@@ -717,7 +711,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/LoginTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
-          <caret line="39" column="80" lean-forward="true" selection-start-line="39" selection-start-column="80" selection-end-line="39" selection-end-column="80" />
+          <caret line="39" column="80" selection-start-line="39" selection-start-column="80" selection-end-line="39" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -727,7 +721,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/general/RegisterTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="194" column="84" lean-forward="true" selection-start-line="194" selection-start-column="84" selection-end-line="194" selection-end-column="84" />
+          <caret line="194" column="84" selection-start-line="194" selection-start-column="84" selection-end-line="194" selection-end-column="84" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -737,7 +731,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserBuyTicketTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
-          <caret line="83" column="80" lean-forward="true" selection-start-line="83" selection-start-column="80" selection-end-line="83" selection-end-column="80" />
+          <caret line="83" column="80" selection-start-line="83" selection-start-column="80" selection-end-line="83" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -746,8 +740,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/sbvtransport/e2e/tests/user/UserPageTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+        <state relative-caret-position="470">
+          <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
