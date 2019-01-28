@@ -1,7 +1,6 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sbvtransport.sbvtransport.dto.DocumentDTO;
@@ -28,25 +27,36 @@ public class DocumentService implements IDocumentService {
 	@Override
 	public Document getOne(Long id) {
 
-		return documentRepository.getOne(id);
+		return documentRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public Document create(DocumentDTO document) {
 
-		Passenger p = passengerRepository.getOne(document.getIdPassenger());
-		Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p);
+		Passenger p = passengerRepository.findById(document.getIdPassenger()).orElse(null);
+		if(p == null){
+			return null;
+		}
+		Document d = new Document(document.getDateOfUpload(), document.getImageLocation(), p,"need approve");
 		return documentRepository.save(d);
 	}
 
 	@Override
 	public Document update(DocumentDTO document) {
 
-		Optional<Document> updateDoc = documentRepository.findById(document.getId());
-		updateDoc.get().setImageLocation(document.getImageLocation());
-		updateDoc.get().setDateOfUpload(document.getDateOfUpload());
+		Document updateDoc = getOne(document.getId());
+		if(updateDoc == null){
+			return null;
+		}
+		Passenger p = passengerRepository.findById(document.getIdPassenger()).orElse(null);
+		if(p == null ||!( p.getId().equals(updateDoc.getPassenger().getId()))){
+			return null;
+		}
+		updateDoc.setImage_location(document.getImageLocation());
+		updateDoc.setDate_of_upload(document.getDateOfUpload());
+		updateDoc.setApproved("need approve");
 
-		return documentRepository.save(updateDoc.get());
+		return documentRepository.save(updateDoc);
 	}
 
 	@Override
@@ -59,6 +69,19 @@ public class DocumentService implements IDocumentService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Document changeApproved(Document document) {
+		
+		Document findDocument = getOne(document.getId());
+		if(findDocument == null){
+			return null;
+		}
+		
+		findDocument.setApproved(document.getApproved());
+		
+		return documentRepository.save(findDocument);
 	}
 
 }

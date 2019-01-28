@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sbvtransport.sbvtransport.dto.BusDTO;
@@ -31,6 +32,7 @@ import com.sbvtransport.sbvtransport.service.BusService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class BusControllerJUnitTest {
 
 	@Autowired
@@ -41,6 +43,8 @@ public class BusControllerJUnitTest {
 
 	@Before
 	public void setUp() {
+		
+		
 		List<Bus> buses = new ArrayList<>();
 		buses.add(new Bus(new Line("8ca", TypeTransport.bus, Zone.first, 1L), false, "ime", 1L, "neki_kod", 5, false));
 		buses.add(new Bus(new Line("8ca", TypeTransport.bus, Zone.first, 1L), true, "ime2", 2L, "neki_kod2", 6, false));
@@ -109,29 +113,8 @@ public class BusControllerJUnitTest {
 
 	}
 
-	// @Test
-	// public void createBusTest() {
-	//
-	// BusDTO bus = new BusDTO("Lasta", 1L, 5);
-	//
-	// ResponseEntity<Bus> responseEntity =
-	// restTemplate.postForEntity("/api/bus/addBus",bus, Bus.class);
-	//
-	// assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-	// assertNotNull(responseEntity.getBody());
-	// assertEquals("Lasta", responseEntity.getBody().getName());
-	// assertEquals("7ca_bus_Lasta", responseEntity.getBody().getCode());
-	// assertEquals(false, responseEntity.getBody().isLate());
-	// assertEquals(5, responseEntity.getBody().getTime_arrive());
-	// assertEquals("7ca", responseEntity.getBody().getLine().getName());
-	// assertEquals(TypeTransport.bus,
-	// responseEntity.getBody().getLine().getLine_type());
-	// assertEquals(Zone.first, responseEntity.getBody().getLine().getZone());
-	//
-	//
-	// }
-
 	// create bus with line that doesn't exist
+	
 	@Test
 	public void createBusTest2() {
 		
@@ -146,7 +129,12 @@ public class BusControllerJUnitTest {
 	
 //	@Test
 //	public void updateBusTest(){
+//		List<Station> stations = new ArrayList<>();
+//
+//		Bus changeBus = new Bus( new Line(1L, "7ca", stations, TypeTransport.bus, Zone.first), true, "novo ime", 2L, "7ca_bus_novo ime", 6,false);
 //		ChangeTransportDTO change = new ChangeTransportDTO(2L, "novo ime", 6, null,null);
+//		Mockito.when(busService.change(change)).thenReturn(changeBus);
+//		
 //		
 //		ResponseEntity<Bus> responseEntity = restTemplate.postForEntity("/api/bus/updateBus",change, Bus.class);
 //

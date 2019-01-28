@@ -21,6 +21,7 @@ import com.sbvtransport.sbvtransport.model.Administrator;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class AdminRepositoryTest {
 
 	@Autowired
@@ -28,14 +29,8 @@ public class AdminRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void testIfAdminExists() {
-		
-		//DA LI DA DODAM
-		//ROLE U SETER METODE KOD KORISNIKA
-		// PA DA SE I KOD TESTOVA ODMAH MOZE
-		//PROVERITI DA LI SU ODGOVARAJUCE ROLE PODESENE NA 
-		//ODGOVARAJUCE KORISNIKE
 
 		Administrator admin = new Administrator();
 		admin.setUsername("admin2");

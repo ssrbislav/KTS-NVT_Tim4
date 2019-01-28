@@ -1,0 +1,65 @@
+
+
+
+    <div class="clearfix">
+        <mat-dialog-actions>
+          <form>
+            <div class="form-group">
+              <h1 style="text-align: center">Buy a ticket</h1>
+          
+              <div id="div2">
+                <label for="type_transport" style="padding-right: 20px;"><b>Transport Type</b></label>
+                <select [(ngModel)] = "buyTicket.type_transport" id = "type_transport" name = "type_transport" required>
+                    <option value = ""></option>
+                    <option value = "bus">bus</option>
+                    <option value = "subway">subway</option>
+                    <option value = "trolley">trolley</option>
+                </select>
+              </div>
+
+              <div id="div2">
+                <label for="zone" style="padding-right: 20px;"><b>Zone</b></label>
+                <select [(ngModel)]="buyTicket.zone" id="zone" name="zone" required >
+                    <option value = ""></option>
+                    <option value = "first">first</option>
+                    <option value = "second">second</option>
+                </select>
+              </div>
+
+              <div id="div2">
+                <label for="ticket_type" style="padding-right: 20px;"><b>Ticket Type</b></label>
+                <select [(ngModel)] = "buyTicket.ticket_type" id = "ticket_type" name = "ticket_type" required>
+                    <option value = ""></option>
+                    <option value = "oneUse">oneUse</option>
+                    <option value = "daily">daily</option>
+                    <option value = "monthly">monthly</option>
+                    <option value = "year">year</option>
+                </select>
+              </div>
+              
+              <div id="div2">
+                <label for="demographic_type" style="padding-right: 20px;"><b>Demographic Type</b></label>
+                <select [(ngModel)] = "buyTicket.demographic_type" id = "demographic_type" name = "demographic_type" required>
+                    <option value = ""></option>
+                    <option value = "standard">standard</option>
+                    <option value = "student">student</option>
+                    <option value = "senior">senior</option>
+                </select>
+              </div>
+
+              <label for="code_transport"><b>Transport Code</b></label>
+              <input type="text" placeholder="Enter Transport Code" name="code_transport" [(ngModel)]="buyTicket.code_transport" 
+              [ngModelOptions]="{standalone: true}" required />
+              
+              <div class="form-group">
+                  <label for="date">Valid From</label>
+                  <input type="date" class="form-control" name="date_birth" [(ngModel)]="buyTicket.date" #date="ngModel"/>  
+              </div>
+      
+              <button class="btn btn-primary" mat-button (click) = "addTicket()">Buy Ticket</button>
+           </div>
+          </form>
+          
+        </mat-dialog-actions>
+    </div>
+   

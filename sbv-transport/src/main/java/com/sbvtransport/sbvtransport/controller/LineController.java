@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,10 +68,13 @@ public class LineController {
 
 	}
 
-	@RequestMapping(value = "/deleteLine/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteLine/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = lineService.delete(id);
+		if (!delete) {
+			return new ResponseEntity<>(delete, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 
@@ -81,8 +85,8 @@ public class LineController {
 
 		String updateLine = lineService.addStation(addStation);
 
-		if (updateLine == null) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		if (updateLine.equals("")) {
+			return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<>(updateLine, HttpStatus.OK);

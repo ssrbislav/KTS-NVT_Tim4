@@ -1,0 +1,47 @@
+<div class="profil">
+  <div class="row">
+    
+    <h1 style="text-align: center">Profil info</h1>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" [(ngModel)] = "passenger.password" [disabled]="true" #inputEl1>
+
+    <div *ngIf = "show == 'change'">
+      <label for="password">Repeat Password</label>
+      <input type="password" name="password" [(ngModel)] = "passRepeat" >
+    </div>
+
+    <label for="first_name">First name</label>
+    <input type="text" name="first_name" [(ngModel)]= "passenger.first_name" [disabled]="true" #inputEl3>
+
+    <label for="last_name">Last name</label>
+    <input type="text" name="last_name" [(ngModel)] = "passenger.last_name" [disabled]="true" #inputEl4>
+
+    <label for="address">Address</label>
+    <input type="text" name="address" [(ngModel)]= "passenger.address" [disabled]="true" #inputEl5>
+
+    <label for="phone_number">Phone number</label>
+    <input type="text" name="phone_number" [(ngModel)] = "passenger.phone_number" [disabled]="true" #inputEl6>
+
+    <div class="clearfix" *ngIf = "show == 'change'">
+        <button class="cancelbtn" (click) = "cancelClicked()">Cancel</button>
+        <button class="signupbtn" (click) = "saveClicked()">Save</button>
+    </div>
+    
+    <button *ngIf = "show == 'profil'" (click) = "clickChange()">Change</button>
+    
+
+  
+  </div>
+</div>
+
+<div style = "width: 50%; height: 50%">
+  <h1>Document</h1>
+  <app-document-view *ngIf= "document == 'not'" (nameEvent)="findPassenger()"></app-document-view>
+  <br>
+  <div *ngIf= "document == 'exist'" >
+    <h3>Date of upload: {{doc.date_of_upload}}</h3>
+     <h3>Image: {{doc.image_location}}</h3>
+       <h3>Approved: {{doc.approved}}</h3>
+  </div>
+</div>

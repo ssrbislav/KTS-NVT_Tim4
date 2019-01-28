@@ -8,6 +8,7 @@ input[type=text]{
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    color: black;
 }
 
 input[type=password] {
@@ -19,6 +20,7 @@ input[type=password] {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    color: black;
 }
 
 input[type=email] {
@@ -30,6 +32,7 @@ input[type=email] {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    color: black;
 }
 
 input[type=submit] {
@@ -45,15 +48,8 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div.addController{
-	border-radius: 20px;
-    background-color: #f2f2f2; 
-    padding: 20px;
-    box-sizing: border-box;
-    width: 90%;
+input[type=date] {
     color: black;
-    
-    	
 }
 
 button {
@@ -69,6 +65,8 @@ button {
   
   button:hover {
     opacity:1;
+    color: black;
+    font-weight: bold;
   }
   
   /* Extra styles for the cancel button */
@@ -79,7 +77,12 @@ button {
   
   /* Float cancel and signup buttons and add an equal width */
   .cancelbtn, .signupbtn {
-    float: left;
+    margin: 0 auto;
     width: 45%;
+  }
+
+  .nomatch {
+      color: red;
+      font-weight: bold;
   }
   

@@ -43,6 +43,10 @@ public class TrolleyController {
 
 		Trolley getTrolley = trolleyService.getOne(id);
 
+		if (getTrolley == null) {
+			return new ResponseEntity<>(getTrolley, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(getTrolley, HttpStatus.OK);
 
 	}
@@ -63,10 +67,12 @@ public class TrolleyController {
 	@RequestMapping(value = "/updateTrolley", method = RequestMethod.POST)
 	public ResponseEntity<Trolley> update(@RequestBody ChangeTransportDTO trolley) {
 
-		Trolley updateTrolley = trolleyService.change(trolley);
-
-		if (updateTrolley == null) {
+		Trolley updateTrolley = null;
+		try {
+			updateTrolley = trolleyService.change(trolley);
+		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
 		}
 
 		return new ResponseEntity<>(updateTrolley, HttpStatus.OK);

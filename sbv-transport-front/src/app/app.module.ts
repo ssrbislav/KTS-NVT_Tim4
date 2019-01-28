@@ -11,7 +11,7 @@ import { AdministratorComponent } from './administrator/administrator.component'
 import { BusComponent } from './administrator/bus/bus.component';
 import { BusTableComponent } from './administrator/bus/bus-table/bus-table.component';
 import { BusService } from './services/bus.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SubwayComponent } from './administrator/subway/subway.component';
 import { SubwayTableComponent } from './administrator/subway/subway-table/subway-table.component';
 import { SubwayService } from './services/subway.service';
@@ -60,10 +60,30 @@ import { ControllerSearchFilterComponent } from './administrator/controller/cont
 import { UserComponent } from './user/user.component';
 import { BusViewComponent } from './user/bus-view/bus-view.component';
 import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
-import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { httpInterceptorProviders, AuthInterceptor  } from './auth/auth-interceptor';
 import { SubwayViewComponent } from './user/subway-view/subway-view.component';
 import { TrolleyViewComponent } from './user/trolley-view/trolley-view.component';
 import { ControllerViewComponent } from './controller-view/controller-view.component';
+import { PricelistService } from './services/pricelist.service';
+import { TicketCheckComponent } from './controller-view/ticket-check/ticket-check.component';
+import { PricelistComponent } from './controller-view/pricelist/pricelist.component';
+import { DocumentComponent } from './administrator/document/document.component';
+import { DocumentService } from './services/document.service';
+import { LineTimetableComponent } from './administrator/line/line-table/line-timetable/line-timetable.component';
+import { BuyTicketComponent } from './user/buy-ticket/buy-ticket.component';
+import { TicketService } from './services/ticket.service';
+import { PassengerService } from './services/passenger.service';
+import { TicketViewComponent } from './user/ticket-view/ticket-view.component';
+import { ProfileViewComponent } from './user/profile-view/profile-view.component';
+import { HttpModule } from '@angular/http';
+import { TicketsComponent } from './controller-view/tickets/tickets.component';
+import { PricelistAddComponent } from './controller-view/pricelist/pricelist-add/pricelist-add.component';
+import { PricelistUpdateComponent } from './controller-view/pricelist/pricelist-update/pricelist-update.component';
+import { DocumentViewComponent } from './user/profile-view/document-view/document-view.component';
+import { DetailsUploadComponent } from './user/profile-view/document-view/details-upload/details-upload.component';
+import { FormUploadComponent } from './user/profile-view/document-view/form-upload/form-upload.component';
+import { ListUploadComponent } from './user/profile-view/document-view/list-upload/list-upload.component';
+
 
 const appRoutes: Routes = [
  
@@ -154,7 +174,24 @@ const appRoutes: Routes = [
     BusViewComponent,
     SubwayViewComponent,
     TrolleyViewComponent,
-    ControllerViewComponent
+    ControllerViewComponent,
+    TicketCheckComponent,
+    PricelistComponent,
+    DocumentComponent,
+    BuyTicketComponent,
+    TicketViewComponent,
+    ProfileViewComponent,
+    DocumentComponent,
+    LineTimetableComponent,
+    TicketsComponent,
+    PricelistAddComponent,
+    PricelistUpdateComponent,
+    DocumentViewComponent,
+    DetailsUploadComponent,
+    FormUploadComponent,
+    ListUploadComponent
+
+  
   ],
   imports: [
     BrowserModule,
@@ -168,7 +205,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   entryComponents: [
     MyDialogComponent,
@@ -187,12 +225,20 @@ const appRoutes: Routes = [
     StationEditComponent,
     LineEditComponent,
     MyDialogTimetableComponent,
-    ControllerAddComponent
+    ControllerAddComponent,
+    TicketCheckComponent,
+    LineTimetableComponent,
+    PricelistAddComponent
    ],
   providers: [RoleGuard, httpInterceptorProviders, BusService,SubwayService,TrolleyService,ControllerService, AdministratorService,LineService,StationService, 
-    LocationService, TimetableService,
+    LocationService, TimetableService, PricelistService, DocumentService, TicketService, PassengerService, HttpClientModule,
     { provide: MatDialogRef, useValue: {} },
-    { provide: MAT_DIALOG_DATA, useValue: [] },],
+    { provide: MAT_DIALOG_DATA, useValue: [] },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

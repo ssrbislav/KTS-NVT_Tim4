@@ -17,7 +17,7 @@ const httpOptions = {
 
     constructor(private http:HttpClient) {}
 
-    private trolleyUrl = 'http://localhost:8080/api/trolley/';
+    trolleyUrl = 'http://localhost:8080/api/trolley/';
 
     public getTrolley() {
         return this.http.get<Trolley[]>(this.trolleyUrl);

@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.nio.charset.Charset;
+import org.springframework.web.util.NestedServletException;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -47,23 +48,29 @@ public class LocationControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(2)))
-                .andExpect(jsonPath("$.[*].location_name").value(hasItem("stanica2")))
-                .andExpect(jsonPath("$.[*].address").value(hasItem("Vojvode Supljikca 51")))
-                .andExpect(jsonPath("$.[*].latitude").value(hasItem(31.40)))
-                .andExpect(jsonPath("$.[*].longitude").value(hasItem(30.50)))
+                .andExpect(jsonPath("$.[*].location_name").value(hasItem("Banatic")))
+                .andExpect(jsonPath("$.[*].address").value(hasItem("150, Rumenacka, Банатић, Novi Sad, Novi Sad City, South Backa District, Vojvodina, 21138, Serbia")))
+                .andExpect(jsonPath("$.[*].latitude").value(hasItem(45.2652)))
+                .andExpect(jsonPath("$.[*].longitude").value(hasItem(19.8159)))
                 .andExpect(jsonPath("$.[*].type").value(hasItem("station")));
     }
 
     @Test
-    public void getOneTest() throws Exception {
+    public void getOneTest_OK() throws Exception {
         mockMvc.perform(get(URL_PREFIX + "/getLocation/2")).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.location_name").value("stanica2"))
-                .andExpect(jsonPath("$.address").value("Vojvode Supljikca 51"))
-                .andExpect(jsonPath("$.latitude").value(31.40))
-                .andExpect(jsonPath("$.longitude").value(30.50))
+                .andExpect(jsonPath("$.location_name").value("Banatic"))
+                .andExpect(jsonPath("$.address").value("150, Rumenacka, Банатић, Novi Sad, Novi Sad City, South Backa District, Vojvodina, 21138, Serbia"))
+                .andExpect(jsonPath("$.latitude").value(45.2652))
+                .andExpect(jsonPath("$.longitude").value(19.8159))
                 .andExpect(jsonPath("$.type").value("station"));
+    }
+
+    @Test
+    public void getOneTest_NoLocation() throws Exception {
+        mockMvc.perform(get(URL_PREFIX + "/getLocation/55"))
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -73,25 +80,36 @@ public class LocationControllerTest {
         LocationDTO locationDTO = new LocationDTO("Stanica2", "Vojvode Supljikca 99", 32.40f, 34.02f, "Station");
         String json = TestUtil.json(locationDTO);
         this.mockMvc.perform(post(URL_PREFIX + "/addLocation").contentType(contentType).content(json))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType));
+    }
+
+    @Test(expected = NestedServletException.class)
+    @Transactional
+    @Rollback(true)
+    public void createTest_EmptyFields() throws Exception {
+        LocationDTO locationDTO = new LocationDTO("", "Vojvode Supljikca 99", null, 34.02f, "Station");
+        String json = TestUtil.json(locationDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/addLocation").contentType(contentType).content(json))
+            .andExpect(status().isBadRequest());
     }
 
     @Test
     @Transactional
     @Rollback(true)
-    public void deleteTest() throws Exception {
-        this.mockMvc.perform(get(URL_PREFIX + "/deleteLocation/1")).andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
-                .andExpect(content().string("true"));
+    public void deleteTest_OK() throws Exception {
+        this.mockMvc.perform(get(URL_PREFIX + "/deleteLocation/1"))
+            .andExpect(status().isOk())
+            .andExpect(content().string("true"));
     }
 
     @Test
     @Transactional
     @Rollback(true)
-    public void deleteTest2() throws Exception {
-        this.mockMvc.perform(get(URL_PREFIX + "/deleteLocation/10")).andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
-                .andExpect(content().string("false"));
+    public void deleteTest_NoLocation() throws Exception {
+        this.mockMvc.perform(get(URL_PREFIX + "/deleteLocation/100"))
+            .andExpect(status().isNotFound())
+            .andExpect(content().string("false"));
     }
 
 }

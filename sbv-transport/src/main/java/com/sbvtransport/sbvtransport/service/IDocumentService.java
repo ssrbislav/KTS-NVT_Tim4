@@ -15,5 +15,7 @@ public interface IDocumentService {
   Document update(DocumentDTO document);
 
   boolean delete(Long id);
+  
+  Document changeApproved(Document document);
 
 }

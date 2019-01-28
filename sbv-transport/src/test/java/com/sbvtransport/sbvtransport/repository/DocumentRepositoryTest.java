@@ -22,6 +22,7 @@ import com.sbvtransport.sbvtransport.model.Passenger;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class DocumentRepositoryTest {
 
 	@Autowired
@@ -40,12 +41,12 @@ public class DocumentRepositoryTest {
 	
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void testIfDocumentExists() {
 
 		Document document = new Document();
-		document.setDateOfUpload(new Date());
-		document.setImageLocation("lokacija slike");
+		document.setDate_of_upload(new Date());
+		document.setImage_location("lokacija slike");
 		document.setPassenger(passenger);
 		
 		documentRepository.save(document);

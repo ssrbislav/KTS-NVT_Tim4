@@ -60,7 +60,7 @@ public class AdministratorService implements IAdministratorService {
 	public boolean validatePassengerDocument(Long passengerId) {
 		Passenger passenger = passengerRepository.getOne(passengerId);
 
-		Date dateOfUpload = passenger.getDocument().getDateOfUpload();
+		Date dateOfUpload = passenger.getDocument().getDate_of_upload();
 
 		LocalDateTime now = LocalDateTime.now();
 		int year = now.getYear();

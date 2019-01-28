@@ -18,6 +18,7 @@ import com.sbvtransport.sbvtransport.model.Transport;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
 public class BusRepositoryTest {
 
 	@Autowired
@@ -31,7 +32,7 @@ public class BusRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void testSaveBus() {
 		Transport t = new Bus(lineRepository.getOne(1L), false, "lasta", locationRepository.getOne(1L), 5,
 				"7ca_bus_lasta");

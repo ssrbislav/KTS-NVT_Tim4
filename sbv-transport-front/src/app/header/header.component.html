@@ -13,13 +13,14 @@
                   <li><a (click)="clickButtonLine()" style="cursor: pointer;">Line</a></li>
                   <li><a (click)="clickButtonStation()" style="cursor: pointer;">Station</a></li>
                   <li><a (click)="clickButtonController()" style="cursor: pointer;">Controller</a></li>
+                  <li><a (click)="clickButtonDocument()" style="cursor: pointer;">Document</a></li>
                   <li><a (click)="clickButtonReport()" style="cursor: pointer;">Report</a></li>
 
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'notregister'">
                 <ul class="nav navbar-nav">
-                  <li><a (click)="clickButtonLogin()" style="cursor: pointer;">Login</a></li>
+                  <li><a id ="logInButton" (click)="clickButtonLogin()" style="cursor: pointer;">Login</a></li>
                   <li><a (click) = "clickButtonRegistration()" style="cursor: pointer;">Registration</a></li>
                 </ul>
             </ul>
@@ -27,19 +28,27 @@
                 <li><a (click) = "clickButtonLogout()" style="cursor: pointer;">Logout</a></li>
             </ul>
 
+            <ul class="nav navbar-nav navbar-left" *ngIf = "(showView) == 'controllerView'">
+                    <li><a (click) = "clickButtonTicketViewController()"  style="cursor: pointer;">Tickets</a></li>
+                    <li><a (click) = "clickButtonPricelist()"  style="cursor: pointer;">Pricelist</a></li>       
+            </ul>
             <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'controllerView'">
-                    <li><a (click) = "clickButtonProfil()"  style="cursor: pointer;">Profil</a></li>
                     <li><a (click) = "clickButtonLogout()" style="cursor: pointer;">Logout</a></li>
-                </ul>
+            </ul>
 
             <ul class="nav navbar-nav navbar-left" *ngIf = "(showView) == 'user'">
                 <ul class="nav navbar-nav">
                     <li><a (click)="clickButtonHome()" style="cursor: pointer;">Home</a></li>
+                    <li><a (click) = "clickButtonBus()"  style="cursor: pointer;">Bus</a></li>
+                    <li><a (click) = "clickButtonSubway()"  style="cursor: pointer;">Subway</a></li>
+                    <li><a (click) = "clickButtonTrolley()"  style="cursor: pointer;">Trolley</a></li>
+                    <li><a (click) = "clickButtonTicket()"  style="cursor: pointer;">Buy a Ticket</a></li>
                 </ul>
             </ul>
 
             <ul class="nav navbar-nav navbar-right" *ngIf = "(showView) == 'user'">
-                <li><a (click) = "clickButtonProfil()"  style="cursor: pointer;">Profil</a></li>
+                <li><a (click) = "clickButtonTickets()"  style="cursor: pointer;">Your Tickets</a></li>
+                <li><a (click) = "clickButtonProfile()"  style="cursor: pointer;">Profil</a></li>
                 <li><a (click) = "clickButtonLogout()" style="cursor: pointer;">Logout</a></li>
             </ul>
         </div>

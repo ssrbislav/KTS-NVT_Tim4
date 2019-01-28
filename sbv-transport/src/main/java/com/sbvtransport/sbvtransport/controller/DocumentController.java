@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sbvtransport.sbvtransport.dto.DocumentDTO;
 import com.sbvtransport.sbvtransport.model.Document;
 import com.sbvtransport.sbvtransport.service.DocumentService;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/document")
@@ -34,6 +35,11 @@ public class DocumentController {
 
 		Document doc = documentService.getOne(id);
 
+		if (doc == null) {
+			return new ResponseEntity<Document>(doc, HttpStatus.NOT_FOUND);
+
+		}
+
 		return new ResponseEntity<Document>(doc, HttpStatus.OK);
 	}
 
@@ -42,6 +48,11 @@ public class DocumentController {
 
 		Document newDoc = documentService.create(doc);
 
+		if (newDoc == null) {
+			return new ResponseEntity<Document>(newDoc, HttpStatus.BAD_REQUEST);
+
+		}
+
 		return new ResponseEntity<Document>(newDoc, HttpStatus.OK);
 	}
 
@@ -49,6 +60,22 @@ public class DocumentController {
 	public ResponseEntity<Document> update(@RequestBody DocumentDTO doc) {
 
 		Document updateDoc = documentService.update(doc);
+
+		if (updateDoc == null) {
+			return new ResponseEntity<>(updateDoc, HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(updateDoc, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/changeApproved", method = RequestMethod.POST)
+	public ResponseEntity<Document> changeApproved(@RequestBody Document doc) {
+
+		Document updateDoc = documentService.changeApproved(doc);
+
+		if (updateDoc == null) {
+			return new ResponseEntity<>(updateDoc, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(updateDoc, HttpStatus.OK);
 	}

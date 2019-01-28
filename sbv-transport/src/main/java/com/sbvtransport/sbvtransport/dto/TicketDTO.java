@@ -3,29 +3,25 @@ package com.sbvtransport.sbvtransport.dto;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
-import com.sbvtransport.sbvtransport.enumeration.TicketType;
-import com.sbvtransport.sbvtransport.enumeration.TypeTransport;
-import com.sbvtransport.sbvtransport.enumeration.Zone;
 
 public class TicketDTO {
 
 	private Long idPassenger;
-	private TypeTransport type_transport;
-	private Zone zone;
-	private TicketType ticket_type;
-	private DemographicTicketType demographic_type;
+	private String type_transport;
+	private String zone;
+	private String ticket_type;
+	private String demographic_type;
 	private String code_transport;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 
 	public TicketDTO() {
 
 	}
 
-	public TicketDTO(Long idPassenger, TypeTransport type_transport, Zone zone, TicketType ticket_type,
-			DemographicTicketType demographic_type, String code_transport, Date date) {
+	public TicketDTO(Long idPassenger, String type_transport, String zone, String ticket_type,
+			String demographic_type, String code_transport, Date date) {
 		super();
 		this.idPassenger = idPassenger;
 		this.type_transport = type_transport;
@@ -44,35 +40,35 @@ public class TicketDTO {
 		this.idPassenger = idPassenger;
 	}
 
-	public TypeTransport getType_transport() {
+	public String getType_transport() {
 		return type_transport;
 	}
 
-	public void setType_transport(TypeTransport type_transport) {
+	public void setType_transport(String type_transport) {
 		this.type_transport = type_transport;
 	}
 
-	public Zone getZone() {
+	public String getString() {
 		return zone;
 	}
 
-	public void setZone(Zone zone) {
+	public void setString(String zone) {
 		this.zone = zone;
 	}
 
-	public TicketType getTicket_type() {
+	public String getTicket_type() {
 		return ticket_type;
 	}
 
-	public void setTicket_type(TicketType ticket_type) {
+	public void setTicket_type(String ticket_type) {
 		this.ticket_type = ticket_type;
 	}
 
-	public DemographicTicketType getDemographic_type() {
+	public String getDemographic_type() {
 		return demographic_type;
 	}
 
-	public void setDemographic_type(DemographicTicketType demographic_type) {
+	public void setDemographic_type(String demographic_type) {
 		this.demographic_type = demographic_type;
 	}
 
@@ -86,6 +82,14 @@ public class TicketDTO {
 
 	public Date getDate() {
 		return date;
+	}
+
+	public String getZone() {
+		return zone;
+	}
+
+	public void setZone(String zone) {
+		this.zone = zone;
 	}
 
 	public void setDate(Date date) {

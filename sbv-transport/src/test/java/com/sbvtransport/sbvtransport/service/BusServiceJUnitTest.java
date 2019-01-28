@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.sbvtransport.sbvtransport.dto.AddLocationDTO;
 import com.sbvtransport.sbvtransport.dto.ChangeTransportDTO;
@@ -28,6 +29,7 @@ import com.sbvtransport.sbvtransport.repository.LocationRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class BusServiceJUnitTest {
 
 	@Autowired
@@ -87,7 +89,6 @@ public class BusServiceJUnitTest {
 		List<Bus> buses = busService.findAll();
 		assertNotNull(buses);
 		assertThat(buses).hasSize(2);
-		assertNotNull(buses);
 		assertThat(buses.get(0).getId()).isEqualTo(1L);
 		assertThat(buses.get(0).getCode()).isEqualTo("neki_kod");
 		assertThat(buses.get(0).getName()).isEqualTo("ime");
@@ -106,7 +107,6 @@ public class BusServiceJUnitTest {
 
 		Bus findBus = busService.getOne(1L);
 		assertNotNull(findBus);
-		assertThat(findBus).isNotNull();
 		assertThat(findBus.getId()).isEqualTo(1L);
 		assertThat(findBus.getCode()).isEqualTo("8ca_bus_lasta");
 		assertThat(findBus.getName()).isEqualTo("lasta");
@@ -127,23 +127,6 @@ public class BusServiceJUnitTest {
 		busService.getOne(10L);
 
 	}
-
-	// @Test
-	// public void createTest(){
-	//
-	// BusDTO bus = new BusDTO("5ca", 1L,5);
-	// Bus createBus = busService.create(bus);
-	//
-	// //assertThat(createBus).isNotNull();
-	// //assertThat(createBus.getId()).isEqualTo(1L);
-	// assertThat(createBus.getCode()).isEqualTo("nova_linija_bus_5ca");
-	// assertThat(createBus.getName()).isEqualTo("5ca");
-	// assertThat(createBus.isLate()).isEqualTo(false);
-	// assertThat(createBus.getLine().getId()).isEqualTo(1L);
-	// assertThat(createBus.getLine().getLine_type()).isEqualTo(TypeTransport.bus);
-	// assertThat(createBus.getLine().getName()).isEqualTo("nova_linija");
-	//
-	// }
 
 	// try to change data in bus that doesn't exist
 	@Test(expected = NullPointerException.class)

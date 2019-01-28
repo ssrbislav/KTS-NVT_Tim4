@@ -22,6 +22,8 @@ export class ControllerAddComponent implements OnInit {
   @ViewChild('dateInput') dateInputRef: ElementRef;
 
   controller: Controller;
+  passwordRepeat: string;
+  errorMessage = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>,private route: Router
   ,private controllerService: ControllerService) {
@@ -29,6 +31,19 @@ export class ControllerAddComponent implements OnInit {
     }
 
   ngOnInit() {
+  }
+
+  checkSame(pass: string) {
+
+    const pass1 = this.pass1InputRef.nativeElement.value;
+
+    this.passwordRepeat = pass;
+    if (this.passwordRepeat !== pass1) {
+      this.errorMessage = "Passwords do not match!"
+    }
+    else {
+      this.errorMessage = "";
+    }
   }
 
   addController(){
@@ -54,7 +69,15 @@ export class ControllerAddComponent implements OnInit {
       console.log("phone: " + phone);
       console.log("date: " + date);
 
-      const newController = new Controller(email,username,pass1,firstName,lastName,address2,phone,date);
+      const newController = new Controller();
+      newController.username = username;
+      newController.email = email;
+      newController.password = pass1;
+      newController.first_name = firstName;
+      newController.last_name = lastName;
+      newController.address = address2;
+      newController.phone_number = phone;
+      newController.date_birth = date;
       newController.roles = ['controller'];
       alert(newController.roles);
 

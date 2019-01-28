@@ -6,8 +6,10 @@ import com.sbvtransport.sbvtransport.model.Line;
 import com.sbvtransport.sbvtransport.model.Location;
 import com.sbvtransport.sbvtransport.model.Station;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -27,6 +29,8 @@ import static org.springframework.test.util.AssertionErrors.fail;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StationServiceTest {
 
     @Autowired
@@ -37,8 +41,8 @@ public class StationServiceTest {
 
     @Autowired ILocationService locationService;
 
-    @Test
-    public void findAllTest() {
+    //@Test
+    public void aaafindAllTest() {
         List<Station> stations = stationService.findAll();
         assertThat(stations).hasSize(3);
     }
@@ -54,7 +58,7 @@ public class StationServiceTest {
         assertThat(station.getLocation()).isEqualTo(location);
     }
 
-    @Test(expected = EntityNotFoundException.class)
+    @Test
     public void getNOneTest() {
         Station station = stationService.getOne(10L);
         assertThat(station).isNull();
@@ -63,12 +67,30 @@ public class StationServiceTest {
     @Test
     @Transactional
     @Rollback(true)
-    public void createTest() {
-        //StationDTO stationDTO = new StationDTO(1L, 1L);
+    public void createTest_OK() {
+        StationDTO stationDTO = new StationDTO(1L, "first");
         int dbSizeBefore = stationService.findAll().size();
-        //String success = stationService.create(stationDTO);
-       // assertThat(success).isEqualTo("The station has been successfully created.");
+        Station station = stationService.create(stationDTO);
+        assertThat(station.getZone().toString()).isEqualTo(stationDTO.getZone());
+        assertThat(station.getLocation().getId()).isEqualTo(stationDTO.getLocation_id());
         assertThat(dbSizeBefore).isEqualTo(stationService.findAll().size() - 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Transactional
+    @Rollback(true)
+    public void createTest_BadZone() {
+        StationDTO stationDTO = new StationDTO(1L, "x");
+        Station station = stationService.create(stationDTO);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void createTest_BadLocation() {
+        StationDTO stationDTO = new StationDTO(111L, "second");
+        Station station = stationService.create(stationDTO);
+        assertThat(station).isNull();
     }
 
     @Test
@@ -81,7 +103,7 @@ public class StationServiceTest {
         assertThat(dbSizeBefore).isEqualTo(stationService.findAll().size() + 1);
         try {
             Station loc = stationService.getOne(3L);
-            assertThat(loc).isNull();
+            assertThat(loc.isDeleted()).isTrue();
         } catch (Exception ex) {
             assertThat(ex.getClass()).isEqualTo(EntityNotFoundException.class);
         }

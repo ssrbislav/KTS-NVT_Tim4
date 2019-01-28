@@ -26,11 +26,29 @@ public class TimetableController {
 		return new ResponseEntity<>(timetables, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getTimetable/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Timetable> getOne(@PathVariable Long id) {
+
+		Timetable timetable = timetableService.getOne(id);
+
+		if(timetable == null || timetable.isDeleted()){
+			return new ResponseEntity<>(timetable, HttpStatus.BAD_REQUEST);
+
+		}
+
+		return new ResponseEntity<>(timetable, HttpStatus.OK);
+
+	}
+
 	@RequestMapping(value = "/addTimetable", method = RequestMethod.POST,produces = "application/json")
 	public ResponseEntity<Timetable> create(@RequestBody TimetableDTO timetableDTO)
 			throws ParseException {
 
 		Timetable newTimetable = timetableService.create(timetableDTO);
+
+		if (newTimetable == null) {
+			return new ResponseEntity<>(newTimetable, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
 
@@ -41,6 +59,10 @@ public class TimetableController {
 
 		Timetable newTimetable = timetableService.create(timetableDTO);
 
+		if(newTimetable == null) {
+			return new ResponseEntity<>(newTimetable, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(newTimetable, HttpStatus.OK);
 
 	}
@@ -50,14 +72,22 @@ public class TimetableController {
 
 		Timetable updateTimetable = timetableService.update(timetable);
 
+		if (updateTimetable == null) {
+			return new ResponseEntity<>(updateTimetable, HttpStatus.BAD_REQUEST);
+		}
+
 		return new ResponseEntity<>(updateTimetable, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/deleteTimetable/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteTimetable/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
 		boolean delete = timetableService.delete(id);
+
+		if (!delete) {
+			return new ResponseEntity<>(delete, HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(delete, HttpStatus.OK);
 

@@ -14,8 +14,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -39,6 +42,8 @@ import com.sbvtransport.sbvtransport.model.Timetable;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BusControllerTest {
 
 	private static final String URL_PREFIX = "/api/bus";
@@ -57,7 +62,7 @@ public class BusControllerTest {
 	}
 
 	@Test
-	public void getAll() throws Exception {
+	public void agetAll() throws Exception {
 		mockMvc.perform(get(URL_PREFIX)).andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize(4))).andExpect(jsonPath("$.[*].id").value(hasItem(1)))
 				.andExpect(jsonPath("$.[*].code").value(hasItem("7ca_bus_lasta")))
@@ -101,8 +106,8 @@ public class BusControllerTest {
 	// good values to create bus
 	@Test
 	@Transactional
-	@Rollback(true)
-	public void createTest() throws Exception {
+	@Rollback(value=true)
+	public void wcreateTest() throws Exception {
 		BusDTO bus = new BusDTO("Lasta", 1L, 5);
 		String json = TestUtil.json(bus);
 		this.mockMvc.perform(post(URL_PREFIX + "/addBus").contentType(contentType).content(json))
@@ -116,8 +121,8 @@ public class BusControllerTest {
 	// bad values to create bus(line doesn't exist)
 	@Test
 	@Transactional
-	@Rollback(true)
-	public void createTest2() throws Exception {
+	@Rollback(value=true)
+	public void wcreateTest2() throws Exception {
 		BusDTO bus = new BusDTO("Lasta", 464643L, 5);
 		String json = TestUtil.json(bus);
 		this.mockMvc.perform(post(URL_PREFIX + "/addBus").contentType(contentType).content(json))
@@ -128,7 +133,7 @@ public class BusControllerTest {
 	// change bus
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest() throws Exception {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
@@ -153,7 +158,7 @@ public class BusControllerTest {
 	// update bus that doesn't exist
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest2() throws Exception {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
@@ -175,7 +180,7 @@ public class BusControllerTest {
 	// test bus delete if bus exist,return:true
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest() throws Exception {
 		this.mockMvc.perform(get(URL_PREFIX + "/deleteBus/1")).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(content().string("true"));
@@ -185,7 +190,7 @@ public class BusControllerTest {
 	// test bus delete if bus doesn't exist,return:false
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest2() throws Exception {
 		this.mockMvc.perform(get(URL_PREFIX + "/deleteBus/1046456343")).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType)).andExpect(content().string("false"));
@@ -195,7 +200,7 @@ public class BusControllerTest {
 	// add location to bus-good value
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest() throws Exception {
 
 		AddLocationDTO addlocation = new AddLocationDTO(4L, 2L);
@@ -208,7 +213,7 @@ public class BusControllerTest {
 	// add location to bus-bad value(bus doesn't exist)
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest2() throws Exception {
 
 		AddLocationDTO addlocation = new AddLocationDTO(4454364363643L, 2L);
@@ -221,7 +226,7 @@ public class BusControllerTest {
 	// add location to bus-bad value(location doesn't exist)
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest3() throws Exception {
 
 		AddLocationDTO addlocation = new AddLocationDTO(1L, 345545353L);
@@ -233,7 +238,7 @@ public class BusControllerTest {
 
 	// search and filter
 	@Test
-	public void searchFilterTest() throws Exception {
+	public void asearchFilterTest() throws Exception {
 
 		FilterSearchTransportDTO searchFilter = new FilterSearchTransportDTO(1L, false, 1L, "");
 		String json = TestUtil.json(searchFilter);

@@ -1,6 +1,6 @@
 <h1 style="text-align: center">Report</h1><br>
 
-<h3>Number of elements:</h3>
+<h3>Number of elements:</h3><br>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -33,11 +33,15 @@
       <th scope="row">Controller</th>
       <td>{{size_controller}}</td>
     </tr>
+    <tr>
+      <th scope="row">Document</th>
+      <td>{{size_document}}</td>
+    </tr>
 </table>
 
 <br>
 
-<h3>Table of bus lines:</h3>
+<h3>Table of bus lines:</h3><br>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -61,7 +65,7 @@
 
 <br>
 
-<h3>Table of subway lines:</h3>
+<h3>Table of subway lines:</h3><br>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -85,7 +89,7 @@
 
 <br>
 
-<h3>Table of trolley lines:</h3>
+<h3>Table of trolley lines:</h3><br>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -106,3 +110,41 @@
       <td>{{trolley.numb_late}}</td>
     </tr>
 </table>
+
+<br>
+
+<div class="main">
+  <h1>Number of sold tickets</h1><br>
+  <div id="firstSearch">
+    <label>From:</label>
+    <input type="date" [(ngModel)]="reportTicket.start_date" >
+  </div>
+
+  <div id="secondSearch">
+      <label>To:</label>
+      <input type="date" [(ngModel)]="reportTicket.finished_date" >
+  </div>
+  <div id="secondSearch">
+      <button class="btn btn-primary btn-lg" (click) = "searchTickets()">Search</button>
+  </div>
+</div>
+
+<div style="padding-top: 100px;">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Number of ticket sold</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let final of finalReportTicket; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{final.start}}</td>
+        <td>{{final.end}}</td>
+        <td>{{final.number_ticket}}</td>
+      </tr>
+  </table>
+</div>

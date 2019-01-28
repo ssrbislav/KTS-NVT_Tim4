@@ -3,3 +3,7 @@ export class changeStationDTO{
     location_name: string;
     zone: Zone;
 }
+
+enum Zone{
+    first,second
+}

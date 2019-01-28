@@ -4,3 +4,6 @@ sbv-transport/\.vscode/
 sbv-transport/src/main/resources/application\.properties
 sbv-transport-front/node_modules
 
+sbv-transport-front/src/app/controller-view/controller-view.component.html
+
+sbv-transport-e2e/target/

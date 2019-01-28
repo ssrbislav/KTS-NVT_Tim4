@@ -107,4 +107,6 @@ public class RegisterDTO {
 		this.date_birth = date_birth;
 	}
 
+
+	
 }

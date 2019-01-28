@@ -48,6 +48,9 @@ public class PassengerDTO {
 		this.date_birth = date_birth;
 	}
 
+	public PassengerDTO() {
+	}
+
 	public String getEmail() {
 		return email;
 	}

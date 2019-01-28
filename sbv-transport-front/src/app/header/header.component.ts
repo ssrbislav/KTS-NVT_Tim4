@@ -53,8 +53,7 @@ export class HeaderComponent implements OnInit {
 }
 
   clickButtonRegistration(){
-    //this.featureSelected.emit('registration');
-    this.router.navigateByUrl('/signup');
+    this.featureSelected.emit('signup');
   }
 
   clickButtonBus(){
@@ -79,6 +78,18 @@ export class HeaderComponent implements OnInit {
   clickButtonProfil(){
     this.featureSelected.emit('profil');
   }
+
+  clickButtonProfile(){
+    this.featureSelected.emit('profileView');
+  }
+
+  clickButtonTicket(){
+    this.featureSelected.emit('buyTicket');
+  }
+
+  clickButtonTickets(){
+    this.featureSelected.emit('ticketView');
+  }
   
   clickButtonLine(){
     this.featureSelected.emit('line');
@@ -100,6 +111,19 @@ export class HeaderComponent implements OnInit {
   clickButtonLogout(){
     this.featureSelected.emit('logout');
 
+  }
+
+  clickButtonPricelist() {
+    this.featureSelected.emit('pricelist');
+  }
+
+  clickButtonDocument(){
+    this.featureSelected.emit('document');
+
+  }
+
+  clickButtonTicketViewController() {
+    this.featureSelected.emit('tickets')
   }
 
 

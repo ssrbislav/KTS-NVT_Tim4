@@ -15,11 +15,16 @@ export class LineService{
 
   constructor(private http:HttpClient) {}
 
-  private lineUrl = 'http://localhost:8080/api/line/';
+  lineUrl = 'http://localhost:8080/api/line/';
 
   public getLines() {
       return this.http.get<Line[]>(this.lineUrl);
   }
+
+  public getLine(id: BigInteger) {
+    const url = `${this.lineUrl + 'getLine'}/${id}`;
+    return this.http.get<Line>(url);
+}
       
   public deleteLine(id: BigInteger){
       const url = `${this.lineUrl + 'deleteLine'}/${id}`;

@@ -1,0 +1,29 @@
+
+
+#create {
+    height: 50px;
+    background-color: #4a7225;
+    margin-right: 2px;
+    border-radius: 5px;
+    border: none;
+    opacity: 0.8;
+}
+
+#update {
+    height: 50px;
+    background-color: rgb(158, 49, 49);
+    margin-left: 2px;
+    border-radius: 5px;
+    border: none;
+    opacity: 0.8;
+}
+
+#create:hover {
+    color: black;
+    opacity: 1;
+}
+
+#update:hover {
+    color: black;
+    opacity: 1;
+}

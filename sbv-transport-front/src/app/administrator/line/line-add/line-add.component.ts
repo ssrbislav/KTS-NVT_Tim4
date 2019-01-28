@@ -94,6 +94,9 @@ export class LineAddComponent implements OnInit {
       }
       this.addStationToList();
      
+    }else{
+      alert( "Successfully line added!");
+      this.dialogRef.close();
     }
 
   }

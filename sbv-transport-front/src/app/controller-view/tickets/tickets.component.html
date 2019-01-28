@@ -1,0 +1,36 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Active</th>
+        <th scope="col">Block</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Ticket code</th>
+        <th scope="col">Date of purchase</th>
+        <th scope="col">Demographic Type</th>
+        <th scope="col">Expired</th>
+        <th scope="col">Ticket Type</th>
+        <th scope="col">Zone</th>
+        <th scope="col">Block Ticket</th>
+        <th scope="col">Unblock Ticket</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let ticket of tickets; let i = index"
+      [ngStyle]="{'background-color': ticket.block ? '#f44336' : '#29434e'}">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{ticket.active}}</td>
+        <td>{{ticket.block}}</td>
+        <td>{{ticket.cost}}</td>
+        <td>{{ticket.id}}</td>
+        <td>{{ticket.date_purchase}}</td>
+        <td>{{ticket.demographic_type}}</td>
+        <td>{{ticket.expired}}</td>
+        <td>{{ticket.ticket_type}}</td>
+        <td>{{ticket.zone}}</td>
+        <td> <img (click) ="blockTicket(ticket.id)" src ="assets/pictures/delete.png" alt="Block" style="cursor: pointer;"></td>
+        <td> <img (click) ="unblockTicket(ticket.id)" src ="assets/pictures/checked.png" alt="Unblock" style="cursor: pointer;"></td>
+        
+      </tr>
+  </table>

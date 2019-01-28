@@ -10,12 +10,16 @@ import java.util.Optional;
 
 import com.sbvtransport.sbvtransport.repository.StationRepository;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityNotFoundException;
@@ -23,6 +27,9 @@ import javax.persistence.EntityNotFoundException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LocationServiceJUnitTest {
 
     @Autowired
@@ -36,24 +43,24 @@ public class LocationServiceJUnitTest {
 
     @Before
     public void setUp() {
-        List<Location> locations = new ArrayList<>();
-//        Location l1 = new Location(1L, "Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
-//        Location l2 = new Location(2L, "Stanica2", "Vojvode Supljikca 99", 50.35f, 32.22f, "Station");
-//        locations.add(l1);
-//        locations.add(l2);
-        Mockito.when(locationRepository.findAll()).thenReturn(locations);
+      List<Location> locations = new ArrayList<>();
+      Location l1 = new Location(1L, "Stanica1", "Vojvode Supljikca 50", 30.40f, 32.02f, "Station");
+      Location l2 = new Location(2L, "Stanica2", "Vojvode Supljikca 99", 50.35f, 32.22f, "Station");
+      locations.add(l1);
+      locations.add(l2);
+      Mockito.when(locationRepository.findAll()).thenReturn(locations);
 
-        Location location = new Location("Stanica3", "Vojvode Bojovica 11", 12.33f, 12.02f, "Station");
-        Optional<Location> optionalLocation = Optional.of(location);
-        Mockito.when(locationRepository.findById(1L)).thenReturn(optionalLocation);
-        Mockito.when(locationRepository.getOne(1L)).thenReturn(location);
-        Mockito.when(locationRepository.getOne(10L)).thenReturn(null);
-        Mockito.when(locationRepository.findById(10L)).thenReturn(null);
+      Location location = new Location("Stanica3", "Vojvode Bojovica 11", 12.33f, 12.02f, "Station");
+      Optional<Location> optionalLocation = Optional.of(location);
+      Mockito.when(locationRepository.findById(1L)).thenReturn(optionalLocation);
+      Mockito.when(locationRepository.findById(10L)).thenReturn(null);
+      Mockito.when(locationRepository.getOne(1L)).thenReturn(location);
+      Mockito.when(locationRepository.getOne(10L)).thenReturn(null);
     }
 
     @Test
-    public void findAllTest() {
-        List<Location> locations = locationService.findAll();
+    public void aaafindAllTest() {
+        List<Location> locations = locationRepository.findAll();
         assertThat(locations).hasSize(2);
         assertNotNull(locations);
         assertThat(locations.get(0).getLocation_name()).isEqualTo("Stanica1");

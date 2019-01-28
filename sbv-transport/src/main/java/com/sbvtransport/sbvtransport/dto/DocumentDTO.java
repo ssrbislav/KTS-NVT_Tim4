@@ -1,14 +1,12 @@
 package com.sbvtransport.sbvtransport.dto;
 
 import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sbvtransport.sbvtransport.model.Passenger;
 
 public class DocumentDTO {
 
 	private Long id;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dateOfUpload;
 	private String imageLocation;
 	private Long idPassenger;
@@ -41,6 +39,10 @@ public class DocumentDTO {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public DocumentDTO() {
 		super();
 	}
@@ -51,5 +53,15 @@ public class DocumentDTO {
 		this.imageLocation = imageLocation;
 		this.idPassenger = idPassenger;
 	}
+
+	public DocumentDTO(Long id, Date dateOfUpload, String imageLocation, Long idPassenger) {
+		super();
+		this.id = id;
+		this.dateOfUpload = dateOfUpload;
+		this.imageLocation = imageLocation;
+		this.idPassenger = idPassenger;
+	}
+	
+	
 
 }

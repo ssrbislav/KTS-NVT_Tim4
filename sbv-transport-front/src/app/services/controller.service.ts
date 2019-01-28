@@ -15,7 +15,7 @@ const httpOptions = {
 
     constructor(private http:HttpClient) {}
 
-    private controllerUrl = 'http://localhost:8080/api/controller/';
+    controllerUrl = 'http://localhost:8080/api/controller/';
 
     public getControllers() {
         return this.http.get<Controller[]>(this.controllerUrl);
@@ -32,7 +32,7 @@ const httpOptions = {
     }
 
     public addController(controller: Controller){
-      return this.http.post(this.controllerUrl + 'addController',controller)
+      return this.http.post<Controller>(this.controllerUrl + 'addController',controller)
       .pipe(
         catchError(e => throwError(e))
       );                 
@@ -42,6 +42,18 @@ const httpOptions = {
     public filterSearch(values: FilterSearchControllerDTO){
       return this.http.post<Controller[]>(this.controllerUrl + 'searchFilter',values);                 
                   
+    }
+
+    public checkTicket(id: BigInteger) {
+      return this.http.get<boolean>(`${this.controllerUrl + 'checkTicket'}/${id}`);
+    }
+
+    public blockTicket(id: BigInteger) {
+      return this.http.get<boolean>(`${this.controllerUrl + 'blockTicket'}/${id}`);
+    }
+
+    public unblockTicket(id: BigInteger) {
+      return this.http.get<boolean>(`${this.controllerUrl + 'unblockTicket'}/${id}`);
     }
 
   }

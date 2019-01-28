@@ -1,3 +1,67 @@
-<p>
-  user-view works!
-</p>
+<h1 style="text-align: center;color: white;">Buses</h1>
+<div id="glavni">
+  <div id="map" style="width: 60%;height:500px"></div>
+
+  <div id="main">
+    <div id="div1">
+      <label for="line" style="padding-right: 20px;"><b>Line</b></label>
+
+      <select [(ngModel)]="filterSearch" id="filter_id_line" name="line" (change)="loadFilterSearch()" required>
+        <option [ngValue]="null"></option>
+        <ng-container *ngFor="let line of lines">
+          <ng-container *ngIf="line.line_type == 'bus'">
+            <option [ngValue]="line">{{line.name}}</option>
+          </ng-container>
+        </ng-container>
+      </select>
+
+      <button type="button" class="btn btn-primary btn-lg" (click)="buyTicket()">Buy a Ticket</button>
+
+    </div>
+
+
+    <!-- <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Station</th>
+              <th scope="col">Times</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = "let timetable of timetables; let i = index">
+              <th scope="row">{{i + 1}}</th>
+              <td *ngFor = "let schedule of timetable.schedule">{{schedule.station}}</td>
+              <td *ngFor = "let time of schedule.times; let j = index">{{schedule.time}}</td>
+            </tr>
+          </tbody>
+        </table> -->
+
+    <ng-container>
+      <div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" colspan="5">First station arrivals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let timetable of timetables; let i = index">
+              <ng-container *ngFor="let time of timetable.schedule[0].times; let i = index">
+            <tr *ngIf="i % 7 === 0">
+              <td *ngFor="let x of [i,i+1,i+2,i+3,i+4,i+5,i+6]">
+                {{timetable.schedule[0].times[x]&nbsp;}}&nbsp;
+              </td>
+            </tr>
+    </ng-container>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+
+  </ng-container>
+
+</div>
+
+
+</div>

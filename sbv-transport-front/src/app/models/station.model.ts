@@ -6,3 +6,7 @@ export class Station{
     zone: Zone;
     deleted: boolean;
 }
+
+enum Zone{
+    first,second
+}

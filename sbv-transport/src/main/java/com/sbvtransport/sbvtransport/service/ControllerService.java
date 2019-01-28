@@ -1,22 +1,32 @@
 package com.sbvtransport.sbvtransport.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
+import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
+import com.sbvtransport.sbvtransport.enumeration.TicketType;
 import com.sbvtransport.sbvtransport.model.Controller;
+import com.sbvtransport.sbvtransport.model.Passenger;
+import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.repository.ControllerRepository;
+import com.sbvtransport.sbvtransport.repository.PassengerRepository;
+import com.sbvtransport.sbvtransport.repository.TicketRepository;
 
 @Service
 public class ControllerService implements IControllerService {
 
 	@Autowired
 	ControllerRepository controllerRepository;
+	
+	@Autowired
+	TicketService ticketService;
+	
+	@Autowired
+	PassengerRepository passengerRepository;
 
 	@Override
 	public List<Controller> findAll() {
@@ -51,15 +61,23 @@ public class ControllerService implements IControllerService {
 	@Override
 	public Controller update(Controller controller) {
 
-		Optional<Controller> updateController = controllerRepository.findById(controller.getId());
-		updateController.get().setAddress(controller.getAddress());
-		updateController.get().setEmail(controller.getEmail());
-		updateController.get().setPhone_number(controller.getPhone_number());
-		updateController.get().setFirst_name(controller.getFirst_name());
-		updateController.get().setLast_name(controller.getLast_name());
-		updateController.get().setUsername(controller.getUsername());
-		updateController.get().setPassword(controller.getPassword());
-		return controllerRepository.save(updateController.get());
+		Controller updateController = controllerRepository.findById(controller.getId()).orElse(null);
+		if(updateController != null){
+			updateController.setAddress(controller.getAddress());
+			updateController.setEmail(controller.getEmail());
+			updateController.setPhone_number(controller.getPhone_number());
+			updateController.setFirst_name(controller.getFirst_name());
+			updateController.setLast_name(controller.getLast_name());
+			updateController.setUsername(controller.getUsername());
+			updateController.setPassword(controller.getPassword());
+			updateController.setDate_birth(controller.getDate_birth());
+
+			return controllerRepository.save(updateController);
+			
+		}
+		
+		return null;
+		
 	}
 
 	@Override
@@ -126,6 +144,117 @@ public class ControllerService implements IControllerService {
 			finalControllers = allControllers;
 		}
 		return finalControllers;
+	}
+	
+	@Override
+	public boolean blockTicket(Long id) {
+		Ticket ticket = ticketService.getOne(id);
+		if(ticket != null) {
+			ticket.setBlock(true);
+			ticket.setActive(false);
+			ticketService.update(ticket);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean unblockTicket(Long id) {
+		Ticket ticket = ticketService.getOne(id);
+		if(ticket != null) {
+			ticket.setBlock(false);
+			ticketService.update(ticket);
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public boolean checkTicket(Long id) {
+		
+		Ticket ticket = ticketService.getOne(id);
+		if(ticket != null) {
+			
+			Passenger passenger = passengerRepository.getOne(ticket.getPassenger().getId());
+			
+			if(ticket.isActive()) {
+				if(ticket.getTicket_type() == TicketType.oneUse) {
+						if(checkDate(ticket.getDate(), new Date())) {
+							return true;
+						}
+				} else if(ticket.getTicket_type() == TicketType.daily) {
+					if(checkDateDaily(ticket.getDate_purchase(), new Date())) {
+								return true;			
+					}
+				} else if(ticket.getTicket_type() == TicketType.monthly) {
+					if(checkDateMonthly(ticket.getDate_purchase(), new Date())) {
+						return true;
+					}
+				} else {
+					if(ticket.getDemographic_type() != DemographicTicketType.standard) {					
+						if(passenger.getDocument() != null) {
+							if(passenger.isDocument_validated()) {
+								return true;
+							}
+						}						
+					} else {
+						// Ako je expired svakako nece ni uci ovde, kao ni bilo gde iznad :D
+							return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean checkDate(Date activation, Date date) {
+
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.setTime(activation);
+		Calendar calendar2 = Calendar.getInstance();
+		calendar2.setTime(date);
+
+		if (calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+				&& calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
+				&& calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH)) {
+			if(calendar1.get(Calendar.HOUR_OF_DAY) == calendar2.get(Calendar.HOUR_OF_DAY) || 
+					calendar1.get(Calendar.HOUR_OF_DAY) == calendar2.get(Calendar.HOUR_OF_DAY -2)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean checkDateDaily(Date activation, Date date) {
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.setTime(activation);
+		Calendar calendar2 = Calendar.getInstance();
+		calendar2.setTime(date);
+		
+		if (calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+				&& calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
+				&& calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean checkDateMonthly(Date activation, Date date) {
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.setTime(activation);
+		Calendar calendar2 = Calendar.getInstance();
+		calendar2.setTime(date);
+		
+		if (calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+				&& calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }

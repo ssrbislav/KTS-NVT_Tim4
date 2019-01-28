@@ -71,7 +71,7 @@ public class AdministratorController {
 			if (passenger.getId() == validateDocument.getIdPassenger()) {
 				Long passengerId = validateDocument.getIdPassenger();
 				if (administratorService.validatePassengerDocument(passengerId)) {
-					passengerService.update(passenger);
+					passengerService.update(passenger, passenger.getId());
 					return new ResponseEntity<>(true, HttpStatus.OK);
 				}
 			}

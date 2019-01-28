@@ -1,15 +1,16 @@
 package com.sbvtransport.sbvtransport.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -32,6 +33,8 @@ import com.sbvtransport.sbvtransport.model.Timetable;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
+@Rollback(value=true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BusServiceTest {
 
 	@Autowired
@@ -41,7 +44,7 @@ public class BusServiceTest {
 	private ILineService lineService;
 
 	@Test
-	public void findAllTest() {
+	public void afindAllTest() {
 		List<Bus> buses = busService.findAll();
 		assertThat(buses).hasSize(4);
 
@@ -90,7 +93,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void createTest() {
 		BusDTO bus = new BusDTO("lasta2", 1L, 5);
 
@@ -139,7 +142,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void updateTest() {
 
 		Set<Date> dates = new HashSet<>();
@@ -178,7 +181,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteTest() {
 
 		boolean successful = busService.delete(2L);
@@ -218,6 +221,10 @@ public class BusServiceTest {
 		Line dbLine2 = busService.checkLine(2L);
 		assertThat(dbLine2).isNull();
 
+		// line doesn't exist
+		Line dbLine3 = busService.checkLine(24353253453L);
+		assertThat(dbLine3).isNull();
+
 	}
 
 	@Test
@@ -241,7 +248,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void addLocationTest() {
 		// location doesn't exist
 		AddLocationDTO newLocation = new AddLocationDTO(1L, 63456362L);
@@ -280,7 +287,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void deleteBecauseLineTest() {
 
 		busService.deleteBecauseLine(1L);
@@ -297,7 +304,7 @@ public class BusServiceTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(value=true)
 	public void changeTest() {
 
 		Location l = new Location(4L, "nova lokacija", "adresa", 67.46f, 54.654f, "transport");
@@ -324,6 +331,8 @@ public class BusServiceTest {
 				.isEqualTo(changeData.getCurrent_location().getLocation_name());
 		assertThat(changedBus.getLocation().getLongitude()).isEqualTo(changeData.getCurrent_location().getLongitude());
 		assertThat(changedBus.getLocation().getType()).isEqualTo(changeData.getCurrent_location().getType());
+		assertThat(changedBus.getCode()).isEqualTo("7ca_bus_novo ime");
+
 
 		// late is false
 		ChangeTransportDTO changeData2 = new ChangeTransportDTO(1L, "novo ime", 5, l, t);
@@ -362,7 +371,7 @@ public class BusServiceTest {
 	}
 
 	@Test
-	public void searchFilterTest() {
+	public void asearchFilterTest() {
 		// filter only line
 		FilterSearchTransportDTO filterSearch = new FilterSearchTransportDTO(1L, false, null, "");
 		List<Bus> listBus = busService.searchFilter(filterSearch);

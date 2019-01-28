@@ -46,6 +46,8 @@ public class AppLoaderService implements ApplicationRunner {
 
 			adminRepository.save(admin);
 			System.out.println("Admin added.");
+			
+		
 		}
 
 	}

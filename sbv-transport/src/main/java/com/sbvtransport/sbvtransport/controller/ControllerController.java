@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,15 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbvtransport.sbvtransport.dto.FilterSearchControllerDTO;
 import com.sbvtransport.sbvtransport.dto.RegisterDTO;
+import com.sbvtransport.sbvtransport.enumeration.DemographicTicketType;
 import com.sbvtransport.sbvtransport.enumeration.RoleName;
+import com.sbvtransport.sbvtransport.enumeration.TicketType;
 import com.sbvtransport.sbvtransport.messages.ResponseMessage;
 import com.sbvtransport.sbvtransport.model.Controller;
 import com.sbvtransport.sbvtransport.model.Role;
+import com.sbvtransport.sbvtransport.model.Ticket;
 import com.sbvtransport.sbvtransport.model.User;
 import com.sbvtransport.sbvtransport.repository.RoleRepository;
 import com.sbvtransport.sbvtransport.repository.UserRepository;
 import com.sbvtransport.sbvtransport.security.JwtProvider;
 import com.sbvtransport.sbvtransport.service.IControllerService;
+import com.sbvtransport.sbvtransport.service.TicketService;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/controller")
@@ -52,6 +57,7 @@ public class ControllerController {
 
 	@Autowired
 	IControllerService controllerService;
+
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<List<Controller>> getAll() {
@@ -77,6 +83,11 @@ public class ControllerController {
 	public ResponseEntity<Controller> update(@RequestBody Controller controller) {
 
 		Controller updateController = controllerService.update(controller);
+		
+		if(updateController == null){
+			return new ResponseEntity<>(updateController, HttpStatus.BAD_REQUEST);
+
+		}
 
 		return new ResponseEntity<>(updateController, HttpStatus.OK);
 
@@ -130,4 +141,29 @@ public class ControllerController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(value = "/checkTicket/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> checkTicket(@PathVariable Long id) {
+		
+		boolean checked = controllerService.checkTicket(id);
+		
+		return new ResponseEntity<>(checked, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/blockTicket/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> blockTicket(@PathVariable Long id) {
+		
+		boolean blocked = controllerService.blockTicket(id);
+		
+		return new ResponseEntity<>(blocked, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/unblockTicket/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> unblockTicket(@PathVariable Long id) {
+		
+		boolean unblocked = controllerService.unblockTicket(id);
+		
+		return new ResponseEntity<>(unblocked, HttpStatus.OK);
+	}
+	
 }

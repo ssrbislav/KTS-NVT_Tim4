@@ -19,12 +19,15 @@ public class Document {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 
-	@Column(name = "dateOfUploud", nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
-	private Date dateOfUpload;
+	@Column(name = "date_of_upload", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date date_of_upload;
 
-	@Column(name = "imageLocation", nullable = false)
-	private String imageLocation;
+	@Column(name = "image_location", nullable = false)
+	private String image_location;
+	
+	@Column(name = "approved", nullable = false) //declined,approved, need approve
+	private String approved;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passenger passenger;
@@ -33,11 +36,21 @@ public class Document {
 		super();
 	}
 
-	public Document(Date dateOfUpload, String imageLocation, Passenger passenger) {
+	public Document(Date dateOfUpload, String imageLocation, Passenger passenger,String approved) {
 		super();
-		this.dateOfUpload = dateOfUpload;
-		this.imageLocation = imageLocation;
+		this.date_of_upload = dateOfUpload;
+		this.image_location = imageLocation;
 		this.passenger = passenger;
+		this.approved = approved;
+	}
+
+	public Document(Long id, Date date_of_upload, String image_location, Passenger passenger,String approved) {
+		super();
+		this.id = id;
+		this.date_of_upload = date_of_upload;
+		this.image_location = image_location;
+		this.passenger = passenger;
+		this.approved = approved;
 	}
 
 	@JsonIgnore
@@ -49,24 +62,40 @@ public class Document {
 		this.passenger = passenger;
 	}
 
-	public Date getDateOfUpload() {
-		return dateOfUpload;
+	public Date getDate_of_upload() {
+		return date_of_upload;
 	}
 
-	public void setDateOfUpload(Date dateOfUpload) {
-		this.dateOfUpload = dateOfUpload;
+	public void setDate_of_upload(Date date_of_upload) {
+		this.date_of_upload = date_of_upload;
 	}
 
-	public String getImageLocation() {
-		return imageLocation;
+	public String getImage_location() {
+		return image_location;
 	}
 
-	public void setImageLocation(String imageLocation) {
-		this.imageLocation = imageLocation;
+	public void setImage_location(String image_location) {
+		this.image_location = image_location;
 	}
 
 	public Long getId() {
 		return id;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getApproved() {
+		return approved;
+	}
+
+	public void setApproved(String approved) {
+		this.approved = approved;
+	}
+
+	
+	
+	
 
 }

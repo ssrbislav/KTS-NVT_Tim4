@@ -15,7 +15,7 @@ export class StationService{
 
     constructor(private http:HttpClient) {}
 
-    private stationUrl = 'http://localhost:8080/api/station/';
+    stationUrl = 'http://localhost:8080/api/station/';
 
     public getStations() {
          return this.http.get<Station[]>(this.stationUrl);

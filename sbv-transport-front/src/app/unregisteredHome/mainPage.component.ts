@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -9,8 +9,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
   styleUrls: ['./mainPage.component.css']
 })
 export class MainPageComponent implements OnInit {
-
-  @ViewChild("registration") registration: RegistrationComponent;
 
   constructor(public dialog: MatDialog){
 
@@ -26,7 +24,24 @@ export class MainPageComponent implements OnInit {
     console.log(feature);
     if(feature == 'login'){
       this.showLogin();
+    } else if (feature == 'signup') {
+      this.showRegistration();
     }
+  }
+
+  showRegistration() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      id: 2,
+      title: "Bojana"
+      };
+
+    const dialogRef = this.dialog.open(RegistrationComponent, dialogConfig);
+
   }
 
   showLogin(){
@@ -48,6 +63,10 @@ export class MainPageComponent implements OnInit {
 //Jedan komentar da vidim da li se ovaj broj komitova povecava ili ne
     });
 
+  }
+
+  clickPicture(){
+    alert("Please login/register so you can see more information!");
   }
   
  

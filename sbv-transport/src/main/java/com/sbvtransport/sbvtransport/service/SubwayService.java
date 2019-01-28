@@ -105,7 +105,7 @@ public class SubwayService implements ISubwayService {
 	@Override
 	public Line checkLine(Long lineId) {
 		
-		Line line = lineRepository.findById(lineId).get();
+		Line line = lineRepository.findById(lineId).orElse(null);
 		if( line != null){
 			if(!line.isDeleted()){
 				if(line.getLine_type() == TypeTransport.subway){
@@ -165,6 +165,8 @@ public class SubwayService implements ISubwayService {
 		} else {
 			updateSubway.get().setLate(false);
 		}
+		String newCode = updateSubway.get().getLine().getName() + "_subway_" + subway.getName();
+		updateSubway.get().setCode(newCode);
 		updateSubway.get().setTime_arrive(subway.getTime_arrive());
 		updateSubway.get().setTimetable(subway.getTimetable());
 		updateSubway.get().setLocation(subway.getCurrent_location());

@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { ControllerService } from '../services/controller.service';
 import { Controller } from '../models/controller.model';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
+import { TicketCheckComponent } from './ticket-check/ticket-check.component';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-controller-view',
@@ -12,19 +14,20 @@ import { TokenStorageService } from '../auth/token-storage.service';
 })
 export class ControllerViewComponent implements OnInit {
 
-  currentController: Controller;
+  currentController: Controller = new Controller();
 
   @ViewChild("header") header: HeaderComponent;
-  showView: string = 'home';
+  showView: string = 'tickets';
 
-  constructor(private controllerService: ControllerService, private router: Router, private token: TokenStorageService) { 
-    this.controllerService.getController(token.getUsername()).subscribe((response) => {
-      this.currentController = response;
-    })
+  constructor(private controllerService: ControllerService, public dialog: MatDialog, private router: Router, private token: TokenStorageService) { 
+    
   }
 
   ngOnInit() {
     this.header.controllerView();
+    this.controllerService.getController(this.token.getUsername()).subscribe((response) => {
+      this.currentController = response;
+    });
   }
 
   onNavigate(feature: string){
@@ -34,9 +37,27 @@ export class ControllerViewComponent implements OnInit {
       this.router.navigate(['mainPage']);
       window.alert("Successfully Logged out!");
     }
-    if(feature == 'profil') {
-      alert(this.currentController.address);
-    }
+  }
+
+  checkTicket() {
+    const dialogConfig = new MatDialogConfig();
+
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+      added: false
+    };
+
+    const dialogRef = this.dialog.open(TicketCheckComponent, dialogConfig);
+    
+  }
+
+  ticketsView() {
+    this.showView = 'tickets';
+  }
+
+  pricelistView() {
+    this.showView = 'pricelist';
   }
 
 }
